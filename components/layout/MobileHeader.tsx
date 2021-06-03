@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import config from '../../config/config'
 import Logo from '../icons/Logo'
@@ -40,21 +40,49 @@ const Styles = styled.div`
     align-items: center;
     justify-content: center;
   }
+  .account {
+    position: absolute;
+    right: 10px;
+    top: 93px;
+    background: #f0f0f0;
+    width: 220px;
+    height: 350px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+  }
 `
 
 export default function MobileHeader() {
+  const [showNav, setShowNav] = useState(false)
+  const [showAccount, setShowAccount] = useState(false)
+
+  const handleAccount = () => {
+    setShowNav(false)
+    setShowAccount(!showAccount)
+  }
+
+  const handleShowNav = (show) => {
+    setShowAccount(false)
+    setShowNav(show)
+  }
+
   return (
     <Styles>
       <div className="header__left">
-        <Icon name="hamburger" />
+        <span onClick={() => handleShowNav(true)}>
+          <Icon name="hamburger" />
+        </span>
         <Logo icon marginLeft="10px" />
-        <MobileSideNav />
+        {showNav && <MobileSideNav handleShowNav={handleShowNav} />}
       </div>
       <div className="header__right">
         <div className="alert">
           <Icon name="alert" />
         </div>
-        <img src="/assets/face.svg" alt="default" className="avatar" />
+        <img src="/assets/face.svg" alt="default" className="avatar" onClick={handleAccount} />
+        {showAccount && <div className="account">Account Detauls</div>}
       </div>
     </Styles>
   )

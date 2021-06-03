@@ -18,6 +18,7 @@ const Styles = styled.div`
   .complete {
     display: flex;
     align-items: center;
+    height: 40px;
     .logo__text {
       margin: 0;
       margin-left: 10px;
@@ -27,6 +28,7 @@ const Styles = styled.div`
     width: 28px;
     height: 28px;
   }
+  height: 40px;
 `
 export default function Logo({
   complete,

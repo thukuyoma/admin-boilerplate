@@ -7,12 +7,11 @@ const Styles = styled.div`
   top: 0;
   flex-direction: column;
   flex-direction: column;
-  background: pink;
+  background: #00000099;
   width: 100vw;
   left: 0;
   height: 100vh;
   position: fixed;
-  //   padding: 20px 0 0 10px;
   border-right: 1px solid #f0f0f0;
   .sidenav__logo {
     margin: 0 0 50px 10px;
@@ -42,11 +41,12 @@ const Styles = styled.div`
   }
 
   .wrapper {
-    background: green;
+    background: #f0f0f0;
     height: 100vh;
     width: 300px;
-    disply: flex;
-    align-items: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .wrapper__top {
@@ -54,24 +54,61 @@ const Styles = styled.div`
     flex-direction: column;
   }
 
-  //   @media (max-width: 700px) {
-  //     display: none;
-  //   }
-  //   @media (max-width: 500px) {
-  //     display: none;
-  //   }
+  @media (max-width: 360px) {
+    .wrapper {
+      width: 240px;
+    }
+  }
+  .close {
+    width: 45px;
+    height: 45px;
+    color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    right: 8px;
+    top: 15px;
+    background: #0098db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  .wrapper__bottom {
+    display: flex;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .account__details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+  }
+  .account__avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+  .username {
+    font-size: 18px;
+    line-height: 21px;
+    color: #0c4284;
+  }
 `
 
 import { useRouter } from 'next/router'
 import links from './nav.links'
 import Logo from '../icons/Logo'
 
-export default function MobileSideNav() {
+export default function MobileSideNav({ handleShowNav }) {
   const router = useRouter()
   const handleRedirect = (url: string) => router.push(url)
   return (
     <Styles>
       <div className="wrapper">
+        <div className="close" onClick={() => handleShowNav(false)}>
+          X
+        </div>
         <div className="wrapper__top">
           <div className="sidenav__logo">
             <Logo complete />
@@ -91,8 +128,17 @@ export default function MobileSideNav() {
             ))}
           </div>
         </div>
-        <div className="wrapper__bottom">Helo we are working</div>
+        <div className="wrapper__bottom">
+          <img src="/assets/face.svg" className="account__avatar" />
+          <div className="account__details">
+            <span className="username">Ukuyoma Theophilus</span>
+            <span className="logout">Logout</span>
+          </div>
+        </div>
       </div>
     </Styles>
   )
+}
+function handleShowNav(arg0: boolean): void {
+  throw new Error('Function not implemented.')
 }
