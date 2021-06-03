@@ -1,0 +1,54 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react'
+import type { AppProps } from 'next/app'
+import '../styles/globals.css'
+import 'react-quill/dist/quill.snow.css'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+import { QueryClientProvider, QueryClient } from 'react-query'
+import Router, { useRouter } from 'next/router'
+import NProgress from 'nprogress'
+import Head from 'next/head'
+import { ReactQueryDevtools } from 'react-query/devtools'
+import { ToastContainer } from 'react-toastify'
+import { AuthProvider, ProtectRoute } from '../context/auth'
+import { getCookie } from '../actions/account/cookies'
+import 'react-toastify/dist/ReactToastify.css'
+
+Router.events.on('routeChangeStart', (url) => {
+  console.log(`Loading: ${url}`)
+  NProgress.start()
+})
+
+Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeError', () => NProgress.done())
+
+function MyApp({ Component, pageProps }: AppProps) {
+  const queryClient = new QueryClient()
+  const router = useRouter()
+  useEffect(() => {
+    const token = getCookie('adminAuthToken')
+    if (!token) {
+      return router.push('/')
+    }
+    return token
+  }, [])
+  return (
+    <>
+      <AuthProvider>
+        <ProtectRoute>
+          <QueryClientProvider client={queryClient}>
+            <Head>
+              <link rel="stylesheet" type="text/css" href="/nprogress.css" />
+              <title>Infocott | Admin</title>
+              <link rel="icon" href="/favicon.svg" />
+            </Head>
+            <ToastContainer />
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </ProtectRoute>
+      </AuthProvider>
+    </>
+  )
+}
+export default MyApp
