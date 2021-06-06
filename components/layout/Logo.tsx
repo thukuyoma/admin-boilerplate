@@ -3,7 +3,10 @@ import config from '../../config/config'
 import styled from 'styled-components'
 
 const Styles = styled.div`
-  .wrapper {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  .logo__wrapper {
     display: flex;
     align-item: center;
   }
@@ -28,7 +31,6 @@ const Styles = styled.div`
     width: 28px;
     height: 28px;
   }
-  height: 40px;
 `
 export default function Logo({
   complete,
@@ -56,7 +58,7 @@ export default function Logo({
           marginTop: marginTop,
           marginBottom: marginBottom,
         }}
-        className="wrapper"
+        className="logo__wrapper"
       >
         {complete && (
           <div className="complete">
@@ -64,7 +66,7 @@ export default function Logo({
             <h1 className="logo__text">Kimogan</h1>
           </div>
         )}
-        {icon && <img src={config.logo.icon} />}
+        {icon && <img src={config.logo.icon} className="icon" />}
         {text && <h1 className="logo__text">Kimogan</h1>}
       </div>
     </Styles>

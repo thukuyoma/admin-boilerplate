@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import config from '../../config/config'
-import Logo from '../icons/Logo'
+import Logo from './Logo'
 import Icon from './../icons/index'
 import MobileSideNav from './MobileSideNav'
+import { FiSettings } from 'react-icons/fi'
+import { BsBell, BsClockHistory } from 'react-icons/bs'
+import { IoIosAddCircle } from 'react-icons/io'
+import { AiOutlineDown, AiOutlineMenu } from 'react-icons/ai'
 
 const Styles = styled.div`
   background: #e8e8e8;
@@ -11,10 +15,11 @@ const Styles = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 -10px;
   padding: 0 10px;
   position: fixed;
   width: 100%;
+  opacity: 1;
+  z-index: 3;
 
   .header__left {
     display: flex;
@@ -25,9 +30,8 @@ const Styles = styled.div`
     align-items: center;
   }
   .avatar {
-    margin-left: 20px;
-    height: 45px;
-    width: 45px;
+    height: 35px;
+    width: 35px;
     border-radius: 50%;
   }
   .alert {
@@ -50,38 +54,61 @@ const Styles = styled.div`
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-}
+  }
+  @media (min-width: 500px) {
+    display: none;
+  }
+  .header__account-details {
+    display: flex;
+    align-items: center;
+  }
+  .header-links__item {
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    :hover {
+      color: #0098db;
+    }
+    @media (max-width: 340px) {
+      margin-left: 15px;
+    }
+  }
+  .mobile__hamburger {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
   }
 `
 
-export default function MobileHeader() {
-  const [showNav, setShowNav] = useState(false)
-  const [showAccount, setShowAccount] = useState(false)
-
-  const handleAccount = () => {
-    setShowNav(false)
-    setShowAccount(!showAccount)
-  }
-
-  const handleShowNav = (show) => {
-    setShowAccount(false)
-    setShowNav(show)
-  }
-
+export default function MobileHeader({ handleAccount, handleShowNav, showNav, showAccount }) {
   return (
     <Styles>
       <div className="header__left">
-        <span onClick={() => handleShowNav(true)}>
-          <Icon name="hamburger" />
+        <span onClick={() => handleShowNav(true)} className="mobile__hamburger">
+          <AiOutlineMenu />
         </span>
         <Logo icon marginLeft="10px" />
         {showNav && <MobileSideNav handleShowNav={handleShowNav} />}
       </div>
       <div className="header__right">
-        <div className="alert">
-          <Icon name="alert" />
+        <div className="header__account-details">
+          <div className="header-links__item" style={{ fontSize: '30px' }}>
+            <IoIosAddCircle />
+          </div>
+          <div className="header-links__item">
+            <BsClockHistory />
+          </div>
+          <div className="header-links__item">
+            <BsBell />
+          </div>
+          <div className="header-links__item">
+            <FiSettings />
+          </div>
+          <div className="header-links__item">
+            <img src="/assets/face.svg" alt="default" className="avatar" onClick={handleAccount} />
+          </div>
         </div>
-        <img src="/assets/face.svg" alt="default" className="avatar" onClick={handleAccount} />
         {showAccount && <div className="account">Account Detauls</div>}
       </div>
     </Styles>

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-// import { useQuery } from 'react-query'
 
 export default function useForm(callback, validation, initialState) {
   const [values, setValues] = useState(initialState)

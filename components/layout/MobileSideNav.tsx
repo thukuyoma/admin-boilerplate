@@ -40,7 +40,7 @@ const Styles = styled.div`
     color: ${config.styles.baseColor};
   }
 
-  .wrapper {
+  .mobile__wrapper {
     background: #f0f0f0;
     height: 100vh;
     width: 300px;
@@ -60,18 +60,18 @@ const Styles = styled.div`
     }
   }
   .close {
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
     color: #fff;
     border-radius: 50%;
     position: absolute;
-    right: 8px;
-    top: 15px;
+    right: 80px;
+    top: 8px;
     background: #0098db;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
+    font-size: 16px;
     font-weight: bold;
   }
   .wrapper__bottom {
@@ -98,14 +98,14 @@ const Styles = styled.div`
 
 import { useRouter } from 'next/router'
 import links from './nav.links'
-import Logo from '../icons/Logo'
+import Logo from './Logo'
 
 export default function MobileSideNav({ handleShowNav }) {
   const router = useRouter()
   const handleRedirect = (url: string) => router.push(url)
   return (
     <Styles>
-      <div className="wrapper">
+      <div className="mobile__wrapper">
         <div className="close" onClick={() => handleShowNav(false)}>
           X
         </div>
