@@ -1,7 +1,8 @@
 import axios from 'axios'
+import config from '../config/config'
 
 const api = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: config.apiBaseUrl,
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': ' *',

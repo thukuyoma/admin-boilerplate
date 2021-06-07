@@ -8,6 +8,8 @@ import config from '../../config/config'
 import { GrAdd } from 'react-icons/gr'
 import { Grid } from '@material-ui/core'
 import TItle from '../../components/forms/blog/TItle'
+import Create from '../../components/blog/CreateBlog'
+import CreateBlog from '../../components/blog/CreateBlog'
 const Styles = styled.div`
   display: flex;
   width: 100%;
@@ -159,46 +161,7 @@ export default function dashboard() {
               </div>
               <MobileContainerHeader />
               <div>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TItle />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TItle />
-                  </Grid>
-                </Grid>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TItle />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TItle />
-                  </Grid>
-                </Grid>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TItle />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TItle />
-                  </Grid>
-                </Grid>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TItle />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TItle />
-                  </Grid>
-                </Grid>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TItle />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={6} lg={6}>
-                    <TItle />
-                  </Grid>
-                </Grid>
+                <CreateBlog />
               </div>
             </div>
             <div className="container__actions">
