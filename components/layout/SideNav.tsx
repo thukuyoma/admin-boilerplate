@@ -7,9 +7,9 @@ const Styles = styled.div`
 
   display: flex;
   flex-direction: column;
-  width: ${({ toggleSideNav }) => (!toggleSideNav ? '100px' : '200px')};
+  width: ${({ toggleSideNav }) => (!toggleSideNav ? '80px' : '200px')};
   position: fixed;
-  padding: 30px 0 0 30px;
+  padding: ${({ toggleSideNav }) => (!toggleSideNav ? '30px 20px' : '30px 0 0 20px')};
   border-right: 1px solid #f0f0f0;
   justify-content: space-between;
   .sidenav__logo {
