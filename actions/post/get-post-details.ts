@@ -3,8 +3,7 @@ import api from '../../utils/api'
 
 export default async function getPostDetails(slug) {
   try {
-    const clientBaseUrl = process.env.BASE_URL
-    const res = await api(`${clientBaseUrl}/posts/details/${slug}`)
+    const res = await api(`/blogs/${slug}`)
     const { data } = res
     return data
   } catch (err) {

@@ -1,16 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
-import { RiErrorWarningLine } from 'react-icons/ri'
-import {
-  Control,
-  InputTitle,
-  Must,
-  InputField,
-  InputError,
-  ErrorIcon,
-} from '../../shared/form-styles'
+import { Control, InputTitle, Must, InputField } from '../../shared/form-styles'
+import DisplayInputError from '../InputError'
 
-export default function TItle({ title, setTitle, inputError, setInputErrors }) {
+export default function TItle({ title, setTitle, inputErrors, setInputErrors }) {
   const handleChange = (e) => {
     setInputErrors((prev) => ({ ...prev, title: '' }))
     setTitle(e.target.value)
@@ -21,19 +13,12 @@ export default function TItle({ title, setTitle, inputError, setInputErrors }) {
         Title <Must>*</Must>
       </InputTitle>
       <InputField
-        error={inputError.title}
+        error={inputErrors.title}
         placeholder="Title of post"
         value={title}
         onChange={handleChange}
       />
-      {inputError.title && (
-        <InputError>
-          <ErrorIcon>
-            <RiErrorWarningLine />
-          </ErrorIcon>
-          {inputError.title}
-        </InputError>
-      )}
+      {inputErrors.title && <DisplayInputError error={inputErrors.title} />}
     </Control>
   )
 }

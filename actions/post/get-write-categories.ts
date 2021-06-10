@@ -3,8 +3,7 @@ import api from '../../utils/api'
 
 export default async function getWriteCategories() {
   try {
-    const baseUrl = process.env.BASE_URL
-    const res = await api(`${baseUrl}/posts/categories`)
+    const res = await api(`/blogs/categories/all/all`)
     const { data } = res
     return data.categories
   } catch (err) {

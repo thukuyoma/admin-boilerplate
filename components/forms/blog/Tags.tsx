@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import {
   InputTitle,
   InputField,
-  ErrorIcon,
-  InputError,
   AddTagButton,
   RemoveTagButton,
   TagInputWrapper,
@@ -13,6 +11,7 @@ import {
 import { nanoid } from 'nanoid'
 import { MdCancel } from 'react-icons/md'
 import { RiAddLine, RiErrorWarningLine } from 'react-icons/ri'
+import DisplayInputError from '../InputError'
 
 export default function Tags({ tags, setTags }) {
   const [tagItemToAdd, setTagItemToAdd] = useState('')
@@ -21,7 +20,9 @@ export default function Tags({ tags, setTags }) {
     const newTags = tags.filter((_item: string, i: number) => i !== index)
     setTags(newTags)
   }
+
   const addTag = (e): void => {
+    e.preventDefault()
     if (!tagItemToAdd) {
       setTagError('Cannot add empty tag')
       return null
@@ -31,6 +32,7 @@ export default function Tags({ tags, setTags }) {
   }
 
   const handleAddTag = (e) => {
+    e.preventDefault()
     setTagError('')
     setTagItemToAdd(e.target.value)
   }
@@ -49,14 +51,7 @@ export default function Tags({ tags, setTags }) {
           <RiAddLine />
         </AddTagButton>
       </TagInputWrapper>
-      {tagError && (
-        <InputError>
-          <ErrorIcon>
-            <RiErrorWarningLine />
-          </ErrorIcon>
-          {tagError}
-        </InputError>
-      )}
+      {tagError && <DisplayInputError error={tagError} />}
       <TagItemWrapper>
         {tags.map((item, itemIndex) => (
           <TagItem key={nanoid()}>

@@ -27,10 +27,10 @@ const Styles = styled.div`
 
     height: 40px;
     :hover {
-      background: #ffa50042;
-      width: ${({ toggleSideNav }) => (!toggleSideNav ? '40px' : '180px')};
+      width: ${({ toggleSideNav }) => (!toggleSideNav ? '40px' : '163px')};
       cursor: pointer;
       border-radius: 5px;
+      background: #f7f7f7;
     }
   }
   .side-nav-link___icon {
@@ -47,11 +47,31 @@ const Styles = styled.div`
   @media (max-width: 500px) {
     display: none;
   }
+  .toggle__button {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background: #cdcdcd;
+    border: none;
+    outline: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #0098db;
+    font-weight: bold;
+    margin-top: 50px;
+    cursor: pointer;
+    :hover {
+      background: #f7f7f7;
+    }
+  }
 `
 
 import { useRouter } from 'next/router'
 import links from './nav.links'
 import Logo from './Logo'
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 
 export default function SideNav({ toggleSideNav, setToggleSideNav }) {
   const router = useRouter()
@@ -76,7 +96,9 @@ export default function SideNav({ toggleSideNav, setToggleSideNav }) {
             </div>
           ))}
         </div>
-        <button onClick={() => setToggleSideNav(!toggleSideNav)}>{'=>>'}</button>
+        <button className="toggle__button" onClick={() => setToggleSideNav(!toggleSideNav)}>
+          {toggleSideNav ? <BsArrowLeft /> : <BsArrowRight />}
+        </button>
       </div>
     </Styles>
   )

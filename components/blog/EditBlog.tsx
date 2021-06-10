@@ -1,8 +1,7 @@
 import { Grid } from '@material-ui/core'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
-import writePost from '../../actions/post/write-post'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import getFormData from '../../utils/get-form-data'
 import postValidator from '../../utils/post-validator'
@@ -14,12 +13,13 @@ import Tags from '../forms/blog/Tags'
 import TItle from '../forms/blog/TItle'
 import Button from '../shared/Button'
 import styled from 'styled-components'
+import editPost from '../../actions/post/edit-post'
 
 const Spacer = styled.div`
   margin-bottom: 100px;
 `
 
-export default function CreateBlog() {
+export default function EditBlog({ blog }) {
   const router = useRouter()
   const [title, setTitle] = useLocalStorage('title', '')
   const [tags, setTags] = useLocalStorage('tags', [])
@@ -37,6 +37,7 @@ export default function CreateBlog() {
     category: '',
     postBody: '',
   })
+
   const values = {
     title,
     description,
@@ -47,7 +48,8 @@ export default function CreateBlog() {
     category,
     postBody,
   }
-  const { mutateAsync, isSuccess, isLoading, isError, error, data } = useMutation(writePost, {
+
+  const { mutateAsync, isSuccess, isLoading } = useMutation(editPost, {
     onError: (resError: object) => {
       setInputErrors({ ...inputErrors, ...resError })
     },
@@ -56,6 +58,17 @@ export default function CreateBlog() {
       localStorage.removeItem('inputErrors')
     },
   })
+
+  useEffect(() => {
+    setTitle(blog?.title)
+    setTags(blog.tags ? [...blog.tags] : [])
+    setImageCaption(blog.image ? blog.image.caption : '')
+    setImageSource(blog.image ? blog.image.source : '')
+    setCategory(blog?.category)
+    setPostBody(blog?.postBody)
+    setDescription(blog?.description)
+  }, [])
+
   const handleSetBody = (bodyContent: string) => {
     setInputErrors({ ...inputErrors, postBody: '' })
     setPostBody(bodyContent)
@@ -68,9 +81,8 @@ export default function CreateBlog() {
       setInputErrors(validationResult.errors)
       return null
     }
-    const postForm = getFormData(values)
-    console.log({ postForm })
-    await mutateAsync(postForm)
+    const formData = getFormData(values)
+    await mutateAsync({ formData, postId: blog._id })
     return null
   }
 
@@ -105,11 +117,11 @@ export default function CreateBlog() {
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={5} md={5} lg={5}>
-            <Tags tags={tags} setTags={setTags} />
+            <Tags tags={tags.reverse()} setTags={setTags} />
           </Grid>
           <Grid item xs={12} sm={7} md={7} lg={7}>
             <PostImage
-              imageUrl=""
+              imageUrl={blog.image ? blog.image.url : ''}
               imageCaption={imageCaption}
               setImageCaption={setImageCaption}
               imageSource={imageSource}
@@ -125,7 +137,7 @@ export default function CreateBlog() {
         </Grid>
         <Button
           block
-          title={isLoading ? 'Creating Post' : 'Create Post'}
+          title={isLoading ? 'Updating Post' : 'Update Post'}
           onClick={handleSubmit}
           loading={isLoading}
           align="center"

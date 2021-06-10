@@ -1,14 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
-import { RiErrorWarningLine } from 'react-icons/ri'
-import {
-  Control,
-  InputTitle,
-  Must,
-  InputField,
-  InputError,
-  ErrorIcon,
-} from '../../shared/form-styles'
+import { Control, InputTitle, Must, InputField } from '../../shared/form-styles'
+import DisplayInputError from '../InputError'
 
 export default function Description({ description, setDescription, inputErrors, setInputErrors }) {
   const handleChange = (e) => {
@@ -26,14 +18,7 @@ export default function Description({ description, setDescription, inputErrors, 
         value={description}
         onChange={handleChange}
       />
-      {inputErrors.description && (
-        <InputError>
-          <ErrorIcon>
-            <RiErrorWarningLine />
-          </ErrorIcon>
-          {inputErrors.description}
-        </InputError>
-      )}
+      {inputErrors.description && <DisplayInputError error={inputErrors.description} />}
     </Control>
   )
 }

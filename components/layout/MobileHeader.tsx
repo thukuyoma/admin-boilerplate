@@ -8,6 +8,12 @@ import { FiSettings } from 'react-icons/fi'
 import { BsBell, BsClockHistory } from 'react-icons/bs'
 import { IoIosAddCircle } from 'react-icons/io'
 import { AiOutlineDown, AiOutlineMenu } from 'react-icons/ai'
+import useAuth from '../../context/auth'
+import ProfileContainer from './ProfileContainer'
+import { RiLoginCircleLine } from 'react-icons/ri'
+import { useRouter } from 'next/router'
+import HeaderLogin from './HeaderLogin'
+import HeaderProfileAvatar from './HeaderProfileAvatar'
 
 const Styles = styled.div`
   background: #e8e8e8;
@@ -29,10 +35,11 @@ const Styles = styled.div`
     display: flex;
     align-items: center;
   }
-  .avatar {
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
+  .profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background: #ffffff;
   }
   .alert {
     width: 40px;
@@ -43,17 +50,6 @@ const Styles = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .account {
-    position: absolute;
-    right: 10px;
-    top: 93px;
-    background: #f0f0f0;
-    width: 220px;
-    height: 350px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
   }
   @media (min-width: 500px) {
     display: none;
@@ -82,6 +78,8 @@ const Styles = styled.div`
 `
 
 export default function MobileHeader({ handleAccount, handleShowNav, showNav, showAccount }) {
+  const { profile, isLoading } = useAuth()
+  const router = useRouter()
   return (
     <Styles>
       <div className="header__left">
@@ -106,10 +104,14 @@ export default function MobileHeader({ handleAccount, handleShowNav, showNav, sh
             <FiSettings />
           </div>
           <div className="header-links__item">
-            <img src="/assets/face.svg" alt="default" className="avatar" onClick={handleAccount} />
+            {profile?.avatar && (
+              <HeaderProfileAvatar handleAccount={handleAccount} showAccount={showAccount} />
+            )}
+            {}
+            {!profile && !isLoading && <HeaderLogin />}
+            {isLoading && <div className="profile"></div>}
           </div>
         </div>
-        {showAccount && <div className="account">Account Detauls</div>}
       </div>
     </Styles>
   )

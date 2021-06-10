@@ -24,14 +24,6 @@ Router.events.on('routeChangeError', () => NProgress.done())
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
-  const router = useRouter()
-  useEffect(() => {
-    const token = getCookie('adminAuthToken')
-    if (!token) {
-      return router.push('/')
-    }
-    return token
-  }, [])
   return (
     <>
       <AuthProvider>

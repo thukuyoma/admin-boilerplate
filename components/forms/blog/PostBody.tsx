@@ -1,8 +1,7 @@
 import dynamic from 'next/dynamic'
 import React from 'react'
-import { BiErrorCircle } from 'react-icons/bi'
-import { ErrorIcon, InputError } from '../../shared/form-styles'
 import styled from 'styled-components'
+import DisplayInputError from '../InputError'
 
 const EditorWriter = dynamic(() => import('./../../shared/EditorWriter'), { ssr: false })
 const EditorEditer = dynamic(() => import('./../../shared/EditorEditer'), { ssr: false })
@@ -31,14 +30,7 @@ export default function PostBody({ handleSetBody, inputErrors, postBody }) {
             inputErrors={inputErrors}
           />
         )}
-        {inputErrors.postBody && (
-          <InputError>
-            <ErrorIcon>
-              <BiErrorCircle />
-            </ErrorIcon>
-            {inputErrors.postBody}
-          </InputError>
-        )}
+        {inputErrors.postBody && <DisplayInputError error={inputErrors.postBody} />}
       </div>
     </Styles>
   )

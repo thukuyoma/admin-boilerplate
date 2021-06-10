@@ -4,8 +4,7 @@ import api from '../../utils/api'
 
 export default async function editPost({ postId, formData }) {
   try {
-    const baseUrl = process.env.BASE_URL
-    const res = await api.put(`${baseUrl}/posts/update/${postId}`, formData)
+    const res = await api.put(`/blogs/${postId}`, formData)
     const { data } = res
     return data
   } catch (err) {

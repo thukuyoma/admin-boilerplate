@@ -1,26 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
-import config from '../../config/config'
-import Icon from './../icons/index'
 import Logo from './Logo'
 import { FiSettings, FiBell } from 'react-icons/fi'
 import { BsBell, BsClockHistory } from 'react-icons/bs'
 import { AiOutlineDown } from 'react-icons/ai'
-// import { FiBell } from 'react-icons/ai'
 import { IoIosAddCircle } from 'react-icons/io'
 import Search from './Search'
+import useAuth from '../../context/auth'
+import HeaderLogin from './HeaderLogin'
+import HeaderProfileAvatar from './HeaderProfileAvatar'
 
 const Styles = styled.div`
   justify-content: space-between;
   z-index: 1028;
   display: flex;
   top: 0px;
-
   color: rgba(36, 46, 62, 0.8);
   transition: all 0.3s ease-in-out 0s;
   position: fixed;
   width: 100%;
-  // padding-right: 30px;
 
   .header__account-details {
     display: flex;
@@ -37,9 +35,10 @@ const Styles = styled.div`
     justify-content: center;
   }
   .profile {
-    width: 35px;
-    height: 35px;
-    border-radius: 35px;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background: #ffffff;
   }
   .alert {
     margin-left: 20px;
@@ -59,10 +58,6 @@ const Styles = styled.div`
     font-size: 16px;
     line-height: 19px;
   }
-
-  // @media (max-width: 1000px) {
-  //   display: none;
-  // }
   @media (max-width: 500px) {
     display: none;
   }
@@ -91,7 +86,8 @@ const Styles = styled.div`
     margin-right: 30px;
   }
 `
-export default function Header({ toggleSideNav }) {
+export default function Header({ toggleSideNav, handleAccount, showAccount }) {
+  const { profile, isLoading } = useAuth()
   return (
     <Styles toggleSideNav={toggleSideNav}>
       <div className="wrapper__now">
@@ -100,9 +96,6 @@ export default function Header({ toggleSideNav }) {
         </div>
         <Search service="Products" />
         <div className="header__spead">
-          {/* <div className="header__title">
-            <Search service="Products" />
-          </div> */}
           <div className="header__account-details">
             <div className="header-links__item" style={{ fontSize: '14px' }}>
               Kimogan <AiOutlineDown />
@@ -120,7 +113,11 @@ export default function Header({ toggleSideNav }) {
               <FiSettings />
             </div>
             <div className="header-links__item">
-              <img src="/assets/face.svg" alt="default" className="profile" />
+              {profile?.avatar && (
+                <HeaderProfileAvatar handleAccount={handleAccount} showAccount={showAccount} />
+              )}
+              {!profile && !isLoading && <HeaderLogin />}
+              {isLoading && <div className="profile"></div>}
             </div>
           </div>
         </div>

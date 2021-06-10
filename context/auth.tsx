@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const token = getCookie('adminAuthToken')
+      const token = getCookie('authToken')
       if (token) {
         setAuthToken(token)
         const user = await getProfile()
@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
   const login = async (credentials) => {
     const user = await loginAdmin(credentials)
     if (user) {
-      const token = getCookie('adminAuthToken')
+      const token = getCookie('authToken')
       setAuthToken(token)
       setProfile({ ...user })
       setIsLoading(false)
@@ -49,7 +49,7 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setProfile(null)
     setAuthToken()
-    removeCookie('adminAuthToken')
+    removeCookie('authToken')
     router.push('/')
     return null
   }
@@ -74,7 +74,7 @@ export function ProtectRoute({ children }) {
   const router = useRouter()
   useEffect(() => {
     if (!profile && !isLoading && !isAuthenticated && router.pathname === '/profile') {
-      router.push('/login')
+      router.push('/')
     }
   }, [isAuthenticated, profile, isLoading, router])
   if (!profile && !isLoading && !isAuthenticated && router.pathname === '/profile')

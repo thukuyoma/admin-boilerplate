@@ -3,10 +3,10 @@ import React, { useRef, useState } from 'react'
 import { RiAddLine } from 'react-icons/ri'
 import { CgArrowsExchangeAlt } from 'react-icons/cg'
 import styled from 'styled-components'
-import { ErrorIcon, InputError, InputField, InputTitle, Must } from '../../shared/form-styles'
+import { InputField, InputTitle, Must } from '../../shared/form-styles'
 import getArrayLastItem from '../../../utils/get-array-last-item'
 import { IoMdRemove } from 'react-icons/io'
-import { BiErrorCircle } from 'react-icons/bi'
+import DisplayInputError from '../InputError'
 
 const ImageWrapper = styled.div`
   width: 100%;
@@ -27,7 +27,7 @@ const AddImageText = styled.p`
   margin: 0;
   font-size: 14px;
 `
-const ChangeImageButton = styled.button`
+const ChangeImageButton = styled.div`
   width: 100%;
   background: #9d9d9d;
   border-radius: 3px;
@@ -77,7 +77,6 @@ export default function PostImage({
   setImageSource,
   setInputErrors,
   inputErrors,
-  image,
 }) {
   const imageInputRef = useRef<HTMLInputElement>(null)
   const [preview, setPreview] = useState<string>(() => {
@@ -92,16 +91,17 @@ export default function PostImage({
       const imageFormat = ['png', 'jpg', 'jpeg']
       const rawImageFormat = getArrayLastItem(e.target.files[0].name.split('.')).toLowerCase()
       if (!imageFormat.includes(rawImageFormat)) {
-        setInputErrors((prev) => ({
-          ...prev,
+        setInputErrors({
+          ...inputErrors,
           image: `Only JPG, JPEG, and PNG images are accepted, you provided a .${rawImageFormat} image`,
-        }))
+        })
         return null
       }
-      setInputErrors((prev) => ({
-        ...prev,
+      setInputErrors({
+        ...inputErrors,
         image: '',
-      }))
+        imageCaption: '',
+      })
       setPreview(URL.createObjectURL(e.target.files[0]))
       setImage(e.target.files[0])
       return null
@@ -114,6 +114,7 @@ export default function PostImage({
     setImageSource('')
     setPreview('')
     setImage('')
+    setInputErrors({ ...inputErrors, imageCaption: '', image: '', imageSource: '' })
   }
 
   return (
@@ -150,6 +151,7 @@ export default function PostImage({
                 onChange={handleFileChange}
                 ref={imageInputRef}
                 style={{ display: 'none' }}
+                name="postImage"
               />
             </ImageWrapper>
           )}
@@ -162,9 +164,15 @@ export default function PostImage({
               </InputTitle>
               <InputField
                 value={imageCaption}
-                onChange={(e) => setImageCaption(e.target.value)}
+                onChange={(e) => {
+                  setInputErrors({ ...inputErrors, imageCaption: '' })
+                  setImageCaption(e.target.value)
+                }}
                 placeholder="Post Image Caption"
+                name="postImage"
+                error={inputErrors.imageCaption}
               />
+              {inputErrors.imageCaption && <DisplayInputError error={inputErrors.imageCaption} />}
             </ImageDetailsControl>
             <ImageDetailsControl>
               <InputTitle>Source</InputTitle>
@@ -179,10 +187,12 @@ export default function PostImage({
               onChange={handleFileChange}
               ref={imageInputRef}
               style={{ display: 'none' }}
+              name="postImage"
             />
             <ChangeImageButton
               onKeyPress={() => imageInputRef.current.click()}
               onClick={() => imageInputRef.current.click()}
+              tabIndex={0}
             >
               <ChangeImageButtonIcon>
                 <CgArrowsExchangeAlt />
@@ -192,16 +202,7 @@ export default function PostImage({
           </Grid>
         )}
       </Grid>
-      <>
-        {inputErrors.image && (
-          <InputError>
-            <ErrorIcon>
-              <BiErrorCircle />
-              {inputErrors.image}
-            </ErrorIcon>
-          </InputError>
-        )}
-      </>
+      {inputErrors.image && <DisplayInputError error={inputErrors.image} />}
     </>
   )
 }

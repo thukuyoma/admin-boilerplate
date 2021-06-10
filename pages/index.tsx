@@ -5,6 +5,9 @@ import { useMutation } from 'react-query'
 import Loader from 'react-loader-spinner'
 import loginValidator from '../utils/login-validator'
 import useAuth from '../context/auth'
+import { Control, InputField } from '../components/shared/form-styles'
+import { RiErrorWarningLine } from 'react-icons/ri'
+import DisplayInputError from '../components/forms/InputError'
 
 interface LoginStateProps {
   email: string
@@ -48,31 +51,36 @@ const Login: React.FC = () => {
   }
 
   if (isSuccess) {
-    router.push('/404')
+    router.push('/blogs/edit')
   }
 
   return (
     <div>
       <div className="input__wrapper">
         <form>
-          <input
-            type="text"
-            placeholder="Email"
-            name="email"
-            value={values.email}
-            onChange={handleChange}
-          />
-          {errors.email && <span className="error">{errors.email}</span>}
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-            autoComplete="on"
-          />
-          {errors.password && <span className="error">{errors.password}</span>}
-          {error && <span className="error">{error}</span>}
+          <Control>
+            <InputField
+              type="text"
+              placeholder="Email"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              error={errors.email}
+            />
+            {errors.email && <DisplayInputError error={errors.email} />}
+          </Control>
+          <Control>
+            <InputField
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              autoComplete="on"
+              error={errors.password}
+            />
+            {errors.password && <DisplayInputError error={errors.password} />}
+          </Control>
         </form>
 
         <span className="tagline">

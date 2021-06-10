@@ -68,7 +68,11 @@ export default function Layout({ children }) {
   }
   return (
     <Styles toggleSideNav={toggleSideNav}>
-      <Header toggleSideNav={toggleSideNav} />
+      <Header
+        toggleSideNav={toggleSideNav}
+        showAccount={showAccount}
+        handleAccount={handleAccount}
+      />
       <MobileHeader
         showNav={showNav}
         showAccount={showAccount}

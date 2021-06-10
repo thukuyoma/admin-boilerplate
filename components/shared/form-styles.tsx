@@ -32,21 +32,8 @@ const InputField = styled.input`
   }
 `
 
-const InputError = styled.div`
-  color: red;
-  font-size: 12px;
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-`
 const Must = styled.span`
   color: red;
-`
-const ErrorIcon = styled.span`
-  color: red;
-  display: flex;
-  align-items: center;
-  margin-right: 5px;
 `
 
 const TagItemWrapper = styled.div`
@@ -65,14 +52,14 @@ const TagItemWrapper = styled.div`
   }
 `
 const TagItem = styled.div`
-  height: 30px;
   background: #fdf5ed;
   border-radius: 50px;
-  padding: 10px 10px;
+  padding: 0px 20px;
   display: flex;
   align-items: center;
   margin: 10px 5px;
   font-size: 12px;
+  white-space: wrap;
 `
 
 const TagInputWrapper = styled.div`
@@ -101,6 +88,7 @@ const AddTagButton = styled.button`
 
 const RemoveTagButton = styled.button`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   outline: 0;
@@ -114,7 +102,7 @@ const RemoveTagButton = styled.button`
   font-size: 20px;
   border-radius: 20px;
   cursor: pointer;
-  margin-right: -10px;
+  margin-right: -20px;
   color: #797777;
   :hover {
     background: #ede9e4;
@@ -163,9 +151,7 @@ export {
   Control,
   InputTitle,
   InputField,
-  InputError,
   Must,
-  ErrorIcon,
   TagItemWrapper,
   TagItem,
   TagInputWrapper,

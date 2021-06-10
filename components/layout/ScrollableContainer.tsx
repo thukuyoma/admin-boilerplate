@@ -4,6 +4,7 @@ import styled from 'styled-components'
 const Styles = styled.div`
   overflow-y: scroll;
   padding-right: 20px;
+  padding-left: 2px;
   max-height: 423px;
   @media (max-width: 500px) {
     height: 100%;

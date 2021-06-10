@@ -1,18 +1,12 @@
 import React from 'react'
-import { BiErrorCircle } from 'react-icons/bi'
 import { useQuery } from 'react-query'
 import Select from 'react-select'
 import getWriteCategories from '../../../actions/post/get-write-categories'
 import capitalizeFirstLetter from '../../../utils/capitalize-first-letter'
-import {
-  Control,
-  customReactSelectStyles,
-  ErrorIcon,
-  InputError,
-  InputTitle,
-} from '../../shared/form-styles'
+import { Control, customReactSelectStyles, InputTitle } from '../../shared/form-styles'
+import DisplayInputError from '../InputError'
 
-export default function Category({ inputErrors, setInputErrors, setCategory }) {
+export default function Category({ category, inputErrors, setInputErrors, setCategory }) {
   const { data: catItems, isSuccess } = useQuery('catItems', getWriteCategories)
 
   const options =
@@ -31,16 +25,10 @@ export default function Category({ inputErrors, setInputErrors, setCategory }) {
           styles={customReactSelectStyles('inputErrors.category')}
           options={options.length && options}
           onChange={handleChange}
+          placeholder={category ? category : 'Select Category'}
         />
       </div>
-      {inputErrors.category && (
-        <InputError>
-          <ErrorIcon>
-            <BiErrorCircle />
-          </ErrorIcon>
-          {inputErrors.category}
-        </InputError>
-      )}
+      {inputErrors.category && <DisplayInputError error={inputErrors.category} />}
     </Control>
   )
 }
