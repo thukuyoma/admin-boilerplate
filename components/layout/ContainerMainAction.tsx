@@ -17,9 +17,10 @@ const Styles = styled.div`
     align-items: center;
     margin-bottom: 30px;
   }
-  @media (max-width: 1000px) {
+  @media (max-width: 800px) {
     width: 100%;
     padding-left: 0;
+    margin-bottom: 50px;
     .action-button__wrapper {
       display: flex;
       width: 100%;

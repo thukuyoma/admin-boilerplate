@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import Select from 'react-select'
 import getWriteCategories from '../../../actions/post/get-write-categories'
 import capitalizeFirstLetter from '../../../utils/capitalize-first-letter'
-import { Control, customReactSelectStyles, InputTitle } from '../../shared/form-styles'
+import { Control, customReactSelectStyles, InputTitle } from '../form-styles'
 import DisplayInputError from '../InputError'
 
 export default function Category({ category, inputErrors, setInputErrors, setCategory }) {

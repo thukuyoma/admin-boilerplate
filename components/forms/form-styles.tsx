@@ -147,6 +147,66 @@ const customReactSelectStyles = (error) => {
   }
 }
 
+const ImageWrapper = styled.div`
+  width: 100%;
+  height: 100px;
+  background: #dae9fc;
+  border-radius: 5px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+`
+
+const AddImageIcon = styled.div`
+  font-size: 20px;
+`
+const AddImageText = styled.p`
+  margin: 0;
+  font-size: 14px;
+`
+const ChangeImageButton = styled.div`
+  width: 100%;
+  background: #9d9d9d;
+  border-radius: 3px;
+  height: 39px;
+  border: 0;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  color: #fff;
+  justify-content: center;
+  padding: 0 10px;
+  cursor: pointer;
+  :hover {
+    background: #d6d6d6;
+  }
+`
+
+const ChangeImageButtonIcon = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  font-size: 20px;
+  flex-shrink: 0;
+`
+
+const ImageDetailsControl = styled.div`
+  margin-bottom: 20px;
+`
+
+const ImagePreview = styled.img`
+  width: 100%;
+  height: 132px;
+  cursor: pointer;
+`
+
+const RemoveImageButton = styled(ChangeImageButton)`
+  // margin-left: 10px;
+`
+const RemoveImageButtonIcon = styled(ChangeImageButtonIcon)``
+
 export {
   Control,
   InputTitle,
@@ -158,4 +218,13 @@ export {
   AddTagButton,
   RemoveTagButton,
   customReactSelectStyles,
+  ImageWrapper,
+  AddImageIcon,
+  AddImageText,
+  ChangeImageButton,
+  ChangeImageButtonIcon,
+  ImageDetailsControl,
+  ImagePreview,
+  RemoveImageButton,
+  RemoveImageButtonIcon,
 }

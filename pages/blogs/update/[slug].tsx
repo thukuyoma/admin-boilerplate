@@ -13,26 +13,37 @@ import { useQuery } from 'react-query'
 import getPostDetails from '../../../actions/post/get-post-details'
 import DisplayAdminLoader from '../../../components/shared/DisplayAdminLoader'
 import DisplayServerError from '../../../components/shared/DisplayServerError'
+import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
 
-const ContainerMainWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  min-height: 450px;
-`
-
-export default function edit() {
+export default function UpdatePost() {
   const router = useRouter()
   const { slug } = router.query
   const { refetch, data, isSuccess, isError, error, isLoading } = useQuery(
     ['blog post details', slug],
     () => getPostDetails(slug)
   )
+  const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
+    { title: 'Edit Blog', url: '', isActive: true },
+    { title: 'Blogs', url: '/blogs', isActive: false },
+    { title: 'All Categories', url: '/blogs/categories', isActive: false },
+    { title: 'Create Categories', url: '/blogs/categories/create', isActive: false },
+    { title: 'Create Blog', url: '/blogs/create', isActive: false },
+  ]
   return (
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
-          <ContainerMainHeader pageTitle="Blog" createUrl="" createButtonTitle="Create Blog" />
-          <MobileContainerHeader pageTitle="Blog" createButtonUrl="" />
+          <ContainerMainHeader
+            pageTitle="Blog"
+            createButtonUrl="/blogs/create"
+            createButtonTitle="Create Post"
+            overlayItems={overlayItems}
+          />
+          <MobileContainerHeader
+            pageTitle="Blog"
+            createButtonUrl="/blogs/create"
+            overlayItems={overlayItems}
+          />
           <ScrollableContainer>
             {isSuccess && data && <EditBlog blog={data} />}
             {isError && <DisplayServerError error={error} />}

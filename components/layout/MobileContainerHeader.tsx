@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import { AiOutlineCaretDown } from 'react-icons/ai'
+import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai'
 import { FiMoreHorizontal } from 'react-icons/fi'
 import styled from 'styled-components'
+import OverlayDisplay from './OverlayDisplay'
 
 const Styles = styled.div`
   margin-top: 25px;
@@ -78,7 +79,15 @@ const Styles = styled.div`
   }
 `
 
-export default function MobileContainerHeader({ pageTitle, createButtonUrl }) {
+export default function MobileContainerHeader({
+  pageTitle,
+  createButtonUrl,
+  overlayItems,
+}: {
+  pageTitle: string
+  createButtonUrl: string
+  overlayItems: Array<{ title: string; url: string; isActive: boolean }>
+}) {
   const router = useRouter()
   const [optionDropDown, setOptionDropDown] = useState<boolean>(false)
   const [showSubPages, setShowSubPages] = useState<boolean>(false)
@@ -92,15 +101,16 @@ export default function MobileContainerHeader({ pageTitle, createButtonUrl }) {
           onKeyPress={() => setShowSubPages(!showSubPages)}
         >
           <span className="mobile-container-header-dropdown__icon">
-            <AiOutlineCaretDown />
+            {showSubPages ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />}
           </span>
-          Products
+          {overlayItems.filter((item) => item.isActive === true)[0].title}
         </span>
         {showSubPages && (
-          <></>
-          // <OverlayDisplay>
-          //   <OverlayDisplayItem>Item</OverlayDisplayItem>
-          // </OverlayDisplay>
+          <OverlayDisplay
+            overlayItems={overlayItems.filter((item) => item.isActive === false)}
+            left="10px"
+            top="90px"
+          />
         )}
       </div>
       <div className="actions">

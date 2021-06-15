@@ -8,7 +8,7 @@ const Styles = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  min-height: 423px;
   background: #fff;
   box-shadow: 0 1px 0 0 #e2e5e8;
   padding: 30px 0;

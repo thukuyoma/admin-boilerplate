@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
+import { AiOutlineCaretUp, AiOutlineCaretDown } from 'react-icons/ai'
 import { RiAddFill } from 'react-icons/ri'
 import styled from 'styled-components'
 import config from '../../config/config'
+import OverlayDisplay from './OverlayDisplay'
 
 const Styles = styled.div`
   .container-main-header {
@@ -30,22 +32,52 @@ const Styles = styled.div`
     margin-right: 10px;
   }
   .container-main-header__options {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #0c4284;
+    cursor: pointer;
   }
   .container-main-header__actions {
   }
+  .container-main-header-dropdown__icon {
+    margin-left: 5px;
+  }
 `
 
-export default function ContainerMainHeader({ pageTitle, createUrl, createButtonTitle }) {
+export default function ContainerMainHeader({
+  overlayItems,
+  pageTitle,
+  createButtonUrl,
+  createButtonTitle,
+}) {
   const router = useRouter()
+  const [showSubPages, setShowSubPages] = useState<boolean>(false)
   return (
     <Styles>
       <div className="container-main-header">
         <div className="container-main-header__left">
           <div className="container-main-header__title">{pageTitle}</div>
-          <span className="container-main-header__options">All Products (1.24K)</span>
+          <span
+            className="container-main-header__options"
+            onClick={() => setShowSubPages(!showSubPages)}
+            onKeyPress={() => setShowSubPages(!showSubPages)}
+          >
+            {overlayItems.filter((item) => item.isActive === true)[0].title}
+            <span className="container-main-header-dropdown__icon">
+              {showSubPages ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />}
+            </span>
+          </span>
+          {showSubPages && (
+            <OverlayDisplay
+              overlayItems={overlayItems.filter((item) => item.isActive === false)}
+              left="20px"
+              top="68px"
+            />
+          )}
         </div>
         <div className="container-main-header__actions">
-          <button className="button" onClick={() => router.push(createUrl)}>
+          <button className="button" onClick={() => router.push(createButtonUrl)}>
             <RiAddFill />
             {createButtonTitle}
           </button>

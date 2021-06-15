@@ -6,18 +6,18 @@ import ContainerMainAction from '../../components/layout/ContainerMainAction'
 import ContainerMainColumn from '../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../components/layout/ScrollableContainer'
 import { useQuery } from 'react-query'
-import getAllPosts from '../../actions/post/get-all-posts'
 import QueryPagination from '../../components/shared/QueryPagination'
 import ServerError from '../../components/shared/ServerError'
 import NotFound from '../../components/shared/NotFound'
 import ServerLoadingLoader from '../../components/shared/ServerLoadingLoader'
-import BlogCard from '../../components/blog/BlogCard'
 import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
+import BookingCard from '../../components/bookings/BookingCard'
+import getAllBookings from '../../actions/bookings/get-all-bookings'
 
-export default function Blogs() {
+export default function BookingIndex() {
   const [page, setPage] = useState<number>(1)
   const limit = 5
   const [query, setQuery] = useState({
@@ -25,11 +25,11 @@ export default function Blogs() {
     totalPages: 0,
     totalPosts: 0,
     currentPage: page,
-    posts: null,
+    bookings: null,
   })
   const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['articles', page],
-    () => getAllPosts({ page, limit }),
+    ['bookings', page],
+    () => getAllBookings({ page, limit }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
@@ -64,20 +64,23 @@ export default function Blogs() {
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerMainHeader
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
-            createButtonTitle="Create Blog"
+            pageTitle="Bookings"
+            createButtonUrl="/bookings/create"
+            createButtonTitle="Create Booking"
             overlayItems={overlayItems}
           />
           <MobileContainerHeader
             overlayItems={overlayItems}
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
+            pageTitle="Bookings"
+            createButtonUrl="/bookings/create"
           />
           <ScrollableContainer>
-            {isSuccess && query.posts.map((post) => <BlogCard key={post.slug} blog={post} />)}
-            {isLoading && <ServerLoadingLoader message="Loading All Posts" />}
-            {isSuccess && !query.posts.length && <NotFound message="No Post Found" />}
+            {isSuccess &&
+              query.bookings.map((booking) => (
+                <BookingCard key={booking.title} booking={booking} />
+              ))}
+            {isLoading && <ServerLoadingLoader message="Loading All bookings" />}
+            {isSuccess && !query.bookings.length && <NotFound message="No booking Found" />}
             {isError && <ServerError error={error} />}
             <QueryPagination
               nextPage={handleNextPage}

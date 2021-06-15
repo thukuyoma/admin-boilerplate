@@ -7,7 +7,7 @@ import {
   TagInputWrapper,
   TagItem,
   TagItemWrapper,
-} from '../../shared/form-styles'
+} from '../form-styles'
 import { nanoid } from 'nanoid'
 import { MdCancel } from 'react-icons/md'
 import { RiAddLine, RiErrorWarningLine } from 'react-icons/ri'

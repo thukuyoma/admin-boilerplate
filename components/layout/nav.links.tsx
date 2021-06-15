@@ -1,84 +1,114 @@
 import Icon from '../icons/index'
-import { v4 as uuidv4 } from 'uuid'
 import config from '../../config/config'
+import { nanoid } from 'nanoid'
 
 const links = [
-  {
-    title: 'Users',
-    icon: <Icon name="user" width={18} height={18} fill={config.styles.baseColor} />,
-    id: uuidv4(),
-    uri: '/questions',
-  },
-  {
-    title: 'Orders',
-    icon: <Icon name="order" width={18} height={18} fill={config.styles.baseColor} />,
-    id: uuidv4(),
-    uri: '/questions',
-  },
+  // {
+  //   title: 'Users',
+  //   icon: <Icon name="user" width={18} height={18} fill={config.styles.baseColor} />,
+  //   id: nanoid(),
+  //   uri: '/questions',
+  // },
+  // {
+  //   title: 'Orders',
+  //   icon: <Icon name="order" width={18} height={18} fill={config.styles.baseColor} />,
+  //   id: nanoid(),
+  //   uri: '/questions',
+  // },
   // {
   //   title: 'Repairs',
   //   icon: <Icon name="question" />,
-  //   id: uuidv4(),
+  //   id: nanoid(),
   //   uri: '/questions',
   // },
   // {
   //   title: 'Admins',
   //   icon: <Icon name="question" />,
-  //   id: uuidv4(),
+  //   id: nanoid(),
   //   uri: '/questions',
   // // },
   // {
   //   title: 'Applications',
   //   icon: <Icon name="question" />,
-  //   id: uuidv4(),
+  //   id: nanoid(),
   //   uri: '/questions',
   // },
   {
-    title: 'Questions',
+    title: 'Scholarships',
     icon: <Icon name="question" width={18} height={18} fill={config.styles.baseColor} />,
-    id: uuidv4(),
-    uri: '/questions',
+    id: nanoid(),
+    uri: '/scholarships',
   },
+  // {
+  //   title: 'Questions',
+  //   icon: <Icon name="question" width={18} height={18} fill={config.styles.baseColor} />,
+  //   id: nanoid(),
+  //   uri: '/questions',
+  // },
   // {
   //   title: 'Payments',
   //   icon: <Icon name="question" />,
-  //   id: uuidv4(),
+  //   id: nanoid(),
   //   uri: '/questions',
   // },
+  // {
+  //   title: 'Orders',
+  //   icon: <Icon name="order" width={18} height={18} fill={config.styles.baseColor} />,
+  //   id: nanoid(),
+  //   uri: '/orders',
+  // },
   {
-    title: 'Orders',
-    icon: <Icon name="order" width={18} height={18} fill={config.styles.baseColor} />,
-    id: uuidv4(),
-    uri: '/orders',
+    title: 'Applications',
+    icon: <Icon name="ticket" width={18} height={18} fill={config.styles.baseColor} />,
+    id: nanoid(),
+    uri: '/applications',
+  },
+  {
+    title: 'Newsletter',
+    icon: <Icon name="ticket" width={18} height={18} fill={config.styles.baseColor} />,
+    id: nanoid(),
+    uri: '/newsletter',
+  },
+  {
+    title: 'Bookings',
+    icon: <Icon name="ticket" width={18} height={18} fill={config.styles.baseColor} />,
+    id: nanoid(),
+    uri: '/bookings',
+  },
+  {
+    title: 'Admins',
+    icon: <Icon name="ticket" width={18} height={18} fill={config.styles.baseColor} />,
+    id: nanoid(),
+    uri: '/admins',
   },
   {
     title: 'Supports',
     icon: <Icon name="ticket" width={18} height={18} fill={config.styles.baseColor} />,
-    id: uuidv4(),
+    id: nanoid(),
     uri: '/tickets',
   },
   {
     title: 'Dashboad',
     icon: <Icon name="analytics" width={18} height={18} fill={config.styles.baseColor} />,
-    id: uuidv4(),
+    id: nanoid(),
     uri: '/analytics',
   },
   {
     title: 'Blogs',
     icon: <Icon name="blog" width={18} height={18} fill={config.styles.baseColor} />,
-    id: uuidv4(),
+    id: nanoid(),
     uri: '/blogs',
   },
-  {
-    title: 'Products',
-    icon: <Icon name="product" width={18} height={18} fill={config.styles.baseColor} />,
-    id: uuidv4(),
-    uri: '/products',
-  },
+  // {
+  //   title: 'Products',
+  //   icon: <Icon name="product" width={18} height={18} fill={config.styles.baseColor} />,
+  //   id: nanoid(),
+  //   uri: '/products',
+  // },
   // {
   //   title: 'Technicians',
   //   icon: <Icon name="question" />,
-  //   id: uuidv4(),
+  //   id: nanoid(),
   //   uri: '/questions',
   // },
   // {

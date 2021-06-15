@@ -5,7 +5,7 @@ import { useMutation } from 'react-query'
 import Loader from 'react-loader-spinner'
 import loginValidator from '../utils/login-validator'
 import useAuth from '../context/auth'
-import { Control, InputField } from '../components/shared/form-styles'
+import { Control, InputField } from '../components/forms/form-styles'
 import { RiErrorWarningLine } from 'react-icons/ri'
 import DisplayInputError from '../components/forms/InputError'
 

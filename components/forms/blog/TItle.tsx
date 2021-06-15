@@ -1,5 +1,5 @@
 import React from 'react'
-import { Control, InputTitle, Must, InputField } from '../../shared/form-styles'
+import { Control, InputTitle, Must, InputField } from '../form-styles'
 import DisplayInputError from '../InputError'
 
 export default function TItle({ title, setTitle, inputErrors, setInputErrors }) {

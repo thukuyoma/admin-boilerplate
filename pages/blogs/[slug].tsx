@@ -17,16 +17,8 @@ import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import EditBlogButton from '../../components/blog/actions/EditBlogButton'
 import UnPublishBlogButton from '../../components/blog/actions/UnPublishBlogButton'
 import PublishBlogButton from '../../components/blog/actions/PublishBlogButton'
-
-const ContainerMainWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  min-height: 450px;
-  @media (max-width: 1000px) {
-    flex-wrap: wrap;
-    height: 100%;
-  }
-`
+import { nanoid } from 'nanoid'
+import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 
 export default function BlogPostDetails() {
   const router = useRouter()
@@ -35,12 +27,47 @@ export default function BlogPostDetails() {
     ['blog post details', slug],
     () => getPostDetails(slug)
   )
+  const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
+    { title: 'Blog Details', url: '', isActive: true },
+    { title: 'Blogs', url: '/blogs', isActive: false },
+    { title: 'All Categories', url: '/blogs/categories', isActive: false },
+    { title: 'Create Categories', url: '/blogs/categories/create', isActive: false },
+    { title: 'Create Blog', url: '/blogs/create', isActive: false },
+  ]
+  const primaryActions = [
+    { component: blog && <EditBlogButton slug={blog.slug} /> },
+    { component: blog && <DeletePostButton postId={blog._id} /> },
+    {
+      component:
+        blog && blog.status.isPublished ? (
+          <UnPublishBlogButton postId={blog && blog._id} refetch={refetch} />
+        ) : (
+          <PublishBlogButton postId={blog && blog._id} refetch={refetch} />
+        ),
+    },
+  ]
+
+  const secondaryActions = [
+    { title: 'Create Blog', url: '/blogs/create' },
+    { title: 'All Blogs', url: '/blogs' },
+    { title: 'All Categories', url: '/blogs/categories' },
+    { title: 'Create Categories', url: '/blogs/categories/create' },
+  ]
   return (
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
-          <ContainerMainHeader pageTitle="Blog" createUrl="" createButtonTitle="Create Blog" />
-          <MobileContainerHeader pageTitle="Blog" createButtonUrl="" />
+          <ContainerMainHeader
+            pageTitle="Blog"
+            createButtonUrl="/blogs/create"
+            createButtonTitle="Create Blog"
+            overlayItems={overlayItems}
+          />
+          <MobileContainerHeader
+            overlayItems={overlayItems}
+            pageTitle="Blog"
+            createButtonUrl="/blogs/create"
+          />
           <ScrollableContainer>
             {isSuccess && blog && <PostDetails blog={blog} />}
             {isError && <DisplayServerError error={error} />}
@@ -50,50 +77,21 @@ export default function BlogPostDetails() {
         <ContainerMainAction>
           {isSuccess && blog && (
             <>
-              <ActionButtonWrapper>
-                <EditBlogButton slug={blog.slug} />
-              </ActionButtonWrapper>
-              <ActionButtonWrapper>
-                <DeletePostButton postId={blog._id} />
-              </ActionButtonWrapper>
-              <ActionButtonWrapper>
-                {blog.status.isPublished ? (
-                  <UnPublishBlogButton postId={blog._id} refetch={refetch} />
-                ) : (
-                  <PublishBlogButton postId={blog._id} refetch={refetch} />
-                )}
-              </ActionButtonWrapper>
+              {primaryActions.map((primaryAction) => (
+                <ActionButtonWrapper key={nanoid()}>{primaryAction.component} </ActionButtonWrapper>
+              ))}
             </>
           )}
-          <ActionButtonWrapper>
-            <span
-              onKeyPress={() => router.push('/blogs/create')}
-              onClick={() => router.push('/blogs/create')}
-            >
-              Create Blog
-            </span>
-          </ActionButtonWrapper>
-          <ActionButtonWrapper>
-            <span onKeyPress={() => router.push('/blogs')} onClick={() => router.push('/blogs')}>
-              All Posts
-            </span>
-          </ActionButtonWrapper>
-          <ActionButtonWrapper>
-            <span
-              onKeyPress={() => router.push('/blogs/categories')}
-              onClick={() => router.push('/blogs/categories')}
-            >
-              See Categories
-            </span>
-          </ActionButtonWrapper>
-          <ActionButtonWrapper>
-            <span
-              onKeyPress={() => router.push('/blogs/categories/create')}
-              onClick={() => router.push('/blogs/categories/create')}
-            >
-              Create Categories
-            </span>
-          </ActionButtonWrapper>
+          {secondaryActions.map((secondaryAction) => (
+            <ActionButtonWrapper key={nanoid()}>
+              <span
+                onKeyPress={() => router.push(secondaryAction.url)}
+                onClick={() => router.push(secondaryAction.url)}
+              >
+                {secondaryAction.title}
+              </span>
+            </ActionButtonWrapper>
+          ))}
         </ContainerMainAction>
       </ContainerMainWrapper>
     </Layout>
