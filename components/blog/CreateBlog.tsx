@@ -14,6 +14,9 @@ import Tags from '../forms/blog/Tags'
 import TItle from '../forms/blog/TItle'
 import Button from '../shared/Button'
 import styled from 'styled-components'
+import InputErrorsSummary from '../forms/InputErrorsSummary'
+import { isNullOrUndefined } from 'util'
+import { toast } from 'react-toastify'
 
 const Spacer = styled.div`
   margin-bottom: 100px;
@@ -47,15 +50,7 @@ export default function CreateBlog() {
     category,
     postBody,
   }
-  const { mutateAsync, isSuccess, isLoading, isError, error, data } = useMutation(writePost, {
-    onError: (resError: object) => {
-      setInputErrors({ ...inputErrors, ...resError })
-    },
-    onSuccess: () => {
-      Object.keys(values).forEach((formItem) => localStorage.removeItem(formItem))
-      localStorage.removeItem('inputErrors')
-    },
-  })
+  const { mutateAsync, isSuccess, isLoading, isError, error, data } = useMutation(writePost)
   const handleSetBody = (bodyContent: string) => {
     setInputErrors({ ...inputErrors, postBody: '' })
     setPostBody(bodyContent)
@@ -69,8 +64,17 @@ export default function CreateBlog() {
       return null
     }
     const postForm = getFormData(values)
-    console.log({ postForm })
-    await mutateAsync(postForm)
+    await mutateAsync(postForm, {
+      onError: (resError: object) => {
+        setInputErrors({ ...inputErrors, ...resError })
+      },
+      onSuccess: (postSlug) => {
+        Object.keys(values).forEach((formItem) => localStorage.removeItem(formItem))
+        localStorage.removeItem('inputErrors')
+        toast.success('Post successfully created')
+        router.push(`/blogs/${postSlug}`)
+      },
+    })
     return null
   }
 
@@ -105,7 +109,7 @@ export default function CreateBlog() {
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={5} md={5} lg={5}>
-            <Tags tags={tags} setTags={setTags} />
+            <Tags tags={tags.slice().reverse()} setTags={setTags} />
           </Grid>
           <Grid item xs={12} sm={7} md={7} lg={7}>
             <PostImage
@@ -123,6 +127,13 @@ export default function CreateBlog() {
         <Grid>
           <PostBody postBody={postBody} inputErrors={inputErrors} handleSetBody={handleSetBody} />
         </Grid>
+        <>
+          {Object.values(inputErrors).filter((error) => error.length > 3).length ? (
+            <InputErrorsSummary
+              errors={Object.values(inputErrors).filter((error) => error.length > 3)}
+            />
+          ) : null}
+        </>
         <Button
           block
           title={isLoading ? 'Creating Post' : 'Create Post'}

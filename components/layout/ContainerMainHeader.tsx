@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import React from 'react'
-import { GrAdd } from 'react-icons/gr'
+import { RiAddFill } from 'react-icons/ri'
 import styled from 'styled-components'
 import config from '../../config/config'
 
@@ -46,7 +46,7 @@ export default function ContainerMainHeader({ pageTitle, createUrl, createButton
         </div>
         <div className="container-main-header__actions">
           <button className="button" onClick={() => router.push(createUrl)}>
-            <GrAdd />
+            <RiAddFill />
             {createButtonTitle}
           </button>
         </div>

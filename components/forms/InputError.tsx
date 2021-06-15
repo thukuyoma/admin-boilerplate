@@ -18,7 +18,7 @@ const Styles = styled.div`
   }
 `
 
-export default function DisplayInputError({ error }) {
+export default function DisplayInputError({ error }: { error: string }) {
   return (
     <Styles>
       <div className="input-error__wrapper">

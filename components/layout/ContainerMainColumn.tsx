@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Styles = styled.div`
-  height: 40px;
   padding-bottom: 10px;
   display: flex;
   flex-direction: column;

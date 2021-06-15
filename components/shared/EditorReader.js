@@ -5,7 +5,8 @@ import styled from 'styled-components'
 
 const Styles = styled.div`
   .DraftEditor-root {
-    line-height: 20px;
+    line-height: 30px;
+    font-size: 14px;
   }
 `
 

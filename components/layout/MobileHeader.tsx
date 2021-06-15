@@ -25,7 +25,7 @@ const Styles = styled.div`
   position: fixed;
   width: 100%;
   opacity: 1;
-  z-index: 3;
+  z-index: 99999999;
 
   .header__left {
     display: flex;

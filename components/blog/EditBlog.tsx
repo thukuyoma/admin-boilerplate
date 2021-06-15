@@ -14,6 +14,7 @@ import TItle from '../forms/blog/TItle'
 import Button from '../shared/Button'
 import styled from 'styled-components'
 import editPost from '../../actions/post/edit-post'
+import { toast } from 'react-toastify'
 
 const Spacer = styled.div`
   margin-bottom: 100px;
@@ -53,9 +54,11 @@ export default function EditBlog({ blog }) {
     onError: (resError: object) => {
       setInputErrors({ ...inputErrors, ...resError })
     },
-    onSuccess: () => {
+    onSuccess: (postSlug) => {
       Object.keys(values).forEach((formItem) => localStorage.removeItem(formItem))
       localStorage.removeItem('inputErrors')
+      toast.success('Post successfully updated')
+      router.push(`/blogs/${postSlug}`)
     },
   })
 
@@ -117,7 +120,7 @@ export default function EditBlog({ blog }) {
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={5} md={5} lg={5}>
-            <Tags tags={tags.reverse()} setTags={setTags} />
+            <Tags tags={tags.slice().reverse()} setTags={setTags} />
           </Grid>
           <Grid item xs={12} sm={7} md={7} lg={7}>
             <PostImage

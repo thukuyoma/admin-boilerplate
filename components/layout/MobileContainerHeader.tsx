@@ -13,6 +13,7 @@ const Styles = styled.div`
   margin-right: -10px;
   border-bottom: 1px solid #ccc;
   padding: 20px 10px;
+  z-index: 222;
   .mobile-container-header__wrapper {
     display: flex;
     align-items: center;

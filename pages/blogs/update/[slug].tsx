@@ -39,7 +39,9 @@ export default function edit() {
             {isLoading && <DisplayAdminLoader message="Loading Post" />}
           </ScrollableContainer>
         </ContainerMainColumn>
-        <ContainerMainAction />
+        <ContainerMainAction>
+          <h1>Hello</h1>
+        </ContainerMainAction>
       </ContainerMainWrapper>
     </Layout>
   )

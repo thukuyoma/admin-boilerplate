@@ -18,15 +18,20 @@ const Styles = styled.div`
     margin-bottom: 30px;
   }
   @media (max-width: 1000px) {
-    display: none;
-  }
-  @media (max-width: 500px) {
+    width: 100%;
+    padding-left: 0;
+    .action-button__wrapper {
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+    }
   }
 `
-export default function ContainerMainAction() {
+export default function ContainerMainAction({ children }) {
   return (
     <Styles>
       <div className="container-main-action__title">Actions</div>
+      {<div className="action-button__wrapper">{children}</div>}
     </Styles>
   )
 }

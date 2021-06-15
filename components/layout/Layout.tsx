@@ -52,6 +52,13 @@ const Styles = styled.div`
     font-size: 14px;
     line-height: 19px;
     color: white;
+    color: #fff;
+    > * {
+      &:first-child {
+        margin-right: 5px;
+        font-size: 20px;
+      }
+    }
   }
 `
 export default function Layout({ children }) {

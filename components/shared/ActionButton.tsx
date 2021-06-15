@@ -6,36 +6,31 @@ import Loader from 'react-loader-spinner'
 const Styles = styled.div`
   display: ${(block) => (block ? 'flex' : 'inline-flex')};
   justify-content: ${({ align }) => align && `${align}`};
-  width: 100%;
+  width: fit-content;
   button {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    // background: #0098db;
+    background: inherit;
     border-radius: 4px;
     border: 0;
     outline: none;
     cursor: pointer;
     white-space: nowrap;
     outline: 0;
-    color: #fff;
-    font-weight: bold;
-    // :hover {
-    //   background-color: black;
-    // }
+    color: inherit;
   }
 `
 interface ButtonProps {
   block: boolean
   title: string
   onClick: (e: SyntheticEvent) => Promise<unknown> | unknown
-  loading: boolean
+  loading?: boolean
   align: string
   style?: unknown
   disabled?: boolean
 }
-export default function Button({
+export default function ActionButton({
   block,
   style = {},
   title,
