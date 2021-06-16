@@ -24,7 +24,7 @@ export default function UnPublishBlogButton({ postId, refetch }) {
   return (
     <ActionButton
       block
-      title="Unpublish Post"
+      title={isLoading ? 'Unpublishing Post' : 'Unpublish Post'}
       onClick={handleUnpublishPost}
       loading={isLoading}
       align="left"

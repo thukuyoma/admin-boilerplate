@@ -14,6 +14,7 @@ const Styles = styled.div`
   margin-bottom: 20px;
   border-bottom: 1px solid #e8e8e8;
   padding-bottom: 20px;
+  margin-right: 20px;
   .booking__image {
     height: 62px;
     width: 62px;

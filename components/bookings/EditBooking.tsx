@@ -1,13 +1,12 @@
 import { Grid } from '@material-ui/core'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import getFormData from '../../utils/get-form-data'
 import Button from '../shared/Button'
 import InputErrorsSummary from '../forms/InputErrorsSummary'
 import { toast } from 'react-toastify'
-import createBooking from '../../actions/bookings/create-booking'
 import {
   BookingTitle,
   BookingDescription,
@@ -16,8 +15,9 @@ import {
   BookingAffiliateLink,
 } from '../forms/booking'
 import bookingValidation from '../forms/booking/booking-validation'
+import editBooking from '../../actions/bookings/edit-booking'
 
-export default function CreateBooking() {
+export default function EditBooking({ booking }) {
   const router = useRouter()
   const [bookingTitle, setBookingTitle] = useLocalStorage('bookingTitle', '')
   const [bookingImage, setBookingImage] = useState<File | Blob | string>('')
@@ -40,7 +40,14 @@ export default function CreateBooking() {
     type: bookingType,
     affiliateLink: bookingAffiliateLink,
   }
-  const { mutateAsync, isSuccess, isLoading } = useMutation(createBooking)
+  const { mutateAsync, isSuccess, isLoading } = useMutation(editBooking)
+
+  useEffect(() => {
+    setBookingTitle(booking.title)
+    setBookingType(booking.type)
+    setBookingDescription(booking.description)
+    setBookingAffiliateLink(booking?.affiliateLink ? booking.affiliateLink : '')
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -55,24 +62,27 @@ export default function CreateBooking() {
       return null
     }
     const bookingForm = getFormData(values)
-    await mutateAsync(bookingForm, {
-      onError: (resError: object) => {
-        setInputErrors({ ...inputErrors, ...resError })
-      },
-      onSuccess: (bookingId) => {
-        const localStorageItems: Array<string> = [
-          'bookingTitle',
-          'bookingDescription',
-          'bookingImage',
-          'bookingType',
-          'bookingAffiliateLink',
-        ]
-        // localStorageItems.forEach((formItem) => localStorage.removeItem(formItem))
-        // localStorage.removeItem('inputErrors')
-        toast.success('Booking successfully created')
-        router.push(`/bookings/${bookingId}`)
-      },
-    })
+    await mutateAsync(
+      { bookingId: booking._id, formData: bookingForm },
+      {
+        onError: (resError: object) => {
+          setInputErrors({ ...inputErrors, ...resError })
+        },
+        onSuccess: (bookingId) => {
+          const localStorageItems: Array<string> = [
+            'bookingTitle',
+            'bookingDescription',
+            'bookingImage',
+            'bookingType',
+            'bookingAffiliateLink',
+          ]
+          localStorageItems.forEach((formItem) => localStorage.removeItem(formItem))
+          localStorage.removeItem('inputErrors')
+          toast.success('Booking successfully updated')
+          router.push(`/bookings/${bookingId}`)
+        },
+      }
+    )
     return null
   }
 
@@ -115,7 +125,7 @@ export default function CreateBooking() {
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6}>
           <BookingImage
-            imageUrl=""
+            imageUrl={booking?.bookingImage ? booking.bookingImage.url : ''}
             inputErrors={inputErrors}
             setInputErrors={setInputErrors}
             setBookingImage={setBookingImage}
@@ -131,7 +141,7 @@ export default function CreateBooking() {
       </>
       <Button
         block
-        title={isLoading ? 'Creating booking' : 'Create Booking'}
+        title={isLoading ? 'Updating booking' : 'Update Booking'}
         onClick={handleSubmit}
         loading={isLoading}
         align="center"

@@ -26,7 +26,7 @@ export default function DeletePostButton({ postId }: { postId: string }) {
   return (
     <ActionButton
       block
-      title="Delete Post"
+      title={isLoading ? 'Deleting Post' : 'Delete Post'}
       onClick={handleDeletePost}
       loading={isLoading}
       align="left"

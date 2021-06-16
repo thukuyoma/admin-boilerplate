@@ -1,9 +1,5 @@
 import React from 'react'
-import CreateBlog from '../../../components/blog/CreateBlog'
-import ContainerMainHeader from '../../../components/layout/ContainerMainHeader'
 import Layout from '../../../components/layout/Layout'
-import MobileContainerHeader from '../../../components/layout/MobileContainerHeader'
-import styled from 'styled-components'
 import ContainerMainAction from '../../../components/layout/ContainerMainAction'
 import ContainerMainColumn from '../../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../../components/layout/ScrollableContainer'
@@ -14,13 +10,15 @@ import getPostDetails from '../../../actions/post/get-post-details'
 import DisplayAdminLoader from '../../../components/shared/DisplayAdminLoader'
 import DisplayServerError from '../../../components/shared/DisplayServerError'
 import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
+import ContainerHeaders from '../../../components/layout/ContainerHeaders'
+import ActionButtonWrapper from '../../../components/shared/ActionButtonWrapper'
+import { nanoid } from 'nanoid'
 
 export default function UpdatePost() {
   const router = useRouter()
   const { slug } = router.query
-  const { refetch, data, isSuccess, isError, error, isLoading } = useQuery(
-    ['blog post details', slug],
-    () => getPostDetails(slug)
+  const { data, isSuccess, isError, error, isLoading } = useQuery(['blog post details', slug], () =>
+    getPostDetails(slug)
   )
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
     { title: 'Edit Blog', url: '', isActive: true },
@@ -29,19 +27,21 @@ export default function UpdatePost() {
     { title: 'Create Categories', url: '/blogs/categories/create', isActive: false },
     { title: 'Create Blog', url: '/blogs/create', isActive: false },
   ]
+
+  const secondaryActions = [
+    { title: 'Create Blog', url: '/blogs/create' },
+    { title: 'All Blogs', url: '/blogs' },
+    { title: 'All Categories', url: '/blogs/categories' },
+    { title: 'Create Categories', url: '/blogs/categories/create' },
+  ]
   return (
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
-          <ContainerMainHeader
+          <ContainerHeaders
             pageTitle="Blog"
             createButtonUrl="/blogs/create"
             createButtonTitle="Create Post"
-            overlayItems={overlayItems}
-          />
-          <MobileContainerHeader
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
@@ -51,7 +51,16 @@ export default function UpdatePost() {
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>
-          <h1>Hello</h1>
+          {secondaryActions.map((secondaryAction) => (
+            <ActionButtonWrapper key={nanoid()}>
+              <span
+                onKeyPress={() => router.push(secondaryAction.url)}
+                onClick={() => router.push(secondaryAction.url)}
+              >
+                {secondaryAction.title}
+              </span>
+            </ActionButtonWrapper>
+          ))}
         </ContainerMainAction>
       </ContainerMainWrapper>
     </Layout>

@@ -8,14 +8,18 @@ import { useRouter } from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
 import CreateBooking from '../../components/bookings/CreateBooking'
+import { nanoid } from 'nanoid'
 
 export default function CreateBookingPage() {
   const router = useRouter()
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Create Blog', url: '', isActive: true },
-    { title: 'bookings', url: '/bookings', isActive: false },
-    { title: 'All Categories', url: '/bookings/categories', isActive: false },
-    { title: 'Create Categories', url: '/bookings/categories/create', isActive: false },
+    { title: 'Create Booking', url: '', isActive: true },
+    { title: 'Bookings', url: '/bookings', isActive: false },
+    { title: 'Booking Requests', url: '/bookings/booking-request', isActive: false },
+  ]
+  const secondaryActions = [
+    { title: 'Bookings', url: '/bookings' },
+    { title: 'Booking Requests', url: '/bookings/booking-request' },
   ]
   return (
     <Layout>
@@ -32,38 +36,16 @@ export default function CreateBookingPage() {
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>
-          <ActionButtonWrapper>
-            <span
-              onKeyPress={() => router.push('/bookings/create')}
-              onClick={() => router.push('/bookings/create')}
-            >
-              Create Blog
-            </span>
-          </ActionButtonWrapper>
-          <ActionButtonWrapper>
-            <span
-              onKeyPress={() => router.push('/bookings')}
-              onClick={() => router.push('/bookings')}
-            >
-              All Posts
-            </span>
-          </ActionButtonWrapper>
-          <ActionButtonWrapper>
-            <span
-              onKeyPress={() => router.push('/bookings/categories')}
-              onClick={() => router.push('/bookings/categories')}
-            >
-              See Categories
-            </span>
-          </ActionButtonWrapper>
-          <ActionButtonWrapper>
-            <span
-              onKeyPress={() => router.push('/bookings/categories/create')}
-              onClick={() => router.push('/bookings/categories/create')}
-            >
-              Create Categories
-            </span>
-          </ActionButtonWrapper>
+          {secondaryActions.map((secondaryAction) => (
+            <ActionButtonWrapper key={nanoid()}>
+              <span
+                onKeyPress={() => router.push(secondaryAction.url)}
+                onClick={() => router.push(secondaryAction.url)}
+              >
+                {secondaryAction.title}
+              </span>
+            </ActionButtonWrapper>
+          ))}
         </ContainerMainAction>
       </ContainerMainWrapper>
     </Layout>

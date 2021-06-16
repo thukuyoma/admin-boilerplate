@@ -24,7 +24,7 @@ export default function PublishBlogButton({ postId, refetch }) {
   return (
     <ActionButton
       block
-      title="Publish Post"
+      title={isLoading ? 'Publishing Post' : 'Publish Post'}
       onClick={handlePublishPost}
       loading={isLoading}
       align="left"

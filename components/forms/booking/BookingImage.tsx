@@ -56,7 +56,7 @@ export default function BookingImage({ imageUrl, setBookingImage, setInputErrors
   return (
     <>
       <Grid container spacing={3}>
-        <Grid item xs={6} sm={12} md={12} lg={12}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
           <InputTitle>Booking Image</InputTitle>
           {preview ? (
             <>
@@ -74,7 +74,7 @@ export default function BookingImage({ imageUrl, setBookingImage, setInputErrors
                 name="bookingImage"
               />
               <Grid container spacing={2}>
-                <Grid item xs={6} sm={6} md={6} lg={6}>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
                   <ChangeImageButton
                     onKeyPress={() => imageInputRef.current.click()}
                     onClick={() => imageInputRef.current.click()}
@@ -86,7 +86,7 @@ export default function BookingImage({ imageUrl, setBookingImage, setInputErrors
                     Change Image
                   </ChangeImageButton>
                 </Grid>
-                <Grid item xs={6} sm={6} md={6} lg={6}>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
                   <RemoveImageButton onKeyPress={handleRemoveImage} onClick={handleRemoveImage}>
                     <RemoveImageButtonIcon>
                       <IoMdRemove />

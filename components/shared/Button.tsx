@@ -12,7 +12,7 @@ const Styles = styled.div`
     align-items: center;
     justify-content: center;
     padding: 10px;
-    // background: #0098db;
+    background: #0098db;
     border-radius: 4px;
     border: 0;
     outline: none;
@@ -21,9 +21,9 @@ const Styles = styled.div`
     outline: 0;
     color: #fff;
     font-weight: bold;
-    // :hover {
-    //   background-color: black;
-    // }
+    :hover {
+      background: #0098db;
+    }
   }
 `
 interface ButtonProps {
