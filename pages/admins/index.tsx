@@ -6,30 +6,30 @@ import ContainerMainAction from '../../components/layout/ContainerMainAction'
 import ContainerMainColumn from '../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../components/layout/ScrollableContainer'
 import { useQuery } from 'react-query'
-import getAllPosts from '../../actions/post/get-all-posts'
 import QueryPagination from '../../components/shared/QueryPagination'
 import ServerError from '../../components/shared/ServerError'
 import NotFound from '../../components/shared/NotFound'
 import ServerLoadingLoader from '../../components/shared/ServerLoadingLoader'
-import BlogCard from '../../components/blog/BlogCard'
 import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
+import AdminCard from '../../components/admins/AdminCard'
+import getAllAdmins from '../../actions/account/get-all-admins'
 
-export default function Blogs() {
+export default function AdminIndexPage() {
   const [page, setPage] = useState<number>(1)
   const limit = 5
   const [query, setQuery] = useState({
     hasMore: false,
     totalPages: 0,
-    totalPosts: 0,
+    totalAdmins: 0,
     currentPage: page,
-    posts: null,
+    admins: null,
   })
-  const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['articles', page],
-    () => getAllPosts({ page, limit }),
+  const { isLoading, data, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
+    ['admins', page],
+    () => getAllAdmins({ page, limit }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
@@ -46,38 +46,32 @@ export default function Blogs() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `All Blogs (${query.totalPosts})`, url: '/blogs', isActive: true },
-    { title: 'All Categories', url: '/blogs/categories', isActive: false },
-    { title: 'Create Categories', url: '/blogs/categories/create', isActive: false },
-    { title: 'Create Blog', url: '/blogs/create', isActive: false },
+    { title: `Admins (${query.totalAdmins})`, url: '/admins', isActive: true },
+    { title: 'Create Admin', url: '/admins/create', isActive: false },
   ]
-
-  const secondaryActions = [
-    { title: 'Create Blog', url: '/blogs/create' },
-    { title: 'All Blogs', url: '/blogs' },
-    { title: 'All Categories', url: '/blogs/categories' },
-    { title: 'Create Categories', url: '/blogs/categories/create' },
-  ]
+  const secondaryActions = [{ title: 'Create Admin', url: '/admins/create' }]
 
   return (
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerMainHeader
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
-            createButtonTitle="Create Blog"
+            pageTitle="Admins"
+            createButtonUrl="/admins/create"
+            createButtonTitle="Create Admin"
             overlayItems={overlayItems}
           />
           <MobileContainerHeader
             overlayItems={overlayItems}
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
+            pageTitle="Admins"
+            createButtonUrl="/admins/create"
           />
           <ScrollableContainer>
-            {isSuccess && query.posts.map((post) => <BlogCard key={post.slug} blog={post} />)}
-            {isLoading && <ServerLoadingLoader message="Loading All Posts" />}
-            {isSuccess && !query.posts.length && <NotFound message="No Post Found" />}
+            {isSuccess &&
+              data &&
+              query?.admins.map((admin) => <AdminCard key={admin.title} admin={admin} />)}
+            {isLoading && <ServerLoadingLoader message="Loading all admins" />}
+            {isSuccess && !query.admins.length && <NotFound message="No admins Found" />}
             {isError && <ServerError error={error} />}
             <QueryPagination
               nextPage={handleNextPage}

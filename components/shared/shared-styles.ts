@@ -5,9 +5,11 @@ const TagKeyValuePair = styled.div`
   margin: 10px 0;
 `
 const TagKey = styled.div`
+  display: flex;
+  align-items: center;
   margin-right: 20px;
   color: #0c4284;
-  font-weight: bold;
+  font-weight: 500;
 `
 
 const TagValue = styled.div`

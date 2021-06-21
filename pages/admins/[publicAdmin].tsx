@@ -11,63 +11,71 @@ import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
-import EditBookingButton from '../../components/bookings/actions/EditBookingButton'
-import DeleteBookingButton from '../../components/bookings/actions/DeleteBookingButton'
-import UnPublishBookingButton from '../../components/bookings/actions/UnPublishBookingButton'
-import PublishBookingButton from '../../components/bookings/actions/PublishBookingButton'
-import BookingDetails from '../../components/bookings/BookingDetails'
-import getBookingDetails from '../../actions/bookings/get-booking-details'
+import getPublicAdmin from '../../actions/account/get-public-admin'
+import AdminPublicDetails from '../../components/admins/AdminPublicDetails'
+import BlockAdminButton from '../../components/admins/actions/BlockAdminButton'
+import DeleteAdminButton from '../../components/admins/actions/DeleteAdminButton'
+import UpdateAdminButton from '../../components/admins/actions/UpdateAdminButton'
+import wordsCapitalizer from '../../utils/words-capitalizer'
+import AdminActivitiesButton from '../../components/admins/actions/AdminActivitiesButton'
 
-export default function BookingDetailsPage() {
+export default function PublicAdminProfilePage() {
   const router = useRouter()
-  const { bookingId } = router.query
-  const { refetch, data: booking, isSuccess, isError, error, isLoading } = useQuery(
-    ['Booking details', bookingId],
-    () => getBookingDetails(bookingId)
+  const { publicAdmin } = router.query
+  const { refetch, data: admin, isSuccess, isError, error, isLoading } = useQuery(
+    ['Admin details', publicAdmin],
+    () => getPublicAdmin(publicAdmin as string)
   )
+
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Booking Details', url: '', isActive: true },
-    { title: 'Bookings', url: '/bookings', isActive: false },
-    { title: 'Booking Requests', url: '/bookings/booking-requests', isActive: false },
-    { title: 'Create booking', url: '/bookings/create', isActive: false },
+    { title: 'Admin Details', url: '', isActive: true },
+    { title: 'Admins', url: '/admins', isActive: false },
+    { title: 'Create Admin', url: '/admins/create', isActive: false },
   ]
   const primaryActions = [
-    { component: booking && <EditBookingButton bookingId={booking._id} /> },
-    { component: booking && <DeleteBookingButton bookingId={booking._id} /> },
     {
-      component:
-        booking && booking.status.isPublished ? (
-          <UnPublishBookingButton refetch={refetch} bookingId={booking ? booking._id : ''} />
-        ) : (
-          <PublishBookingButton refetch={refetch} bookingId={booking ? booking._id : ''} />
-        ),
+      component: admin && (
+        <UpdateAdminButton
+          adminToUpdateName={wordsCapitalizer(`${admin.firstName} ${admin.lastName}`)}
+          adminId={admin._id}
+        />
+      ),
+    },
+    { component: admin && <DeleteAdminButton adminId={admin._id} /> },
+    { component: admin && <AdminActivitiesButton adminId={admin._id} /> },
+    {
+      component: admin && (
+        <BlockAdminButton
+          refetch={refetch}
+          isBlocked={admin.status.isBlocked}
+          adminId={admin ? admin._id : ''}
+        />
+      ),
     },
   ]
 
   const secondaryActions = [
-    { title: 'Create booking', url: '/bookings/create' },
-    { title: 'Bookings', url: '/bookings' },
-    { title: 'Booking Requests', url: '/bookings/booking-requests' },
-    { title: 'Create booking', url: '/bookings/create' },
+    { title: 'Create Admin', url: '/admins/create' },
+    { title: 'Admins', url: '/admins' },
   ]
   return (
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerHeaders
-            pageTitle="Bookings"
-            createButtonUrl="/bookings/create"
-            createButtonTitle="Create Booking"
+            pageTitle="Admins"
+            createButtonUrl="/admins/create"
+            createButtonTitle="Create Admin"
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess && booking && <BookingDetails booking={booking} />}
+            {isSuccess && admin && <AdminPublicDetails admin={admin} />}
             {isError && <DisplayServerError error={error} />}
-            {isLoading && <DisplayAdminLoader message="Loading Booking" />}
+            {isLoading && <DisplayAdminLoader message="Loading Admin" />}
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>
-          {isSuccess && booking && (
+          {isSuccess && admin && (
             <>
               {primaryActions.map((primaryAction) => (
                 <ActionButtonWrapper key={nanoid()}>{primaryAction.component} </ActionButtonWrapper>

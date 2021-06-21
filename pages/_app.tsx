@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
+import React from 'react'
 import type { AppProps } from 'next/app'
 import '../styles/globals.css'
 import 'react-quill/dist/quill.snow.css'
@@ -11,7 +11,6 @@ import Head from 'next/head'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { ToastContainer } from 'react-toastify'
 import { AuthProvider, ProtectRoute } from '../context/auth'
-import { getCookie } from '../actions/account/cookies'
 import 'react-toastify/dist/ReactToastify.css'
 
 Router.events.on('routeChangeStart', (url) => {

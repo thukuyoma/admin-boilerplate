@@ -1,12 +1,14 @@
 import api from '../../utils/api'
-
-// eslint-disable-next-line consistent-return
-export default async function updateAdmin({ email, formData }) {
-  const baseUrl = process.env.BASE_URL
+export default async function updateAdmin({
+  adminId,
+  formData,
+}: {
+  adminId: string | undefined
+  formData: object
+}) {
   try {
-    const res = await api.put(`${baseUrl}/accounts/update/${email}`, formData)
-    const { data } = res
-    return data.profile
+    const res = await api.put(`/admins/${adminId}`, formData)
+    return res.data.adminId
   } catch (err) {
     throw err.response.data.msg
   }

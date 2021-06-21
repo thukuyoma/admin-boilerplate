@@ -23,7 +23,7 @@ export default function BookingCard({ bookingRequest }) {
       <div>
         <TagKeyValuePair>
           <TagKey>Booking Title:</TagKey>
-          <TagValue>{bookingRequest.title}</TagValue>
+          <TagValue>{capitalizeFirstLetter(bookingRequest.title)}</TagValue>
         </TagKeyValuePair>
         <TagKeyValuePair>
           <TagKey>Requesters Fullnames:</TagKey>

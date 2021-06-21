@@ -2,10 +2,9 @@ import api from '../../utils/api'
 
 export default async function getPublicAdmin(adminProfileToGet: string) {
   try {
-    const baseUrl = process.env.BASE_URL
-    const res = await api.get(`${baseUrl}/accounts/public/${adminProfileToGet}`)
-    const { data } = res
-    return data
+    const res = await api.get(`/admins/public-profile/${adminProfileToGet}`)
+    const { admin } = res.data
+    return admin
   } catch (err) {
     throw err.response.data.msg
   }

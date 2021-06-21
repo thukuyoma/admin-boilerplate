@@ -2,23 +2,23 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
-import deleteBooking from '../../../actions/bookings/delete-booking'
+import deleteAdmin from '../../../actions/account/delete-admin'
 import ActionButton from '../../shared/ActionButton'
 
-export default function DeleteBookingButton({ bookingId }: { bookingId: string }) {
+export default function DeleteAdminButton({ adminId }: { adminId: string }) {
   const router = useRouter()
-  const { mutateAsync, isLoading } = useMutation([bookingId], deleteBooking)
-  const handleDeleteBooking = async () => {
-    if (!bookingId) {
+  const { mutateAsync, isLoading } = useMutation([adminId], deleteAdmin)
+  const handleDeleteAdmin = async () => {
+    if (!adminId) {
       return null
     }
-    await mutateAsync(bookingId, {
+    await mutateAsync(adminId, {
       onError: (err) => {
         toast.error(err)
       },
       onSuccess: (data) => {
         toast.success(data)
-        router.push('/bookings')
+        router.push('/admins')
       },
     })
     return null
@@ -26,8 +26,8 @@ export default function DeleteBookingButton({ bookingId }: { bookingId: string }
   return (
     <ActionButton
       block
-      title={isLoading ? 'Deleting Booking' : 'Delete Booking'}
-      onClick={handleDeleteBooking}
+      title={isLoading ? 'Deleting Admin' : 'Delete Admin'}
+      onClick={handleDeleteAdmin}
       loading={isLoading}
       align="left"
     />

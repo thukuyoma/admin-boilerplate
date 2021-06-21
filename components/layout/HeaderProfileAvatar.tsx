@@ -11,8 +11,8 @@ const Styles = styled.div`
   cursor: pointer;
   z-index: 12;
   .avatar {
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
   }
 `
@@ -22,7 +22,7 @@ export default function HeaderProfileAvatar({ showAccount, handleAccount }) {
   return (
     <Styles>
       <img
-        src={profile?.avatar.url}
+        src={profile?.avatar.url ? profile?.avatar.url : '/assets/face.svg'}
         alt="default"
         className="avatar"
         onClick={() => handleAccount()}

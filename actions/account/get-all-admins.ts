@@ -1,9 +1,8 @@
 import api from '../../utils/api'
 
-export default async function getALlAdmins() {
+export default async function getALlAdmins({ page, limit }) {
   try {
-    const baseUrl = process.env.BASE_URL
-    const res = await api.get(`${baseUrl}/accounts/all-admins`)
+    const res = await api.get(`/admins?page=${Number(page)}&&limit=${Number(limit)}`)
     const { data } = res
     return data
   } catch (err) {
