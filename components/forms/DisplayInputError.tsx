@@ -21,12 +21,14 @@ const Styles = styled.div`
 export default function DisplayInputError({ error }: { error: string }) {
   return (
     <Styles>
-      <div className="input-error__wrapper">
-        <div className="input-error__icon">
-          <BiErrorCircle />
+      {error.length ? (
+        <div className="input-error__wrapper">
+          <div className="input-error__icon">
+            <BiErrorCircle />
+          </div>
+          {error}
         </div>
-        {error}
-      </div>
+      ) : null}
     </Styles>
   )
 }
