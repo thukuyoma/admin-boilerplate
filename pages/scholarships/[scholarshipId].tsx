@@ -6,76 +6,74 @@ import styled from 'styled-components'
 import ContainerMainAction from '../../components/layout/ContainerMainAction'
 import ContainerMainColumn from './../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../components/layout/ScrollableContainer'
-import PostDetails from '../../components/blog/PostDetails'
 import { useRouter } from 'next/router'
-import getPostDetails from '../../actions/post/get-post-details'
 import { useQuery } from 'react-query'
 import DisplayAdminLoader from '../../components/shared/DisplayAdminLoader'
 import DisplayServerError from '../../components/shared/DisplayServerError'
-import DeletePostButton from '../../components/blog/actions/DeletePostButton'
 import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
-import EditBlogButton from '../../components/blog/actions/EditBlogButton'
-import UnPublishBlogButton from '../../components/blog/actions/UnPublishBlogButton'
-import PublishBlogButton from '../../components/blog/actions/PublishBlogButton'
 import { nanoid } from 'nanoid'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
+import getScholarship from '../../actions/scholarship/get-scholarship'
+import ScholarshipDetails from '../../components/scholarship/ScholarshipDetails'
+import EditScholarshipButton from '../../components/scholarship/actions/EditScholarshipButton'
+import DeleteScholarshipButton from '../../components/scholarship/actions/DeleteScholarshipButton'
+import PublishScholarshipButton from '../../components/scholarship/actions/PublishScholarshipButton'
 
 export default function BlogPostDetails() {
   const router = useRouter()
-  const { slug } = router.query
-  const { refetch, data: blog, isSuccess, isError, error, isLoading } = useQuery(
-    ['blog post details', slug],
-    () => getPostDetails(slug)
+  const { scholarshipId } = router.query
+  const { refetch, data: scholarship, isSuccess, isError, error, isLoading } = useQuery(
+    ['scholarship details', scholarshipId],
+    () => getScholarship(scholarshipId as string)
   )
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Blog Details', url: '', isActive: true },
-    { title: 'Blogs', url: '/blogs', isActive: false },
-    { title: 'All Categories', url: '/blogs/categories', isActive: false },
-    { title: 'Create Categories', url: '/blogs/categories/create', isActive: false },
-    { title: 'Create Blog', url: '/blogs/create', isActive: false },
+    { title: 'Scholarship Details', url: '', isActive: true },
+    { title: 'Scholarships', url: '/scholarship', isActive: false },
+    { title: 'Create Scholarship', url: '/scholarship/create', isActive: false },
   ]
   const primaryActions = [
-    { component: blog && <EditBlogButton slug={blog.slug} /> },
-    { component: blog && <DeletePostButton postId={blog._id} /> },
+    { component: scholarship && <EditScholarshipButton scholarshipId={scholarshipId as string} /> },
     {
-      component:
-        blog && blog.status.isPublished ? (
-          <UnPublishBlogButton postId={blog && blog._id} refetch={refetch} />
-        ) : (
-          <PublishBlogButton postId={blog && blog._id} refetch={refetch} />
-        ),
+      component: scholarship && <DeleteScholarshipButton scholarshipId={scholarshipId as string} />,
+    },
+    {
+      component: scholarship && (
+        <PublishScholarshipButton
+          isPublished={scholarship.status && scholarship.status.isPublished}
+          scholarshipId={scholarshipId}
+          refetch={refetch}
+        />
+      ),
     },
   ]
 
   const secondaryActions = [
-    { title: 'Create Blog', url: '/blogs/create' },
-    { title: 'All Blogs', url: '/blogs' },
-    { title: 'All Categories', url: '/blogs/categories' },
-    { title: 'Create Categories', url: '/blogs/categories/create' },
+    { title: 'Scholarships', url: '/scholarships' },
+    { title: 'Create Scholarship', url: '/scholarships/create' },
   ]
   return (
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerMainHeader
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
-            createButtonTitle="Create Blog"
+            pageTitle="Scholarship"
+            createButtonUrl="/scholarship/create"
+            createButtonTitle="Create Scholarship"
             overlayItems={overlayItems}
           />
           <MobileContainerHeader
             overlayItems={overlayItems}
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
+            pageTitle="Scholarship"
+            createButtonUrl="/scholarship/create"
           />
           <ScrollableContainer>
-            {isSuccess && blog && <PostDetails blog={blog} />}
+            {isSuccess && scholarship && <ScholarshipDetails scholarship={scholarship} />}
             {isError && <DisplayServerError error={error} />}
-            {isLoading && <DisplayAdminLoader message="Loading Post" />}
+            {isLoading && <DisplayAdminLoader message="Loading Scholarship" />}
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>
-          {isSuccess && blog && (
+          {isSuccess && scholarship && (
             <>
               {primaryActions.map((primaryAction) => (
                 <ActionButtonWrapper key={nanoid()}>{primaryAction.component} </ActionButtonWrapper>

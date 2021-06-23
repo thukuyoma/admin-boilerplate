@@ -23,12 +23,12 @@ export default function ScholarshipIndexPage() {
   const [query, setQuery] = useState({
     hasMore: false,
     totalPages: 0,
-    totalscholarships: 0,
+    totalScholarships: 0,
     currentPage: page,
     scholarships: [],
   })
   const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['articles', page],
+    ['scholarships', page],
     () => getAllscholarships({ page, limit }),
     {
       keepPreviousData: true,
@@ -46,7 +46,7 @@ export default function ScholarshipIndexPage() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `Scholarships (${query.totalscholarships})`, url: '/scholarships', isActive: true },
+    { title: `Scholarships (${query.totalScholarships})`, url: '/scholarships', isActive: true },
     { title: 'Create Scholarship', url: '/scholarships/create', isActive: false },
   ]
 

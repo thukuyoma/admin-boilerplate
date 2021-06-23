@@ -11,7 +11,7 @@ import {
 import { nanoid } from 'nanoid'
 import { MdCancel } from 'react-icons/md'
 import { RiAddLine, RiErrorWarningLine } from 'react-icons/ri'
-import DisplayInputError from '../InputError'
+import DisplayInputError from '../DisplayInputError'
 
 export default function Tags({ tags, setTags }) {
   const [tagItemToAdd, setTagItemToAdd] = useState('')

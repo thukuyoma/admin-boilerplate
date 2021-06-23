@@ -1,6 +1,6 @@
 import React from 'react'
 import { Control, InputTitle, Must, InputField } from '../form-styles'
-import DisplayInputError from '../InputError'
+import DisplayInputError from '../DisplayInputError'
 
 export default function BookingAffiliateLink({
   bookingAffiliateLink,

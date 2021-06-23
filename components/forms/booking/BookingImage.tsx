@@ -17,7 +17,7 @@ import {
 } from '../form-styles'
 import getArrayLastItem from '../../../utils/get-array-last-item'
 import { IoMdRemove } from 'react-icons/io'
-import DisplayInputError from '../InputError'
+import DisplayInputError from '../DisplayInputError'
 
 export default function BookingImage({ imageUrl, setBookingImage, setInputErrors, inputErrors }) {
   const imageInputRef = useRef<HTMLInputElement>(null)

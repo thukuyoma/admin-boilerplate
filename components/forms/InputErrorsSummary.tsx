@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import DisplayInputError from './InputError'
+import DisplayInputError from './DisplayInputError'
 
 const Styles = styled.div`
   margin-bottom: 20px;

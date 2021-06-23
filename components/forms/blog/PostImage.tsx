@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { InputField, InputTitle, Must } from '../form-styles'
 import getArrayLastItem from '../../../utils/get-array-last-item'
 import { IoMdRemove } from 'react-icons/io'
-import DisplayInputError from '../InputError'
+import DisplayInputError from '../DisplayInputError'
 
 const ImageWrapper = styled.div`
   width: 100%;

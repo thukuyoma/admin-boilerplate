@@ -3,8 +3,8 @@ import { useQuery } from 'react-query'
 import Select from 'react-select'
 import getWriteCategories from '../../../actions/post/get-write-categories'
 import capitalizeFirstLetter from '../../../utils/capitalize-first-letter'
+import DisplayInputError from '../DisplayInputError'
 import { Control, customReactSelectStyles, InputTitle } from '../form-styles'
-import DisplayInputError from '../InputError'
 
 export default function Category({ category, inputErrors, setInputErrors, setCategory }) {
   const { data: catItems, isSuccess } = useQuery('catItems', getWriteCategories)
