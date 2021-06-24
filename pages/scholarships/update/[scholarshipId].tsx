@@ -3,51 +3,48 @@ import Layout from '../../../components/layout/Layout'
 import ContainerMainAction from '../../../components/layout/ContainerMainAction'
 import ContainerMainColumn from '../../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../../components/layout/ScrollableContainer'
-import EditBlog from '../../../components/blog/EditBlog'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
-import getPostDetails from '../../../actions/post/get-post-details'
 import DisplayAdminLoader from '../../../components/shared/DisplayAdminLoader'
 import DisplayServerError from '../../../components/shared/DisplayServerError'
 import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
 import ContainerHeaders from '../../../components/layout/ContainerHeaders'
 import ActionButtonWrapper from '../../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
+import UpdateScholarship from '../../../components/scholarship/UpdateScholarship'
+import getScholarship from '../../../actions/scholarship/get-scholarship'
 
-export default function UpdatePost() {
+export default function UpdateScholarshipPage() {
   const router = useRouter()
-  const { slug } = router.query
-  const { data, isSuccess, isError, error, isLoading } = useQuery(['blog post details', slug], () =>
-    getPostDetails(slug)
+  const { scholarshipId } = router.query
+  const { data: scholarship, isSuccess, isError, error, isLoading } = useQuery(
+    ['scholarship details', scholarshipId],
+    () => getScholarship(scholarshipId as string)
   )
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Edit Blog', url: '', isActive: true },
-    { title: 'Blogs', url: '/blogs', isActive: false },
-    { title: 'All Categories', url: '/blogs/categories', isActive: false },
-    { title: 'Create Categories', url: '/blogs/categories/create', isActive: false },
-    { title: 'Create Blog', url: '/blogs/create', isActive: false },
+    { title: 'Update', url: '', isActive: true },
+    { title: 'Scholarships', url: '/scholarships', isActive: false },
+    { title: 'Create Scholarship', url: '/scholarships/create', isActive: false },
   ]
 
   const secondaryActions = [
-    { title: 'Create Blog', url: '/blogs/create' },
-    { title: 'All Blogs', url: '/blogs' },
-    { title: 'All Categories', url: '/blogs/categories' },
-    { title: 'Create Categories', url: '/blogs/categories/create' },
+    { title: 'Create Scholarship', url: '/scholarships/create' },
+    { title: 'Scholaships', url: '/scholarships' },
   ]
   return (
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerHeaders
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
-            createButtonTitle="Create Post"
+            pageTitle="Scholarships"
+            createButtonUrl="/scholarships/create"
+            createButtonTitle="Create Scholarship"
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess && data && <EditBlog blog={data} />}
+            {isSuccess && scholarship && <UpdateScholarship scholarship={scholarship} />}
             {isError && <DisplayServerError error={error} />}
-            {isLoading && <DisplayAdminLoader message="Loading Post" />}
+            {isLoading && <DisplayAdminLoader message="Loading Scholarship" />}
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>

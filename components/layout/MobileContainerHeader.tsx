@@ -114,9 +114,12 @@ export default function MobileContainerHeader({
         )}
       </div>
       <div className="actions">
-        <button className="create__button" onClick={() => router.push(createButtonUrl)}>
-          +
-        </button>
+        {createButtonUrl ? (
+          <button className="create__button" onClick={() => router.push(createButtonUrl)}>
+            +
+          </button>
+        ) : null}
+
         <button
           className="create__button"
           onKeyPress={() => setOptionDropDown(!optionDropDown)}

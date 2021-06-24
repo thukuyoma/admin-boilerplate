@@ -1,5 +1,4 @@
 import React from 'react'
-import CreateBlog from '../../components/blog/CreateBlog'
 import ContainerMainHeader from '../../components/layout/ContainerMainHeader'
 import Layout from '../../components/layout/Layout'
 import MobileContainerHeader from '../../components/layout/MobileContainerHeader'
@@ -11,38 +10,36 @@ import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { useRouter } from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import { nanoid } from 'nanoid'
+import CreateScholarship from '../../components/scholarship/CreateScholarship'
 
 export default function CreateBlogPost() {
   const router = useRouter()
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Create Blog', url: '', isActive: true },
-    { title: 'Blogs', url: '/blogs', isActive: false },
-    { title: 'All Categories', url: '/blogs/categories', isActive: false },
-    { title: 'Create Categories', url: '/blogs/categories/create', isActive: false },
+    { title: 'Create', url: '/scholarships/create', isActive: true },
+    { title: `Scholarships`, url: '/scholarships', isActive: false },
   ]
 
   const secondaryActions = [
-    { title: 'All Blogs', url: '/blogs' },
-    { title: 'All Categories', url: '/blogs/categories' },
-    { title: 'Create Categories', url: '/blogs/categories/create' },
+    { title: 'Create Scholarship', url: '/scholarships/create' },
+    { title: 'Scholarships', url: '/scholarships' },
   ]
   return (
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerMainHeader
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
-            createButtonTitle="Create Blog"
+            pageTitle="Scholarships"
+            createButtonUrl=""
+            createButtonTitle="Create Scholarship"
             overlayItems={overlayItems}
           />
           <MobileContainerHeader
             overlayItems={overlayItems}
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
+            pageTitle="Scholarships"
+            createButtonUrl=""
           />
           <ScrollableContainer>
-            <CreateBlog />
+            <CreateScholarship />
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>

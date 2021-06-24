@@ -61,14 +61,14 @@ export default function ScholarshipIndexPage() {
         <ContainerMainColumn>
           <ContainerMainHeader
             pageTitle="Scholarship"
-            createButtonUrl="/Scholarships/create"
+            createButtonUrl="/scholarships/create"
             createButtonTitle="Create Scholarship"
             overlayItems={overlayItems}
           />
           <MobileContainerHeader
             overlayItems={overlayItems}
             pageTitle="Scholarship"
-            createButtonUrl="/Scholarships/create"
+            createButtonUrl="/scholarships/create"
           />
           <ScrollableContainer>
             {isSuccess &&

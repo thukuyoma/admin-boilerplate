@@ -40,11 +40,7 @@ const TagItemWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  > * {
-    &:first-child {
-      margin-left: 0px;
-    }
-  }
+  margin-top: 10px;
   > * {
     &:last-child {
       margin-right: 0px;
@@ -58,6 +54,17 @@ const TagItem = styled.div`
   display: flex;
   align-items: center;
   margin: 10px 5px;
+  font-size: 12px;
+  white-space: wrap;
+`
+
+const SquareTagItem = styled.div`
+  background: #fdf5ed;
+  border-radius: 5px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  margin: 10px 5px 10px 0;
   font-size: 12px;
   white-space: wrap;
 `
@@ -227,4 +234,5 @@ export {
   ImagePreview,
   RemoveImageButton,
   RemoveImageButtonIcon,
+  SquareTagItem,
 }

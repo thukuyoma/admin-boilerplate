@@ -76,12 +76,14 @@ export default function ContainerMainHeader({
             />
           )}
         </div>
-        <div className="container-main-header__actions">
-          <button className="button" onClick={() => router.push(createButtonUrl)}>
-            <RiAddFill />
-            {createButtonTitle}
-          </button>
-        </div>
+        {createButtonUrl ? (
+          <div className="container-main-header__actions">
+            <button className="button" onClick={() => router.push(createButtonUrl)}>
+              <RiAddFill />
+              {createButtonTitle}
+            </button>
+          </div>
+        ) : null}
       </div>
     </Styles>
   )

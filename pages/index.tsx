@@ -8,6 +8,7 @@ import useAuth from '../context/auth'
 import { Control, InputField } from '../components/forms/form-styles'
 import { RiErrorWarningLine } from 'react-icons/ri'
 import DisplayInputError from '../components/forms/DisplayInputError'
+import Analytics from '../components/dashboard/Analytics'
 
 interface LoginStateProps {
   email: string
@@ -57,6 +58,7 @@ const Login: React.FC = () => {
   return (
     <div>
       <div className="input__wrapper">
+        <Analytics />
         <form>
           <Control>
             <InputField
