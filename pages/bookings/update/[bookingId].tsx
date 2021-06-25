@@ -46,7 +46,7 @@ export default function UpdateBookingPage() {
           <ScrollableContainer>
             {isSuccess && booking && <EditBooking booking={booking} />}
             {isError && <DisplayServerError error={error} />}
-            {isLoading && <DisplayAdminLoader message="Loading Booking" />}
+            {isLoading && <DisplayAdminLoader message="Loading Bookings" />}
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>

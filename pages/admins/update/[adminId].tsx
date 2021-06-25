@@ -46,7 +46,7 @@ export default function UpdateAdminPage() {
               <UpdateAdmin adminToUpdateName={adminToUpdateName} admin={data} />
             )}
             {isError && <DisplayServerError error={error} />}
-            {isLoading && <DisplayAdminLoader message="Loading Post" />}
+            {isLoading && <DisplayAdminLoader message="Loading Admin" />}
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>

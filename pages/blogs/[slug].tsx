@@ -1,8 +1,5 @@
 import React from 'react'
-import ContainerMainHeader from '../../components/layout/ContainerMainHeader'
 import Layout from '../../components/layout/Layout'
-import MobileContainerHeader from '../../components/layout/MobileContainerHeader'
-import styled from 'styled-components'
 import ContainerMainAction from '../../components/layout/ContainerMainAction'
 import ContainerMainColumn from './../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../components/layout/ScrollableContainer'
@@ -19,6 +16,7 @@ import UnPublishBlogButton from '../../components/blog/actions/UnPublishBlogButt
 import PublishBlogButton from '../../components/blog/actions/PublishBlogButton'
 import { nanoid } from 'nanoid'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
+import ContainerHeaders from '../../components/layout/ContainerHeaders'
 
 export default function BlogPostDetails() {
   const router = useRouter()
@@ -57,16 +55,11 @@ export default function BlogPostDetails() {
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
-          <ContainerMainHeader
+          <ContainerHeaders
             pageTitle="Blog"
             createButtonUrl="/blogs/create"
             createButtonTitle="Create Blog"
             overlayItems={overlayItems}
-          />
-          <MobileContainerHeader
-            overlayItems={overlayItems}
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
           />
           <ScrollableContainer>
             {isSuccess && blog && <PostDetails blog={blog} />}

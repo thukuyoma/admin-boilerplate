@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import ContainerMainHeader from '../../components/layout/ContainerMainHeader'
 import Layout from '../../components/layout/Layout'
-import MobileContainerHeader from '../../components/layout/MobileContainerHeader'
 import ContainerMainAction from '../../components/layout/ContainerMainAction'
 import ContainerMainColumn from '../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../components/layout/ScrollableContainer'
@@ -16,6 +14,7 @@ import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import getAllApplications from '../../actions/application/get-all-applications'
+import ContainerHeaders from '../../components/layout/ContainerHeaders'
 
 export default function ApplicationsIndexPage() {
   const [page, setPage] = useState<number>(1)
@@ -53,29 +52,25 @@ export default function ApplicationsIndexPage() {
     },
   ]
 
-  const secondaryActions = [{ title: 'All applications', url: '/applications' }]
+  const secondaryActions = [{ title: 'Applications', url: '/applications' }]
 
   return (
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
-          <ContainerMainHeader
+          <ContainerHeaders
             pageTitle="Application"
-            createButtonUrl="/applications/create"
-            createButtonTitle="Create application"
+            createButtonUrl=""
+            createButtonTitle=""
             overlayItems={overlayItems}
           />
-          <MobileContainerHeader
-            overlayItems={overlayItems}
-            pageTitle="application"
-            createButtonUrl="/applications/create"
-          />
+
           <ScrollableContainer>
             {isSuccess &&
               query.applications.map((application) => (
                 <ApplicationCard key={application.slug} application={application} />
               ))}
-            {isLoading && <ServerLoadingLoader message="Loading All Applications" />}
+            {isLoading && <ServerLoadingLoader message="Loading Applications" />}
             {isSuccess && !query.applications.length && <NotFound message="No Application Found" />}
             {isError && <ServerError error={error} />}
             <QueryPagination

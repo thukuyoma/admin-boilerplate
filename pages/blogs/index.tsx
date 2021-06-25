@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import ContainerMainHeader from '../../components/layout/ContainerMainHeader'
 import Layout from '../../components/layout/Layout'
-import MobileContainerHeader from '../../components/layout/MobileContainerHeader'
 import ContainerMainAction from '../../components/layout/ContainerMainAction'
 import ContainerMainColumn from '../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../components/layout/ScrollableContainer'
@@ -16,6 +14,7 @@ import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
+import ContainerHeaders from '../../components/layout/ContainerHeaders'
 
 export default function Blogs() {
   const [page, setPage] = useState<number>(1)
@@ -63,20 +62,15 @@ export default function Blogs() {
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
-          <ContainerMainHeader
+          <ContainerHeaders
             pageTitle="Blog"
             createButtonUrl="/blogs/create"
             createButtonTitle="Create Blog"
             overlayItems={overlayItems}
           />
-          <MobileContainerHeader
-            overlayItems={overlayItems}
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
-          />
           <ScrollableContainer>
             {isSuccess && query.posts.map((post) => <BlogCard key={post.slug} blog={post} />)}
-            {isLoading && <ServerLoadingLoader message="Loading All Posts" />}
+            {isLoading && <ServerLoadingLoader message="Loading Posts" />}
             {isSuccess && !query.posts.length && <NotFound message="No Post Found" />}
             {isError && <ServerError error={error} />}
             <QueryPagination

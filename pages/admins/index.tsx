@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import ContainerMainHeader from '../../components/layout/ContainerMainHeader'
 import Layout from '../../components/layout/Layout'
-import MobileContainerHeader from '../../components/layout/MobileContainerHeader'
 import ContainerMainAction from '../../components/layout/ContainerMainAction'
 import ContainerMainColumn from '../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../components/layout/ScrollableContainer'
@@ -16,6 +14,7 @@ import router from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import AdminCard from '../../components/admins/AdminCard'
 import getAllAdmins from '../../actions/account/get-all-admins'
+import ContainerHeaders from '../../components/layout/ContainerHeaders'
 
 export default function AdminIndexPage() {
   const [page, setPage] = useState<number>(1)
@@ -55,23 +54,18 @@ export default function AdminIndexPage() {
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
-          <ContainerMainHeader
+          <ContainerHeaders
             pageTitle="Admins"
             createButtonUrl="/admins/create"
             createButtonTitle="Create Admin"
             overlayItems={overlayItems}
           />
-          <MobileContainerHeader
-            overlayItems={overlayItems}
-            pageTitle="Admins"
-            createButtonUrl="/admins/create"
-          />
           <ScrollableContainer>
             {isSuccess &&
               data &&
               query?.admins.map((admin) => <AdminCard key={admin.title} admin={admin} />)}
-            {isLoading && <ServerLoadingLoader message="Loading all admins" />}
-            {isSuccess && !query.admins.length && <NotFound message="No admins Found" />}
+            {isLoading && <ServerLoadingLoader message="Loading Admins" />}
+            {isSuccess && !query.admins.length && <NotFound message="No Admin Found" />}
             {isError && <ServerError error={error} />}
             <QueryPagination
               nextPage={handleNextPage}

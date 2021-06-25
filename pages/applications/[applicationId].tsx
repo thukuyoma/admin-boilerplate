@@ -1,12 +1,9 @@
 import React from 'react'
-import ContainerMainHeader from '../../components/layout/ContainerMainHeader'
 import Layout from '../../components/layout/Layout'
-import MobileContainerHeader from '../../components/layout/MobileContainerHeader'
 import ContainerMainAction from '../../components/layout/ContainerMainAction'
 import ContainerMainColumn from './../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../components/layout/ScrollableContainer'
 import { useRouter } from 'next/router'
-import getPostDetails from '../../actions/post/get-post-details'
 import { useQuery } from 'react-query'
 import DisplayAdminLoader from '../../components/shared/DisplayAdminLoader'
 import DisplayServerError from '../../components/shared/DisplayServerError'
@@ -16,6 +13,7 @@ import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import ApplicationDetails from '../../components/applications/ApplicationDetails'
 import getApplicationsDetails from '../../actions/application/get-application-details'
 import MarkAsRead from '../../components/applications/actions/MarkAsRead'
+import ContainerHeaders from '../../components/layout/ContainerHeaders'
 
 export default function ApplicationtDetails() {
   const router = useRouter()
@@ -45,21 +43,17 @@ export default function ApplicationtDetails() {
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
-          <ContainerMainHeader
+          <ContainerHeaders
             pageTitle="Application"
-            createButtonUrl="/applications/create"
+            createButtonUrl=""
             createButtonTitle="Create Application"
             overlayItems={overlayItems}
           />
-          <MobileContainerHeader
-            overlayItems={overlayItems}
-            pageTitle="Application"
-            createButtonUrl="/applications/create"
-          />
+
           <ScrollableContainer>
             {isSuccess && application && <ApplicationDetails application={application} />}
             {isError && <DisplayServerError error={error} />}
-            {isLoading && <DisplayAdminLoader message="Loading Post" />}
+            {isLoading && <DisplayAdminLoader message="Loading Applications" />}
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>

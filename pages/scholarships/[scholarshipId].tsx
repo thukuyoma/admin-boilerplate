@@ -1,8 +1,6 @@
 import React from 'react'
 import ContainerMainHeader from '../../components/layout/ContainerMainHeader'
 import Layout from '../../components/layout/Layout'
-import MobileContainerHeader from '../../components/layout/MobileContainerHeader'
-import styled from 'styled-components'
 import ContainerMainAction from '../../components/layout/ContainerMainAction'
 import ContainerMainColumn from './../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../components/layout/ScrollableContainer'
@@ -60,11 +58,6 @@ export default function BlogPostDetails() {
             createButtonUrl="/scholarship/create"
             createButtonTitle="Create Scholarship"
             overlayItems={overlayItems}
-          />
-          <MobileContainerHeader
-            overlayItems={overlayItems}
-            pageTitle="Scholarship"
-            createButtonUrl="/scholarship/create"
           />
           <ScrollableContainer>
             {isSuccess && scholarship && <ScholarshipDetails scholarship={scholarship} />}

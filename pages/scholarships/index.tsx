@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import ContainerMainHeader from '../../components/layout/ContainerMainHeader'
 import Layout from '../../components/layout/Layout'
-import MobileContainerHeader from '../../components/layout/MobileContainerHeader'
 import ContainerMainAction from '../../components/layout/ContainerMainAction'
 import ContainerMainColumn from '../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../components/layout/ScrollableContainer'
@@ -16,6 +14,7 @@ import router from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import getAllscholarships from '../../actions/scholarship/get-all-scholalrships'
 import ScholarshipCard from '../../components/scholarship/ScholarshipCard '
+import ContainerHeaders from '../../components/layout/ContainerHeaders'
 
 export default function ScholarshipIndexPage() {
   const [page, setPage] = useState<number>(1)
@@ -59,23 +58,18 @@ export default function ScholarshipIndexPage() {
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
-          <ContainerMainHeader
+          <ContainerHeaders
             pageTitle="Scholarship"
             createButtonUrl="/scholarships/create"
             createButtonTitle="Create Scholarship"
             overlayItems={overlayItems}
-          />
-          <MobileContainerHeader
-            overlayItems={overlayItems}
-            pageTitle="Scholarship"
-            createButtonUrl="/scholarships/create"
           />
           <ScrollableContainer>
             {isSuccess &&
               query.scholarships.map((scholarship) => (
                 <ScholarshipCard key={scholarship.title} scholarship={scholarship} />
               ))}
-            {isLoading && <ServerLoadingLoader message="Loading All Scholarships" />}
+            {isLoading && <ServerLoadingLoader message="Loading Scholarships" />}
             {isSuccess && !query.scholarships.length && <NotFound message="No scholarship Found" />}
             {isError && <ServerError error={error} />}
             <QueryPagination

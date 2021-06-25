@@ -49,7 +49,7 @@ export default function ApplicationsLogs({ applicationId }) {
         <p className="tag__title">Application Support Log</p>
         {isSuccess &&
           query.applicationLogs.map((log) => <ApplicationLogCard key={log._id} log={log} />)}
-        {isLoading && <ServerLoadingLoader message="Loading All Applications Logs" />}
+        {isLoading && <ServerLoadingLoader message="Loading Application Logs" />}
         {isSuccess && !query.applicationLogs.length && (
           <NotFound message="No Application Log Found" />
         )}

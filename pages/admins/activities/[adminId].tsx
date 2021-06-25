@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import ContainerMainHeader from '../../../components/layout/ContainerMainHeader'
 import Layout from '../../../components/layout/Layout'
-import MobileContainerHeader from '../../../components/layout/MobileContainerHeader'
 import ContainerMainAction from '../../../components/layout/ContainerMainAction'
 import ContainerMainColumn from '../../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../../components/layout/ScrollableContainer'
@@ -16,11 +14,7 @@ import { useRouter } from 'next/router'
 import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
 import AdminActivitiesCard from '../../../components/admins/AdminActivitiesCard'
 import getAdminActiviesLog from '../../../actions/account/get-admin-activities-log'
-import AdminActivitiesButton from '../../../components/admins/actions/AdminActivitiesButton'
-import BlockAdminButton from '../../../components/admins/actions/BlockAdminButton'
-import DeleteAdminButton from '../../../components/admins/actions/DeleteAdminButton'
-import UpdateAdminButton from '../../../components/admins/actions/UpdateAdminButton'
-import wordsCapitalizer from '../../../utils/words-capitalizer'
+import ContainerHeaders from '../../../components/layout/ContainerHeaders'
 
 export default function AdminActivitiesPage() {
   const [page, setPage] = useState<number>(1)
@@ -74,16 +68,11 @@ export default function AdminActivitiesPage() {
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
-          <ContainerMainHeader
+          <ContainerHeaders
             pageTitle="Admins"
             createButtonUrl="/admins/create"
             createButtonTitle="Create Admin"
             overlayItems={overlayItems}
-          />
-          <MobileContainerHeader
-            overlayItems={overlayItems}
-            pageTitle="Admins"
-            createButtonUrl="/admins/create"
           />
           <ScrollableContainer>
             {isSuccess &&
@@ -91,9 +80,9 @@ export default function AdminActivitiesPage() {
               query?.activityHistory.map((activity) => (
                 <AdminActivitiesCard key={nanoid()} activity={activity} />
               ))}
-            {isLoading && <ServerLoadingLoader message="Loading all activities History" />}
+            {isLoading && <ServerLoadingLoader message="Loading Admin Activities" />}
             {isSuccess && !query.activityHistory.length && (
-              <NotFound message="No activities Found for this admin" />
+              <NotFound message="No Admin Activity Found" />
             )}
             {isError && <ServerError error={error} />}
             <QueryPagination

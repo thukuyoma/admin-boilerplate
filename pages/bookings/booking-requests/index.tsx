@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import ContainerMainHeader from '../../../components/layout/ContainerMainHeader'
 import Layout from '../../../components/layout/Layout'
-import MobileContainerHeader from '../../../components/layout/MobileContainerHeader'
 import ContainerMainAction from '../../../components/layout/ContainerMainAction'
 import ContainerMainColumn from '../../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../../components/layout/ScrollableContainer'
@@ -16,6 +14,7 @@ import router from 'next/router'
 import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
 import getBookingRequests from '../../../actions/bookings/get-booking-requests'
 import BookingRequestCard from '../../../components/bookings/BookingRequestCard'
+import ContainerHeaders from '../../../components/layout/ContainerHeaders'
 
 export default function BookingRequestsPage() {
   const [page, setPage] = useState<number>(1)
@@ -61,24 +60,19 @@ export default function BookingRequestsPage() {
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
-          <ContainerMainHeader
+          <ContainerHeaders
             pageTitle="Bookings"
             createButtonUrl="/bookings/create"
             createButtonTitle="Create Booking"
             overlayItems={overlayItems}
-          />
-          <MobileContainerHeader
-            overlayItems={overlayItems}
-            pageTitle="Bookings"
-            createButtonUrl="/bookings/create"
           />
           <ScrollableContainer>
             {isSuccess &&
               query.bookingRequests.map((bookingRequest) => (
                 <BookingRequestCard key={bookingRequest.title} bookingRequest={bookingRequest} />
               ))}
-            {isLoading && <ServerLoadingLoader message="Loading All bookings" />}
-            {isSuccess && !query.bookingRequests.length && <NotFound message="No booking Found" />}
+            {isLoading && <ServerLoadingLoader message="Loading Bookings" />}
+            {isSuccess && !query.bookingRequests.length && <NotFound message="No Booking Found" />}
             {isError && <ServerError error={error} />}
             <QueryPagination
               nextPage={handleNextPage}

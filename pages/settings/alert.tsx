@@ -1,38 +1,33 @@
 import React from 'react'
+import ContainerMainHeader from '../../components/layout/ContainerMainHeader'
 import Layout from '../../components/layout/Layout'
+import MobileContainerHeader from '../../components/layout/MobileContainerHeader'
 import ContainerMainAction from '../../components/layout/ContainerMainAction'
-import ContainerMainColumn from '../../components/layout/ContainerMainColumn'
+import ContainerMainColumn from './../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../components/layout/ScrollableContainer'
-import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { useRouter } from 'next/router'
-import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
+import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
-import CreateScholarship from '../../components/scholarship/CreateScholarship'
-import ContainerHeaders from '../../components/layout/ContainerHeaders'
+import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
+import AlertCreatedList from '../../components/setting/alert/AlertsCreatedList'
 
-export default function CreateBlogPost() {
-  const router = useRouter()
+export default function BlogPostDetails() {
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Create', url: '/scholarships/create', isActive: true },
-    { title: `Scholarships`, url: '/scholarships', isActive: false },
+    { title: 'Details', url: '', isActive: true },
+    { title: 'Scholarships', url: '/scholarship', isActive: false },
+    { title: 'Create Scholarship', url: '/scholarship/create', isActive: false },
   ]
-
+  const router = useRouter()
   const secondaryActions = [
-    { title: 'Create Scholarship', url: '/scholarships/create' },
     { title: 'Scholarships', url: '/scholarships' },
+    { title: 'Create Scholarship', url: '/scholarships/create' },
   ]
   return (
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
-          <ContainerHeaders
-            pageTitle="Scholarships"
-            createButtonUrl=""
-            createButtonTitle="Create Scholarship"
-            overlayItems={overlayItems}
-          />
           <ScrollableContainer>
-            <CreateScholarship />
+            <AlertCreatedList />
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>
