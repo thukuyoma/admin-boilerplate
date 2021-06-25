@@ -46,13 +46,13 @@ export default function BookingIndex() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `Bookings (${query.totalBookings})`, url: '/bookings', isActive: true },
+    { title: ` (${query.totalBookings})`, url: '/bookings', isActive: true },
     { title: 'Create Booking', url: '/bookings/create', isActive: false },
     { title: 'Booking Requests', url: '/bookings/booking-request', isActive: false },
   ]
   const secondaryActions = [
     { title: 'Create Booking', url: '/bookings/create' },
-    { title: 'Booking Requests', url: '/bookings/booking-request' },
+    { title: 'Booking Requests', url: '/bookings/booking-requests' },
   ]
 
   return (

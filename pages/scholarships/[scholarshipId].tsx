@@ -27,7 +27,7 @@ export default function BlogPostDetails() {
     () => getScholarship(scholarshipId as string)
   )
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Scholarship Details', url: '', isActive: true },
+    { title: 'Details', url: '', isActive: true },
     { title: 'Scholarships', url: '/scholarship', isActive: false },
     { title: 'Create Scholarship', url: '/scholarship/create', isActive: false },
   ]

@@ -13,7 +13,7 @@ import { nanoid } from 'nanoid'
 export default function CreateBookingPage() {
   const router = useRouter()
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Create Booking', url: '', isActive: true },
+    { title: 'Create', url: '', isActive: true },
     { title: 'Bookings', url: '/bookings', isActive: false },
     { title: 'Booking Requests', url: '/bookings/booking-request', isActive: false },
   ]

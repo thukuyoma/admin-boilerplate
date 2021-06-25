@@ -46,7 +46,7 @@ export default function AdminIndexPage() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `Admins (${query.totalAdmins})`, url: '/admins', isActive: true },
+    { title: `(${query.totalAdmins})`, url: '/admins', isActive: true },
     { title: 'Create Admin', url: '/admins/create', isActive: false },
   ]
   const secondaryActions = [{ title: 'Create Admin', url: '/admins/create' }]

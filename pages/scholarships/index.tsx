@@ -46,7 +46,7 @@ export default function ScholarshipIndexPage() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `Scholarships (${query.totalScholarships})`, url: '/scholarships', isActive: true },
+    { title: `(${query.totalScholarships})`, url: '/scholarships', isActive: true },
     { title: 'Create Scholarship', url: '/scholarships/create', isActive: false },
   ]
 

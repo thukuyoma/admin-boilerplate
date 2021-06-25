@@ -25,7 +25,7 @@ export default function BookingRequestsPage() {
     totalPages: 0,
     totalBookingRequests: 0,
     currentPage: page,
-    bookingRequests: null,
+    bookingRequests: [],
   })
   const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
     ['Booking Requests', page],
@@ -46,15 +46,15 @@ export default function BookingRequestsPage() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `Booking Requests (${query.totalBookingRequests})`, url: '/bookings', isActive: true },
+    { title: `Requests (${query.totalBookingRequests})`, url: '/bookings', isActive: true },
     { title: 'Bookings', url: '/bookings', isActive: false },
     { title: 'Create Booking', url: '/bookings/create', isActive: false },
-    { title: 'Booking Requests', url: '/bookings/booking-request', isActive: false },
+    { title: 'Booking Requests', url: '/bookings/booking-requests', isActive: false },
   ]
   const secondaryActions = [
     { title: 'Create Booking', url: '/bookings/create' },
     { title: 'Bookings', url: '/bookings' },
-    { title: 'Booking Requests', url: '/bookings/booking-request' },
+    { title: 'Booking Requests', url: '/bookings/booking-requests' },
   ]
 
   return (

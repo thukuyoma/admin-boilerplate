@@ -17,7 +17,7 @@ const Styles = styled.div`
   .blog__image {
     height: 62px;
     width: 62px;
-    border-radius: 0px;
+    border-radius: 5px;
     margin-right: 10px;
   }
   .blog-details {

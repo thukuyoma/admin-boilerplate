@@ -17,7 +17,7 @@ export default function SelectAdminRole({ role, setRole }) {
   }
   return (
     <Control>
-      <InputTitle>Role</InputTitle>
+      <InputTitle>Admin Role</InputTitle>
       <div>
         <Select
           styles={customReactSelectStyles('inputErrors.role')}

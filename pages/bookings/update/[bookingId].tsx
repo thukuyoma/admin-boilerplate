@@ -22,7 +22,7 @@ export default function UpdateBookingPage() {
     () => getBookingDetails(bookingId)
   )
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Edit Booking', url: '', isActive: true },
+    { title: 'Edit', url: '', isActive: true },
     { title: 'Bookings', url: '/bookings', isActive: false },
     { title: 'Booking Requests', url: '/bookings/booking-requests', isActive: false },
     { title: 'Create booking', url: '/bookings/create', isActive: false },

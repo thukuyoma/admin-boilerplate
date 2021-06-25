@@ -31,11 +31,10 @@ const Styles = styled.div`
 }
   }
   .input__group {
-    background: #f8f8f8;
     height: 35px;
     margin-top: 10px;
     outline: none;
-    backgroud: inherit;
+    background: inherit;
     padding: 5px 10px;
     border-radius: 4px;
     border: 1px solid #cacaca;

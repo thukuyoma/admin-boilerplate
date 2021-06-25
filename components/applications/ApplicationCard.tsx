@@ -90,11 +90,14 @@ export default function ApplicationCard({ application }) {
           </div>
           <div>
             <div className="applicant__name">
-              {wordsCapitalizer(`${application.firstName} ${application.firstName}`)}
+              {wordsCapitalizer(`${application.firstName} ${application.lastName}`)}
               <span className="applicant__nationality">({application.nationality})</span>
               <span>{dateFormatter(application.timestamp)}</span>
             </div>
-            <p className="applicant__request" style={{ fontWeight: application.isRead && 500 }}>
+            <p
+              className="applicant__request"
+              style={{ fontWeight: !application.status.isRead && 500 }}
+            >
               {capitalizeFirstLetter(application.programme)} in {application.studyField} in{' '}
               {application.desiredCountry}
             </p>
@@ -114,6 +117,10 @@ export default function ApplicationCard({ application }) {
             onKeyPress={() => router.push(`/applications/${application._id}`)}
             tabIndex={0}
             className="application__button"
+            style={{
+              color: !application.status.isRead && 'black',
+              fontWeight: !application.status.isRead && 600,
+            }}
           >
             See More
           </span>

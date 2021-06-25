@@ -4,6 +4,7 @@ import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import dateFormatter from '../../utils/date-formatter'
 import wordsCapitalizer from '../../utils/words-capitalizer'
 import { TagKey, TagKeyValuePair, TagValue } from '../shared/shared-styles'
+import AdminInfoCard from './AdminInfoCard'
 import AccountsPermission from './permissions/AccountsPermissions'
 import PostsPermission from './permissions/PostsPermissions'
 import SettingsPermissions from './permissions/SettingsPermissions'
@@ -39,8 +40,8 @@ const Styles = styled.div`
 export default function AdminPublicDetails({ admin }) {
   return (
     <Styles>
-      <div className="avatar-wrapper">
-        <img className="image-avatar" src={admin.avatar ? admin.avatar : '/assets/face.svg'} />
+      {/* <div className="avatar-wrapper">
+        
         <p className="admin__name">
           {capitalizeFirstLetter(admin.firstName)} {capitalizeFirstLetter(admin.lastName)}
         </p>
@@ -62,7 +63,8 @@ export default function AdminPublicDetails({ admin }) {
           <TagKey>Created On:</TagKey>
           <TagValue>{dateFormatter(admin.timestamp)}</TagValue>
         </TagKeyValuePair>
-      </div>
+      </div> */}
+      <AdminInfoCard admin={admin} />
       <AccountsPermission handleSetAccounts={() => null} accounts={admin.permissions.accounts} />
       <PostsPermission handleSetPosts={() => null} posts={admin.permissions.posts} />
       <SettingsPermissions handleSetSettings={() => null} settings={admin.permissions.settings} />

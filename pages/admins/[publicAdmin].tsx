@@ -28,7 +28,7 @@ export default function PublicAdminProfilePage() {
   )
 
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Admin Details', url: '', isActive: true },
+    { title: 'Details', url: '', isActive: true },
     { title: 'Admins', url: '/admins', isActive: false },
     { title: 'Create Admin', url: '/admins/create', isActive: false },
   ]

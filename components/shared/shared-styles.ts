@@ -10,6 +10,7 @@ const TagKey = styled.div`
   margin-right: 20px;
   color: #0c4284;
   font-weight: 500;
+  flex-shrink: 0;
 `
 
 const TagValue = styled.div`

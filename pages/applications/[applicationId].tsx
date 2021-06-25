@@ -15,6 +15,7 @@ import { nanoid } from 'nanoid'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import ApplicationDetails from '../../components/applications/ApplicationDetails'
 import getApplicationsDetails from '../../actions/application/get-application-details'
+import MarkAsRead from '../../components/applications/actions/MarkAsRead'
 
 export default function ApplicationtDetails() {
   const router = useRouter()
@@ -24,23 +25,22 @@ export default function ApplicationtDetails() {
     () => getApplicationsDetails(applicationId)
   )
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Application Details', url: '', isActive: true },
+    { title: 'Details', url: '', isActive: true },
     { title: 'Applications', url: '/applications', isActive: false },
-    { title: 'All Categories', url: '/applications/categories', isActive: false },
-    { title: 'Create Categories', url: '/applications/categories/create', isActive: false },
-    { title: 'Create Application', url: '/applications/create', isActive: false },
   ]
   const primaryActions = [
-    // { component: Application && <EditBlogButton slug={Application.slug} /> },
-    // { component: Application && <DeletePostButton postId={Application._id} /> },
+    {
+      component: application && (
+        <MarkAsRead
+          applicationId={applicationId as string}
+          refetch={refetch}
+          isRead={application.status.isRead}
+        />
+      ),
+    },
   ]
 
-  const secondaryActions = [
-    { title: 'Create Application', url: '/applications/create' },
-    { title: 'Mark as Read', url: '/applications' },
-    { title: 'View Support Logs', url: '/applications/categories' },
-    { title: 'Add Log', url: '/applications/categories/create' },
-  ]
+  const secondaryActions = [{ title: 'Applications', url: '/applications' }]
   return (
     <Layout>
       <ContainerMainWrapper>

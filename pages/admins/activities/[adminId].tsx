@@ -16,6 +16,11 @@ import { useRouter } from 'next/router'
 import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
 import AdminActivitiesCard from '../../../components/admins/AdminActivitiesCard'
 import getAdminActiviesLog from '../../../actions/account/get-admin-activities-log'
+import AdminActivitiesButton from '../../../components/admins/actions/AdminActivitiesButton'
+import BlockAdminButton from '../../../components/admins/actions/BlockAdminButton'
+import DeleteAdminButton from '../../../components/admins/actions/DeleteAdminButton'
+import UpdateAdminButton from '../../../components/admins/actions/UpdateAdminButton'
+import wordsCapitalizer from '../../../utils/words-capitalizer'
 
 export default function AdminActivitiesPage() {
   const [page, setPage] = useState<number>(1)
@@ -49,13 +54,21 @@ export default function AdminActivitiesPage() {
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
     {
-      title: `Admin Activities (${query && query.totalActivityHistory})`,
+      title: `Activities (${query && query.totalActivityHistory})`,
       url: '/',
       isActive: true,
     },
     { title: 'Create Admin', url: '/admins/create', isActive: false },
+    { title: 'Details', url: `admins/${adminId}`, isActive: false },
+    { title: 'Admins', url: '/admins', isActive: false },
+    { title: 'Create Admin', url: '/admins/create', isActive: false },
   ]
-  const secondaryActions = [{ title: 'Create Admin', url: '/admins/create' }]
+
+  const secondaryActions = [
+    { title: 'Create Admin', url: '/admins/create' },
+    { title: 'Admin Details', url: `/admins/${adminId}` },
+    { title: 'Admins', url: `/admins` },
+  ]
 
   return (
     <Layout>

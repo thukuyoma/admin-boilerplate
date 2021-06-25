@@ -15,7 +15,7 @@ import { useState } from 'react'
 export default function CreateAdminPage() {
   const router = useRouter()
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Create Admin', url: '', isActive: true },
+    { title: 'Create', url: '', isActive: true },
     { title: 'Admins', url: '/admins', isActive: false },
     { title: 'Admin Requests', url: '/admins/admin-request', isActive: false },
   ]
@@ -28,7 +28,7 @@ export default function CreateAdminPage() {
         <ContainerMainColumn>
           <ContainerHeaders
             pageTitle="Admins"
-            createButtonUrl="/admin/create"
+            createButtonUrl="/admins/create"
             createButtonTitle="Create Admin"
             overlayItems={overlayItems}
           />

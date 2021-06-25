@@ -94,10 +94,7 @@ export default function CreateAdmin({ email, user }) {
 
   return (
     <>
-      <Control>
-        <InputTitle>Select Role</InputTitle>
-        <SelectAdminRole role={role} setRole={setRole} />
-      </Control>
+      <SelectAdminRole role={role} setRole={setRole} />
       <AccountsPermission handleSetAccounts={handleSetAccounts} accounts={accounts} />
       <PostsPermission handleSetPosts={handleSetPosts} posts={posts} />
       <SettingsPermissions handleSetSettings={handleSetSettings} settings={settings} />

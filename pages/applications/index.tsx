@@ -47,7 +47,7 @@ export default function ApplicationsIndexPage() {
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
     {
-      title: `All applications (${query.totalApplications})`,
+      title: `(${query.totalApplications})`,
       url: '/applications',
       isActive: true,
     },
