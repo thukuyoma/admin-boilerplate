@@ -67,8 +67,8 @@ export default function CreateBooking() {
           'bookingType',
           'bookingAffiliateLink',
         ]
-        // localStorageItems.forEach((formItem) => localStorage.removeItem(formItem))
-        // localStorage.removeItem('inputErrors')
+        localStorageItems.forEach((formItem) => localStorage.removeItem(formItem))
+        localStorage.removeItem('inputErrors')
         toast.success('Booking successfully created')
         router.push(`/bookings/${bookingId}`)
       },

@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 import { useRouter } from 'next/router'
 import React, { useState, useContext, useEffect } from 'react'
+import { useQuery } from 'react-query'
 import { getCookie, removeCookie } from '../actions/account/cookies'
 import getProfile from '../actions/account/get-profile'
 import loginAdmin from '../actions/account/login-admin'
@@ -16,21 +17,22 @@ export function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const router = useRouter()
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const token = getCookie('authToken')
-      if (token) {
-        setAuthToken(token)
-        const user = await getProfile()
-        if (!user) {
-          return setProfile(null)
-        }
-        setProfile({ ...user })
-        setIsLoading(false)
-        return null
+  const fetchProfile = async () => {
+    const token = getCookie('authToken')
+    if (token) {
+      setAuthToken(token)
+      const user = await getProfile()
+      if (!user) {
+        return setProfile(null)
       }
+      setProfile({ ...user })
+      setIsLoading(false)
       return null
     }
+    return null
+  }
+
+  useEffect(() => {
     fetchProfile()
   }, [])
 
@@ -53,6 +55,11 @@ export function AuthProvider({ children }) {
     router.push('/')
     return null
   }
+
+  const refreshProfile = () => {
+    fetchProfile()
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -62,6 +69,7 @@ export function AuthProvider({ children }) {
         setProfile,
         login,
         logout,
+        refreshProfile,
       }}
     >
       {children}

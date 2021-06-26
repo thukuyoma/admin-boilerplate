@@ -1,94 +1,78 @@
-/* eslint-disable jsx-a11y/interactive-supports-focus */
-import Link from 'next/link'
 import React from 'react'
-import { AiOutlineLogout, AiOutlineProfile } from 'react-icons/ai'
+import { AiOutlineLogout } from 'react-icons/ai'
+import { RiSettings3Line } from 'react-icons/ri'
 import styled from 'styled-components'
 import useAuth from '../../context/auth'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 
 const Styles = styled.div`
-  position: absolute;
-  right: 10px;
-  top: 60px;
-  z-index: 999;
-  width: 220px;
-  padding: 15px 15px 20px 15px;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(27, 31, 35, 0.15);
-  border-radius: 3px;
-  box-shadow: 0 3px 12px rgb(27 31 35 / 15%);
-  transition: 0.5s;
-  color: #051d39;
-
   .avatar__name {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    .username {
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .email {
-      font-size: 13px;
-      margin-top: 5px;
-    }
-
-    .avatar {
-      height: 50px;
-      width: 50px;
-      border-radius: 30px;
-      margin-bottom: 15px;
-      background: gray;
-      position: relative;
-      flex-shrink: 0;
-      .image {
-        border-radius: 80px;
-      }
-    }
-    .image {
-      height: 50px;
-      width: 50px;
-      border-radius: 30px;
-      margin-right: 10px;
-    }
+    border-bottom: 1px solid #5e5e5e1f;
+    padding-bottom: 20px;
+  }
+  .username {
+    font-size: 16px;
+    font-weight: 700;
   }
 
-  .item {
-    display: flex;
-    align-items: center;
-    border-top: 1px solid #5e5e5e1f;
-    margin-top: 20px;
-    padding-top: 20px;
-    cursor: pointer;
-    width: 100%;
-    .item__icon {
-      font-size: 20px;
-      margin-right: 10px;
-    }
-    .item__title {
-      font-size: 14px;
-    }
+  .email {
+    font-size: 13px;
+    margin-top: 5px;
   }
 
-  @media (max-width: 600px) {
-    right: 5px;
-    top: 75px;
+  .avatar {
+    height: 70px;
+    width: 70px;
+    border-radius: 59px;
+    margin-bottom: 15px;
+    background: gray;
   }
 
+  .item__icon {
+    margin-right: 5px;
+  }
   .profile-card-initials {
-    height: 50px;
-    width: 50px;
-    border-radius: 30px;
-    background-color: #051d39;
+    height: 70px;
+    width: 70px;
+    border-radius: 59px;
+    background-color: #385c78;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 20px;
-    box-shadow: 0 1px 5px rgb(27 31 35 / 15%);
+    font-size: 30px;
+  }
+  .account__action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .account__action-seperator {
+    margin: 0 10px;
+  }
+  .account__Settings {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #0098db;
+    cursor: pointer;
+    :hover {
+      color: #2a74be;
+    }
+  }
+  .account__logout {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #e4585a;
+    cursor: pointer;
+    :hover {
+      color: red;
+    }
   }
 `
 
@@ -98,41 +82,37 @@ export default function ProfileContainer() {
     <Styles>
       {!isLoading && profile ? (
         <>
-          <Link href="/account/profile">
-            <a>
-              <div className="avatar__name">
-                <div className="avatar">
-                  {profile && !isLoading && (
-                    <>
-                      {profile?.avatar ? (
-                        <img src={profile.avatar.url} alt="logo" className="image" />
-                      ) : (
-                        <div className="profile-card-initials">
-                          {capitalizeFirstLetter(profile.firstName)?.charAt(0)}
-                          {capitalizeFirstLetter(profile.lastName)?.charAt(0)}
-                        </div>
-                      )}
-                    </>
+          <div className="avatar__name">
+            <div className="avatar">
+              {profile && !isLoading && (
+                <>
+                  {profile?.avatar ? (
+                    <img src={profile.avatar} alt="logo" className="avatar" />
+                  ) : (
+                    <div className="profile-card-initials">
+                      {capitalizeFirstLetter(profile.firstName)?.charAt(0)}
+                      {capitalizeFirstLetter(profile.lastName)?.charAt(0)}
+                    </div>
                   )}
-                </div>
-                <span className="username">
-                  {profile.firstName} {profile.lastName}
-                </span>
-                <span className="email">{profile.email}</span>
-              </div>
-            </a>
-          </Link>
-          <Link href="/account/settings">
-            <a>
-              <div className="item">
-                <AiOutlineProfile className="item__icon" />
-                <span className="item__title">Profile</span>
-              </div>
-            </a>
-          </Link>
-          <div role="button" className="item" onKeyPress={() => logout()} onClick={() => logout()}>
-            <AiOutlineLogout className="item__icon" />
-            <span className="item__title">Logout</span>
+                </>
+              )}
+            </div>
+            {profile?.avatar.url}
+            <span className="username">
+              {profile.firstName} {profile.lastName}
+            </span>
+            <p className="email">{profile.email}</p>
+            <div className="account__action">
+              <span className="account__Settings">
+                <RiSettings3Line className="item__icon" />
+                <span className="item__title">Account Setting</span>
+              </span>
+              <span className="account__action-seperator">|</span>
+              <span className="account__logout">
+                <AiOutlineLogout className="item__icon" />
+                <span className="item__title">Logout</span>
+              </span>
+            </div>
           </div>
         </>
       ) : null}

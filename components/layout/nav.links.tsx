@@ -85,7 +85,7 @@ const links = [
     title: 'Supports',
     icon: <Icon name="ticket" width={18} height={18} fill={config.styles.baseColor} />,
     id: nanoid(),
-    uri: '/tickets',
+    uri: '/supports',
   },
   {
     title: 'Dashboad',
@@ -98,6 +98,12 @@ const links = [
     icon: <Icon name="blog" width={18} height={18} fill={config.styles.baseColor} />,
     id: nanoid(),
     uri: '/blogs',
+  },
+  {
+    title: 'Settings',
+    icon: <Icon name="blog" width={18} height={18} fill={config.styles.baseColor} />,
+    id: nanoid(),
+    uri: '/settings',
   },
   // {
   //   title: 'Products',

@@ -28,7 +28,6 @@ export default function HeaderProfileAvatar({ showAccount, handleAccount }) {
         onClick={() => handleAccount()}
         onKeyPress={() => handleAccount()}
       />
-      {showAccount && <ProfileContainer />}
     </Styles>
   )
 }

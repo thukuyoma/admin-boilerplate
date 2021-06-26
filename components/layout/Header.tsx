@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Logo from './Logo'
 import { FiSettings, FiBell } from 'react-icons/fi'
+import { TiThSmall } from 'react-icons/ti'
 import { BsBell, BsClockHistory } from 'react-icons/bs'
 import { AiOutlineDown } from 'react-icons/ai'
 import { IoIosAddCircle } from 'react-icons/io'
@@ -9,6 +10,9 @@ import Search from './Search'
 import useAuth from '../../context/auth'
 import HeaderLogin from './HeaderLogin'
 import HeaderProfileAvatar from './HeaderProfileAvatar'
+import CreateShortcuts from './CreateShortcuts'
+import HistoryTab from './HistoryTab'
+import AccountTab from './AccountTab'
 
 const Styles = styled.div`
   justify-content: space-between;
@@ -48,6 +52,7 @@ const Styles = styled.div`
     display: flex;
     align-items: center;
     font-size: 20px;
+    cursor: pointer;
     :hover {
       color: #0098db;
     }
@@ -72,6 +77,7 @@ const Styles = styled.div`
     align-items: center;
     padding: 0 10px;
     background: #f7f7f7;
+    position: relative;
   }
   .header__spead {
     display: flex;
@@ -86,7 +92,15 @@ const Styles = styled.div`
     margin-right: 30px;
   }
 `
-export default function Header({ toggleSideNav, handleAccount, showAccount }) {
+export default function Header({
+  toggleSideNav,
+  handleAccount,
+  showAccount,
+  handleCreateShortcuts,
+  showCreateShortcuts,
+  handleHistoryTab,
+  showHistoryTab,
+}) {
   const { profile, isLoading } = useAuth()
   return (
     <Styles toggleSideNav={toggleSideNav}>
@@ -101,16 +115,24 @@ export default function Header({ toggleSideNav, handleAccount, showAccount }) {
               Kimogan <AiOutlineDown />
             </div>
             <div className="header-links__item" style={{ fontSize: '26px' }}>
-              <IoIosAddCircle />
+              <IoIosAddCircle
+                onClick={() => handleCreateShortcuts()}
+                onKeyPress={() => handleCreateShortcuts()}
+              />
             </div>
+            <CreateShortcuts showCreateShortcuts={showCreateShortcuts} />
             <div className="header-links__item">
-              <BsClockHistory />
+              <BsClockHistory
+                onClick={() => handleHistoryTab()}
+                onKeyPress={() => handleHistoryTab()}
+              />
             </div>
+            <HistoryTab showHistoryTab={showHistoryTab} />
             <div className="header-links__item">
               <BsBell />
             </div>
             <div className="header-links__item">
-              <FiSettings />
+              <TiThSmall />
             </div>
             <div className="header-links__item">
               {profile?.avatar && (
@@ -119,6 +141,7 @@ export default function Header({ toggleSideNav, handleAccount, showAccount }) {
               {!profile && !isLoading && <HeaderLogin />}
               {isLoading && <div className="profile"></div>}
             </div>
+            <AccountTab handleAccount={handleAccount} showAccount={showAccount} />
           </div>
         </div>
       </div>

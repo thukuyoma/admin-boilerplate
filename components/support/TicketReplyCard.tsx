@@ -10,6 +10,7 @@ const Styles = styled.div`
     font-size: 13px;
     color: #8a8a8a;
     margin: 0;
+    // font-weight: bold;
   }
   .log__name {
     margin-right: 5px;
@@ -26,7 +27,7 @@ const Styles = styled.div`
   }
 `
 
-export default function ApplicationLogCard({ log }) {
+export default function TicketReplyCard({ log }) {
   return (
     <Styles>
       <p className="log__name-date">

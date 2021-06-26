@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Header from '../../components/layout/Header'
-import MobileContainerHeader from '../../components/layout/MobileContainerHeader'
+// import MobileContainerHeader from '../../components/layout/MobileContainerHeader'
 import MobileHeader from '../../components/layout/MobileHeader'
 import SideNav from '../../components/layout/SideNav'
-import config from '../../config/config'
-import { GrAdd } from 'react-icons/gr'
-import { Grid } from '@material-ui/core'
-import TItle from '../../components/forms/blog/TItle'
-import Create from '../../components/blog/CreateBlog'
-import CreateBlog from '../../components/blog/CreateBlog'
-import ContainerMainHeader from './ContainerMainHeader'
+// import config from '../../config/config'
+// import { GrAdd } from 'react-icons/gr'
+// import { Grid } from '@material-ui/core'
+// import TItle from '../../components/forms/blog/TItle'
+// import Create from '../../components/blog/CreateBlog'
+// import CreateBlog from '../../components/blog/CreateBlog'
+// import ContainerMainHeader from './ContainerMainHeader'
 
 const Styles = styled.div`
   display: flex;
@@ -65,13 +65,28 @@ export default function Layout({ children }) {
   const [toggleSideNav, setToggleSideNav] = useState<boolean>(false)
   const [showNav, setShowNav] = useState<boolean>(false)
   const [showAccount, setShowAccount] = useState<boolean>(false)
+  const [showCreateShortcuts, setShowCreateShortcuts] = useState<boolean>(false)
+  const [showHistoryTab, setShowHistryTab] = useState<boolean>(false)
   const handleAccount = () => {
     setShowNav(false)
+    setShowCreateShortcuts(false)
+    setShowHistryTab(false)
     setShowAccount(!showAccount)
   }
   const handleShowNav = (show: boolean) => {
     setShowAccount(false)
     setShowNav(show)
+  }
+
+  const handleCreateShortcuts = () => {
+    setShowAccount(false)
+    setShowHistryTab(false)
+    setShowCreateShortcuts(!showCreateShortcuts)
+  }
+  const handleHistoryTab = () => {
+    setShowCreateShortcuts(false)
+    setShowAccount(false)
+    setShowHistryTab(!showHistoryTab)
   }
   return (
     <Styles toggleSideNav={toggleSideNav}>
@@ -79,6 +94,10 @@ export default function Layout({ children }) {
         toggleSideNav={toggleSideNav}
         showAccount={showAccount}
         handleAccount={handleAccount}
+        handleCreateShortcuts={handleCreateShortcuts}
+        showCreateShortcuts={showCreateShortcuts}
+        handleHistoryTab={handleHistoryTab}
+        showHistoryTab={showHistoryTab}
       />
       <MobileHeader
         showNav={showNav}
