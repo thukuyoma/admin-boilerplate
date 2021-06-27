@@ -4,7 +4,7 @@ import AccountSettingsMenu from './SettingsTabs'
 import UpdateAvatar from './UpdateAvatar'
 import UpdateNames from './UpdateNames'
 import ProfileContainer from './ProfileContainer'
-import TabsOverlay from '../layout/TabsOverlay'
+import TabsOverlay from '../layout/header-tabs/TabsOverlay'
 import UpdateBio from './UpdateBio'
 
 export default function AccountTab({ showAccount, handleAccount }) {

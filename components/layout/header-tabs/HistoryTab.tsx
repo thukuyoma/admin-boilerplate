@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { BiMessageSquareAdd } from 'react-icons/bi'
 import styled from 'styled-components'
-import ActivityLogs from './ActivityLogs'
+import ActivityLogs from '../ActivityLogs'
 
 const Styles = styled.div`
   .overlay__wrapper {

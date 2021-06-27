@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import useAuth from '../../context/auth'
+import useAuth from '../../../context/auth'
 
-import ProfileContainer from '../account/ProfileContainer'
+import ProfileContainer from '../../account/ProfileContainer'
 
 const Styles = styled.div`
   display: flex;

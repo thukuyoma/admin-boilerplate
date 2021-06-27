@@ -9,9 +9,9 @@ import { IoIosAddCircle } from 'react-icons/io'
 import Search from './Search'
 import useAuth from '../../context/auth'
 import HeaderLogin from './HeaderLogin'
-import HeaderProfileAvatar from './HeaderProfileAvatar'
+import HeaderProfileAvatar from './header-tabs/HeaderProfileAvatar'
 import CreateShortcuts from './CreateShortcuts'
-import HistoryTab from './HistoryTab'
+import HistoryTab from './header-tabs/HistoryTab'
 import AccountTab from '../account/AccountTab'
 
 const Styles = styled.div`

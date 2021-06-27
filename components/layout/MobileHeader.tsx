@@ -13,7 +13,7 @@ import ProfileContainer from '../account/ProfileContainer'
 import { RiLoginCircleLine } from 'react-icons/ri'
 import { useRouter } from 'next/router'
 import HeaderLogin from './HeaderLogin'
-import HeaderProfileAvatar from './HeaderProfileAvatar'
+import HeaderProfileAvatar from './header-tabs/HeaderProfileAvatar'
 
 const Styles = styled.div`
   background: #e8e8e8;

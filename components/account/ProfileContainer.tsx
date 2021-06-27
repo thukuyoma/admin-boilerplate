@@ -116,7 +116,7 @@ export default function ProfileContainer({ setSwitchCaseAccount }) {
           </div>
           {profile?.bio ? (
             <p>
-              <strong>Bio: </strong> {profile?.bio}
+              <strong>Bio: </strong> {capitalizeFirstLetter(profile?.bio)}
             </p>
           ) : null}
         </>
