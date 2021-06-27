@@ -3,34 +3,40 @@ import { useMutation } from 'react-query'
 import styled from 'styled-components'
 import updateNames from '../../actions/account/update-names'
 import useAuth from '../../context/auth'
+import { InputField, InputTitle } from '../forms/form-styles'
+import Button from '../shared/Button'
 import ErrorAlert from '../shared/ErrorAlert'
 import SucccessAlert from '../shared/SuccessAlert'
+import AccountTabTitle from './AccountTabTitle'
 
 const Styles = styled.div`
-  .button {
-    margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .form__control {
+    margin-bottom: 20px;
+    width: 100%;
   }
 `
 
-export default function UpdateNames() {
+export default function UpdateNames({ setSwitchCaseAccount }) {
   const { mutateAsync, isSuccess, data, isLoading } = useMutation(updateNames)
   const { profile, refreshProfile } = useAuth()
   const [values, setValues] = useState({
     lastName: profile && profile.lastName,
     firstName: profile && profile.firstName,
   })
-
   const [inputsError, setInputErrors] = useState({
     lastName: '',
     firstName: '',
   })
-
   const { lastName, firstName } = values
-
   const handleChange = (e) => {
+    setInputErrors((prev) => ({ ...prev, [e.target.name]: '' }))
     setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
-
   const handleSubmit = async () => {
     if (!lastName) {
       setInputErrors((prev) => ({ ...prev, lastName: 'Last name is required' }))
@@ -52,22 +58,39 @@ export default function UpdateNames() {
 
   return (
     <Styles>
-      <div>Update Names</div>
-      <div>
-        <input
+      <AccountTabTitle
+        tabTitle="Update Profile Names"
+        setSwitchCaseAccount={setSwitchCaseAccount}
+      />
+      <div className="form__control">
+        <InputTitle>First name</InputTitle>
+        <InputField
           placeholder="First name"
           name="firstName"
           value={firstName}
           onChange={handleChange}
         />
         {inputsError.firstName && <ErrorAlert error={inputsError.firstName} />}
-        <input placeholder="Last name" name="lastName" value={lastName} onChange={handleChange} />
-        {inputsError.lastName && <ErrorAlert error={inputsError.lastName} />}
-        {isSuccess && data && <SucccessAlert message={data as string} />}
-        <div className="button">
-          {isLoading ? <div>Updating Names</div> : <div onClick={handleSubmit}>Update Name</div>}
-        </div>
       </div>
+      <div className="form__control">
+        <InputTitle>Last name</InputTitle>
+        <InputField
+          placeholder="Last name"
+          name="lastName"
+          value={lastName}
+          onChange={handleChange}
+        />
+        {inputsError.lastName && <ErrorAlert error={inputsError.lastName} />}
+        {isSuccess && data && <SucccessAlert message="Successfully updated account name(s)" />}
+      </div>
+      <Button
+        title={`${isLoading ? 'Updating' : 'Update'} Names`}
+        loading={isLoading}
+        onClick={handleSubmit}
+        disabled={isLoading}
+        align="center"
+        block
+      />
     </Styles>
   )
 }

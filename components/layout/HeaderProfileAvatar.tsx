@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import useAuth from '../../context/auth'
 
-import ProfileContainer from './ProfileContainer'
+import ProfileContainer from '../account/ProfileContainer'
 
 const Styles = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ export default function HeaderProfileAvatar({ showAccount, handleAccount }) {
   return (
     <Styles>
       <img
-        src={profile?.avatar.url ? profile?.avatar.url : '/assets/face.svg'}
+        src={profile?.avatar ? profile?.avatar : '/assets/face.svg'}
         alt="default"
         className="avatar"
         onClick={() => handleAccount()}

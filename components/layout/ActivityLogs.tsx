@@ -66,18 +66,15 @@ const Styles = styled.div`
   }
   .pagination__number {
     color: #385c78;
-    width: 20px;
-    height: 20px;
-    border: 1.5px solid #385c78;
+    padding: 2px 5px;
+    border: 1.5px solid #ccc;
+    min-width: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 3px;
     margin: 0 5px;
     font-size: 12px;
-  }
-  .pagination__number--current {
-    border-color: #0098db;
   }
 `
 export default function ActivityLogs() {
@@ -140,9 +137,7 @@ export default function ActivityLogs() {
               className="pagination__control"
               style={{ color: data?.currentPage === 1 && 'gray' }}
             />
-            <div className="pagination__number pagination__number--current">
-              {data?.currentPage}
-            </div>
+            <div className="pagination__number">{data?.currentPage}</div>
             {isFetching && (
               <Loader
                 style={{ margin: '0 10px', display: 'flex' }}

@@ -20,6 +20,29 @@ const InputField = styled.input`
   padding: 10px 10px;
   width: 100%;
   box-shadow: ${({ error }) => error && '0 0 0 0.1rem #f28da0'};
+  background: inherit;
+  font-family: inherit;
+  :focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgb(0 123 255 / 25%);
+  }
+  :hover {
+    background: #f0f0f0;
+  }
+`
+const TextArea = styled.textarea`
+  border: 1px solid #ced4da;
+  box-sizing: border-box;
+  border-radius: 3px;
+  height: 100px;
+  padding: 10px 10px;
+  width: 100%;
+  box-shadow: ${({ error }) => error && '0 0 0 0.1rem #f28da0'};
+  background: inherit;
+  font-family: inherit;
   :focus {
     color: #495057;
     background-color: #fff;
@@ -235,4 +258,5 @@ export {
   RemoveImageButton,
   RemoveImageButtonIcon,
   SquareTagItem,
+  TextArea,
 }

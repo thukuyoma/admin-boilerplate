@@ -76,7 +76,7 @@ const Styles = styled.div`
   }
 `
 
-export default function ProfileContainer() {
+export default function ProfileContainer({ setSwitchCaseAccount }) {
   const { profile, isLoading, logout } = useAuth()
   return (
     <Styles>
@@ -99,21 +99,26 @@ export default function ProfileContainer() {
             </div>
             {profile?.avatar.url}
             <span className="username">
-              {profile.firstName} {profile.lastName}
+              {capitalizeFirstLetter(profile.firstName)} {capitalizeFirstLetter(profile.lastName)}
             </span>
             <p className="email">{profile.email}</p>
             <div className="account__action">
-              <span className="account__Settings">
+              <span className="account__Settings" onClick={() => setSwitchCaseAccount('settings')}>
                 <RiSettings3Line className="item__icon" />
-                <span className="item__title">Account Setting</span>
+                <span>Manage Account</span>
               </span>
               <span className="account__action-seperator">|</span>
-              <span className="account__logout">
+              <span className="account__logout" onClick={() => logout()}>
                 <AiOutlineLogout className="item__icon" />
-                <span className="item__title">Logout</span>
+                <span>Logout</span>
               </span>
             </div>
           </div>
+          {profile?.bio ? (
+            <p>
+              <strong>Bio: </strong> {profile?.bio}
+            </p>
+          ) : null}
         </>
       ) : null}
     </Styles>

@@ -12,7 +12,7 @@ import HeaderLogin from './HeaderLogin'
 import HeaderProfileAvatar from './HeaderProfileAvatar'
 import CreateShortcuts from './CreateShortcuts'
 import HistoryTab from './HistoryTab'
-import AccountTab from './AccountTab'
+import AccountTab from '../account/AccountTab'
 
 const Styles = styled.div`
   justify-content: space-between;
