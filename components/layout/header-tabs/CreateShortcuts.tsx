@@ -2,21 +2,10 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { BiMessageSquareAdd } from 'react-icons/bi'
 import styled from 'styled-components'
+import HeaderTabTitle from './HeaderTabTitle'
+import TabsOverlay from './TabsOverlay'
 
 const Styles = styled.div`
-  .overlay__wrapper {
-    position: absolute;
-    background-color: #f3f8fe;
-    width: 362px;
-    height: 100vh;
-    top: 60px;
-    right: 0;
-  }
-  .shortcut__header {
-    text-align: center;
-    margin: 20px 10px;
-    margin-bottom: 30px;
-  }
   .shortcut-wrapper {
     display: flex;
     align-items: center;
@@ -51,9 +40,6 @@ const Styles = styled.div`
   .shortcut__icon {
     margin-right: 5px;
   }
-  .wrapper__head {
-    text-align: center;
-  }
 `
 
 const shortcuts = [
@@ -84,8 +70,8 @@ export default function CreateShortcuts({ showCreateShortcuts }) {
     <>
       {showCreateShortcuts && (
         <Styles>
-          <div className="overlay__wrapper">
-            <p className="shortcut__header">Create Shortcuts</p>
+          <TabsOverlay>
+            <HeaderTabTitle>Create Shortcuts</HeaderTabTitle>
             <div className="shortcut-wrapper">
               {shortcuts.map((shortcut) => (
                 <div className="shortcut">
@@ -96,7 +82,7 @@ export default function CreateShortcuts({ showCreateShortcuts }) {
                 </div>
               ))}
             </div>
-          </div>
+          </TabsOverlay>
         </Styles>
       )}
     </>

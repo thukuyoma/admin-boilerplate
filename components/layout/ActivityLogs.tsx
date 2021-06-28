@@ -3,22 +3,17 @@ import styled from 'styled-components'
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import moment from 'moment'
-import { IoMdArrowForward } from 'react-icons/io'
 import Loader from 'react-loader-spinner'
 import { RiRefreshLine } from 'react-icons/ri'
 import useAuth from '../../context/auth'
 import getAdminActiviesLog from '../../actions/account/get-admin-activities-log'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import { HiArrowNarrowLeft, HiArrowNarrowRight } from 'react-icons/hi'
+import HeaderTabTitle from './header-tabs/HeaderTabTitle'
 
 const Styles = styled.div`
   padding: 0 20px;
   .header__title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 30px;
   }
   .logger {
     font-size: 12px;
@@ -97,15 +92,14 @@ export default function ActivityLogs() {
   }
   return (
     <Styles>
-      <>
-        <p className="header__title">
-          Recent Activities
-          <RiRefreshLine className="refetch" onClick={() => refetch()} />
-          {isFetching && (
-            <Loader style={{ display: 'flex' }} type="Oval" color="black" height={12} width={12} />
-          )}
-        </p>
-      </>
+      <HeaderTabTitle>
+        Recent Activities
+        <RiRefreshLine className="refetch" onClick={() => refetch()} />
+        {isFetching && (
+          <Loader style={{ display: 'flex' }} type="Oval" color="black" height={12} width={12} />
+        )}
+      </HeaderTabTitle>
+
       <>
         {isLoading && (
           <div className="loader__window">

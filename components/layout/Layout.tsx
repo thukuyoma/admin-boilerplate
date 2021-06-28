@@ -67,27 +67,39 @@ export default function Layout({ children }) {
   const [showAccount, setShowAccount] = useState<boolean>(false)
   const [showCreateShortcuts, setShowCreateShortcuts] = useState<boolean>(false)
   const [showHistoryTab, setShowHistryTab] = useState<boolean>(false)
+  const [showShortcuts, setShowShortcuts] = useState<boolean>(false)
   const handleAccount = () => {
     setShowNav(false)
     setShowCreateShortcuts(false)
     setShowHistryTab(false)
+    setShowShortcuts(false)
     setShowAccount(!showAccount)
   }
   const handleShowNav = (show: boolean) => {
     setShowAccount(false)
     setShowNav(show)
+    setShowShortcuts(false)
   }
 
   const handleCreateShortcuts = () => {
     setShowAccount(false)
     setShowHistryTab(false)
+    setShowShortcuts(false)
     setShowCreateShortcuts(!showCreateShortcuts)
+  }
+  const handleShortcuts = () => {
+    setShowAccount(false)
+    setShowHistryTab(false)
+    setShowCreateShortcuts(false)
+    setShowShortcuts(!showShortcuts)
   }
   const handleHistoryTab = () => {
     setShowCreateShortcuts(false)
     setShowAccount(false)
+    setShowShortcuts(false)
     setShowHistryTab(!showHistoryTab)
   }
+
   return (
     <Styles toggleSideNav={toggleSideNav}>
       <Header
@@ -98,6 +110,8 @@ export default function Layout({ children }) {
         showCreateShortcuts={showCreateShortcuts}
         handleHistoryTab={handleHistoryTab}
         showHistoryTab={showHistoryTab}
+        handleShortcuts={handleShortcuts}
+        showShortcuts={showShortcuts}
       />
       <MobileHeader
         showNav={showNav}

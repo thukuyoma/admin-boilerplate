@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import Logo from './Logo'
-import { FiSettings, FiBell } from 'react-icons/fi'
 import { TiThSmall } from 'react-icons/ti'
 import { BsBell, BsClockHistory } from 'react-icons/bs'
 import { AiOutlineDown } from 'react-icons/ai'
@@ -10,9 +9,10 @@ import Search from './Search'
 import useAuth from '../../context/auth'
 import HeaderLogin from './HeaderLogin'
 import HeaderProfileAvatar from './header-tabs/HeaderProfileAvatar'
-import CreateShortcuts from './CreateShortcuts'
+import CreateShortcuts from './header-tabs/CreateShortcuts'
 import HistoryTab from './header-tabs/HistoryTab'
 import AccountTab from '../account/AccountTab'
+import ShortcutsTab from './header-tabs/ShortcutsTab'
 
 const Styles = styled.div`
   justify-content: space-between;
@@ -100,6 +100,8 @@ export default function Header({
   showCreateShortcuts,
   handleHistoryTab,
   showHistoryTab,
+  handleShortcuts,
+  showShortcuts,
 }) {
   const { profile, isLoading } = useAuth()
   return (
@@ -132,8 +134,9 @@ export default function Header({
               <BsBell />
             </div>
             <div className="header-links__item">
-              <TiThSmall />
+              <TiThSmall onClick={() => handleShortcuts()} onKeyPress={() => handleShortcuts()} />
             </div>
+            <ShortcutsTab showShortcuts={showShortcuts} />
             <div className="header-links__item">
               {profile?.avatar && (
                 <HeaderProfileAvatar handleAccount={handleAccount} showAccount={showAccount} />
