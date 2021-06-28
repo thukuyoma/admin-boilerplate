@@ -7,7 +7,7 @@ import ProfileContainer from './ProfileContainer'
 import TabsOverlay from '../layout/header-tabs/TabsOverlay'
 import UpdateBio from './UpdateBio'
 
-export default function AccountTab({ showAccount, handleAccount }) {
+export default function AccountTab({ showAccount }) {
   const [switchCaseAccount, setSwitchCaseAccount] = useState('profile')
   switch (switchCaseAccount) {
     case 'profile':

@@ -8,7 +8,7 @@ const Styles = styled.div`
   height: 100vh;
   top: 60px;
   right: 0;
-  padding: 30px 10px 20px 10px;
+  padding: 30px 20px 20px 20px;
 `
 
 export default function TabsOverlay({ children }) {

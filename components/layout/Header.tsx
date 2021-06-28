@@ -144,7 +144,7 @@ export default function Header({
               {!profile && !isLoading && <HeaderLogin />}
               {isLoading && <div className="profile"></div>}
             </div>
-            <AccountTab handleAccount={handleAccount} showAccount={showAccount} />
+            <AccountTab showAccount={showAccount} />
           </div>
         </div>
       </div>

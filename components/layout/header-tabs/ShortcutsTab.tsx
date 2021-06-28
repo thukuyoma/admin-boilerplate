@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import React from 'react'
-import { BiMessageSquareAdd } from 'react-icons/bi'
 import styled from 'styled-components'
 import HeaderTabTitle from './HeaderTabTitle'
 import TabsOverlay from './TabsOverlay'
@@ -18,9 +17,8 @@ const Styles = styled.div`
     justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
-    margin: 10px 20px;
-    height: 100px;
     width: 100px;
+    height: 100px;
   }
   .shortcut__image {
     width: 30px;
@@ -28,6 +26,7 @@ const Styles = styled.div`
     border-radius: 5px;
   }
   .shortcut__title {
+    margin: 0;
     margin-top: 10px;
     font-size: 16px;
     cursor: pointer;
@@ -44,24 +43,49 @@ const Styles = styled.div`
 
 const shortcuts = [
   {
-    title: 'Blog',
-    url: '/blogs/create',
+    title: 'Blogs',
+    url: '/blogs',
     icon: '/shortcuts/blog.png',
   },
   {
     title: 'Admin',
-    url: '/admins/create',
+    url: '/admins',
     icon: '/shortcuts/admin.png',
   },
   {
-    title: 'Booking',
-    url: '/bookings/create',
+    title: 'Bookings',
+    url: '/bookings',
     icon: '/shortcuts/booking.svg',
   },
   {
-    title: 'Scholarship',
-    url: '/scholarships/create',
+    title: 'Scholarships',
+    url: '/scholarships',
     icon: '/shortcuts/scholarship.svg',
+  },
+  {
+    title: 'Applications',
+    url: '/applications',
+    icon: '/shortcuts/application.png',
+  },
+  {
+    title: 'Supports',
+    url: '/supports',
+    icon: '/shortcuts/support.png',
+  },
+  {
+    title: 'Newsletter',
+    url: '/newsletter',
+    icon: '/shortcuts/newsletter.png',
+  },
+  {
+    title: 'Dashboard',
+    url: '/dashboard',
+    icon: '/shortcuts/dashboard.png',
+  },
+  {
+    title: 'Settings',
+    url: '/settings',
+    icon: '/shortcuts/settings.png',
   },
 ]
 export default function ShortcutsTab({ showShortcuts }) {
@@ -77,7 +101,7 @@ export default function ShortcutsTab({ showShortcuts }) {
                 <div className="shortcut">
                   <img className="shortcut__image" src={shortcut.icon} />
                   <p className="shortcut__title" onClick={() => router.push(shortcut.url)}>
-                    <BiMessageSquareAdd className="shortcut__icon" /> {shortcut.title}
+                    {shortcut.title}
                   </p>
                 </div>
               ))}

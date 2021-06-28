@@ -12,9 +12,6 @@ import { HiArrowNarrowLeft, HiArrowNarrowRight } from 'react-icons/hi'
 import HeaderTabTitle from './header-tabs/HeaderTabTitle'
 
 const Styles = styled.div`
-  padding: 0 20px;
-  .header__title {
-  }
   .logger {
     font-size: 12px;
   }
