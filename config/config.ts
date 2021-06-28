@@ -1,8 +1,8 @@
 export default {
   logo: { text: '/assets/logo.svg', icon: '/assets/icon.svg' },
   client: {
-    clientName: '',
-    clientDomain: '',
+    clientName: 'Kimogan',
+    clientDomain: 'kimogan.com',
   },
   styles: {
     baseColor: '#0C4284',

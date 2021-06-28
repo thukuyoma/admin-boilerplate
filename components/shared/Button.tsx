@@ -21,8 +21,11 @@ const Styles = styled.div`
     outline: 0;
     color: #fff;
     font-weight: bold;
+    min-width: 100px;
     :hover {
-      background: #0098db;
+      color: #fff;
+      background-color: #2083cf;
+      box-shadow: 0 1px 1px rgb(0 0 0 / 20%);
     }
   }
 `

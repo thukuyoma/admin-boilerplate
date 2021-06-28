@@ -7,6 +7,7 @@ const Styles = styled.div`
     color: red;
     font-size: 12px;
     margin-top: 10px;
+    margin-bottom: 10px;
     display: flex;
   }
   .input-error__icon {

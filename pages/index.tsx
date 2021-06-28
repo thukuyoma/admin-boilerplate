@@ -2,35 +2,57 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useMutation } from 'react-query'
-import Loader from 'react-loader-spinner'
-import loginValidator from '../utils/login-validator'
 import useAuth from '../context/auth'
-import { Control, InputField } from '../components/forms/form-styles'
-import { RiErrorWarningLine } from 'react-icons/ri'
+import { Control, InputField, InputTitle } from '../components/forms/form-styles'
 import DisplayInputError from '../components/forms/DisplayInputError'
-import Analytics from '../components/dashboard/Analytics'
-
+import Button from '../components/shared/Button'
+import styled from 'styled-components'
+import loginValidation from '../validations/login-validation'
+import ErrorAlert from '../components/shared/ErrorAlert'
 interface LoginStateProps {
   email: string
   password: string
 }
 
+const Styles = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  padding: 10px;
+  form {
+    max-width: 500px;
+    flex-shrink: 0;
+    width: 100%;
+    flex-grow: 1;
+  }
+  .account__tag {
+    font-size: 30px;
+    text-align: center;
+  }
+  @media (max-width: 340px) {
+    margin: 30px 0;
+  }
+`
+
 const Login: React.FC = () => {
   const { login } = useAuth()
   const [values, setValues] = useState<LoginStateProps>({ email: '', password: '' })
   const { mutateAsync, isSuccess, isLoading, isError, error } = useMutation(() => login(values))
-  const [errors, setErrors] = useState({
+  const [inputErrors, setInputErrors] = useState({
     email: '',
     password: '',
   })
   const router = useRouter()
   const handleChange = (e) => {
+    setInputErrors((prev) => ({ ...prev, [e.target.name]: '' }))
     setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   useEffect(() => {
     if (isError) {
-      setErrors((prev) => ({
+      setInputErrors((prev) => ({
         ...prev,
         ...(error as Record<string, unknown>),
       }))
@@ -39,16 +61,17 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const errorItems = loginValidator(values)
-    if (errorItems.email || errorItems.password) {
-      setErrors({ ...errorItems })
-    } else {
-      setErrors({
-        email: '',
-        password: '',
-      })
-      await mutateAsync()
+    const validation = loginValidation(values)
+    console.log({ validation })
+    if (validation.isError) {
+      setInputErrors(validation.errors)
+      return null
     }
+    setInputErrors({
+      email: '',
+      password: '',
+    })
+    await mutateAsync()
   }
 
   if (isSuccess) {
@@ -56,35 +79,35 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div>
-      <div className="input__wrapper">
-        <Analytics />
-        <form>
-          <Control>
-            <InputField
-              type="text"
-              placeholder="Email"
-              name="email"
-              value={values.email}
-              onChange={handleChange}
-              error={errors.email}
-            />
-            {errors.email && <DisplayInputError error={errors.email} />}
-          </Control>
-          <Control>
-            <InputField
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={values.password}
-              onChange={handleChange}
-              autoComplete="on"
-              error={errors.password}
-            />
-            {errors.password && <DisplayInputError error={errors.password} />}
-          </Control>
-        </form>
-
+    <Styles>
+      <form>
+        <p className="account__tag">Login</p>
+        <Control>
+          <InputTitle>Email</InputTitle>
+          <InputField
+            type="text"
+            placeholder="Email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+            error={inputErrors.email}
+          />
+          {inputErrors.email && <DisplayInputError error={inputErrors.email} />}
+        </Control>
+        <Control>
+          <InputTitle>Password</InputTitle>
+          <InputField
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={values.password}
+            onChange={handleChange}
+            autoComplete="on"
+            error={inputErrors.password}
+          />
+          {inputErrors.password && <DisplayInputError error={inputErrors.password} />}
+        </Control>
+        {isError && <ErrorAlert error={error} />}
         <span className="tagline">
           Cant login contact
           <Link href="/register">
@@ -93,25 +116,17 @@ const Login: React.FC = () => {
             </a>
           </Link>
         </span>
-        <div className="button__wrapper">
-          {isLoading || isSuccess ? (
-            <button>
-              Login
-              <Loader
-                style={{ marginLeft: '5px', display: 'flex' }}
-                type="Oval"
-                width={15}
-                height={15}
-                size={20}
-                color="#fff"
-              />
-            </button>
-          ) : (
-            <button onClick={handleSubmit}>Login</button>
-          )}
-        </div>
-      </div>
-    </div>
+        <Button
+          block
+          style={{ marginTop: '30px' }}
+          title="Login"
+          onClick={(e) => handleSubmit(e)}
+          loading={isLoading}
+          align="center"
+          disabled={isLoading}
+        />
+      </form>
+    </Styles>
   )
 }
 

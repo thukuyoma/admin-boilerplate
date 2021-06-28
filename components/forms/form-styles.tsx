@@ -3,7 +3,6 @@ import styled from 'styled-components'
 const Control = styled.div`
   width: 100%;
   margin-bottom: 20px;
-  min-height: 92px;
 `
 const InputTitle = styled.div`
   font-weight: 500;

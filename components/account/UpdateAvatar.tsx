@@ -153,7 +153,7 @@ export default function UpdateAvatar({ setSwitchCaseAccount }) {
             disabled={isLoading}
             align="center"
             block
-            style={{ marginTop: '10px' }}
+            style={{ marginTop: '30px' }}
           />
         ) : (
           <Button
@@ -163,7 +163,7 @@ export default function UpdateAvatar({ setSwitchCaseAccount }) {
             disabled={isLoading}
             align="center"
             block
-            style={{ marginTop: '10px' }}
+            style={{ marginTop: '30px' }}
           />
         )}
       </div>

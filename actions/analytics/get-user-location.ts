@@ -1,28 +1,30 @@
 import api from '../utils/api'
+
 export default async function getUserLocation() {
   try {
-    const ipLocation = await api('https://extreme-ip-lookup.com/json/')
+    const res = await api('https://extreme-ip-lookup.com/json/')
     const {
       city,
       continent,
       country,
       countryCode,
-      lat,
-      lon: log,
+      lat: latitude,
+      lon: longitude,
       query: ipAddress,
       region,
-    } = ipLocation.data
-    return {
+    } = res.data
+    const analytics = {
       city,
       continent,
       country,
       countryCode,
-      lat,
-      log,
+      latitude,
+      longitude,
       ipAddress,
       region,
     }
+    return analytics
   } catch (err) {
-    throw err.response.data
+    return null
   }
 }

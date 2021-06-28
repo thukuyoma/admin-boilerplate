@@ -12,7 +12,8 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import { ToastContainer } from 'react-toastify'
 import { AuthProvider, ProtectRoute } from '../context/auth'
 import 'react-toastify/dist/ReactToastify.css'
-
+import config from './../config/config'
+import AnalyticsProvider from '../context/analytics'
 Router.events.on('routeChangeStart', (url) => {
   console.log(`Loading: ${url}`)
   NProgress.start()
@@ -25,20 +26,22 @@ function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
   return (
     <>
-      <AuthProvider>
-        <ProtectRoute>
-          <QueryClientProvider client={queryClient}>
-            <Head>
-              <link rel="stylesheet" type="text/css" href="/nprogress.css" />
-              <title>Infocott | Admin</title>
-              <link rel="icon" href="/favicon.svg" />
-            </Head>
-            <ToastContainer />
-            <Component {...pageProps} />
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </ProtectRoute>
-      </AuthProvider>
+      <AnalyticsProvider>
+        <AuthProvider>
+          <ProtectRoute>
+            <QueryClientProvider client={queryClient}>
+              <Head>
+                <link rel="stylesheet" type="text/css" href="/nprogress.css" />
+                <title>{config.client.clientName} | Admin</title>
+                <link rel="icon" href="/favicon.svg" />
+              </Head>
+              <ToastContainer />
+              <Component {...pageProps} />
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+          </ProtectRoute>
+        </AuthProvider>
+      </AnalyticsProvider>
     </>
   )
 }

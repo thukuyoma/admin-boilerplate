@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -21,9 +17,15 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "pages/_documents.js", "pages/create-post.js", "database/config.js", "database/mongodb.js", "database/mongodb.js", "database/mongodb.js", "components/editor/CkEditor.js", "pages/register.tsx"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "**/*.tsx",
+    "pages/_documents.js",
+    "pages/create-post.js",
+    "database/config.js",
+    "database/mongodb.js",
+    "database/mongodb.js",
+    "database/mongodb.js",
+    "components/editor/CkEditor.js",
+    "pages/accounts/register.tsx"
+  ],
+  "exclude": ["node_modules"]
 }

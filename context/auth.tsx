@@ -1,7 +1,6 @@
 /* eslint-disable consistent-return */
 import { useRouter } from 'next/router'
 import React, { useState, useContext, useEffect } from 'react'
-import { useQuery } from 'react-query'
 import { getCookie, removeCookie } from '../actions/account/cookies'
 import getProfile from '../actions/account/get-profile'
 import loginAdmin from '../actions/account/login-admin'
