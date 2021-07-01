@@ -1,16 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Header from '../../components/layout/Header'
-// import MobileContainerHeader from '../../components/layout/MobileContainerHeader'
 import MobileHeader from '../../components/layout/MobileHeader'
 import SideNav from '../../components/layout/SideNav'
-// import config from '../../config/config'
-// import { GrAdd } from 'react-icons/gr'
-// import { Grid } from '@material-ui/core'
-// import TItle from '../../components/forms/blog/TItle'
-// import Create from '../../components/blog/CreateBlog'
-// import CreateBlog from '../../components/blog/CreateBlog'
-// import ContainerMainHeader from './ContainerMainHeader'
 
 const Styles = styled.div`
   display: flex;

@@ -33,6 +33,8 @@ const Styles = styled.div`
     }
   }
   .side-nav-link___icon {
+    font-size: 16px;
+    color: ${config.styles.baseColor};
   }
   .side-nav-link___title {
     margin-left: 20px;

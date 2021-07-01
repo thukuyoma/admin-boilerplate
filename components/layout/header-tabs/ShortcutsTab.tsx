@@ -32,6 +32,7 @@ const Styles = styled.div`
     cursor: pointer;
     display: flex;
     align-items: center;
+    font-size: 14px;
     :hover {
       color: #0098db;
     }

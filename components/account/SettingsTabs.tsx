@@ -27,10 +27,9 @@ const Styles = styled.div`
   }
   .settings-tab__title {
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     display: flex;
-    // flex-direction: column;
     align-items: center;
     :hover {
       color: #0098db;

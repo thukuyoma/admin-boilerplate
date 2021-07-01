@@ -25,7 +25,7 @@ const Styles = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
+    font-size: 14px;
     flex-shrink: 0;
   }
   .card__name {
@@ -38,7 +38,7 @@ const Styles = styled.div`
     margin-left: 5px;
   }
   .card__email {
-    font-size: 16px;
+    font-size: 14px;
     margin: 0;
     padding-top: 3px;
   }

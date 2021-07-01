@@ -31,13 +31,18 @@ const Styles = styled.div`
       cursor: pointer;
       border-radius: 5px;
       background: #f7f7f7;
+      .side-nav-link___icon {
+        color: #0098db;
+      }
     }
   }
   .side-nav-link___icon {
+    font-size: 16px;
+    color: ${config.styles.baseColor};
   }
   .side-nav-link___title {
     margin-left: 20px;
-    font-size: 16px;
+    font-size: 14px;
     color: ${config.styles.baseColor};
   }
 
@@ -79,9 +84,6 @@ export default function SideNav({ toggleSideNav, setToggleSideNav }) {
   return (
     <Styles toggleSideNav={toggleSideNav}>
       <div>
-        {/* <div className="sidenav__logo">
-          <Logo complete={toggleSideNav} icon={!toggleSideNav} />
-        </div> */}
         <div className="sidenav__links">
           {links.map((link) => (
             <div

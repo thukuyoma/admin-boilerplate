@@ -1,123 +1,67 @@
-import Icon from '../icons/index'
 import config from '../../config/config'
 import { nanoid } from 'nanoid'
+import { RiBookletLine, RiFilePaperLine, RiAdminLine, RiSettings2Line } from 'react-icons/ri'
+import { FaWpforms } from 'react-icons/fa'
+import { MdSchool } from 'react-icons/md'
+import { BsNewspaper } from 'react-icons/bs'
+import { BiSupport } from 'react-icons/bi'
+import { AiOutlineDashboard } from 'react-icons/ai'
 
 const links = [
-  // {
-  //   title: 'Users',
-  //   icon: <Icon name="user" width={18} height={18} fill={config.styles.baseColor} />,
-  //   id: nanoid(),
-  //   uri: '/questions',
-  // },
-  // {
-  //   title: 'Orders',
-  //   icon: <Icon name="order" width={18} height={18} fill={config.styles.baseColor} />,
-  //   id: nanoid(),
-  //   uri: '/questions',
-  // },
-  // {
-  //   title: 'Repairs',
-  //   icon: <Icon name="question" />,
-  //   id: nanoid(),
-  //   uri: '/questions',
-  // },
-  // {
-  //   title: 'Admins',
-  //   icon: <Icon name="question" />,
-  //   id: nanoid(),
-  //   uri: '/questions',
-  // // },
-  // {
-  //   title: 'Applications',
-  //   icon: <Icon name="question" />,
-  //   id: nanoid(),
-  //   uri: '/questions',
-  // },
+  {
+    title: 'Dashboad',
+    icon: <AiOutlineDashboard className="side-nav-link___icon" />,
+    id: nanoid(),
+    uri: '/dashboard',
+  },
+  {
+    title: 'Admins',
+    icon: <RiAdminLine className="side-nav-link___icon" />,
+    id: nanoid(),
+    uri: '/admins',
+  },
   {
     title: 'Scholarships',
-    icon: <Icon name="question" width={18} height={18} fill={config.styles.baseColor} />,
+    icon: <MdSchool className="side-nav-link___icon" />,
     id: nanoid(),
     uri: '/scholarships',
   },
-  // {
-  //   title: 'Questions',
-  //   icon: <Icon name="question" width={18} height={18} fill={config.styles.baseColor} />,
-  //   id: nanoid(),
-  //   uri: '/questions',
-  // },
-  // {
-  //   title: 'Payments',
-  //   icon: <Icon name="question" />,
-  //   id: nanoid(),
-  //   uri: '/questions',
-  // },
-  // {
-  //   title: 'Orders',
-  //   icon: <Icon name="order" width={18} height={18} fill={config.styles.baseColor} />,
-  //   id: nanoid(),
-  //   uri: '/orders',
-  // },
   {
     title: 'Applications',
-    icon: <Icon name="ticket" width={18} height={18} fill={config.styles.baseColor} />,
+    icon: <FaWpforms className="side-nav-link___icon" />,
     id: nanoid(),
     uri: '/applications',
   },
   {
     title: 'Newsletter',
-    icon: <Icon name="ticket" width={18} height={18} fill={config.styles.baseColor} />,
+    icon: <BsNewspaper className="side-nav-link___icon" />,
     id: nanoid(),
     uri: '/newsletter',
   },
   {
     title: 'Bookings',
-    icon: <Icon name="ticket" width={18} height={18} fill={config.styles.baseColor} />,
+    icon: <RiBookletLine className="side-nav-link___icon" />,
     id: nanoid(),
     uri: '/bookings',
   },
   {
-    title: 'Admins',
-    icon: <Icon name="ticket" width={18} height={18} fill={config.styles.baseColor} />,
-    id: nanoid(),
-    uri: '/admins',
-  },
-  {
-    title: 'Supports',
-    icon: <Icon name="ticket" width={18} height={18} fill={config.styles.baseColor} />,
-    id: nanoid(),
-    uri: '/supports',
-  },
-  {
-    title: 'Dashboad',
-    icon: <Icon name="analytics" width={18} height={18} fill={config.styles.baseColor} />,
-    id: nanoid(),
-    uri: '/analytics',
-  },
-  {
     title: 'Blogs',
-    icon: <Icon name="blog" width={18} height={18} fill={config.styles.baseColor} />,
+    icon: <RiFilePaperLine className="side-nav-link___icon" />,
     id: nanoid(),
     uri: '/blogs',
   },
   {
+    title: 'Supports',
+    icon: <BiSupport className="side-nav-link___icon" />,
+    id: nanoid(),
+    uri: '/supports',
+  },
+  {
     title: 'Settings',
-    icon: <Icon name="blog" width={18} height={18} fill={config.styles.baseColor} />,
+    icon: <RiSettings2Line className="side-nav-link___icon" />,
     id: nanoid(),
     uri: '/settings',
   },
-  // {
-  //   title: 'Products',
-  //   icon: <Icon name="product" width={18} height={18} fill={config.styles.baseColor} />,
-  //   id: nanoid(),
-  //   uri: '/products',
-  // },
-  // {
-  //   title: 'Technicians',
-  //   icon: <Icon name="question" />,
-  //   id: nanoid(),
-  //   uri: '/questions',
-  // },
-  // {
 ]
 
 export default links
