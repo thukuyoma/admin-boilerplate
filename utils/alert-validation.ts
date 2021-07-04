@@ -27,7 +27,7 @@ export default function alertValidation({
     errors.expiresAt = 'Alert expiring date is required'
   }
   if (message) {
-    if (message.length > 100) {
+    if (message.length > 151) {
       errors.message = 'Alert message must be less than 1000 characters'
     }
   }

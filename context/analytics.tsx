@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-// import { detect } from 'detect-browser'
 import getDeviceDetails from '../actions/analytics/get-device-details'
 import getUserLocation from '../actions/get-user-location'
-import getWeatherData from '../actions/get-weather-data'
 
 const AnalyticsContext = React.createContext(null)
 
@@ -14,16 +12,11 @@ export default function AnalyticsProvider({ children }) {
   const [ip, setIp] = useState(null)
   const [weather, setWeather] = useState(null)
   const [device, setDevice] = useState(null)
-  const [pageDetails, setPageDetails] = useState(null)
 
   const getIp = async () => {
     const ip = await getUserLocation()
     if (ip) {
       setIp(ip)
-      //   const weather = await getWeatherData({ lat: ip.lat, log: ip.log })
-      //   if (weather) {
-      //     setWeather(weather)
-      //   }
     }
   }
 
@@ -48,7 +41,6 @@ export default function AnalyticsProvider({ children }) {
     <AnalyticsContext.Provider
       value={{
         ip,
-        pageDetails,
         device,
         weather,
         recordPageVisit,
