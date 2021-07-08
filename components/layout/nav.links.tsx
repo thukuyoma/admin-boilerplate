@@ -17,7 +17,7 @@ const links = [
     title: 'Dashboad',
     icon: <IconReportAnalytics width={20} color="#0C4284" strokeWidth={1.5} />,
     id: nanoid(),
-    uri: '/dashboard',
+    uri: '/analytics/dashboard',
   },
   {
     title: 'Admins',
