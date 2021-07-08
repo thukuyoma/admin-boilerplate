@@ -1,64 +1,69 @@
 import config from '../../config/config'
 import { nanoid } from 'nanoid'
-import { RiBookletLine, RiFilePaperLine, RiAdminLine, RiSettings2Line } from 'react-icons/ri'
-import { FaWpforms } from 'react-icons/fa'
-import { MdSchool } from 'react-icons/md'
-import { BsNewspaper } from 'react-icons/bs'
-import { BiSupport } from 'react-icons/bi'
-import { AiOutlineDashboard } from 'react-icons/ai'
+import {
+  IconReportAnalytics,
+  IconUserCheck,
+  IconSchool,
+  IconForms,
+  IconNews,
+  IconMailOpened,
+  IconNotebook,
+  IconHelp,
+  IconSettings,
+} from '@tabler/icons'
 
 const links = [
   {
     title: 'Dashboad',
-    icon: <AiOutlineDashboard className="side-nav-link___icon" />,
+    icon: <IconReportAnalytics width={20} color="#0C4284" strokeWidth={1.5} />,
     id: nanoid(),
     uri: '/dashboard',
   },
   {
     title: 'Admins',
-    icon: <RiAdminLine className="side-nav-link___icon" />,
+    icon: <IconUserCheck width={20} color="#0C4284" strokeWidth={1.5} />,
     id: nanoid(),
     uri: '/admins',
   },
   {
     title: 'Scholarships',
-    icon: <MdSchool className="side-nav-link___icon" />,
+    icon: <IconSchool width={20} color="#0C4284" strokeWidth={1.5} />,
     id: nanoid(),
     uri: '/scholarships',
   },
   {
     title: 'Applications',
-    icon: <FaWpforms className="side-nav-link___icon" />,
+    icon: <IconForms width={20} color="#0C4284" strokeWidth={1.5} />,
     id: nanoid(),
     uri: '/applications',
   },
   {
     title: 'Newsletter',
-    icon: <BsNewspaper className="side-nav-link___icon" />,
+    icon: <IconMailOpened width={20} color="#0C4284" strokeWidth={1.5} />,
     id: nanoid(),
     uri: '/newsletter',
   },
   {
     title: 'Bookings',
-    icon: <RiBookletLine className="side-nav-link___icon" />,
+    icon: <IconNotebook width={20} color="#0C4284" strokeWidth={1.5} />,
     id: nanoid(),
     uri: '/bookings',
   },
   {
     title: 'Blogs',
-    icon: <RiFilePaperLine className="side-nav-link___icon" />,
+    icon: <IconNews width={20} color="#0C4284" strokeWidth={1.5} />,
     id: nanoid(),
     uri: '/blogs',
   },
   {
     title: 'Supports',
-    icon: <BiSupport className="side-nav-link___icon" />,
+    icon: <IconHelp width={20} color="#0C4284" strokeWidth={1.5} />,
     id: nanoid(),
     uri: '/supports',
   },
   {
     title: 'Settings',
-    icon: <RiSettings2Line className="side-nav-link___icon" />,
+    icon: <IconSettings width={20} color="#0C4284" strokeWidth={1.5} />,
     id: nanoid(),
     uri: '/settings',
   },
