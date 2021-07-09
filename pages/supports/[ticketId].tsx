@@ -10,7 +10,6 @@ import DisplayServerError from '../../components/shared/DisplayServerError'
 import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
-// import MarkAsRead from '../../components/supports/actions/MarkAsRead'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
 import SupportDetails from '../../components/support/SupportDetails'
 import getSupportTicket from '../../actions/support/getSupportTicket'
@@ -26,18 +25,6 @@ export default function SupporttDetails() {
     { title: 'Details', url: '', isActive: true },
     { title: 'Supports', url: '/supports', isActive: false },
   ]
-  //   const primaryActions = [
-  //     {
-  //       component: support && (
-  //         <MarkAsRead
-  //           ticketId={ticketId as string}
-  //           refetch={refetch}
-  //           isRead={support.status.isRead}
-  //         />
-  //       ),
-  //     },
-  //   ]
-
   const secondaryActions = [{ title: 'Supports', url: '/supports' }]
   return (
     <Layout>
@@ -56,13 +43,6 @@ export default function SupporttDetails() {
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>
-          {/* {isSuccess && support && (
-            <>
-              {primaryActions.map((primaryAction) => (
-                <ActionButtonWrapper key={nanoid()}>{primaryAction.component} </ActionButtonWrapper>
-              ))}
-            </>
-          )} */}
           {secondaryActions.map((secondaryAction) => (
             <ActionButtonWrapper key={nanoid()}>
               <span

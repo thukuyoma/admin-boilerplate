@@ -12,10 +12,10 @@ const Styles = styled.div`
   background-color: rgb(255, 255, 255);
   color: rgb(97, 97, 97);
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  box-shadow: 0 1px 20px 0 rgb(69 90 100 / 8%);
   background-image: none;
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 1px 20px 0 rgb(69 90 100 / 8%);
   border: 1px solid rgba(144, 202, 249, 0.46);
 
   .table__title {

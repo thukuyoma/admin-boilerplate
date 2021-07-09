@@ -15,6 +15,7 @@ import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
 import getSupportTickets from '../../actions/support/get-support-tickets'
 import NameListCard from '../../components/shared/NameListCard'
+import SupportTable from '../../components/shared/SupportTable'
 
 export default function SupportIndexPage() {
   const [page, setPage] = useState<number>(1)
@@ -46,9 +47,7 @@ export default function SupportIndexPage() {
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
     { title: `Tickets (${query.totalTickets})`, url: '/supports', isActive: true },
-    { title: 'Create Support', url: '/supports/create', isActive: false },
   ]
-  const secondaryActions = [{ title: 'Create Support', url: '/supports/create' }]
 
   return (
     <Layout>
@@ -56,24 +55,12 @@ export default function SupportIndexPage() {
         <ContainerMainColumn>
           <ContainerHeaders
             pageTitle="Supports"
-            createButtonUrl="/supports/create"
-            createButtonTitle="Create Support"
+            createButtonUrl=""
+            createButtonTitle=""
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess &&
-              data &&
-              query?.tickets.map((ticket) => (
-                <NameListCard
-                  firstName={ticket.requester.firstName}
-                  lastName={ticket.requester.lastName}
-                  timestamp={ticket.timestamp}
-                  mainText={ticket.subject}
-                  buttonTItle="Reply"
-                  buttonLink={`/supports/${ticket._id}`}
-                  key={ticket._id}
-                />
-              ))}
+            {isSuccess && data && query?.tickets && <SupportTable tickets={query.tickets} />}
             {isLoading && <ServerLoadingLoader message="Loading Support Tickets" />}
             {isSuccess && !query.tickets.length && <NotFound message="No Support Ticket Found" />}
             {isError && <ServerError error={error} />}
@@ -88,7 +75,7 @@ export default function SupportIndexPage() {
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>
-          {secondaryActions.map((secondaryAction) => (
+          {/* {secondaryActions.map((secondaryAction) => (
             <ActionButtonWrapper key={nanoid()}>
               <span
                 onKeyPress={() => router.push(secondaryAction.url)}
@@ -97,7 +84,7 @@ export default function SupportIndexPage() {
                 {secondaryAction.title}
               </span>
             </ActionButtonWrapper>
-          ))}
+          ))} */}
         </ContainerMainAction>
       </ContainerMainWrapper>
     </Layout>
