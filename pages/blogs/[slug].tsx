@@ -47,16 +47,16 @@ export default function BlogPostDetails() {
 
   const secondaryActions = [
     { title: 'Create Blog', url: '/blogs/create' },
-    { title: 'All Blogs', url: '/blogs' },
-    { title: 'All Categories', url: '/blogs/categories' },
-    { title: 'Create Categories', url: '/blogs/categories/create' },
+    { title: 'Blogs', url: '/blogs' },
+    { title: 'Categories', url: '/blogs/categories' },
+    { title: 'Create Category', url: '/blogs/categories/create' },
   ]
   return (
     <Layout>
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerHeaders
-            pageTitle="Blog"
+            pageTitle="Blogs"
             createButtonUrl="/blogs/create"
             createButtonTitle="Create Blog"
             overlayItems={overlayItems}

@@ -12,7 +12,6 @@ import getTicketReplies from '../../actions/support/get-ticket-replies'
 const Styles = styled.div`
   margin-top: 30px;
   padding-bottom: 30px;
-  border-bottom: 1px solid #f0f0f0;
 `
 export default function TicketReplies({ ticketId }) {
   const [page, setPage] = useState<number>(1)

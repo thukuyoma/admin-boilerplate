@@ -9,12 +9,12 @@ import QueryPagination from '../../components/shared/QueryPagination'
 import ServerError from '../../components/shared/ServerError'
 import NotFound from '../../components/shared/NotFound'
 import ServerLoadingLoader from '../../components/shared/ServerLoadingLoader'
-import BlogCard from '../../components/blog/BlogCard'
 import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
+import BlogListTable from '../../components/blog/BlogListTable'
 
 export default function Blogs() {
   const [page, setPage] = useState<number>(1)
@@ -24,7 +24,7 @@ export default function Blogs() {
     totalPages: 0,
     totalPosts: 0,
     currentPage: page,
-    posts: null,
+    posts: [],
   })
   const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
     ['articles', page],
@@ -45,16 +45,15 @@ export default function Blogs() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `All Blogs (${query.totalPosts})`, url: '/blogs', isActive: true },
-    { title: 'All Categories', url: '/blogs/categories', isActive: false },
-    { title: 'Create Categories', url: '/blogs/categories/create', isActive: false },
+    { title: `(${query.totalPosts})`, url: '/blogs', isActive: true },
+    { title: 'Categories', url: '/blogs/categories', isActive: false },
+    { title: 'Create Category', url: '/blogs/categories/create', isActive: false },
     { title: 'Create Blog', url: '/blogs/create', isActive: false },
   ]
 
   const secondaryActions = [
     { title: 'Create Blog', url: '/blogs/create' },
-    { title: 'All Blogs', url: '/blogs' },
-    { title: 'All Categories', url: '/blogs/categories' },
+    { title: 'Categories', url: '/blogs/categories' },
     { title: 'Create Categories', url: '/blogs/categories/create' },
   ]
 
@@ -63,13 +62,13 @@ export default function Blogs() {
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerHeaders
-            pageTitle="Blog"
+            pageTitle="Blogs"
             createButtonUrl="/blogs/create"
             createButtonTitle="Create Blog"
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess && query.posts.map((post) => <BlogCard key={post.slug} blog={post} />)}
+            {isSuccess && query?.posts && <BlogListTable blogs={query.posts} />}
             {isLoading && <ServerLoadingLoader message="Loading Posts" />}
             {isSuccess && !query.posts.length && <NotFound message="No Post Found" />}
             {isError && <ServerError error={error} />}

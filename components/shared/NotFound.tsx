@@ -10,7 +10,6 @@ const Styles = styled.div`
   width: 100%;
   min-height: 423px;
   background: #fff;
-  box-shadow: 0 1px 0 0 #e2e5e8;
   padding: 30px 0;
 
   .image-wrapper {

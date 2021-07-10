@@ -14,12 +14,21 @@ const Styles = styled.div`
     font-size: 14px;
     flex-shrink: 0;
   }
+  .avatar__image {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+  }
 `
 export default function TableAvatar({ initial, image }: { initial?: string; image?: string }) {
   return (
     <Styles>
       {initial && <div className="card__tag">{initial.charAt(0).toUpperCase()}</div>}
-      {image && <div className="card__tag">{initial.toUpperCase()}</div>}
+      {image && (
+        <div className="card__tag">
+          <img className="avatar__image" src={image} />
+        </div>
+      )}
       {!initial && !image && <div className="card__tag">#</div>}
     </Styles>
   )

@@ -30,7 +30,7 @@ export default function CreateBlogPost() {
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerMainHeader
-            pageTitle="Blog"
+            pageTitle="Blogs"
             createButtonUrl=""
             createButtonTitle=""
             overlayItems={overlayItems}

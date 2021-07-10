@@ -39,7 +39,7 @@ export default function UpdatePost() {
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerHeaders
-            pageTitle="Blog"
+            pageTitle="Blogs"
             createButtonUrl="/blogs/create"
             createButtonTitle="Create Post"
             overlayItems={overlayItems}

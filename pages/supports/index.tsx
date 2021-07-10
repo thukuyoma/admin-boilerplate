@@ -9,13 +9,12 @@ import ServerError from '../../components/shared/ServerError'
 import NotFound from '../../components/shared/NotFound'
 import ServerLoadingLoader from '../../components/shared/ServerLoadingLoader'
 import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
-import { nanoid } from 'nanoid'
-import router from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
 import getSupportTickets from '../../actions/support/get-support-tickets'
-import NameListCard from '../../components/shared/NameListCard'
-import SupportTable from '../../components/shared/SupportTable'
+import SupportTable from '../../components/support/SupportListTable'
+import { nanoid } from 'nanoid'
+import router from 'next/router'
 
 export default function SupportIndexPage() {
   const [page, setPage] = useState<number>(1)

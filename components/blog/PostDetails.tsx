@@ -1,12 +1,11 @@
-import Image from 'next/image'
 import React from 'react'
 import styled from 'styled-components'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import dateFormatter from '../../utils/date-formatter'
+import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 import EditorReader from '../shared/EditorReader'
 
 const Styles = styled.div`
-  margin-bottom: 30px;
   .post__title {
     font-size: 16px;
     line-height: 27px;
@@ -19,12 +18,12 @@ const Styles = styled.div`
     height: 80px;
     position: relative;
     flex-shrink: 0;
+    border-radius: 12px;
   }
   .post__timestamp {
     font-size: 13px;
     line-height: 200.4%;
     color: #c4c4c4;
-    margin-left: 20px;
   }
   .post__tags {
     display: flex;
@@ -103,42 +102,46 @@ const TagsWrapper = styled.div`
 export default function PostDetails({ blog }) {
   return (
     <Styles>
-      <div className="post__wrapper">
-        <div className="post__image">
-          {<Image src={blog.image ? blog.image.url : '/assets/no-blog-image.png'} layout="fill" />}
-        </div>
-        <div className="post__section">
-          <h1 className="post__title">
-            {capitalizeFirstLetter(blog.title)}
+      <BorderPaddingWrapper padding>
+        <div className="post__wrapper">
+          {
+            <img
+              className="post__image"
+              src={blog.image ? blog.image.url : '/assets/no-blog-image.png'}
+            />
+          }
+
+          <div className="post__section">
+            <h1 className="post__title">{capitalizeFirstLetter(blog.title)}</h1>
             <span className="post__timestamp">{dateFormatter(blog.timestamp)}</span>
-          </h1>
+          </div>
         </div>
-      </div>
-      {blog?.image?.caption && (
-        <p className="post-image__source">
-          <strong>Image Source: </strong>
-          {blog.image.source}
-        </p>
-      )}
-      {blog?.image?.source && (
-        <p className="post-image__source">
-          <strong>Image Source: </strong>
-          {blog.image.source}
-        </p>
-      )}
+        {blog?.image?.caption && (
+          <p className="post-image__source">
+            <strong>Image Source: </strong>
+            {blog.image.source}
+          </p>
+        )}
+        {blog?.image?.source && (
+          <p className="post-image__source">
+            <strong>Image Source: </strong>
+            {blog.image.source}
+          </p>
+        )}
 
-      <EditorReader body={JSON.parse(blog.postBody)} />
+        <EditorReader body={JSON.parse(blog.postBody)} />
 
-      {blog.tags.length ? (
-        <>
-          <TagTItle>Tags</TagTItle>
-          <TagsWrapper>
-            {blog.tags.map((tag) => (
-              <TagItem key={tag}>{tag}</TagItem>
-            ))}
-          </TagsWrapper>
-        </>
-      ) : null}
+        {blog.tags.length ? (
+          <>
+            <TagTItle>Tags</TagTItle>
+            <TagsWrapper>
+              {blog.tags.map((tag) => (
+                <TagItem key={tag}>{tag}</TagItem>
+              ))}
+            </TagsWrapper>
+          </>
+        ) : null}
+      </BorderPaddingWrapper>
     </Styles>
   )
 }
