@@ -141,6 +141,9 @@ export default function CreateBlog() {
           align="center"
           style={{ border: '1px solid #06c' }}
           disabled={isLoading || isSuccess}
+          size="medium"
+          variant="filled"
+          color="primary"
         />
       </form>
     </Spacer>

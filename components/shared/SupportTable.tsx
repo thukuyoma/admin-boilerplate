@@ -5,7 +5,6 @@ import React from 'react'
 import styled from 'styled-components'
 import dateFormatter from '../../utils/date-formatter'
 import TableAvatar from './TableAvatar'
-import { IconTrash } from '@tabler/icons'
 import Button from './Button'
 
 const Styles = styled.div`
@@ -83,8 +82,8 @@ export default function SupportTable({ tickets }) {
                   <TableCell className="table__cell table-cell__align-right">
                     <Button
                       title={`${ticket.status.isClosed ? 'Closed' : 'Open'}`}
-                      size="small"
                       color={`${ticket.status.isClosed ? 'info' : 'danger'}`}
+                      size="small"
                       variant="filled"
                       align="right"
                     />

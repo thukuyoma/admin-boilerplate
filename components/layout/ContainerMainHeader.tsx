@@ -1,9 +1,10 @@
+import { IconPlus } from '@tabler/icons'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { AiOutlineCaretUp, AiOutlineCaretDown } from 'react-icons/ai'
-import { RiAddFill } from 'react-icons/ri'
 import styled from 'styled-components'
 import config from '../../config/config'
+import Button from '../shared/Button'
 import OverlayDisplay from './OverlayDisplay'
 
 const Styles = styled.div`
@@ -78,10 +79,15 @@ export default function ContainerMainHeader({
         </div>
         {createButtonUrl ? (
           <div className="container-main-header__actions">
-            <button className="button" onClick={() => router.push(createButtonUrl)}>
-              <RiAddFill />
-              {createButtonTitle}
-            </button>
+            <Button
+              title={createButtonTitle}
+              size="medium"
+              color="primary"
+              onClick={() => router.push(createButtonUrl)}
+              variant="filled"
+              align="right"
+              startIcon={<IconPlus width={15} strokeWidth={2} />}
+            />
           </div>
         ) : null}
       </div>

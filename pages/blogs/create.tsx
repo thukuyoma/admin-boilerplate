@@ -32,15 +32,11 @@ export default function CreateBlogPost() {
         <ContainerMainColumn>
           <ContainerMainHeader
             pageTitle="Blog"
-            createButtonUrl="/blogs/create"
-            createButtonTitle="Create Blog"
+            createButtonUrl=""
+            createButtonTitle=""
             overlayItems={overlayItems}
           />
-          <MobileContainerHeader
-            overlayItems={overlayItems}
-            pageTitle="Blog"
-            createButtonUrl="/blogs/create"
-          />
+          <MobileContainerHeader overlayItems={overlayItems} pageTitle="" createButtonUrl="" />
           <ScrollableContainer>
             <CreateBlog />
           </ScrollableContainer>

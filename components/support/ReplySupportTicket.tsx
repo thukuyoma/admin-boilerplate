@@ -75,6 +75,9 @@ export default function ReplySupportTicket({ ticketId, refetch }) {
         loading={isLoading}
         align="center"
         disabled={isLoading}
+        variant="filled"
+        color="primary"
+        size="medium"
       />
     </Styles>
   )

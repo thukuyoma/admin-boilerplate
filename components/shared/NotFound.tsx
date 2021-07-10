@@ -26,7 +26,7 @@ export default function NotFound({ message }) {
   return (
     <Styles>
       <div className="image-wrapper">
-        <Image src="/assets/not-found.svg" layout="fill" />
+        <Image src="/assets/not-found.png" layout="fill" />
       </div>
       <p>{message}</p>
     </Styles>

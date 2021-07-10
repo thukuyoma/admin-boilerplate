@@ -74,6 +74,18 @@ const Styles = styled.div`
       ${({ color }) => color === 'link' && 'border: none; text-decoration: underline;'}
     }
   }
+  .button-icon__start {
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .button-icon__end {
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
 `
 type Variants = 'outlined' | 'filled'
 type Colors =
@@ -143,9 +155,9 @@ export default function Button({
             ...style,
           }}
         >
-          {startIcon && <span>{startIcon}</span>}
+          {startIcon && <span className="button-icon__start">{startIcon}</span>}
           {title}
-          {endIcon && <span>{endIcon}</span>}
+          {endIcon && <span className="button-icon__end">{endIcon}</span>}
           <span>
             {loading && (
               <Loader

@@ -25,32 +25,7 @@ const Styles = styled.div`
       margin-left: 0px;
       padding: 0 10px;
     }
-    @media (max-width: 500px) {
-      // display: none;
-    }
     position: relative;
-  }
-  .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 10px;
-    height: 30px;
-    background: #0098db;
-    border-radius: 3px;
-    white-space: nowrap;
-    outline: none;
-    border: 1px solid #0098db;
-    font-size: 14px;
-    line-height: 19px;
-    color: white;
-    color: #fff;
-    > * {
-      &:first-child {
-        margin-right: 5px;
-        font-size: 20px;
-      }
-    }
   }
 `
 export default function Layout({ children }) {
