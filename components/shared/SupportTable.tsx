@@ -84,9 +84,8 @@ export default function SupportTable({ tickets }) {
                     <Button
                       title={`${ticket.status.isClosed ? 'Closed' : 'Open'}`}
                       size="small"
-                      curved
-                      color={`${ticket.status.isClosed ? 'dark' : 'danger'}`}
-                      variant="outlined"
+                      color={`${ticket.status.isClosed ? 'info' : 'danger'}`}
+                      variant="filled"
                       align="right"
                     />
                   </TableCell>

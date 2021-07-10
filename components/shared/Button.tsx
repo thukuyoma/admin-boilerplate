@@ -28,11 +28,25 @@ const Styles = styled.div`
     ${({ curved }) => curved && 'border-radius: 50px;'}
   }
   .filled {
-    background: #0098db;
-    outline: 0;
+    ${({ color }) => color === 'primary' && 'background-color: #0098db; color: #fff;'}
+    ${({ color }) => color === 'secondary' && 'background-color: #6c757d; color: #fff;'}
+    ${({ color }) => color === 'success' && 'background-color: #6aea87; color: #fff;'}
+    ${({ color }) => color === 'danger' && 'background-color: #dc3545; color: #fff;'}
+    ${({ color }) => color === 'warning' && 'background-color: #ffc107; color: #212529;'}
+    ${({ color }) => color === 'info' && 'background-color: #17a2b8; color: #fff;'}
+    ${({ color }) => color === 'light' && 'background-color: #f8f9fa; color: #212529;'}
+    ${({ color }) => color === 'dark' && 'background-color: #343a40; color: #fff;'}
+    ${({ color }) => color === 'link' && 'border: none; color: #0098db;'}
     :hover {
-      color: #fff;
-      background-color: #2083cf;
+      ${({ color }) => color === 'primary' && 'background-color: #1d8fc2; color: #fff;'}
+      ${({ color }) => color === 'secondary' && 'background-color: #545b62; color: #fff;'}
+      ${({ color }) => color === 'success' && 'background-color: #47fc70; color: #fff;'}
+      ${({ color }) => color === 'danger' && 'background-color: #c82333; color: #fff;'}
+      ${({ color }) => color === 'warning' && 'background-color: #e0a800; color: #212529;'}
+      ${({ color }) => color === 'info' && 'background-color: #138496; color: #fff;'}
+      ${({ color }) => color === 'light' && 'background-color: #dae0e5; color: #212529;'}
+      ${({ color }) => color === 'dark' && 'background-color: #343a40; color: #fff;'}
+      ${({ color }) => color === 'link' && 'border: none; text-decoration: underline;'}
     }
   }
   .outlined {
