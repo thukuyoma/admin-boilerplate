@@ -12,10 +12,9 @@ const Styles = styled.div`
   background: #fff;
   box-shadow: 0 1px 0 0 #e2e5e8;
   padding: 30px 0;
-
   .image-wrapper {
     height: 200px;
-    width: 200px;
+    width: 300px;
     position: relative;
   }
   p {
@@ -27,7 +26,7 @@ export default function ServerError({ error }) {
   return (
     <Styles>
       <div className="image-wrapper">
-        <Image src="/assets/not-found.svg" layout="fill" />
+        <Image src="/assets/server-error.png" layout="fill" />
       </div>
       <p>{error}</p>
     </Styles>
