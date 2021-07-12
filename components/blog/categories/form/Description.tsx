@@ -23,4 +23,3 @@ export default function Description({ description, setDescription, inputErrors, 
     </Control>
   )
 }
-screenLeft

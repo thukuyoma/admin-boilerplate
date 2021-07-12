@@ -1,9 +1,8 @@
 import api from '../../../utils/api'
 
-export default async function updateCategory({ catTitle, formData }) {
+export default async function updateCategory({ categoryTitle, values }) {
   try {
-    const baseUrl = process.env.BASE_URL
-    const res = await api.put(`${baseUrl}/posts/categories/${catTitle}`, formData)
+    const res = await api.put(`/blogs/categories/${categoryTitle}`, values)
     return res.data
   } catch (err) {
     throw err.response.data.msg

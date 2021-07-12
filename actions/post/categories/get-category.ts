@@ -2,8 +2,7 @@ import api from '../../../utils/api'
 
 export default async function getCategory(catagoryTitle: string) {
   try {
-    const baseUrl = process.env.BASE_URL
-    const res = await api.get(`${baseUrl}/posts/categories/${catagoryTitle}`)
+    const res = await api.get(`/blogs/categories/${catagoryTitle}`)
     const { category } = res.data
     return category
   } catch (err) {

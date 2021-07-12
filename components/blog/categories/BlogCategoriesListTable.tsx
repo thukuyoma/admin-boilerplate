@@ -8,8 +8,12 @@ import TableAvatar from '../../shared/TableAvatar'
 import Button from '../../shared/Button'
 import capitalizeFirstLetter from '../../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../../shared/BorderPaddingWrapper'
+import wordShortener from '../../../utils/wordShortener'
 
 const Styles = styled.div`
+  .category__description {
+    min-width: 200px;
+  }
   .table__cell {
     border-color: red;
     padding: 16px;
@@ -54,7 +58,9 @@ export default function BlogCategoriesListTable({ categories }) {
                     #
                   </TableCell>
                   <TableCell className="table__cell table-cell__border-top">Title</TableCell>
-                  <TableCell className="table__cell table-cell__border-top">Description</TableCell>
+                  <TableCell className="table__cell table-cell__border-top category__description">
+                    Description
+                  </TableCell>
                   <TableCell className="table__cell table-cell__border-top">Date</TableCell>
                   <TableCell
                     align="right"
@@ -69,8 +75,8 @@ export default function BlogCategoriesListTable({ categories }) {
                   ? categories.map((category) => (
                       <TableRow
                         key={nanoid()}
-                        onClick={() => router.push(`categories/${category.title}`)}
-                        onKeyPress={() => router.push(`categories/${category.title}`)}
+                        onClick={() => router.push(`/blogs/categories/${category.title}`)}
+                        onKeyPress={() => router.push(`/blogs/categories/${category.title}`)}
                         className="table__row"
                       >
                         <TableCell className="table__cell">
@@ -79,7 +85,9 @@ export default function BlogCategoriesListTable({ categories }) {
                         <TableCell className="table__cell category__subject">
                           {capitalizeFirstLetter(category.title)}
                         </TableCell>
-                        <TableCell className="table__cell">{category?.description}</TableCell>
+                        <TableCell className="table__cell category__description">
+                          {wordShortener(category?.description, 10)}
+                        </TableCell>
                         <TableCell className="table__cell category__timestamp">
                           {dateFormatter(category.timestamp)}
                         </TableCell>

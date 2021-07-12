@@ -1,9 +1,8 @@
 import api from '../../../utils/api'
 
-export default async function deleteCategory(catTitle: string) {
+export default async function deleteCategory(categoryTitle: string) {
   try {
-    const baseUrl = process.env.BASE_URL
-    const res = await api.delete(`${baseUrl}/posts/categories/${catTitle}`)
+    const res = await api.delete(`/blogs/categories/${categoryTitle}`)
     return res.data
   } catch (err) {
     throw err.response.data.msg
