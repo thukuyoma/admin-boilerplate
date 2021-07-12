@@ -99,6 +99,9 @@ export default function ForgotPasswordPage() {
           loading={isLoading}
           align="center"
           disabled={isLoading}
+          color="primary"
+          size="medium"
+          variant="filled"
         />
       </form>
     </Styles>

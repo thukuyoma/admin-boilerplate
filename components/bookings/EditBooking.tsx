@@ -141,12 +141,15 @@ export default function EditBooking({ booking }) {
       </>
       <Button
         block
-        title={isLoading ? 'Updating booking' : 'Update Booking'}
+        title="Update Booking"
         onClick={handleSubmit}
         loading={isLoading}
         align="center"
         style={{ border: '1px solid #06c', marginTop: '50px' }}
         disabled={isLoading || isSuccess}
+        color="primary"
+        size="medium"
+        variant="filled"
       />
     </form>
   )

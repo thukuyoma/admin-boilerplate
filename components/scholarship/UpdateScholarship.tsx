@@ -69,7 +69,6 @@ export default function UpdateScholarship({ scholarship }) {
   }, [scholarship])
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log({ values })
     const validationResult = scholarshipValidation({
       ...values,
       scholarshipImage: scholarship.image.url,
@@ -177,9 +176,11 @@ export default function UpdateScholarship({ scholarship }) {
         title={isLoading ? 'Updating Scholarship' : 'Update Scholarship'}
         onClick={handleSubmit}
         loading={isLoading}
-        align="center"
-        style={{ border: '1px solid #06c' }}
         disabled={isLoading || isSuccess}
+        align="center"
+        color="primary"
+        size="medium"
+        variant="filled"
       />
     </form>
   )

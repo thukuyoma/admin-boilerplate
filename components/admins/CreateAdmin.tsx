@@ -105,11 +105,14 @@ export default function CreateAdmin({ email, user }) {
       {isError && <ErrorAlert error={error} />}
       <Button
         block
-        title={isLoading ? 'Creating Admin' : 'Create Admin'}
+        title="Create Admin"
         onClick={handleCreateAdmin}
         loading={isLoading}
         align="center"
         disabled={isLoading || isSuccess}
+        color="primary"
+        size="medium"
+        variant="filled"
       />
     </>
   )

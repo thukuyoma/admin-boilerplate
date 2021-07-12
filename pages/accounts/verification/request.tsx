@@ -101,6 +101,9 @@ export default function RequestVerificationPage() {
           loading={isLoading}
           align="center"
           disabled={isLoading}
+          color="primary"
+          size="medium"
+          variant="filled"
         />
       </form>
     </Styles>

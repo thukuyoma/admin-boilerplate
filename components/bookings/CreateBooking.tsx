@@ -131,12 +131,15 @@ export default function CreateBooking() {
       </>
       <Button
         block
-        title={isLoading ? 'Creating booking' : 'Create Booking'}
+        title="Create Booking"
         onClick={handleSubmit}
         loading={isLoading}
         align="center"
         style={{ border: '1px solid #06c', marginTop: '50px' }}
         disabled={isLoading || isSuccess}
+        color="primary"
+        size="medium"
+        variant="filled"
       />
     </form>
   )

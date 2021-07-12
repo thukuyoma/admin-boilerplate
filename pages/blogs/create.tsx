@@ -14,16 +14,16 @@ import { nanoid } from 'nanoid'
 export default function CreateBlogPost() {
   const router = useRouter()
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Create Blog', url: '', isActive: true },
+    { title: 'Create', url: '', isActive: true },
     { title: 'Blogs', url: '/blogs', isActive: false },
-    { title: 'All Categories', url: '/blogs/categories', isActive: false },
+    { title: 'Categories', url: '/blogs/categories', isActive: false },
     { title: 'Create Categories', url: '/blogs/categories/create', isActive: false },
   ]
 
   const secondaryActions = [
-    { title: 'All Blogs', url: '/blogs' },
-    { title: 'All Categories', url: '/blogs/categories' },
-    { title: 'Create Categories', url: '/blogs/categories/create' },
+    { title: 'Blogs', url: '/blogs' },
+    { title: 'Categories', url: '/blogs/categories' },
+    { title: 'Create Category', url: '/blogs/categories/create' },
   ]
   return (
     <Layout>

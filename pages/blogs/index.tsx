@@ -22,9 +22,9 @@ export default function Blogs() {
   const [query, setQuery] = useState({
     hasMore: false,
     totalPages: 0,
-    totalPosts: 0,
+    totalBlogs: 0,
     currentPage: page,
-    posts: [],
+    blogs: [],
   })
   const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
     ['articles', page],
@@ -45,18 +45,16 @@ export default function Blogs() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `(${query.totalPosts})`, url: '/blogs', isActive: true },
+    { title: `(${query.totalBlogs})`, url: '/blogs', isActive: true },
     { title: 'Categories', url: '/blogs/categories', isActive: false },
     { title: 'Create Category', url: '/blogs/categories/create', isActive: false },
     { title: 'Create Blog', url: '/blogs/create', isActive: false },
   ]
-
   const secondaryActions = [
     { title: 'Create Blog', url: '/blogs/create' },
     { title: 'Categories', url: '/blogs/categories' },
     { title: 'Create Categories', url: '/blogs/categories/create' },
   ]
-
   return (
     <Layout>
       <ContainerMainWrapper>
@@ -68,9 +66,9 @@ export default function Blogs() {
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess && query?.posts && <BlogListTable blogs={query.posts} />}
+            {isSuccess && query?.blogs && <BlogListTable blogs={query.blogs} />}
             {isLoading && <ServerLoadingLoader message="Loading Posts" />}
-            {isSuccess && !query.posts.length && <NotFound message="No Post Found" />}
+            {isSuccess && query.blogs.length === 0 && <NotFound message="No Post Found" />}
             {isError && <ServerError error={error} />}
             <QueryPagination
               nextPage={handleNextPage}

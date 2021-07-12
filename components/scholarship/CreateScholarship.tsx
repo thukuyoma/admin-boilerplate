@@ -59,9 +59,7 @@ export default function CreateScholarship() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log({ values })
     const validationResult = scholarshipValidation(values)
-    console.log(validationResult)
     if (validationResult.isError) {
       setInputErrors(validationResult.errors)
       return null
@@ -163,8 +161,10 @@ export default function CreateScholarship() {
         onClick={handleSubmit}
         loading={isLoading}
         align="center"
-        style={{ border: '1px solid #06c' }}
         disabled={isLoading || isSuccess}
+        color="primary"
+        size="medium"
+        variant="filled"
       />
     </form>
   )

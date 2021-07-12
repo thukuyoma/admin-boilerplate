@@ -69,7 +69,6 @@ export default function ResetPasswordPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const validation = resetPasswordValidation(values)
-    console.log({ validation })
     if (validation.isError) {
       setInputErrors(validation.errors)
       return null
@@ -143,6 +142,9 @@ export default function ResetPasswordPage() {
           loading={isLoading}
           align="center"
           disabled={isLoading}
+          color="primary"
+          size="medium"
+          variant="filled"
         />
       </form>
     </Styles>

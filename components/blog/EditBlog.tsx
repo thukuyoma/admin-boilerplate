@@ -26,8 +26,8 @@ export default function EditBlog({ blog }) {
   const [tags, setTags] = useLocalStorage('tags', [])
   const [imageCaption, setImageCaption] = useLocalStorage('imageCaption', '')
   const [imageSource, setImageSource] = useLocalStorage('imageSource', '')
-  const [image, setImage] = useState<File | Blob | string>('')
-  const [category, setCategory] = useLocalStorage('category', '')
+  const [image, setImage] = useLocalStorage('image', { url: '', publicId: '' })
+  const [category, setCategory] = useLocalStorage('category', 'best')
   const [postBody, setPostBody] = useLocalStorage('postBody', '')
   const [description, setDescription] = useLocalStorage('description', '')
   const [inputErrors, setInputErrors] = useLocalStorage('inputErrors', {
@@ -42,11 +42,12 @@ export default function EditBlog({ blog }) {
   const values = {
     title,
     description,
-    tags: JSON.stringify(tags),
-    postImage: image,
-    imageCaption,
-    imageSource,
-    category,
+    tags,
+    image: {
+      ...image,
+      caption: imageCaption,
+      source: imageSource,
+    },
     postBody,
   }
 
@@ -67,7 +68,12 @@ export default function EditBlog({ blog }) {
     setTags(blog.tags ? [...blog.tags] : [])
     setImageCaption(blog.image ? blog.image.caption : '')
     setImageSource(blog.image ? blog.image.source : '')
-    setCategory(blog?.category)
+    setImage(
+      blog.image
+        ? { url: blog.image.url, publicId: blog.image.publicId }
+        : { url: '', publicId: '' }
+    )
+    // setCategory(blog?.category)
     setPostBody(blog?.postBody)
     setDescription(blog?.description)
   }, [])
@@ -84,8 +90,7 @@ export default function EditBlog({ blog }) {
       setInputErrors(validationResult.errors)
       return null
     }
-    const formData = getFormData(values)
-    await mutateAsync({ formData, postId: blog._id })
+    await mutateAsync({ formData: values, postId: blog._id })
     return null
   }
 
@@ -124,7 +129,7 @@ export default function EditBlog({ blog }) {
           </Grid>
           <Grid item xs={12} sm={7} md={7} lg={7}>
             <PostImage
-              imageUrl={blog.image ? blog.image.url : ''}
+              image={image}
               imageCaption={imageCaption}
               setImageCaption={setImageCaption}
               imageSource={imageSource}
@@ -140,12 +145,14 @@ export default function EditBlog({ blog }) {
         </Grid>
         <Button
           block
-          title={isLoading ? 'Updating Post' : 'Update Post'}
+          title="Update Post"
           onClick={handleSubmit}
           loading={isLoading}
-          align="center"
-          style={{ border: '1px solid #06c' }}
           disabled={isLoading || isSuccess}
+          align="center"
+          color="primary"
+          size="medium"
+          variant="filled"
         />
       </form>
     </Spacer>

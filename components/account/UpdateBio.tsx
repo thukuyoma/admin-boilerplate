@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import { useMutation } from 'react-query'
 import useAuth from '../../context/auth'
 import updateBio from '../../actions/account/update-bio'
@@ -53,6 +52,9 @@ export default function UpdateBio({ setSwitchCaseAccount }) {
         align="center"
         block
         style={{ marginTop: '10px' }}
+        color="primary"
+        size="medium"
+        variant="filled"
       />
     </>
   )

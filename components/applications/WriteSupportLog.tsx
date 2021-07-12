@@ -76,6 +76,9 @@ export default function WriteSupportLog({ applicationId, refetch }) {
         loading={isLoading}
         align="center"
         disabled={isLoading}
+        color="primary"
+        size="medium"
+        variant="filled"
       />
     </Styles>
   )

@@ -9,6 +9,5 @@ export default function eventTracker({
   description?: string
   action?: string
 }) {
-  console.log({ action, element, pageName, description })
   return null
 }

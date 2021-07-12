@@ -104,13 +104,11 @@ export default function PostDetails({ blog }) {
     <Styles>
       <BorderPaddingWrapper padding>
         <div className="post__wrapper">
-          {
-            <img
-              className="post__image"
-              src={blog.image ? blog.image.url : '/assets/no-blog-image.png'}
-            />
-          }
-
+          {blog.image.url ? (
+            <img className="post__image" src={blog.image.url} />
+          ) : (
+            <img className="post__image" src="/assets/no-blog-image.png" />
+          )}
           <div className="post__section">
             <h1 className="post__title">{capitalizeFirstLetter(blog.title)}</h1>
             <span className="post__timestamp">{dateFormatter(blog.timestamp)}</span>
@@ -118,8 +116,8 @@ export default function PostDetails({ blog }) {
         </div>
         {blog?.image?.caption && (
           <p className="post-image__source">
-            <strong>Image Source: </strong>
-            {blog.image.source}
+            <strong>Image Caption: </strong>
+            {blog.image.caption}
           </p>
         )}
         {blog?.image?.source && (
@@ -128,9 +126,7 @@ export default function PostDetails({ blog }) {
             {blog.image.source}
           </p>
         )}
-
         <EditorReader body={JSON.parse(blog.postBody)} />
-
         {blog.tags.length ? (
           <>
             <TagTItle>Tags</TagTItle>

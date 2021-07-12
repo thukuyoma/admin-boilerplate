@@ -72,7 +72,6 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const validation = registerValidation(values)
-    console.log({ validation })
     if (validation.isError) {
       setInputErrors(validation.errors)
       return null
@@ -173,6 +172,9 @@ export default function RegisterPage() {
           loading={isLoading}
           align="center"
           disabled={isLoading}
+          color="primary"
+          size="medium"
+          variant="filled"
         />
       </form>
     </Styles>

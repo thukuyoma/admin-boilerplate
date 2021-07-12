@@ -4,6 +4,12 @@ import DisplayInputError from './DisplayInputError'
 
 const Styles = styled.div`
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+
+  p {
+    margin: 0;
+  }
 `
 export default function InputErrorsSummary({ errors }) {
   return (

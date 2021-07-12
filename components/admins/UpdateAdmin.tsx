@@ -83,11 +83,14 @@ export default function UpdateAdmin({ admin, adminToUpdateName }) {
       {isError && <ErrorAlert error={error} />}
       <Button
         block
-        title={isLoading ? 'Updating Admin' : 'Update Admin'}
+        title="Update Admin"
         onClick={handleUpdateAdmin}
         loading={isLoading}
         align="center"
         disabled={isLoading || isSuccess}
+        color="primary"
+        size="medium"
+        variant="filled"
       />
     </>
   )

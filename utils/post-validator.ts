@@ -1,5 +1,5 @@
 export default function bookingValidation(values) {
-  const { title, description, image, imageCaption, category, postBody } = values
+  const { title, description, image, category, postBody } = values
   let errors = {} as {
     title: string
     description: string
@@ -10,8 +10,11 @@ export default function bookingValidation(values) {
   }
   if (!title) errors.title = 'Title is required'
   if (!description) errors.description = 'Description is required'
-  if (image) {
-    if (!imageCaption) errors.imageCaption = 'Image must have a caption'
+  if (image.url && image.publicId && !image.caption) {
+    errors.imageCaption = 'Image must have a caption'
+  }
+  if (!image.url && !image.publicId && image.caption) {
+    errors.imageCaption = 'Image is required'
   }
   if (!postBody) errors.postBody = 'Body is required'
   if (!category) errors.category = 'Category required'

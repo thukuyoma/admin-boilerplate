@@ -1,8 +1,13 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { RiAddLine } from 'react-icons/ri'
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
 import getArrayLastItem from '../../utils/get-array-last-item'
+import { useMutation } from 'react-query'
+import fileUploader from '../../actions/cloud-assets/file-uploader'
+import deleteCloudFile from '../../actions/cloud-assets/delete-cloud-file'
+import Loader from '../shared/Loader'
+import DisplayInputError from './DisplayInputError'
 
 const Styles = styled.div`
   .preview__container {
@@ -18,6 +23,8 @@ const Styles = styled.div`
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    width: 100px;
+    height: 100px;
   }
   .image__wrapper {
     background: #dae9fc;
@@ -27,6 +34,8 @@ const Styles = styled.div`
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    width: 100px;
+    height: 100px;
   }
   .image__add-text {
     margin: 0;
@@ -64,116 +73,158 @@ const Styles = styled.div`
       color: #f0f0f0;
     }
   }
+  .upload__progress {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: #0098db;
+    border: 0;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    color: #fff;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 5px;
+    flex-shrink: 0;
+    margin-top: 10px;
+    font-size: 10px;
+  }
+  .image__side-button {
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 export default function ImagePicker({
-  imageUrl,
+  image,
   setImageCallback,
-  setInputErrors,
-  inputErrors,
-  height,
-  width,
-  marginBottom,
-  marginTop,
-  marginRight,
-  marginLeft,
   buttonTitle,
-  imageInputFieldName,
+  styles,
 }: {
-  imageUrl?: string
+  image?: { url: string; publicId: string }
   setImageCallback: (value: object | string) => void
-  setInputErrors: (value: object | string) => void
-  inputErrors: object
-  height: number
-  width: number
-  marginBottom?: number
-  marginTop?: number
-  marginRight?: number
-  marginLeft?: number
   buttonTitle?: string
-  imageInputFieldName: string
+  styles?: { marginBottom?: number; marginTop?: number; marginRight?: number; marginLeft?: number }
 }) {
+  const { mutateAsync: uploadMutateAsync, isLoading: uploadIsLoading } = useMutation(fileUploader)
+  const { mutateAsync: deleteMutateAsync, isLoading: deleteingIsLoading } = useMutation(
+    deleteCloudFile
+  )
   const imageInputRef = useRef<HTMLInputElement>(null)
-  const [preview, setPreview] = useState<string>(() => {
-    if (imageUrl) {
-      return imageUrl
+  const [uploadPercentage, setUploadPercentage] = useState(0)
+  const [imageError, setImageError] = useState('')
+  const [preview, setPreview] = useState(() => {
+    if (image.url) {
+      return image
     }
-    return ''
+    return { url: '', publicId: '' }
   })
+  const [file, setFile] = useState<File | Blob | string>('')
+  useEffect(() => {
+    if (image.url) {
+      setPreview(image)
+    }
+  }, [image.url])
 
-  const handleFileChange = (e) => {
+  const uploader = async () => {
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('upload_preset', 'postimages')
+    await uploadMutateAsync(
+      { formData, setUploadPercentage },
+      {
+        onSuccess: (data) => {
+          setPreview(data)
+          setImageCallback(data)
+        },
+        onError: (err) => setImageError(err as string),
+      }
+    )
+  }
+  useEffect(() => {
+    if (file) {
+      uploader()
+    }
+  }, [file])
+
+  const handleRemoveImage = async (e) => {
+    if (!image.publicId && !image.url) return null
+    e.preventDefault()
+    await deleteMutateAsync(image.publicId, {
+      onSuccess: () => {
+        setPreview({ url: '', publicId: '' })
+        setImageCallback({ url: '', publicId: '' })
+      },
+      onError: (err) => setImageError(err as string),
+    })
+    setImageError('')
+    return
+  }
+
+  const handleFileChange = async (e) => {
+    if (image.url && image.publicId) {
+      await handleRemoveImage(e)
+    }
     if (e.target.files.length) {
       const imageFormat = ['png', 'jpg', 'jpeg']
       const rawImageFormat = getArrayLastItem(e.target.files[0].name.split('.')).toLowerCase()
       if (!imageFormat.includes(rawImageFormat)) {
-        setInputErrors({
-          ...inputErrors,
-          [imageInputFieldName]: `Only JPG, JPEG, and PNG images are accepted, you provided a .${rawImageFormat} image`,
-        })
+        setImageError(
+          `Only JPG, JPEG, and PNG images are accepted, you provided a .${rawImageFormat} image`
+        )
         return null
       }
-      setInputErrors({
-        ...inputErrors,
-        [imageInputFieldName]: '',
-      })
-      setPreview(URL.createObjectURL(e.target.files[0]))
-      setImageCallback(e.target.files[0])
+      setFile(e.target.files[0])
+      setImageError('')
       return null
     }
     return null
   }
-
-  const handleRemoveImage = () => {
-    setPreview('')
-    setImageCallback('')
-    setInputErrors({ ...inputErrors, image: '' })
-  }
-
-  const marginStyles = {
-    marginTop: marginTop ? `${marginTop}px` : '0px',
-    marginRight: marginRight ? `${marginRight}px` : '0px',
-    marginBottom: marginBottom ? `${marginBottom}px` : '0px',
-    marginLeft: marginLeft ? `${marginLeft}px` : '0px',
-  }
   return (
     <Styles>
-      {preview ? (
-        <div className="preview__container" style={marginStyles}>
+      {preview.url && preview.publicId ? (
+        <div className="preview__container" style={styles}>
           <img
-            src={preview}
+            src={preview.url}
             alt="image"
             className="preview__image"
-            onKeyPress={() => imageInputRef.current.click()}
-            onClick={() => imageInputRef.current.click()}
-            style={{
-              width: width ? `${width}px` : '200px',
-              height: height ? `${height}px` : '150px',
-            }}
+            style={styles}
+            onKeyPress={(e) => imageInputRef.current.click()}
+            onClick={(e) => imageInputRef.current.click()}
           />
           <input
             type="file"
             onChange={handleFileChange}
             ref={imageInputRef}
             style={{ display: 'none' }}
+            accept="image/png, image/jpeg, image/jpg"
           />
-          <button
-            className="image__remove-button"
-            onKeyPress={handleRemoveImage}
-            onClick={handleRemoveImage}
-          >
-            <MdClose />
-          </button>
+          <div className="image__side-button">
+            <button
+              className="image__remove-button"
+              onKeyPress={handleRemoveImage}
+              onClick={handleRemoveImage}
+            >
+              <MdClose />
+            </button>
+            {uploadPercentage || uploadIsLoading ? (
+              <div className="upload__progress">{uploadPercentage}%</div>
+            ) : null}
+            {deleteingIsLoading ? (
+              <div className="upload__progress">
+                <Loader width={12} isLoading={deleteingIsLoading} />
+              </div>
+            ) : null}
+          </div>
         </div>
       ) : (
-        <div className="preview__container" style={marginStyles}>
+        <div className="preview__container" style={styles}>
           <div
             className="image__wrapper"
             onKeyPress={() => imageInputRef.current.click()}
             onClick={() => imageInputRef.current.click()}
-            style={{
-              width: width ? `${width}px` : '200px',
-              height: height ? `${height}px` : '150px',
-            }}
+            style={styles}
           >
             <div className="image__add-icon">
               <RiAddLine />
@@ -184,13 +235,20 @@ export default function ImagePicker({
               onChange={handleFileChange}
               ref={imageInputRef}
               style={{ display: 'none' }}
+              accept="image/png, image/jpeg, image/jpg"
             />
           </div>
-          <div className="image__remove-button image__remove-button--dummy">
-            <MdClose />
+          <div className="image__side-button">
+            <div className="image__remove-button image__remove-button--dummy">
+              <MdClose />
+            </div>
+            {uploadPercentage || uploadIsLoading ? (
+              <div className="upload__progress">{uploadPercentage}%</div>
+            ) : null}
           </div>
         </div>
       )}
+      {imageError && <DisplayInputError error={imageError} />}
     </Styles>
   )
 }

@@ -14,7 +14,6 @@ const Styles = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   .form__control {
     margin-bottom: 20px;
     width: 100%;
@@ -90,6 +89,9 @@ export default function UpdateNames({ setSwitchCaseAccount }) {
         disabled={isLoading}
         align="center"
         block
+        color="primary"
+        size="medium"
+        variant="filled"
       />
     </Styles>
   )

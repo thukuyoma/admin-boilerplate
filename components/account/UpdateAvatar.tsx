@@ -147,13 +147,16 @@ export default function UpdateAvatar({ setSwitchCaseAccount }) {
         {isSuccess && data && <SuccessAlert message="Profile Image Uploaded successfully" />}
         {image.preview ? (
           <Button
-            title={`${isLoading ? 'Updating' : 'Update'} Avatar`}
+            title="Update Avatar"
             loading={isLoading}
             onClick={handleUpload}
             disabled={isLoading}
             align="center"
             block
             style={{ marginTop: '30px' }}
+            color="primary"
+            size="medium"
+            variant="filled"
           />
         ) : (
           <Button
@@ -164,6 +167,9 @@ export default function UpdateAvatar({ setSwitchCaseAccount }) {
             align="center"
             block
             style={{ marginTop: '30px' }}
+            color="primary"
+            size="medium"
+            variant="filled"
           />
         )}
       </div>

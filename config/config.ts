@@ -10,5 +10,14 @@ export default {
     accentColor: '',
     tertiaryColor: '',
   },
+  cloudinary: {
+    cloudName: 'odemru-technologies',
+    preset: {
+      postImages: 'postimages',
+      accountAvatars: 'account-avatars',
+      bookingImage: 'booking-images',
+      scholarshipImages: 'scholarship-images',
+    },
+  },
   apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
 }

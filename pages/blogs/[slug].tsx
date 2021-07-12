@@ -26,7 +26,7 @@ export default function BlogPostDetails() {
     () => getPostDetails(slug)
   )
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: 'Blog Details', url: '', isActive: true },
+    { title: 'Details', url: '', isActive: true },
     { title: 'Blogs', url: '/blogs', isActive: false },
     { title: 'All Categories', url: '/blogs/categories', isActive: false },
     { title: 'Create Categories', url: '/blogs/categories/create', isActive: false },

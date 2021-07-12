@@ -62,7 +62,6 @@ const Login: React.FC = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const validation = loginValidation(values)
-    console.log({ validation })
     if (validation.isError) {
       setInputErrors(validation.errors)
       return null
@@ -124,6 +123,9 @@ const Login: React.FC = () => {
           loading={isLoading}
           align="center"
           disabled={isLoading}
+          color="primary"
+          size="medium"
+          variant="filled"
         />
       </form>
     </Styles>

@@ -94,13 +94,16 @@ export default function ChangePassword({ setSwitchCaseAccount }) {
         {isError && <ErrorAlert error={error} />}
         {isSuccess && data && <SuccessAlert message="Password successfully updated" />}
         <Button
-          title={`${isLoading ? 'Updating' : 'Update'} Password`}
+          title="Update Password"
           loading={isLoading}
           onClick={handleUpdatePassword}
           disabled={isLoading}
           align="center"
           block
           style={{ marginTop: '10px' }}
+          color="primary"
+          size="medium"
+          variant="filled"
         />
       </div>
     </Styles>

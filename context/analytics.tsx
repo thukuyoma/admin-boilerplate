@@ -28,15 +28,9 @@ export default function AnalyticsProvider({ children }) {
     }
   }, [])
 
-  const recordPageVisit = async () => {
-    console.log('We are recording page right now')
-  }
+  const recordPageVisit = async () => {}
 
-  const recordEventTracker = async () => {
-    console.log(
-      'We are recording event tracker right now and am very happy and am sure ayou are happy'
-    )
-  }
+  const recordEventTracker = async () => {}
   return (
     <AnalyticsContext.Provider
       value={{
