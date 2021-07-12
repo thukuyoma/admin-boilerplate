@@ -3,16 +3,13 @@ import { nanoid } from 'nanoid'
 import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
-import dateFormatter from '../../utils/date-formatter'
-import TableAvatar from '../shared/TableAvatar'
-import Button from '../shared/Button'
-import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
-import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
+import dateFormatter from '../../../utils/date-formatter'
+import TableAvatar from '../../shared/TableAvatar'
+import Button from '../../shared/Button'
+import capitalizeFirstLetter from '../../../utils/capitalize-first-letter'
+import BorderPaddingWrapper from '../../shared/BorderPaddingWrapper'
 
 const Styles = styled.div`
-  .blog__subject {
-    min-width: 200px;
-  }
   .table__cell {
     border-color: red;
     padding: 16px;
@@ -32,7 +29,7 @@ const Styles = styled.div`
   .table-cell__border-top {
     border-top: none;
   }
-  .blog__timestamp {
+  .category__timestamp {
     min-width: 150px;
   }
   .table__row {
@@ -40,11 +37,11 @@ const Styles = styled.div`
   }
 `
 
-export default function BlogListTable({ blogs }) {
+export default function BlogCategoriesListTable({ categories }) {
   const router = useRouter()
   return (
     <Styles>
-      {blogs?.length ? (
+      {categories?.length ? (
         <BorderPaddingWrapper>
           <TableContainer>
             <Table aria-label="Blog List Table">
@@ -57,7 +54,7 @@ export default function BlogListTable({ blogs }) {
                     #
                   </TableCell>
                   <TableCell className="table__cell table-cell__border-top">Title</TableCell>
-                  <TableCell className="table__cell table-cell__border-top">Views</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Description</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Date</TableCell>
                   <TableCell
                     align="right"
@@ -68,30 +65,28 @@ export default function BlogListTable({ blogs }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {blogs.length
-                  ? blogs.map((blog) => (
+                {categories.length
+                  ? categories.map((category) => (
                       <TableRow
                         key={nanoid()}
-                        onClick={() => router.push(`blogs/${blog.slug}`)}
-                        onKeyPress={() => router.push(`blogs/${blog.slug}`)}
+                        onClick={() => router.push(`categories/${category.title}`)}
+                        onKeyPress={() => router.push(`categories/${category.title}`)}
                         className="table__row"
                       >
                         <TableCell className="table__cell">
-                          <TableAvatar image={blog?.image.url} />
+                          <TableAvatar image={category?.image?.url} />
                         </TableCell>
-                        <TableCell className="table__cell blog__subject">
-                          {capitalizeFirstLetter(blog.title)}
+                        <TableCell className="table__cell category__subject">
+                          {capitalizeFirstLetter(category.title)}
                         </TableCell>
-                        <TableCell className="table__cell">
-                          {blog?.viewCount ? blog.viewCount : 0}
-                        </TableCell>
-                        <TableCell className="table__cell blog__timestamp">
-                          {dateFormatter(blog.timestamp)}
+                        <TableCell className="table__cell">{category?.description}</TableCell>
+                        <TableCell className="table__cell category__timestamp">
+                          {dateFormatter(category.timestamp)}
                         </TableCell>
                         <TableCell className="table__cell table-cell__align-right">
                           <Button
-                            title={`${blog.status.isPublished ? 'Online' : 'Offline'}`}
-                            color={`${blog.status.isPublished ? 'info' : 'danger'}`}
+                            title={`${category.status.isPublished ? 'Online' : 'Offline'}`}
+                            color={`${category.status.isPublished ? 'info' : 'danger'}`}
                             size="small"
                             variant="filled"
                             align="right"
