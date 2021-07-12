@@ -1,7 +1,6 @@
 import { Grid } from '@material-ui/core'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-// import React, { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import writePost from '../../actions/post/write-post'
 import useLocalStorage from '../../hooks/useLocalStorage'
@@ -29,7 +28,7 @@ export default function CreateBlog() {
   const [imageCaption, setImageCaption] = useLocalStorage('imageCaption', '')
   const [imageSource, setImageSource] = useLocalStorage('imageSource', '')
   const [image, setImage] = useLocalStorage('image', { url: '', publicId: '' })
-  const [category, setCategory] = useLocalStorage('category', 'politics')
+  const [category, setCategory] = useLocalStorage('category', '')
   const [postBody, setPostBody] = useLocalStorage('postBody', '')
   const [description, setDescription] = useLocalStorage('description', '')
   const [inputErrors, setInputErrors] = useLocalStorage('inputErrors', {
@@ -143,7 +142,7 @@ export default function CreateBlog() {
           </>
           <Button
             block
-            title={isLoading ? 'Creating Post' : 'Create Post'}
+            title="Create Post"
             onClick={handleSubmit}
             loading={isLoading}
             align="center"

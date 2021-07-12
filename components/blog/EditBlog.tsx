@@ -1,9 +1,8 @@
 import { Grid } from '@material-ui/core'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useMutation } from 'react-query'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import getFormData from '../../utils/get-form-data'
 import postValidator from '../../utils/post-validator'
 import Category from '../forms/blog/Category'
 import Description from '../forms/blog/Description'
@@ -27,7 +26,7 @@ export default function EditBlog({ blog }) {
   const [imageCaption, setImageCaption] = useLocalStorage('imageCaption', '')
   const [imageSource, setImageSource] = useLocalStorage('imageSource', '')
   const [image, setImage] = useLocalStorage('image', { url: '', publicId: '' })
-  const [category, setCategory] = useLocalStorage('category', 'best')
+  const [category, setCategory] = useLocalStorage('category', '')
   const [postBody, setPostBody] = useLocalStorage('postBody', '')
   const [description, setDescription] = useLocalStorage('description', '')
   const [inputErrors, setInputErrors] = useLocalStorage('inputErrors', {
@@ -49,19 +48,10 @@ export default function EditBlog({ blog }) {
       source: imageSource,
     },
     postBody,
+    category,
   }
 
-  const { mutateAsync, isSuccess, isLoading } = useMutation(editPost, {
-    onError: (resError: object) => {
-      setInputErrors({ ...inputErrors, ...resError })
-    },
-    onSuccess: (postSlug) => {
-      Object.keys(values).forEach((formItem) => localStorage.removeItem(formItem))
-      localStorage.removeItem('inputErrors')
-      toast.success('Post successfully updated')
-      router.push(`/blogs/${postSlug}`)
-    },
-  })
+  const { mutateAsync, isSuccess, isLoading } = useMutation(editPost)
 
   useEffect(() => {
     setTitle(blog?.title)
@@ -73,9 +63,9 @@ export default function EditBlog({ blog }) {
         ? { url: blog.image.url, publicId: blog.image.publicId }
         : { url: '', publicId: '' }
     )
-    // setCategory(blog?.category)
-    setPostBody(blog?.postBody)
-    setDescription(blog?.description)
+    setCategory(blog?.category ? blog.category : '')
+    setPostBody(blog?.postBody ? blog.postBody : '')
+    setDescription(blog?.description ? blog.description : '')
   }, [])
 
   const handleSetBody = (bodyContent: string) => {
@@ -90,7 +80,22 @@ export default function EditBlog({ blog }) {
       setInputErrors(validationResult.errors)
       return null
     }
-    await mutateAsync({ formData: values, postId: blog._id })
+    await mutateAsync(
+      { formData: values, postId: blog._id },
+      {
+        onError: (resError: object) => {
+          setInputErrors({ ...inputErrors, ...resError })
+        },
+        onSuccess: (postSlug) => {
+          Object.keys({ ...values, imageCaption, imageSource }).forEach((formItem) =>
+            localStorage.removeItem(formItem)
+          )
+          localStorage.removeItem('inputErrors')
+          toast.success('Post successfully updated')
+          router.push(`/blogs/${postSlug}`)
+        },
+      }
+    )
     return null
   }
 

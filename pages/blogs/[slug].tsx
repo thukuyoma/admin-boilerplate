@@ -12,11 +12,10 @@ import DisplayServerError from '../../components/shared/DisplayServerError'
 import DeletePostButton from '../../components/blog/actions/DeletePostButton'
 import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import EditBlogButton from '../../components/blog/actions/EditBlogButton'
-import UnPublishBlogButton from '../../components/blog/actions/UnPublishBlogButton'
-import PublishBlogButton from '../../components/blog/actions/PublishBlogButton'
 import { nanoid } from 'nanoid'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
+import TogglePublishBlogButton from '../../components/blog/actions/TogglePublishBlogButton'
 
 export default function BlogPostDetails() {
   const router = useRouter()
@@ -36,12 +35,13 @@ export default function BlogPostDetails() {
     { component: blog && <EditBlogButton slug={blog.slug} /> },
     { component: blog && <DeletePostButton postId={blog._id} /> },
     {
-      component:
-        blog && blog.status.isPublished ? (
-          <UnPublishBlogButton postId={blog && blog._id} refetch={refetch} />
-        ) : (
-          <PublishBlogButton postId={blog && blog._id} refetch={refetch} />
-        ),
+      component: blog && blog.status && (
+        <TogglePublishBlogButton
+          postId={blog && blog._id}
+          refetch={refetch}
+          isPublished={blog.status.isPublished}
+        />
+      ),
     },
   ]
 
