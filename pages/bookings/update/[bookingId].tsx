@@ -5,7 +5,6 @@ import ContainerMainColumn from '../../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../../components/layout/ScrollableContainer'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
-import DisplayAdminLoader from '../../../components/shared/DisplayAdminLoader'
 import DisplayServerError from '../../../components/shared/DisplayServerError'
 import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
 import ContainerHeaders from '../../../components/layout/ContainerHeaders'
@@ -13,6 +12,7 @@ import ActionButtonWrapper from '../../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import EditBooking from '../../../components/bookings/EditBooking'
 import getBookingDetails from '../../../actions/bookings/get-booking-details'
+import LoadingState from '../../../components/shared/ServerLoadingLoader'
 
 export default function UpdateBookingPage() {
   const router = useRouter()
@@ -46,7 +46,7 @@ export default function UpdateBookingPage() {
           <ScrollableContainer>
             {isSuccess && booking && <EditBooking booking={booking} />}
             {isError && <DisplayServerError error={error} />}
-            {isLoading && <DisplayAdminLoader message="Loading Bookings" />}
+            {isLoading && <LoadingState message="Loading Bookings" />}
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>

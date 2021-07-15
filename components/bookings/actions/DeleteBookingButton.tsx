@@ -8,7 +8,7 @@ import ActionButton from '../../shared/ActionButton'
 export default function DeleteBookingButton({ bookingId }: { bookingId: string }) {
   const router = useRouter()
   const { mutateAsync, isLoading } = useMutation([bookingId], deleteBooking)
-  const handleDeleteBooking = async () => {
+  const handleSubmit = async () => {
     if (!bookingId) {
       return null
     }
@@ -27,7 +27,7 @@ export default function DeleteBookingButton({ bookingId }: { bookingId: string }
     <ActionButton
       block
       title={isLoading ? 'Deleting Booking' : 'Delete Booking'}
-      onClick={handleDeleteBooking}
+      onClick={handleSubmit}
       loading={isLoading}
       align="left"
     />

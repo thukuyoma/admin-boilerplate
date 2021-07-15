@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useMutation } from 'react-query'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import getFormData from '../../utils/get-form-data'
@@ -10,17 +10,18 @@ import { toast } from 'react-toastify'
 import {
   BookingTitle,
   BookingDescription,
-  BookingImage,
   BookingType,
   BookingAffiliateLink,
 } from '../forms/booking'
 import bookingValidation from '../forms/booking/booking-validation'
 import editBooking from '../../actions/bookings/edit-booking'
+import { Control, InputTitle, Must } from '../forms/form-styles'
+import ImagePicker from '../forms/ImagePicker'
 
 export default function EditBooking({ booking }) {
   const router = useRouter()
   const [bookingTitle, setBookingTitle] = useLocalStorage('bookingTitle', '')
-  const [bookingImage, setBookingImage] = useState<File | Blob | string>('')
+  const [bookingImage, setBookingImage] = useLocalStorage('bookingImage', { url: '', publicId: '' })
   const [bookingType, setBookingType] = useLocalStorage('bookingType', '')
   const [bookingDescription, setBookingDescription] = useLocalStorage('bookingDescription', '')
   const [bookingAffiliateLink, setBookingAffiliateLink] = useLocalStorage(
@@ -36,7 +37,7 @@ export default function EditBooking({ booking }) {
   const values = {
     title: bookingTitle,
     description: bookingDescription,
-    bookingImage: bookingImage,
+    image: bookingImage,
     type: bookingType,
     affiliateLink: bookingAffiliateLink,
   }
@@ -47,6 +48,7 @@ export default function EditBooking({ booking }) {
     setBookingType(booking.type)
     setBookingDescription(booking.description)
     setBookingAffiliateLink(booking?.affiliateLink ? booking.affiliateLink : '')
+    setBookingImage(booking?.image ? booking.image : { url: '', publicId: '' })
   }, [])
 
   const handleSubmit = async (e) => {
@@ -61,9 +63,8 @@ export default function EditBooking({ booking }) {
       setInputErrors(validationResult.errors)
       return null
     }
-    const bookingForm = getFormData(values)
     await mutateAsync(
-      { bookingId: booking._id, formData: bookingForm },
+      { bookingId: booking._id, formData: values },
       {
         onError: (resError: object) => {
           setInputErrors({ ...inputErrors, ...resError })
@@ -124,12 +125,12 @@ export default function EditBooking({ booking }) {
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6}>
-          <BookingImage
-            imageUrl={booking?.bookingImage ? booking.bookingImage.url : ''}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-            setBookingImage={setBookingImage}
-          />
+          <Control>
+            <InputTitle>
+              Booking Image <Must>*</Must>
+            </InputTitle>
+            <ImagePicker image={bookingImage} setImageCallback={setBookingImage} />
+          </Control>
         </Grid>
       </Grid>
       <>

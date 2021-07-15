@@ -13,8 +13,8 @@ import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
 import getBookingRequests from '../../../actions/bookings/get-booking-requests'
-import BookingRequestCard from '../../../components/bookings/BookingRequestCard'
 import ContainerHeaders from '../../../components/layout/ContainerHeaders'
+import BookingRequestListTable from '../../../components/bookings/BookingRequestListTable'
 
 export default function BookingRequestsPage() {
   const [page, setPage] = useState<number>(1)
@@ -26,7 +26,7 @@ export default function BookingRequestsPage() {
     currentPage: page,
     bookingRequests: [],
   })
-  const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
+  const { isLoading, isError, isSuccess, error, isPreviousData, isFetching, refetch } = useQuery(
     ['Booking Requests', page],
     () => getBookingRequests({ page, limit }),
     {
@@ -67,10 +67,9 @@ export default function BookingRequestsPage() {
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess &&
-              query.bookingRequests.map((bookingRequest) => (
-                <BookingRequestCard key={bookingRequest.title} bookingRequest={bookingRequest} />
-              ))}
+            {isSuccess && (
+              <BookingRequestListTable refetch={refetch} bookingRequests={query.bookingRequests} />
+            )}
             {isLoading && <ServerLoadingLoader message="Loading Bookings" />}
             {isSuccess && !query.bookingRequests.length && <NotFound message="No Booking Found" />}
             {isError && <ServerError error={error} />}

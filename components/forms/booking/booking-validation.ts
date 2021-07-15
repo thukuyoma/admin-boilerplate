@@ -14,7 +14,7 @@ export default function bookingValidation({
   bookingTitle: string
   bookingDescription: string
   bookingType: string
-  bookingImage: File | Blob | string
+  bookingImage: { url: string; publicId: string }
 }) {
   const errors = {} as {
     bookingTitle: string
@@ -35,6 +35,9 @@ export default function bookingValidation({
     errors.bookingType = 'Booking type is required'
   }
   if (!bookingImage) {
+    errors.bookingImage = 'Booking image is required'
+  }
+  if ((bookingImage && !bookingImage.publicId) || !bookingImage.url) {
     errors.bookingImage = 'Booking image is required'
   }
   return { errors, isError: Object.keys(errors).length > 0 }

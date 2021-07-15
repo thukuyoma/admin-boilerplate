@@ -5,7 +5,6 @@ import ContainerMainColumn from './../../components/layout/ContainerMainColumn'
 import ScrollableContainer from '../../components/layout/ScrollableContainer'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
-import DisplayAdminLoader from '../../components/shared/DisplayAdminLoader'
 import DisplayServerError from '../../components/shared/DisplayServerError'
 import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
@@ -13,10 +12,10 @@ import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
 import EditBookingButton from '../../components/bookings/actions/EditBookingButton'
 import DeleteBookingButton from '../../components/bookings/actions/DeleteBookingButton'
-import UnPublishBookingButton from '../../components/bookings/actions/UnPublishBookingButton'
-import PublishBookingButton from '../../components/bookings/actions/PublishBookingButton'
 import BookingDetails from '../../components/bookings/BookingDetails'
 import getBookingDetails from '../../actions/bookings/get-booking-details'
+import LoadingState from '../../components/shared/ServerLoadingLoader'
+import TooglePublishBookingButton from '../../components/bookings/actions/TooglePublishBookingButton'
 
 export default function BookingDetailsPage() {
   const router = useRouter()
@@ -35,12 +34,13 @@ export default function BookingDetailsPage() {
     { component: booking && <EditBookingButton bookingId={booking._id} /> },
     { component: booking && <DeleteBookingButton bookingId={booking._id} /> },
     {
-      component:
-        booking && booking.status.isPublished ? (
-          <UnPublishBookingButton refetch={refetch} bookingId={booking ? booking._id : ''} />
-        ) : (
-          <PublishBookingButton refetch={refetch} bookingId={booking ? booking._id : ''} />
-        ),
+      component: booking && (
+        <TooglePublishBookingButton
+          isPublished={booking.status.isPublished}
+          refetch={refetch}
+          bookingId={booking ? booking._id : ''}
+        />
+      ),
     },
   ]
 
@@ -63,7 +63,7 @@ export default function BookingDetailsPage() {
           <ScrollableContainer>
             {isSuccess && booking && <BookingDetails booking={booking} />}
             {isError && <DisplayServerError error={error} />}
-            {isLoading && <DisplayAdminLoader message="Loading Bookings" />}
+            {isLoading && <LoadingState message="Loading Bookings" />}
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>

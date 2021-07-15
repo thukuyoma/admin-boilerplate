@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 import AdminInfoCard from './AdminInfoCard'
 import AccountsPermission from './permissions/AccountsPermissions'
 import PostsPermission from './permissions/PostsPermissions'
@@ -36,14 +37,16 @@ const Styles = styled.div`
 export default function AdminPublicDetails({ admin }) {
   return (
     <Styles>
-      <AdminInfoCard admin={admin} />
-      <AccountsPermission handleSetAccounts={() => null} accounts={admin.permissions.accounts} />
-      <PostsPermission handleSetPosts={() => null} posts={admin.permissions.posts} />
-      <SettingsPermissions handleSetSettings={() => null} settings={admin.permissions.settings} />
-      <UtilitiesPermissions
-        handleSetUtilities={() => null}
-        utilities={admin.permissions.utilities}
-      />
+      <BorderPaddingWrapper padding>
+        <AdminInfoCard admin={admin} />
+        <AccountsPermission handleSetAccounts={() => null} accounts={admin.permissions.accounts} />
+        <PostsPermission handleSetPosts={() => null} posts={admin.permissions.posts} />
+        <SettingsPermissions handleSetSettings={() => null} settings={admin.permissions.settings} />
+        <UtilitiesPermissions
+          handleSetUtilities={() => null}
+          utilities={admin.permissions.utilities}
+        />
+      </BorderPaddingWrapper>
     </Styles>
   )
 }

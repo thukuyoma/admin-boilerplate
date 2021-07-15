@@ -12,9 +12,9 @@ import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
-import BookingCard from '../../components/bookings/BookingCard'
 import getAllBookings from '../../actions/bookings/get-all-bookings'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
+import BookingListTable from '../../components/bookings/BookingListTable'
 
 export default function BookingIndex() {
   const [page, setPage] = useState<number>(1)
@@ -65,10 +65,7 @@ export default function BookingIndex() {
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess &&
-              query.bookings.map((booking) => (
-                <BookingCard key={booking.title} booking={booking} />
-              ))}
+            {isSuccess && <BookingListTable bookings={query.bookings} />}
             {isLoading && <ServerLoadingLoader message="Loading Bookings" />}
             {isSuccess && !query.bookings.length && <NotFound message="No Booking Found" />}
             {isError && <ServerError error={error} />}

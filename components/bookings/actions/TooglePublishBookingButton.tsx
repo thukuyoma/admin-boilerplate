@@ -1,12 +1,12 @@
 import React from 'react'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
-import publishBooking from '../../../actions/bookings/publish-booking'
+import togglePublish from '../../../actions/bookings/toggle-booking-request-book-status'
 import ActionButton from '../../shared/ActionButton'
 
-export default function PublishBookingButton({ bookingId, refetch }) {
-  const { mutateAsync, isLoading } = useMutation([bookingId], publishBooking)
-  const handlePublishBooking = async () => {
+export default function TooglePublishBookingButton({ bookingId, refetch, isPublished }) {
+  const { mutateAsync, isLoading } = useMutation([bookingId], togglePublish)
+  const handleSubmit = async () => {
     if (!bookingId) {
       return null
     }
@@ -24,8 +24,8 @@ export default function PublishBookingButton({ bookingId, refetch }) {
   return (
     <ActionButton
       block
-      title={isLoading ? 'Publishing Booking' : 'Publish Booking'}
-      onClick={handlePublishBooking}
+      title={isPublished ? 'Unpublish Booking' : 'Publish Booking'}
+      onClick={handleSubmit}
       loading={isLoading}
       align="left"
     />

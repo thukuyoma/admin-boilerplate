@@ -1,6 +1,7 @@
 import React from 'react'
-import { Control, InputTitle, Must, InputField } from '../form-styles'
+import { Control, InputTitle, Must, TextArea } from '../form-styles'
 import DisplayInputError from '../DisplayInputError'
+import InputWordsCounter from '../InputWordsCounter'
 
 export default function BookingDescription({
   bookingDescription,
@@ -22,9 +23,10 @@ export default function BookingDescription({
   return (
     <Control>
       <InputTitle>
-        Booking Description (150/{bookingDescription.length}) <Must>*</Must>
+        Booking Description <InputWordsCounter words="bookingDescription" max={150} />{' '}
+        <Must>*</Must>
       </InputTitle>
-      <InputField
+      <TextArea
         error={inputErrors.bookingDescription}
         placeholder="Short Booking Description"
         value={bookingDescription}

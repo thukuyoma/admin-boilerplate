@@ -12,9 +12,9 @@ import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
-import AdminCard from '../../components/admins/AdminCard'
 import getAllAdmins from '../../actions/account/get-all-admins'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
+import AdminListTable from '../../components/admins/AdminListTable'
 
 export default function AdminIndexPage() {
   const [page, setPage] = useState<number>(1)
@@ -61,11 +61,9 @@ export default function AdminIndexPage() {
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess &&
-              data &&
-              query?.admins.map((admin) => <AdminCard key={admin.title} admin={admin} />)}
-            {isLoading && <ServerLoadingLoader message="Loading Admins" />}
+            {isSuccess && query.admins && <AdminListTable admins={query.admins} />}
             {isSuccess && !query.admins.length && <NotFound message="No Admin Found" />}
+            {isLoading && <ServerLoadingLoader message="Loading Admins" />}
             {isError && <ServerError error={error} />}
             <QueryPagination
               nextPage={handleNextPage}

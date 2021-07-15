@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import wordsCapitalizer from '../../utils/words-capitalizer'
 import { TagKey, TagTitle, TagDetails } from '../shared/shared-styles'
 import ItemStatus from '../shared/ItemStatus'
+import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 
 const Styles = styled.div`
   margin-bottom: 30px;
@@ -54,25 +55,27 @@ export default function BookingDetails({ booking }) {
   const router = useRouter()
   return (
     <Styles>
-      <div className="booking__wrapper">
-        <img
-          className="booking__image"
-          src={booking.bookingImage ? booking.bookingImage.url : '/assets/no-booking-image.png'}
-        />
-        <div className="booking__details">
-          <p className="booking__type-date">
-            {capitalizeFirstLetter(booking.type)}{' '}
-            <span className="booking__timestamp">{dateFormatter(booking.timestamp)}</span>
-          </p>
-          <ItemStatus statusTitle="Published" status={booking.status.isPublished} />
-          <p className="booking__creator">
-            <TagKey>Created By:</TagKey>
-            {wordsCapitalizer(booking.createdBy.adminFullName)}
-          </p>
+      <BorderPaddingWrapper padding>
+        <div className="booking__wrapper">
+          <img
+            className="booking__image"
+            src={booking.image ? booking.image.url : '/assets/no-booking-image.png'}
+          />
+          <div className="booking__details">
+            <p className="booking__type-date">
+              {capitalizeFirstLetter(booking.type)}{' '}
+              <span className="booking__timestamp">{dateFormatter(booking.timestamp)}</span>
+            </p>
+            <ItemStatus statusTitle="Published" status={booking.status.isPublished} />
+            <p className="booking__creator">
+              <TagKey>Created By:</TagKey>
+              {wordsCapitalizer(booking.createdBy.adminFullName)}
+            </p>
+          </div>
         </div>
-      </div>
-      <TagTitle>Booking Description</TagTitle>
-      <TagDetails>{capitalizeFirstLetter(booking.description)}</TagDetails>
+        <TagTitle>Booking Description</TagTitle>
+        <TagDetails>{capitalizeFirstLetter(booking.description)}</TagDetails>
+      </BorderPaddingWrapper>
     </Styles>
   )
 }
