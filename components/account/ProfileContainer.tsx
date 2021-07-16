@@ -78,6 +78,7 @@ const Styles = styled.div`
 
 export default function ProfileContainer({ setSwitchCaseAccount }) {
   const { profile, isLoading, logout } = useAuth()
+
   return (
     <Styles>
       {!isLoading && profile ? (
@@ -86,8 +87,8 @@ export default function ProfileContainer({ setSwitchCaseAccount }) {
             <div className="avatar">
               {profile && !isLoading && (
                 <>
-                  {profile?.avatar ? (
-                    <img src={profile.avatar} alt="logo" className="avatar" />
+                  {profile?.avatar?.url ? (
+                    <img src={profile.avatar?.url} alt="logo" className="avatar" />
                   ) : (
                     <div className="profile-card-initials">
                       {capitalizeFirstLetter(profile.firstName)?.charAt(0)}
@@ -97,7 +98,7 @@ export default function ProfileContainer({ setSwitchCaseAccount }) {
                 </>
               )}
             </div>
-            {profile?.avatar.url}
+            {profile?.avatar?.url}
             <span className="username">
               {capitalizeFirstLetter(profile.firstName)} {capitalizeFirstLetter(profile.lastName)}
             </span>

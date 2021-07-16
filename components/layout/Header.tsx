@@ -138,9 +138,7 @@ export default function Header({
             </div>
             <ShortcutsTab showShortcuts={showShortcuts} />
             <div className="header-links__item">
-              {profile?.avatar && (
-                <HeaderProfileAvatar handleAccount={handleAccount} showAccount={showAccount} />
-              )}
+              {profile && !isLoading && <HeaderProfileAvatar handleAccount={handleAccount} />}
               {!profile && !isLoading && <HeaderLogin />}
               {isLoading && <div className="profile"></div>}
             </div>

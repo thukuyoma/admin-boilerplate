@@ -74,7 +74,7 @@ const Login: React.FC = () => {
   }
 
   if (isSuccess) {
-    router.push('/blogs/edit')
+    router.push('/analytics/dashboard')
   }
 
   return (

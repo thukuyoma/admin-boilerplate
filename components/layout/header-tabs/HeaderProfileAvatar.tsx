@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import useAuth from '../../../context/auth'
 
-import ProfileContainer from '../../account/ProfileContainer'
-
 const Styles = styled.div`
   display: flex;
   align-items: center;
@@ -17,12 +15,12 @@ const Styles = styled.div`
   }
 `
 
-export default function HeaderProfileAvatar({ showAccount, handleAccount }) {
+export default function HeaderProfileAvatar({ handleAccount }) {
   const { profile } = useAuth()
   return (
     <Styles>
       <img
-        src={profile?.avatar ? profile?.avatar : '/assets/face.svg'}
+        src={profile?.avatar ? profile?.avatar : '/assets/default-avatar.png'}
         alt="default"
         className="avatar"
         onClick={() => handleAccount()}
