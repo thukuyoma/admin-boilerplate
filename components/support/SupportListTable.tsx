@@ -10,7 +10,7 @@ import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 
 const Styles = styled.div`
-  .ticket__subject {
+  .support__subject {
     min-width: 200px;
   }
   .table__cell {
@@ -29,7 +29,7 @@ const Styles = styled.div`
   .table-cell__border-top {
     border-top: none;
   }
-  .ticket__timestamp {
+  .support__timestamp {
     min-width: 150px;
   }
   .table__row {
@@ -37,13 +37,13 @@ const Styles = styled.div`
   }
 `
 
-export default function SupportListTable({ tickets }) {
+export default function SupportListTable({ supports }) {
   const router = useRouter()
   return (
     <Styles>
       <BorderPaddingWrapper>
         <TableContainer>
-          <Table aria-label="support ticket">
+          <Table aria-label="support support">
             <TableHead>
               <TableRow>
                 <TableCell align="center" className="table__cell table-cell__border-top">
@@ -61,37 +61,38 @@ export default function SupportListTable({ tickets }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {tickets.length &&
-                tickets.map((ticket) => (
-                  <TableRow
-                    key={nanoid()}
-                    onClick={() => router.push(`supports/${ticket._id}`)}
-                    onKeyPress={() => router.push(`supports/${ticket._id}`)}
-                    className="table__row"
-                  >
-                    <TableCell className="table__cell">
-                      <TableAvatar initial={ticket.requester.firstName} />
-                    </TableCell>
-                    <TableCell className="table__cell ticket__subject">
-                      {capitalizeFirstLetter(ticket.subject)}
-                    </TableCell>
-                    <TableCell className="table__cell">
-                      {capitalizeFirstLetter(ticket.department)}
-                    </TableCell>
-                    <TableCell className="table__cell ticket__timestamp">
-                      {dateFormatter(ticket.timestamp)}
-                    </TableCell>
-                    <TableCell className="table__cell table-cell__align-right">
-                      <Button
-                        title={`${ticket.status.isClosed ? 'Closed' : 'Open'}`}
-                        color={`${ticket.status.isClosed ? 'info' : 'danger'}`}
-                        size="small"
-                        variant="filled"
-                        align="right"
-                      />
-                    </TableCell>
-                  </TableRow>
-                ))}
+              {supports.length
+                ? supports.map((support) => (
+                    <TableRow
+                      key={nanoid()}
+                      onClick={() => router.push(`supports/${support._id}`)}
+                      onKeyPress={() => router.push(`supports/${support._id}`)}
+                      className="table__row"
+                    >
+                      <TableCell className="table__cell">
+                        <TableAvatar initial={support.requester.firstName} />
+                      </TableCell>
+                      <TableCell className="table__cell support__subject">
+                        {capitalizeFirstLetter(support.subject)}
+                      </TableCell>
+                      <TableCell className="table__cell">
+                        {capitalizeFirstLetter(support.department)}
+                      </TableCell>
+                      <TableCell className="table__cell support__timestamp">
+                        {dateFormatter(support.timestamp)}
+                      </TableCell>
+                      <TableCell className="table__cell table-cell__align-right">
+                        <Button
+                          title={`${support.status.isClosed ? 'Closed' : 'Open'}`}
+                          color={`${support.status.isClosed ? 'info' : 'danger'}`}
+                          size="small"
+                          variant="filled"
+                          align="right"
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : null}
             </TableBody>
           </Table>
         </TableContainer>

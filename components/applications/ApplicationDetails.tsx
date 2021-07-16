@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import dateFormatter from '../../utils/date-formatter'
 import wordsCapitalizer from '../../utils/words-capitalizer'
+import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 import ApplicationsLogs from './ApplicationsLogs'
 import WriteSupportLog from './WriteSupportLog'
 
@@ -90,79 +91,80 @@ const Styles = styled.div`
 export default function ApplicationDetails({ application }) {
   return (
     <Styles>
-      <div className="divider">
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={5}>
-            <div className="application__group">
-              <div className="application__tag">
-                {application.firstName.charAt(0).toUpperCase()}
-                {application.lastName.charAt(0).toUpperCase()}
-              </div>
-              <div>
-                <div className="applicant__name">
-                  {wordsCapitalizer(
-                    `${application.firstName} ${application.middleName} ${application.lastName}`
-                  )}
+      <BorderPaddingWrapper padding>
+        <div className="divider">
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={5}>
+              <div className="application__group">
+                <div className="application__tag">
+                  {application.firstName.charAt(0).toUpperCase()}
+                  {application.lastName.charAt(0).toUpperCase()}
                 </div>
-                <p className="applicant__date">{dateFormatter(application.timestamp)}</p>
-              </div>
-            </div>
-          </Grid>
-          <Grid container item xs={12} sm={7}>
-            <Grid>
-              <div className="grid__wrapper">
-                <p className="tag__title">Personal Information</p>
-                <div className="tag__grouper">
-                  <div className="tag__group tag__group-active">
-                    <p className="tag__name">
-                      <AiFillPhone className="tag__icon" />
-                      Telephone
-                    </p>
-                    <p className="tag__value">{application.telephoneNumber}</p>
+                <div>
+                  <div className="applicant__name">
+                    {wordsCapitalizer(
+                      `${application.firstName} ${application.middleName} ${application.lastName}`
+                    )}
                   </div>
-                  <div className="tag__group">
-                    <p className="tag__name">
-                      <ImLocation2 className="tag__icon" />
-                      Residential Address
-                    </p>
-                    <p className="tag__value">{application.address}</p>
-                  </div>
-                </div>
-                <div className="tag__seperator">
-                  <p className="tag__name">
-                    <MdEmail className="tag__icon" />
-                    Email
-                  </p>
-                  <p className="tag__value">{application.email}</p>
+                  <p className="applicant__date">{dateFormatter(application.timestamp)}</p>
                 </div>
               </div>
             </Grid>
+            <Grid container item xs={12} sm={7}>
+              <Grid>
+                <div className="grid__wrapper">
+                  <p className="tag__title">Personal Information</p>
+                  <div className="tag__grouper">
+                    <div className="tag__group tag__group-active">
+                      <p className="tag__name">
+                        <AiFillPhone className="tag__icon" />
+                        Telephone
+                      </p>
+                      <p className="tag__value">{application.telephoneNumber}</p>
+                    </div>
+                    <div className="tag__group">
+                      <p className="tag__name">
+                        <ImLocation2 className="tag__icon" />
+                        Residential Address
+                      </p>
+                      <p className="tag__value">{application.address}</p>
+                    </div>
+                  </div>
+                  <div className="tag__seperator">
+                    <p className="tag__name">
+                      <MdEmail className="tag__icon" />
+                      Email
+                    </p>
+                    <p className="tag__value">{application.email}</p>
+                  </div>
+                </div>
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
-      <div className="school__divider">
-        <p className="tag__title">Application Details</p>
-        <Grid spacing={3} container>
-          <Grid item xs={12} md={3}>
-            <p className="tag__name">Programme</p>
-            <p className="tag__value">{capitalizeFirstLetter(application.programme)}</p>
+        </div>
+        <div className="school__divider">
+          <p className="tag__title">Application Details</p>
+          <Grid spacing={3} container>
+            <Grid item xs={12} md={3}>
+              <p className="tag__name">Programme</p>
+              <p className="tag__value">{capitalizeFirstLetter(application.programme)}</p>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <p className="tag__name">Field of study</p>
+              <p className="tag__value">{capitalizeFirstLetter(application.studyField)}</p>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <p className="tag__name">Desired Country</p>
+              <p className="tag__value">{capitalizeFirstLetter(application.desiredCountry)}</p>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <p className="tag__name">University</p>
+              <p className="tag__value">{capitalizeFirstLetter(application.university)}</p>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={3}>
-            <p className="tag__name">Field of study</p>
-            <p className="tag__value">{capitalizeFirstLetter(application.studyField)}</p>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <p className="tag__name">Desired Country</p>
-            <p className="tag__value">{capitalizeFirstLetter(application.desiredCountry)}</p>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <p className="tag__name">University</p>
-            <p className="tag__value">{capitalizeFirstLetter(application.university)}</p>
-          </Grid>
-        </Grid>
-      </div>
-
-      <ApplicationsLogs applicationId={application._id} />
+        </div>
+        <ApplicationsLogs applicationId={application._id} />
+      </BorderPaddingWrapper>
     </Styles>
   )
 }

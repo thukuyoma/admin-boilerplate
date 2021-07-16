@@ -13,7 +13,7 @@ import blogCategoryValidation from '../../../utils/blog-category-validation'
 import createCategory from '../../../actions/post/categories/create-category'
 import TItle from './form/TItle'
 import Description from './form/Description'
-import { Control } from '../../forms/form-styles'
+import { Control, InputTitle, Must } from '../../forms/form-styles'
 
 const Spacer = styled.div`
   margin-bottom: 100px;
@@ -70,6 +70,9 @@ export default function CreateBlogCategory() {
             </Grid>
             <Grid item xs={12} sm={7} md={7} lg={7}>
               <Control>
+                <InputTitle>
+                  Image <Must>*</Must>
+                </InputTitle>
                 <ImagePicker image={image} setImageCallback={setImage} />
               </Control>
             </Grid>

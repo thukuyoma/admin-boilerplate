@@ -22,9 +22,9 @@ export default function SupportIndexPage() {
   const [query, setQuery] = useState({
     hasMore: false,
     totalPages: 0,
-    totalTickets: 0,
+    totalSupports: 0,
     currentPage: page,
-    tickets: [],
+    supports: [],
   })
   const { isLoading, data, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
     ['supports ticket', page],
@@ -45,7 +45,7 @@ export default function SupportIndexPage() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `Tickets (${query.totalTickets})`, url: '/supports', isActive: true },
+    { title: `Tickets (${query.supports})`, url: '/supports', isActive: true },
   ]
 
   return (
@@ -59,9 +59,9 @@ export default function SupportIndexPage() {
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess && data && query?.tickets && <SupportTable tickets={query.tickets} />}
+            {isSuccess && data && query?.supports && <SupportTable supports={query.supports} />}
             {isLoading && <ServerLoadingLoader message="Loading Support Tickets" />}
-            {isSuccess && !query.tickets.length && <NotFound message="No Support Ticket Found" />}
+            {isSuccess && !query.supports.length && <NotFound message="No Support Ticket Found" />}
             {isError && <ServerError error={error} />}
             <QueryPagination
               nextPage={handleNextPage}
