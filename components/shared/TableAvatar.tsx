@@ -21,15 +21,22 @@ const Styles = styled.div`
   }
 `
 export default function TableAvatar({ initial, image }: { initial?: string; image?: string }) {
-  return (
-    <Styles>
-      {initial && <div className="card__tag">{initial.charAt(0).toUpperCase()}</div>}
-      {image && (
+  if (image) {
+    return (
+      <Styles>
         <div className="card__tag">
           <img className="avatar__image" src={image} />
         </div>
-      )}
-      {!initial && !image && <div className="card__tag">#</div>}
-    </Styles>
-  )
+      </Styles>
+    )
+  }
+  if (initial) {
+    return (
+      <Styles>
+        {initial && <div className="card__tag">{initial.charAt(0).toUpperCase()}</div>}
+        {!initial && !image && <div className="card__tag">#</div>}
+      </Styles>
+    )
+  }
+  return <Styles>{<div className="card__tag">#</div>}</Styles>
 }

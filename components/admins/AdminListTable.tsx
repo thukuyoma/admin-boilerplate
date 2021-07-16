@@ -77,7 +77,7 @@ export default function AdminListTable({ admins }) {
                         className="table__row"
                       >
                         <TableCell className="table__cell">
-                          <TableAvatar image={admin?.image?.url} />
+                          <TableAvatar image={admin?.image?.url} initial={admin.firstName} />
                         </TableCell>
                         <TableCell className="table__cell admin__subject">
                           {capitalizeFirstLetter(admin.firstName)}{' '}
