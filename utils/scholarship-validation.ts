@@ -46,7 +46,7 @@ export default function scholarshipValidation(formInputs: ScholarshipSchemaI) {
   if (!country) {
     errors.country = errorMessages.countryIsRequired
   }
-  if (!scholarshipImage) {
+  if (!scholarshipImage.url) {
     errors.scholarshipImage = errorMessages.imageIsRequired
   }
   return {

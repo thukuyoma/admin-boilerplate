@@ -28,8 +28,8 @@ export default function CreateAdminPage() {
         <ContainerMainColumn>
           <ContainerHeaders
             pageTitle="Admins"
-            createButtonUrl="/admins/create"
-            createButtonTitle="Create Admin"
+            createButtonUrl=""
+            createButtonTitle=""
             overlayItems={overlayItems}
           />
           <ScrollableContainer>

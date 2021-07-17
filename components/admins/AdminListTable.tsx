@@ -101,7 +101,7 @@ export default function AdminListTable({ admins }) {
                         </TableCell>
                         <TableCell className="table__cell table-cell__align-right">
                           <Button
-                            title="See More"
+                            title="View"
                             color="info"
                             size="small"
                             variant="filled"

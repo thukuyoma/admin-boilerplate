@@ -17,9 +17,10 @@ import {
   WhoCanApply,
 } from './form'
 import ApplicationDeadLine from './form/ApplicationDeadLine'
-import ScholarshipImage from './form/ScholarshipImage'
 import scholarshipValidation from '../../utils/scholarship-validation'
 import createScholarship from '../../actions/scholarship/create-scholarship'
+import ImagePicker from '../forms/ImagePicker'
+import { InputTitle } from '../forms/form-styles'
 
 export default function CreateScholarship() {
   const router = useRouter()
@@ -28,7 +29,10 @@ export default function CreateScholarship() {
   const [howToApply, setHowToApply] = useLocalStorage('howToApply', [])
   const [country, setCountry] = useLocalStorage('country', '')
   const [organization, setOrganization] = useLocalStorage('organization', '')
-  const [scholarshipImage, setScholarshipImage] = useState<File | Blob | string>('')
+  const [scholarshipImage, setScholarshipImage] = useLocalStorage('scholarshipImage', {
+    url: '',
+    publicId: '',
+  })
   const [whoCanApply, setWhoCanApply] = useLocalStorage('whoCanApply', '')
   const [applicationDeadLine, setApplicationDeadLine] = useLocalStorage('applicationDeadLine', '')
   const [scholarshipSourceLink, setScholarshipSourceLink] = useLocalStorage(
@@ -55,7 +59,7 @@ export default function CreateScholarship() {
     applicationDeadLine,
     scholarshipSourceLink,
   }
-  const { mutateAsync, isSuccess, isLoading, error, data } = useMutation(createScholarship)
+  const { mutateAsync, isSuccess, isLoading } = useMutation(createScholarship)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -137,12 +141,8 @@ export default function CreateScholarship() {
           />
         </Grid>
         <Grid item xs={12} sm={4} md={4} lg={4}>
-          <ScholarshipImage
-            imageUrl=""
-            setScholarshipImage={setScholarshipImage}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-          />
+          <InputTitle> Image</InputTitle>
+          <ImagePicker image={scholarshipImage} setImageCallback={setScholarshipImage} />
         </Grid>
       </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12}>

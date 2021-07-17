@@ -6,7 +6,7 @@ export interface ScholarshipSchemaI {
   country: string
   description: string
   howToApply?: Array<string>
-  scholarshipImage?: File | Blob | string
+  scholarshipImage?: { url: string; publicId: string }
   applicationDeadLine?: string | number
 }
 
