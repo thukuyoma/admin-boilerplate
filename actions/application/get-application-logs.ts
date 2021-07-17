@@ -11,7 +11,7 @@ export default async function getApplicationLogs({
 }) {
   try {
     const res = await api.get(
-      `/applications/${applicationId}/logs?limit=${Number(limit)}&page=${Number(page)}`
+      `/applications/logs/${applicationId}?limit=${Number(limit)}&page=${Number(page)}`
     )
     const { data } = res
     return data

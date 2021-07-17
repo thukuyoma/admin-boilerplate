@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import React from 'react'
-import ActionButton from '../../shared/ActionButton'
+import ActionButton from '../../buttons/ActionButton'
 
 export default function EditBlogButton({ slug }) {
   const router = useRouter()

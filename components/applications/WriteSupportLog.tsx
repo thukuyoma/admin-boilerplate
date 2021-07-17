@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import styled from 'styled-components'
 import writeLog from '../../actions/application/write-log'
 import DisplayInputError from '../forms/DisplayInputError'
-import Button from '../shared/Button'
+import Button from '../buttons/Button'
 
 const Styles = styled.div`
   margin-top: 50px;
@@ -31,7 +31,7 @@ const Styles = styled.div`
   }
 `
 
-export default function WriteSupportLog({ applicationId, refetch }) {
+export default function WriteSupportLog({ applicationId, refetchApplicationLogs }) {
   const [message, setMessage] = useState('')
   const [inputError, setInputError] = useState('')
   const { mutateAsync, isLoading, isSuccess } = useMutation(writeLog)
@@ -50,9 +50,9 @@ export default function WriteSupportLog({ applicationId, refetch }) {
       { message, applicationId },
       {
         onSuccess: (data) => {
-          toast.success(data)
           setMessage('')
-          refetch()
+          refetchApplicationLogs()
+          toast.success(data)
         },
       }
     )

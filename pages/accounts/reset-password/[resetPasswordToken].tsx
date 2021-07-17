@@ -9,7 +9,7 @@ import { Control, InputTitle, InputField } from '../../../components/forms/form-
 import ErrorAlert from '../../../components/shared/ErrorAlert'
 import { useAnalytics } from '../../../context/analytics'
 import resetPasswordValidation from '../../../validations/reset-password-validation'
-import Button from '../../../components/shared/Button'
+import Button from '../../../components/buttons/Button'
 import { toast } from 'react-toastify'
 interface ResetPasswordI {
   newPassword: string

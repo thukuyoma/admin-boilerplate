@@ -5,9 +5,10 @@ import React from 'react'
 import styled from 'styled-components'
 import dateFormatter from '../../utils/date-formatter'
 import TableAvatar from '../shared/TableAvatar'
-import Button from '../shared/Button'
+import Button from '../buttons/Button'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
+import StatusButton from '../buttons/StatusButton'
 
 const Styles = styled.div`
   .admin__subject {
@@ -59,11 +60,12 @@ export default function AdminListTable({ admins }) {
                   <TableCell className="table__cell table-cell__border-top">Name</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Role</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Date Created</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Active</TableCell>
                   <TableCell
                     align="right"
                     className="table__cell table-cell__align-right table-cell__border-top"
                   >
-                    Status
+                    Action
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -89,12 +91,20 @@ export default function AdminListTable({ admins }) {
                         <TableCell className="table__cell admin__timestamp">
                           {dateFormatter(admin.timestamp)}
                         </TableCell>
+                        <TableCell className="table__cell admin__timestamp">
+                          {
+                            <StatusButton
+                              color={!admin.status.isBlocked ? 'success' : 'danger'}
+                              title={!admin.status.isBlocked ? 'Active' : 'Blocked'}
+                            />
+                          }
+                        </TableCell>
                         <TableCell className="table__cell table-cell__align-right">
                           <Button
                             title="See More"
                             color="info"
                             size="small"
-                            variant="outlined"
+                            variant="filled"
                             align="right"
                           />
                         </TableCell>

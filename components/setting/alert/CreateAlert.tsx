@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import createAlert from '../../../actions/settings/alert/create-alert'
 import alertValidation from '../../../utils/alert-validation'
 import InputErrorsSummary from '../../forms/InputErrorsSummary'
-import Button from '../../shared/Button'
+import Button from '../../buttons/Button'
 import { AlertButtonText, ExpiresAt, Message, AlertButtonLink, AlertType } from './form'
 
 export default function CreateAlert() {

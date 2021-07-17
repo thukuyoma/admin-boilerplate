@@ -12,7 +12,7 @@ import { nanoid } from 'nanoid'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import ApplicationDetails from '../../components/applications/ApplicationDetails'
 import getApplicationsDetails from '../../actions/application/get-application-details'
-import MarkAsRead from '../../components/applications/actions/MarkAsRead'
+import MarkAsApplied from '../../components/applications/actions/MarkAsApplied'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
 
 export default function ApplicationtDetails() {
@@ -29,10 +29,10 @@ export default function ApplicationtDetails() {
   const primaryActions = [
     {
       component: application && (
-        <MarkAsRead
+        <MarkAsApplied
           applicationId={applicationId as string}
           refetch={refetch}
-          isRead={application.status.isRead}
+          isApplied={application.status.isApplied}
         />
       ),
     },

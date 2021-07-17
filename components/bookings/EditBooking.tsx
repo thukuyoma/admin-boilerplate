@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import { useMutation } from 'react-query'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import getFormData from '../../utils/get-form-data'
-import Button from '../shared/Button'
+import Button from '../buttons/Button'
 import InputErrorsSummary from '../forms/InputErrorsSummary'
 import { toast } from 'react-toastify'
 import {

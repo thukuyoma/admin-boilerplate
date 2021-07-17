@@ -70,7 +70,7 @@ const Styles = styled.div`
     border-radius: 5px;
     border: 1px solid #ccc;
     background: #fff;
-    width: 183px;
+    width: 200px;
     box-shadow: 0 3px 12px rgb(27 31 35 / 15%);
   }
   .mobile-container-header-dropdown-menu__item {

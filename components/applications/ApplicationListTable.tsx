@@ -8,9 +8,10 @@ import TableAvatar from '../shared/TableAvatar'
 import Button from '../buttons/Button'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
+import StatusButton from '../buttons/StatusButton'
 
 const Styles = styled.div`
-  .blog__subject {
+  .application__subject {
     min-width: 200px;
   }
   .table__cell {
@@ -32,7 +33,7 @@ const Styles = styled.div`
   .table-cell__border-top {
     border-top: none;
   }
-  .blog__timestamp {
+  .application__timestamp {
     min-width: 150px;
   }
   .table__row {
@@ -40,11 +41,11 @@ const Styles = styled.div`
   }
 `
 
-export default function BlogListTable({ blogs }) {
+export default function ApplicationListTable({ applications }) {
   const router = useRouter()
   return (
     <Styles>
-      {blogs?.length ? (
+      {applications?.length ? (
         <BorderPaddingWrapper>
           <TableContainer>
             <Table aria-label="Blog List Table">
@@ -56,42 +57,54 @@ export default function BlogListTable({ blogs }) {
                   >
                     #
                   </TableCell>
-                  <TableCell className="table__cell table-cell__border-top">Title</TableCell>
-                  <TableCell className="table__cell table-cell__border-top">Views</TableCell>
-                  <TableCell className="table__cell table-cell__border-top">Date</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Name</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Country</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Programme</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Applied On</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Status</TableCell>
                   <TableCell
                     align="right"
                     className="table__cell table-cell__align-right table-cell__border-top"
                   >
-                    Status
+                    Action
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {blogs.length
-                  ? blogs.map((blog) => (
+                {applications.length
+                  ? applications.map((application) => (
                       <TableRow
                         key={nanoid()}
-                        onClick={() => router.push(`blogs/${blog.slug}`)}
-                        onKeyPress={() => router.push(`blogs/${blog.slug}`)}
+                        onClick={() => router.push(`/applications/${application._id}`)}
+                        onKeyPress={() => router.push(`/applications/${application._id}`)}
                         className="table__row"
                       >
                         <TableCell className="table__cell">
-                          <TableAvatar image={blog?.image.url} />
+                          <TableAvatar initial={application.firstName} />
                         </TableCell>
-                        <TableCell className="table__cell blog__subject">
-                          {capitalizeFirstLetter(blog.title)}
+                        <TableCell className="table__cell application__subject">
+                          {capitalizeFirstLetter(application.firstName)}{' '}
+                          {capitalizeFirstLetter(application.lastName)}
                         </TableCell>
                         <TableCell className="table__cell">
-                          {blog?.viewCount ? blog.viewCount : 0}
+                          {capitalizeFirstLetter(application.desiredCountry)}
                         </TableCell>
-                        <TableCell className="table__cell blog__timestamp">
-                          {dateFormatter(blog.timestamp)}
+                        <TableCell className="table__cell">
+                          {capitalizeFirstLetter(application.programme)}
+                        </TableCell>
+                        <TableCell className="table__cell application__timestamp">
+                          {dateFormatter(application.timestamp)}
+                        </TableCell>
+                        <TableCell className="table__cell application__timestamp">
+                          <StatusButton
+                            title={`${application.status.isApplied ? 'Applied' : 'Pending'}`}
+                            color={`${application.status.isApplied ? 'success' : 'warning'}`}
+                          />
                         </TableCell>
                         <TableCell className="table__cell table-cell__align-right">
                           <Button
-                            title={`${blog.status.isPublished ? 'Online' : 'Offline'}`}
-                            color={`${blog.status.isPublished ? 'info' : 'danger'}`}
+                            title="Respond"
+                            color="info"
                             size="small"
                             variant="filled"
                             align="right"

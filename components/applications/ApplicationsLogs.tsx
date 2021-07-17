@@ -12,7 +12,11 @@ import WriteSupportLog from './WriteSupportLog'
 const Styles = styled.div`
   margin-top: 30px;
   padding-bottom: 30px;
-  border-bottom: 1px solid #f0f0f0;
+  .log__not-found {
+    font-size: 12px;
+    color: gray;
+    font-style: italic;
+  }
 `
 export default function ApplicationsLogs({ applicationId }) {
   const [page, setPage] = useState<number>(1)
@@ -24,7 +28,15 @@ export default function ApplicationsLogs({ applicationId }) {
     currentPage: page,
     applicationLogs: [],
   })
-  const { isLoading, refetch, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
+  const {
+    isLoading,
+    refetch: refetchApplicationLogs,
+    isError,
+    isSuccess,
+    error,
+    isPreviousData,
+    isFetching,
+  } = useQuery(
     ['application logs', applicationId, page],
     () => getApplicationLogs({ applicationId, page, limit }),
     {
@@ -44,14 +56,23 @@ export default function ApplicationsLogs({ applicationId }) {
   }
   return (
     <>
-      <WriteSupportLog applicationId={applicationId} refetch={refetch} />
+      <WriteSupportLog
+        applicationId={applicationId}
+        refetchApplicationLogs={refetchApplicationLogs}
+      />
       <Styles>
         <p className="tag__title">Application Support Log</p>
         {isSuccess &&
-          query.applicationLogs.map((log) => <ApplicationLogCard key={log._id} log={log} />)}
-        {isLoading && <ServerLoadingLoader message="Loading Application Logs" />}
+          query.applicationLogs.map((log) => (
+            <ApplicationLogCard
+              refetchApplicationLogs={refetchApplicationLogs}
+              key={log._id}
+              log={log}
+            />
+          ))}
+        {isLoading && <p className="log__not-found">Loading previous logs...</p>}
         {isSuccess && !query.applicationLogs.length && (
-          <NotFound message="No Application Log Found" />
+          <p className="log__not-found">Logs on this application will appear here</p>
         )}
         {isError && <ServerError error={error} />}
         <QueryPagination

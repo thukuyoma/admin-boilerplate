@@ -7,7 +7,7 @@ import useAuth from '../../context/auth'
 import SuccessAlert from '../shared/SuccessAlert'
 import ErrorAlert from '../shared/ErrorAlert'
 import Progress from './Progress'
-import Button from '../shared/Button'
+import Button from '../buttons/Button'
 import AccountTabTitle from './AccountTabTitle'
 
 const Styles = styled.div`

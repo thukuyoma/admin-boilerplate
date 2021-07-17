@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { AiOutlineCaretUp, AiOutlineCaretDown } from 'react-icons/ai'
 import styled from 'styled-components'
 import config from '../../config/config'
-import Button from '../shared/Button'
+import Button from '../buttons/Button'
 import OverlayDisplay from './OverlayDisplay'
 
 const Styles = styled.div`

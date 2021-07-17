@@ -3,7 +3,7 @@ import React from 'react'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
 import deletePost from '../../../actions/post/delete-post'
-import ActionButton from '../../shared/ActionButton'
+import ActionButton from '../../buttons/ActionButton'
 
 export default function DeletePostButton({ postId }: { postId: string }) {
   const router = useRouter()

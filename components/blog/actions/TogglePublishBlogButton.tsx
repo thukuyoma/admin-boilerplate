@@ -2,7 +2,7 @@ import React from 'react'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
 import publishPost from '../../../actions/post/publish-post'
-import ActionButton from '../../shared/ActionButton'
+import ActionButton from '../../buttons/ActionButton'
 
 export default function TogglePublishBlogButton({ postId, refetch, isPublished }) {
   const { mutateAsync, isLoading } = useMutation([postId], publishPost, {

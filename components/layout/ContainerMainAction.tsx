@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Styles = styled.div`
   padding: 0 0 0 20px;
-  width: 300px;
+  width: 200px;
   flex-shrink: 0;
   .container-main-action__title {
     height: 40px;

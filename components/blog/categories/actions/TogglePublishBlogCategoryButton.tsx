@@ -2,7 +2,7 @@ import React from 'react'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
 import publishCategory from '../../../../actions/post/categories/publish-category'
-import ActionButton from '../../../shared/ActionButton'
+import ActionButton from '../../../buttons/ActionButton'
 
 export default function TogglePublishBlogCategoryButton({ categoryTitle, refetch, isPublished }) {
   const { mutateAsync, isLoading } = useMutation([categoryTitle], publishCategory, {

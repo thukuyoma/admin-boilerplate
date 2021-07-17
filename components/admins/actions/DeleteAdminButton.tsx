@@ -3,7 +3,7 @@ import React from 'react'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
 import deleteAdmin from '../../../actions/account/delete-admin'
-import ActionButton from '../../shared/ActionButton'
+import ActionButton from '../../buttons/ActionButton'
 
 export default function DeleteAdminButton({ adminId }: { adminId: string }) {
   const router = useRouter()

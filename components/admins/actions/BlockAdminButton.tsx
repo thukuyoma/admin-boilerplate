@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
 import blockAdmin from '../../../actions/account/block-admin'
-import ActionButton from '../../shared/ActionButton'
+import ActionButton from '../../buttons/ActionButton'
 
 export default function DeleteBookingButton({
   adminId,

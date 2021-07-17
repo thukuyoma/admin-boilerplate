@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
 import publishScholarship from '../../../actions/scholarship/publish-scholarship'
-import ActionButton from '../../shared/ActionButton'
+import ActionButton from '../../buttons/ActionButton'
 
 export default function PublishScholarshipButton({ scholarshipId, refetch, isPublished }) {
   const [buttonTitle, setButtonTitle] = useState('')

@@ -20,7 +20,7 @@ const Styles = styled.div`
     white-space: nowrap;
     outline: 0;
     color: #fff;
-    border: 0;
+    border:  0;
     ${({ size }) =>
       (size === 'small' && 'height: 30px; font-size: 13px;') ||
       (size === 'medium' && 'height: 36px; font-size: 14px;') ||
@@ -78,7 +78,7 @@ const Styles = styled.div`
     margin-right: 5px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content:  center;
   }
   .button-icon__end {
     margin-left: 5px;
@@ -130,19 +130,10 @@ export default function Button({
   variant,
   startIcon,
   endIcon,
-  icon,
-  iconOnly,
   curved,
   size,
   color,
 }: ButtonProps) {
-  if (icon && iconOnly) {
-    return (
-      <div onClick={onClick} className="button button__icon-only">
-        {icon}
-      </div>
-    )
-  }
   return (
     <Styles color={color} variant={variant} size={size} curved={curved} align={align}>
       <div className={`button__wrapper ${block && 'block'} ${align}`}>

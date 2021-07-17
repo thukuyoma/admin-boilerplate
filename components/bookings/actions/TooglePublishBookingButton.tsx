@@ -2,7 +2,7 @@ import React from 'react'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
 import togglePublish from '../../../actions/bookings/toggle-booking-request-book-status'
-import ActionButton from '../../shared/ActionButton'
+import ActionButton from '../../buttons/ActionButton'
 
 export default function TooglePublishBookingButton({ bookingId, refetch, isPublished }) {
   const { mutateAsync, isLoading } = useMutation([bookingId], togglePublish)

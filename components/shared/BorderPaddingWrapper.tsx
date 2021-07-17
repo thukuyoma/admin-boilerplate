@@ -6,5 +6,10 @@ const BorderPaddingWrapper = styled.div`
   border: 1px solid #ccc;
   margin-bottom: 30px;
   ${({ padding }) => padding && 'padding: 20px;'}
+  @media(max-width: 900px) {
+    margin-top: 30px;
+    border-radius: 5px;
+    padding: 10px;
+  }
 `
 export default BorderPaddingWrapper

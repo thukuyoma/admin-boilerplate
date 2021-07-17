@@ -8,17 +8,17 @@ import QueryPagination from '../../components/shared/QueryPagination'
 import ServerError from '../../components/shared/ServerError'
 import NotFound from '../../components/shared/NotFound'
 import ServerLoadingLoader from '../../components/shared/ServerLoadingLoader'
-import ApplicationCard from '../../components/applications/ApplicationCard'
 import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import getAllApplications from '../../actions/application/get-all-applications'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
+import ApplicationListTable from '../../components/applications/ApplicationListTable'
 
 export default function ApplicationsIndexPage() {
   const [page, setPage] = useState<number>(1)
-  const limit: number = 10
+  const limit: number = 5
   const [query, setQuery] = useState({
     hasMore: false,
     totalPages: 0,
@@ -66,10 +66,7 @@ export default function ApplicationsIndexPage() {
           />
 
           <ScrollableContainer>
-            {isSuccess &&
-              query.applications.map((application) => (
-                <ApplicationCard key={application.slug} application={application} />
-              ))}
+            {isSuccess && <ApplicationListTable applications={query.applications} />}
             {isLoading && <ServerLoadingLoader message="Loading Applications" />}
             {isSuccess && !query.applications.length && <NotFound message="No Application Found" />}
             {isError && <ServerError error={error} />}
