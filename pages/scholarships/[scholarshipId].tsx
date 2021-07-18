@@ -15,7 +15,7 @@ import getScholarship from '../../actions/scholarship/get-scholarship'
 import ScholarshipDetails from '../../components/scholarship/ScholarshipDetails'
 import EditScholarshipButton from '../../components/scholarship/actions/EditScholarshipButton'
 import DeleteScholarshipButton from '../../components/scholarship/actions/DeleteScholarshipButton'
-import PublishScholarshipButton from '../../components/scholarship/actions/PublishScholarshipButton'
+import TogglePublishScholarshipButton from '../../components/scholarship/actions/TogglePublishScholarshipButton'
 
 export default function BlogPostDetails() {
   const router = useRouter()
@@ -36,7 +36,7 @@ export default function BlogPostDetails() {
     },
     {
       component: scholarship && (
-        <PublishScholarshipButton
+        <TogglePublishScholarshipButton
           isPublished={scholarship.status && scholarship.status.isPublished}
           scholarshipId={scholarshipId}
           refetch={refetch}

@@ -17,9 +17,10 @@ import {
   WhoCanApply,
 } from './form'
 import ApplicationDeadLine from './form/ApplicationDeadLine'
-import ScholarshipImage from './form/ScholarshipImage'
+// import ScholarshipImage from './form/ScholarshipImage'
 import scholarshipValidation from '../../utils/scholarship-validation'
 import updateScholarship from '../../actions/scholarship/update-scholarship'
+import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 
 export default function UpdateScholarship({ scholarship }) {
   const router = useRouter()
@@ -95,93 +96,95 @@ export default function UpdateScholarship({ scholarship }) {
   }
 
   return (
-    <form encType="multipart/form-data">
-      <Grid container spacing={3}>
+    <BorderPaddingWrapper padding>
+      <form encType="multipart/form-data">
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={12} md={12} lg={12}>
+            <Title
+              title={title}
+              setTitle={setTitle}
+              inputErrors={inputErrors}
+              setInputErrors={setInputErrors}
+            />
+          </Grid>
+        </Grid>
+        <Description
+          description={description}
+          setDescription={setDescription}
+          inputErrors={inputErrors}
+          setInputErrors={setInputErrors}
+        />
+        <ScholarshipSourceLink
+          scholarshipSourceLink={scholarshipSourceLink}
+          setScholarshipSourceLink={setScholarshipSourceLink}
+          inputErrors={inputErrors}
+          setInputErrors={setInputErrors}
+        />
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Country
+              country={country}
+              setCountry={setCountry}
+              inputErrors={inputErrors}
+              setInputErrors={setInputErrors}
+            />
+          </Grid>
+          <Grid item xs={12} sm={8} md={8} lg={8}>
+            <Organization
+              organization={organization}
+              setOrganization={setOrganization}
+              inputErrors={inputErrors}
+              setInputErrors={setInputErrors}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <WhoCanApply
+              whoCanApply={whoCanApply}
+              setWhoCanApply={setWhoCanApply}
+              inputErrors={inputErrors}
+              setInputErrors={setInputErrors}
+            />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <ApplicationDeadLine
+              setApplicationDeadLine={setApplicationDeadLine}
+              inputErrors={inputErrors}
+              setInputErrors={setInputErrors}
+            />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            {/* <ScholarshipImage
+              imageUrl={scholarship.image ? scholarship.image.url : ''}
+              setScholarshipImage={setScholarshipImage}
+              inputErrors={inputErrors}
+              setInputErrors={setInputErrors}
+            /> */}
+          </Grid>
+        </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <Title
-            title={title}
-            setTitle={setTitle}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-          />
+          <HowToApply howToApply={howToApply} setHowToApply={setHowToApply} />
         </Grid>
-      </Grid>
-      <Description
-        description={description}
-        setDescription={setDescription}
-        inputErrors={inputErrors}
-        setInputErrors={setInputErrors}
-      />
-      <ScholarshipSourceLink
-        scholarshipSourceLink={scholarshipSourceLink}
-        setScholarshipSourceLink={setScholarshipSourceLink}
-        inputErrors={inputErrors}
-        setInputErrors={setInputErrors}
-      />
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={4} md={4} lg={4}>
-          <Country
-            country={country}
-            setCountry={setCountry}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-          />
-        </Grid>
-        <Grid item xs={12} sm={8} md={8} lg={8}>
-          <Organization
-            organization={organization}
-            setOrganization={setOrganization}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-          />
-        </Grid>
-      </Grid>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={4} md={4} lg={4}>
-          <WhoCanApply
-            whoCanApply={whoCanApply}
-            setWhoCanApply={setWhoCanApply}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-          />
-        </Grid>
-        <Grid item xs={12} sm={4} md={4} lg={4}>
-          <ApplicationDeadLine
-            setApplicationDeadLine={setApplicationDeadLine}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-          />
-        </Grid>
-        <Grid item xs={12} sm={4} md={4} lg={4}>
-          <ScholarshipImage
-            imageUrl={scholarship.image ? scholarship.image.url : ''}
-            setScholarshipImage={setScholarshipImage}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-          />
-        </Grid>
-      </Grid>
-      <Grid item xs={12} sm={12} md={12} lg={12}>
-        <HowToApply howToApply={howToApply} setHowToApply={setHowToApply} />
-      </Grid>
-      <>
-        {Object.values(inputErrors).filter((error) => error.length > 3).length ? (
-          <InputErrorsSummary
-            errors={Object.values(inputErrors).filter((error) => error.length > 3)}
-          />
-        ) : null}
-      </>
-      <Button
-        block
-        title={isLoading ? 'Updating Scholarship' : 'Update Scholarship'}
-        onClick={handleSubmit}
-        loading={isLoading}
-        disabled={isLoading || isSuccess}
-        align="center"
-        color="primary"
-        size="medium"
-        variant="filled"
-      />
-    </form>
+        <>
+          {Object.values(inputErrors).filter((error) => error.length > 3).length ? (
+            <InputErrorsSummary
+              errors={Object.values(inputErrors).filter((error) => error.length > 3)}
+            />
+          ) : null}
+        </>
+        <Button
+          block
+          title={isLoading ? 'Updating Scholarship' : 'Update Scholarship'}
+          onClick={handleSubmit}
+          loading={isLoading}
+          disabled={isLoading || isSuccess}
+          align="center"
+          color="primary"
+          size="medium"
+          variant="filled"
+        />
+      </form>
+    </BorderPaddingWrapper>
   )
 }

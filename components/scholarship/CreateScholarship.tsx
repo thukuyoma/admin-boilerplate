@@ -21,6 +21,7 @@ import scholarshipValidation from '../../utils/scholarship-validation'
 import createScholarship from '../../actions/scholarship/create-scholarship'
 import ImagePicker from '../forms/ImagePicker'
 import { InputTitle } from '../forms/form-styles'
+import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 
 export default function CreateScholarship() {
   const router = useRouter()
@@ -83,89 +84,91 @@ export default function CreateScholarship() {
   }
 
   return (
-    <form encType="multipart/form-data">
-      <Grid container spacing={3}>
+    <BorderPaddingWrapper padding>
+      <form encType="multipart/form-data">
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={12} md={12} lg={12}>
+            <Title
+              title={title}
+              setTitle={setTitle}
+              inputErrors={inputErrors}
+              setInputErrors={setInputErrors}
+            />
+          </Grid>
+        </Grid>
+        <Description
+          description={description}
+          setDescription={setDescription}
+          inputErrors={inputErrors}
+          setInputErrors={setInputErrors}
+        />
+        <ScholarshipSourceLink
+          scholarshipSourceLink={scholarshipSourceLink}
+          setScholarshipSourceLink={setScholarshipSourceLink}
+          inputErrors={inputErrors}
+          setInputErrors={setInputErrors}
+        />
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Country
+              country={country}
+              setCountry={setCountry}
+              inputErrors={inputErrors}
+              setInputErrors={setInputErrors}
+            />
+          </Grid>
+          <Grid item xs={12} sm={8} md={8} lg={8}>
+            <Organization
+              organization={organization}
+              setOrganization={setOrganization}
+              inputErrors={inputErrors}
+              setInputErrors={setInputErrors}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <WhoCanApply
+              whoCanApply={whoCanApply}
+              setWhoCanApply={setWhoCanApply}
+              inputErrors={inputErrors}
+              setInputErrors={setInputErrors}
+            />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <ApplicationDeadLine
+              setApplicationDeadLine={setApplicationDeadLine}
+              inputErrors={inputErrors}
+              setInputErrors={setInputErrors}
+            />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <InputTitle> Image</InputTitle>
+            <ImagePicker image={scholarshipImage} setImageCallback={setScholarshipImage} />
+          </Grid>
+        </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <Title
-            title={title}
-            setTitle={setTitle}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-          />
+          <HowToApply howToApply={howToApply.slice().reverse()} setHowToApply={setHowToApply} />
         </Grid>
-      </Grid>
-      <Description
-        description={description}
-        setDescription={setDescription}
-        inputErrors={inputErrors}
-        setInputErrors={setInputErrors}
-      />
-      <ScholarshipSourceLink
-        scholarshipSourceLink={scholarshipSourceLink}
-        setScholarshipSourceLink={setScholarshipSourceLink}
-        inputErrors={inputErrors}
-        setInputErrors={setInputErrors}
-      />
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={4} md={4} lg={4}>
-          <Country
-            country={country}
-            setCountry={setCountry}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-          />
-        </Grid>
-        <Grid item xs={12} sm={8} md={8} lg={8}>
-          <Organization
-            organization={organization}
-            setOrganization={setOrganization}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-          />
-        </Grid>
-      </Grid>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={4} md={4} lg={4}>
-          <WhoCanApply
-            whoCanApply={whoCanApply}
-            setWhoCanApply={setWhoCanApply}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-          />
-        </Grid>
-        <Grid item xs={12} sm={4} md={4} lg={4}>
-          <ApplicationDeadLine
-            setApplicationDeadLine={setApplicationDeadLine}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
-          />
-        </Grid>
-        <Grid item xs={12} sm={4} md={4} lg={4}>
-          <InputTitle> Image</InputTitle>
-          <ImagePicker image={scholarshipImage} setImageCallback={setScholarshipImage} />
-        </Grid>
-      </Grid>
-      <Grid item xs={12} sm={12} md={12} lg={12}>
-        <HowToApply howToApply={howToApply.slice().reverse()} setHowToApply={setHowToApply} />
-      </Grid>
-      <>
-        {Object.values(inputErrors).filter((error) => error.length > 3).length ? (
-          <InputErrorsSummary
-            errors={Object.values(inputErrors).filter((error) => error.length > 3)}
-          />
-        ) : null}
-      </>
-      <Button
-        block
-        title={isLoading ? 'Creating Scholarship' : 'Create Scholarship'}
-        onClick={handleSubmit}
-        loading={isLoading}
-        align="center"
-        disabled={isLoading || isSuccess}
-        color="primary"
-        size="medium"
-        variant="filled"
-      />
-    </form>
+        <>
+          {Object.values(inputErrors).filter((error) => error.length > 3).length ? (
+            <InputErrorsSummary
+              errors={Object.values(inputErrors).filter((error) => error.length > 3)}
+            />
+          ) : null}
+        </>
+        <Button
+          block
+          title={isLoading ? 'Creating Scholarship' : 'Create Scholarship'}
+          onClick={handleSubmit}
+          loading={isLoading}
+          align="center"
+          disabled={isLoading || isSuccess}
+          color="primary"
+          size="medium"
+          variant="filled"
+        />
+      </form>
+    </BorderPaddingWrapper>
   )
 }

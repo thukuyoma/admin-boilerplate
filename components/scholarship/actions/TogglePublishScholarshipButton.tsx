@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
-import publishScholarship from '../../../actions/scholarship/publish-scholarship'
+import togglePublishScholarship from '../../../actions/scholarship/toggle-publish-scholarship'
 import ActionButton from '../../buttons/ActionButton'
 
-export default function PublishScholarshipButton({ scholarshipId, refetch, isPublished }) {
+export default function TogglePublishScholarshipButton({ scholarshipId, refetch, isPublished }) {
   const [buttonTitle, setButtonTitle] = useState('')
   useEffect(() => {
     if (isPublished) {
@@ -13,7 +13,7 @@ export default function PublishScholarshipButton({ scholarshipId, refetch, isPub
     }
     setButtonTitle('Publish')
   }, [isPublished])
-  const { mutateAsync, isLoading } = useMutation([scholarshipId], publishScholarship, {
+  const { mutateAsync, isLoading } = useMutation([scholarshipId], togglePublishScholarship, {
     onError: (err) => {
       toast.error(err)
     },
@@ -22,7 +22,7 @@ export default function PublishScholarshipButton({ scholarshipId, refetch, isPub
       toast.success(data)
     },
   })
-  const handlePublishPost = async () => {
+  const handleSubmit = async () => {
     if (!scholarshipId) {
       return null
     }
@@ -33,7 +33,7 @@ export default function PublishScholarshipButton({ scholarshipId, refetch, isPub
     <ActionButton
       block
       title={isLoading ? `${buttonTitle}ing Scholarship` : `${buttonTitle} Scholarship`}
-      onClick={handlePublishPost}
+      onClick={handleSubmit}
       loading={isLoading}
       align="left"
     />

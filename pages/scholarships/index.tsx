@@ -13,8 +13,8 @@ import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import getAllscholarships from '../../actions/scholarship/get-all-scholalrships'
-import ScholarshipCard from '../../components/scholarship/ScholarshipCard '
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
+import ScholarshipListTable from '../../components/scholarship/ScholarshipListTable'
 
 export default function ScholarshipIndexPage() {
   const [page, setPage] = useState<number>(1)
@@ -65,10 +65,7 @@ export default function ScholarshipIndexPage() {
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess &&
-              query.scholarships.map((scholarship) => (
-                <ScholarshipCard key={scholarship.title} scholarship={scholarship} />
-              ))}
+            {isSuccess && <ScholarshipListTable scholarships={query.scholarships} />}
             {isLoading && <ServerLoadingLoader message="Loading Scholarships" />}
             {isSuccess && !query.scholarships.length && <NotFound message="No scholarship Found" />}
             {isError && <ServerError error={error} />}
