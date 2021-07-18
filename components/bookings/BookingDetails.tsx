@@ -73,6 +73,10 @@ export default function BookingDetails({ booking }) {
             </p>
           </div>
         </div>
+        <TagTitle>Title</TagTitle>
+        <TagDetails>{capitalizeFirstLetter(booking.title)}</TagDetails>
+        <TagTitle>Affilitate Link</TagTitle>
+        <TagDetails>{capitalizeFirstLetter(booking.affiliateLink)}</TagDetails>
         <TagTitle>Booking Description</TagTitle>
         <TagDetails>{capitalizeFirstLetter(booking.description)}</TagDetails>
       </BorderPaddingWrapper>

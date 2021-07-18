@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import getFormData from '../../utils/get-form-data'
 import Button from '../buttons/Button'
 import InputErrorsSummary from '../forms/InputErrorsSummary'
 import { toast } from 'react-toastify'
@@ -13,14 +12,16 @@ import {
   Country,
   Organization,
   HowToApply,
-  ScholarshipSourceLink,
+  SourceLink,
   WhoCanApply,
 } from './form'
 import ApplicationDeadLine from './form/ApplicationDeadLine'
-// import ScholarshipImage from './form/ScholarshipImage'
 import scholarshipValidation from '../../utils/scholarship-validation'
 import updateScholarship from '../../actions/scholarship/update-scholarship'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
+import DisplayInputError from '../forms/DisplayInputError'
+import { InputTitle } from '../forms/form-styles'
+import ImagePicker from '../forms/ImagePicker'
 
 export default function UpdateScholarship({ scholarship }) {
   const router = useRouter()
@@ -29,32 +30,32 @@ export default function UpdateScholarship({ scholarship }) {
   const [howToApply, setHowToApply] = useLocalStorage('howToApply', [])
   const [country, setCountry] = useLocalStorage('country', '')
   const [organization, setOrganization] = useLocalStorage('organization', '')
-  const [scholarshipImage, setScholarshipImage] = useState<File | Blob | string>('')
+  const [image, setImage] = useLocalStorage('image', {
+    url: '',
+    publicId: '',
+  })
   const [whoCanApply, setWhoCanApply] = useLocalStorage('whoCanApply', '')
   const [applicationDeadLine, setApplicationDeadLine] = useLocalStorage('applicationDeadLine', '')
-  const [scholarshipSourceLink, setScholarshipSourceLink] = useLocalStorage(
-    'scholarshipSourceLink',
-    ''
-  )
+  const [sourceLink, setSourceLink] = useLocalStorage('sourceLink', '')
   const [inputErrors, setInputErrors] = useState({
     title: '',
     description: '',
     country: '',
     organization: '',
-    scholarshipImage: '',
-    scholarshipSourceLink: '',
+    image: '',
+    sourceLink: '',
     whoCanApply: '',
   })
   const values = {
     title,
     description,
     country,
-    scholarshipImage,
+    image,
     organization,
     whoCanApply,
     howToApply,
     applicationDeadLine,
-    scholarshipSourceLink,
+    sourceLink,
   }
   const { mutateAsync, isSuccess, isLoading, isError, error, data } = useMutation(updateScholarship)
 
@@ -66,21 +67,18 @@ export default function UpdateScholarship({ scholarship }) {
     setOrganization(scholarship.organization)
     setWhoCanApply(scholarship.whoCanApply)
     setApplicationDeadLine(scholarship.applicationDeadLine)
-    setScholarshipSourceLink(scholarship.scholarshipSourceLink)
+    setSourceLink(scholarship.sourceLink)
+    setImage(scholarship.image)
   }, [scholarship])
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const validationResult = scholarshipValidation({
-      ...values,
-      scholarshipImage: scholarship.image.url,
-    })
-    if (validationResult.isError) {
-      setInputErrors(validationResult.errors)
+    const validation = scholarshipValidation(values)
+    if (validation.isError) {
+      setInputErrors(validation.errors)
       return null
     }
-    const scholarshipForm = getFormData({ ...values, howToApply: JSON.stringify(howToApply) })
     await mutateAsync(
-      { scholarshipId: scholarship._id, formData: scholarshipForm },
+      { scholarshipId: scholarship._id, formData: values },
       {
         onError: (resError: object) => {
           setInputErrors({ ...inputErrors, ...resError })
@@ -114,9 +112,9 @@ export default function UpdateScholarship({ scholarship }) {
           inputErrors={inputErrors}
           setInputErrors={setInputErrors}
         />
-        <ScholarshipSourceLink
-          scholarshipSourceLink={scholarshipSourceLink}
-          setScholarshipSourceLink={setScholarshipSourceLink}
+        <SourceLink
+          sourceLink={sourceLink}
+          setSourceLink={setSourceLink}
           inputErrors={inputErrors}
           setInputErrors={setInputErrors}
         />
@@ -155,12 +153,9 @@ export default function UpdateScholarship({ scholarship }) {
             />
           </Grid>
           <Grid item xs={12} sm={4} md={4} lg={4}>
-            {/* <ScholarshipImage
-              imageUrl={scholarship.image ? scholarship.image.url : ''}
-              setScholarshipImage={setScholarshipImage}
-              inputErrors={inputErrors}
-              setInputErrors={setInputErrors}
-            /> */}
+            <InputTitle> Image</InputTitle>
+            <ImagePicker image={image} setImageCallback={setImage} />
+            {inputErrors.image && <DisplayInputError error={inputErrors.image} />}
           </Grid>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -175,7 +170,7 @@ export default function UpdateScholarship({ scholarship }) {
         </>
         <Button
           block
-          title={isLoading ? 'Updating Scholarship' : 'Update Scholarship'}
+          title="Update Scholarship"
           onClick={handleSubmit}
           loading={isLoading}
           disabled={isLoading || isSuccess}

@@ -18,15 +18,7 @@ const errorMessages = {
   isInvalidScholarshipId: 'Invalid scholarship id',
 }
 export default function scholarshipValidation(formInputs: ScholarshipSchemaI) {
-  const {
-    title,
-    organization,
-    whoCanApply,
-    description,
-    country,
-    scholarshipSourceLink,
-    scholarshipImage,
-  } = formInputs
+  const { title, organization, whoCanApply, description, country, sourceLink, image } = formInputs
   const errors = {} as ScholarshipValidationFieldI
   if (!title) {
     errors.title = errorMessages.titleIsRequired
@@ -40,14 +32,14 @@ export default function scholarshipValidation(formInputs: ScholarshipSchemaI) {
   if (!description) {
     errors.description = errorMessages.descriptionIsRequired
   }
-  if (!scholarshipSourceLink) {
-    errors.scholarshipSourceLink = errorMessages.scholarshipSourceLinkIsRequired
+  if (!sourceLink) {
+    errors.sourceLink = errorMessages.scholarshipSourceLinkIsRequired
   }
   if (!country) {
     errors.country = errorMessages.countryIsRequired
   }
-  if (!scholarshipImage.url) {
-    errors.scholarshipImage = errorMessages.imageIsRequired
+  if (!image.url) {
+    errors.image = errorMessages.imageIsRequired
   }
   return {
     isError: Object.keys(errors).length ? true : false,

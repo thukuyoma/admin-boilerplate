@@ -81,7 +81,7 @@ export default function ContainerMainHeader({
           <div className="container-main-header__actions">
             <Button
               title={createButtonTitle}
-              size="medium"
+              size="small"
               color="primary"
               onClick={() => router.push(createButtonUrl)}
               variant="filled"

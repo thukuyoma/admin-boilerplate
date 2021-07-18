@@ -1,9 +1,8 @@
 import { Grid } from '@material-ui/core'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import getFormData from '../../utils/get-form-data'
 import Button from '../buttons/Button'
 import InputErrorsSummary from '../forms/InputErrorsSummary'
 import { toast } from 'react-toastify'
@@ -13,7 +12,7 @@ import {
   Country,
   Organization,
   HowToApply,
-  ScholarshipSourceLink,
+  SourceLink,
   WhoCanApply,
 } from './form'
 import ApplicationDeadLine from './form/ApplicationDeadLine'
@@ -22,6 +21,7 @@ import createScholarship from '../../actions/scholarship/create-scholarship'
 import ImagePicker from '../forms/ImagePicker'
 import { InputTitle } from '../forms/form-styles'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
+import DisplayInputError from '../forms/DisplayInputError'
 
 export default function CreateScholarship() {
   const router = useRouter()
@@ -30,47 +30,48 @@ export default function CreateScholarship() {
   const [howToApply, setHowToApply] = useLocalStorage('howToApply', [])
   const [country, setCountry] = useLocalStorage('country', '')
   const [organization, setOrganization] = useLocalStorage('organization', '')
-  const [scholarshipImage, setScholarshipImage] = useLocalStorage('scholarshipImage', {
+  const [image, setImage] = useLocalStorage('image', {
     url: '',
     publicId: '',
   })
   const [whoCanApply, setWhoCanApply] = useLocalStorage('whoCanApply', '')
   const [applicationDeadLine, setApplicationDeadLine] = useLocalStorage('applicationDeadLine', '')
-  const [scholarshipSourceLink, setScholarshipSourceLink] = useLocalStorage(
-    'scholarshipSourceLink',
-    ''
-  )
+  const [sourceLink, setSourceLink] = useLocalStorage('sourceLink', '')
   const [inputErrors, setInputErrors] = useState({
     title: '',
     description: '',
     country: '',
     organization: '',
-    scholarshipImage: '',
-    scholarshipSourceLink: '',
+    image: '',
+    sourceLink: '',
     whoCanApply: '',
   })
   const values = {
     title,
     description,
     country,
-    scholarshipImage,
+    image,
     organization,
     whoCanApply,
     howToApply,
     applicationDeadLine,
-    scholarshipSourceLink,
+    sourceLink,
   }
   const { mutateAsync, isSuccess, isLoading } = useMutation(createScholarship)
+  useEffect(() => {
+    if (image.url && image.publicId) {
+      setInputErrors({ ...inputErrors, image: '' })
+    }
+  }, [image.url])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const validationResult = scholarshipValidation(values)
-    if (validationResult.isError) {
-      setInputErrors(validationResult.errors)
+    const validation = scholarshipValidation(values)
+    if (validation.isError) {
+      setInputErrors(validation.errors)
       return null
     }
-    const scholarshipForm = getFormData({ ...values, howToApply: JSON.stringify(howToApply) })
-    await mutateAsync(scholarshipForm, {
+    await mutateAsync(values, {
       onError: (resError: object) => {
         setInputErrors({ ...inputErrors, ...resError })
       },
@@ -102,9 +103,9 @@ export default function CreateScholarship() {
           inputErrors={inputErrors}
           setInputErrors={setInputErrors}
         />
-        <ScholarshipSourceLink
-          scholarshipSourceLink={scholarshipSourceLink}
-          setScholarshipSourceLink={setScholarshipSourceLink}
+        <SourceLink
+          sourceLink={sourceLink}
+          setSourceLink={setSourceLink}
           inputErrors={inputErrors}
           setInputErrors={setInputErrors}
         />
@@ -144,7 +145,8 @@ export default function CreateScholarship() {
           </Grid>
           <Grid item xs={12} sm={4} md={4} lg={4}>
             <InputTitle> Image</InputTitle>
-            <ImagePicker image={scholarshipImage} setImageCallback={setScholarshipImage} />
+            <ImagePicker image={image} setImageCallback={setImage} />
+            {inputErrors.image && <DisplayInputError error={inputErrors.image} />}
           </Grid>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12}>

@@ -20,6 +20,8 @@ export default function CreateBlogPost() {
   const secondaryActions = [
     { title: 'Create Scholarship', url: '/scholarships/create' },
     { title: 'Scholarships', url: '/scholarships' },
+    { title: 'All Online', url: '/scholarships/filters/online' },
+    { title: 'All offline', url: '/scholarships/filters/offline' },
   ]
   return (
     <Layout>

@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
-import Layout from '../../components/layout/Layout'
-import ContainerMainAction from '../../components/layout/ContainerMainAction'
-import ContainerMainColumn from '../../components/layout/ContainerMainColumn'
-import ScrollableContainer from '../../components/layout/ScrollableContainer'
+import Layout from '../../../components/layout/Layout'
+import ContainerMainAction from '../../../components/layout/ContainerMainAction'
+import ContainerMainColumn from '../../../components/layout/ContainerMainColumn'
+import ScrollableContainer from '../../../components/layout/ScrollableContainer'
 import { useQuery } from 'react-query'
-import QueryPagination from '../../components/shared/QueryPagination'
-import ServerError from '../../components/shared/ServerError'
-import NotFound from '../../components/shared/NotFound'
-import ServerLoadingLoader from '../../components/shared/ServerLoadingLoader'
-import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
+import QueryPagination from '../../../components/shared/QueryPagination'
+import ServerError from '../../../components/shared/ServerError'
+import NotFound from '../../../components/shared/NotFound'
+import ServerLoadingLoader from '../../../components/shared/ServerLoadingLoader'
+import ActionButtonWrapper from '../../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
-import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
-import getAllscholarships from '../../actions/scholarship/get-all-scholalrships'
-import ContainerHeaders from '../../components/layout/ContainerHeaders'
-import ScholarshipListTable from '../../components/scholarship/ScholarshipListTable'
+import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
+import ContainerHeaders from '../../../components/layout/ContainerHeaders'
+import ScholarshipListTable from '../../../components/scholarship/ScholarshipListTable'
+import filterScholarship from '../../../actions/scholarship/filter-scholarship'
 
-export default function ScholarshipIndexPage() {
+export default function FilterOfflineScholarships() {
   const [page, setPage] = useState<number>(1)
   const limit = 5
   const [query, setQuery] = useState({
@@ -28,7 +28,7 @@ export default function ScholarshipIndexPage() {
   })
   const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
     ['scholarships', page],
-    () => getAllscholarships({ page, limit }),
+    () => filterScholarship({ page, limit, status: 'offline' }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
@@ -45,7 +45,7 @@ export default function ScholarshipIndexPage() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `(${query.totalScholarships})`, url: '/scholarships', isActive: true },
+    { title: `Offline (${query.totalScholarships})`, url: '/scholarships', isActive: true },
     { title: 'Create Scholarship', url: '/scholarships/create', isActive: false },
   ]
 

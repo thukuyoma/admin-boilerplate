@@ -101,9 +101,6 @@ export default function ScholarshipDetails({ scholarship }) {
         <TagTitle>Scholarship Description</TagTitle>
         <TagDetails>{capitalizeFirstLetter(scholarship.description)}</TagDetails>
 
-        <TagTitle>Scholarship Description</TagTitle>
-        <TagDetails>{capitalizeFirstLetter(scholarship.description)}</TagDetails>
-
         {scholarship.howToApply.length ? (
           <>
             <TagTitle>How to Apply</TagTitle>
