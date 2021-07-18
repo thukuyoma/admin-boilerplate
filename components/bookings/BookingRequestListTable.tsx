@@ -7,6 +7,7 @@ import TableAvatar from '../shared/TableAvatar'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 import ToggleBookedStatusButton from './actions/ToggleBookedStatusButton'
+import StatusButton from '../buttons/StatusButton'
 
 const Styles = styled.div`
   .bookingRequest__subject {
@@ -18,6 +19,7 @@ const Styles = styled.div`
     border: none;
     text-align: left;
     border-top: 1px solid rgb(238, 238, 238);
+    white-space: nowrap;
   }
   .table-cell__align-right {
     text-align: right;
@@ -59,11 +61,12 @@ export default function BookingRequestListTable({ bookingRequests, refetch }) {
                   <TableCell className="table__cell table-cell__border-top">email</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Phone Number</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Date Created</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Status</TableCell>
                   <TableCell
+                    className="table__cell table-cell__border-top table-cell__align-right"
                     align="right"
-                    className="table__cell table-cell__align-right table-cell__border-top"
                   >
-                    Status
+                    Action
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -89,6 +92,12 @@ export default function BookingRequestListTable({ bookingRequests, refetch }) {
                         </TableCell>
                         <TableCell className="table__cell bookingRequest__timestamp">
                           {dateFormatter(bookingRequest.timestamp)}
+                        </TableCell>
+                        <TableCell className="table__cell bookingRequest__timestamp">
+                          <StatusButton
+                            title={`${bookingRequest.status.isBooked ? 'Booked' : 'Pending'}`}
+                            color={`${bookingRequest.status.isBooked ? 'success' : 'warning'}`}
+                          />
                         </TableCell>
                         <TableCell className="table__cell table-cell__align-right">
                           <ToggleBookedStatusButton

@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
-import Layout from '../../../components/layout/Layout'
-import ContainerMainAction from '../../../components/layout/ContainerMainAction'
-import ContainerMainColumn from '../../../components/layout/ContainerMainColumn'
-import ScrollableContainer from '../../../components/layout/ScrollableContainer'
+import Layout from '../../../../components/layout/Layout'
+import ContainerMainAction from '../../../../components/layout/ContainerMainAction'
+import ContainerMainColumn from '../../../../components/layout/ContainerMainColumn'
+import ScrollableContainer from '../../../../components/layout/ScrollableContainer'
 import { useQuery } from 'react-query'
-import QueryPagination from '../../../components/shared/QueryPagination'
-import ServerError from '../../../components/shared/ServerError'
-import NotFound from '../../../components/shared/NotFound'
-import ServerLoadingLoader from '../../../components/shared/ServerLoadingLoader'
-import ActionButtonWrapper from '../../../components/shared/ActionButtonWrapper'
+import QueryPagination from '../../../../components/shared/QueryPagination'
+import ServerError from '../../../../components/shared/ServerError'
+import NotFound from '../../../../components/shared/NotFound'
+import ServerLoadingLoader from '../../../../components/shared/ServerLoadingLoader'
+import ActionButtonWrapper from '../../../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
-import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
-import getBookingRequests from '../../../actions/bookings/get-booking-requests'
-import ContainerHeaders from '../../../components/layout/ContainerHeaders'
-import BookingRequestListTable from '../../../components/bookings/BookingRequestListTable'
+import ContainerMainWrapper from '../../../../components/layout/ContainerWrapper'
+import ContainerHeaders from '../../../../components/layout/ContainerHeaders'
+import BookingRequestListTable from '../../../../components/bookings/BookingRequestListTable'
+import filterBookingRequests from '../../../../actions/bookings/filter-booking-request'
 
-export default function BookingRequestsPage() {
+export default function PendingBookingRequestsPage() {
   const [page, setPage] = useState<number>(1)
   const limit = 5
   const [query, setQuery] = useState({
@@ -27,8 +27,8 @@ export default function BookingRequestsPage() {
     bookingRequests: [],
   })
   const { isLoading, isError, isSuccess, error, isPreviousData, isFetching, refetch } = useQuery(
-    ['Booking Requests', page],
-    () => getBookingRequests({ page, limit }),
+    ['Pending Booking Requests', page],
+    () => filterBookingRequests({ page, limit, status: 'pending' }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
@@ -45,7 +45,7 @@ export default function BookingRequestsPage() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `Requests (${query.totalBookingRequests})`, url: '/bookings', isActive: true },
+    { title: `Pending Requests (${query.totalBookingRequests})`, url: '/bookings', isActive: true },
     { title: 'Bookings', url: '/bookings', isActive: false },
     { title: 'Create Booking', url: '/bookings/create', isActive: false },
     { title: 'Booking Requests', url: '/bookings/booking-requests', isActive: false },

@@ -12,23 +12,23 @@ import ActionButtonWrapper from '../../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
-import filterApplications from '../../../actions/application/filter-applications'
 import ContainerHeaders from '../../../components/layout/ContainerHeaders'
-import ApplicationListTable from '../../../components/applications/ApplicationListTable'
+import BookingListTable from '../../../components/bookings/BookingListTable'
+import filterBookings from '../../../actions/bookings/filter-bookings'
 
-export default function FilterApplicationByApplied() {
+export default function FilterOfflineBooking() {
   const [page, setPage] = useState<number>(1)
-  const limit: number = 5
+  const limit = 5
   const [query, setQuery] = useState({
     hasMore: false,
     totalPages: 0,
-    totalApplications: 0,
+    totalBookings: 0,
     currentPage: page,
-    applications: [],
+    bookings: null,
   })
   const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['Applied applications', page],
-    () => filterApplications({ page, limit, status: 'applied' }),
+    ['Offline Bbookings', page],
+    () => filterBookings({ page, limit, status: 'offline' }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
@@ -45,17 +45,15 @@ export default function FilterApplicationByApplied() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    {
-      title: `Applied (${query.totalApplications})`,
-      url: '/applications',
-      isActive: true,
-    },
+    { title: `Offline (${query.totalBookings})`, url: '/bookings', isActive: true },
+    { title: 'Create Booking', url: '/bookings/create', isActive: false },
+    { title: 'Booking Requests', url: '/bookings/booking-request', isActive: false },
   ]
-
   const secondaryActions = [
-    { title: 'Applications', url: '/applications' },
-    { title: 'All Applied', url: '/applications/filters/applied' },
-    { title: 'All Pending', url: '/applications/filters/pending' },
+    { title: 'Create Booking', url: '/bookings/create' },
+    { title: 'Booking Requests', url: '/bookings/booking-requests' },
+    { title: 'All Online', url: '/bookings/filters/online' },
+    { title: 'All Offline', url: '/bookings/filters/offline' },
   ]
 
   return (
@@ -63,16 +61,15 @@ export default function FilterApplicationByApplied() {
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerHeaders
-            pageTitle="Application"
-            createButtonUrl=""
-            createButtonTitle=""
+            pageTitle="Bookings"
+            createButtonUrl="/bookings/create"
+            createButtonTitle="Create Booking"
             overlayItems={overlayItems}
           />
-
           <ScrollableContainer>
-            {isSuccess && <ApplicationListTable applications={query.applications} />}
-            {isLoading && <ServerLoadingLoader message="Loading Applications" />}
-            {isSuccess && !query.applications.length && <NotFound message="No Application Found" />}
+            {isSuccess && <BookingListTable bookings={query.bookings} />}
+            {isLoading && <ServerLoadingLoader message="Loading Bookings" />}
+            {isSuccess && !query.bookings.length && <NotFound message="No Booking Found" />}
             {isError && <ServerError error={error} />}
             <QueryPagination
               nextPage={handleNextPage}

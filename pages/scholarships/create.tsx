@@ -21,7 +21,7 @@ export default function CreateBlogPost() {
     { title: 'Create Scholarship', url: '/scholarships/create' },
     { title: 'Scholarships', url: '/scholarships' },
     { title: 'All Online', url: '/scholarships/filters/online' },
-    { title: 'All offline', url: '/scholarships/filters/offline' },
+    { title: 'All Offline', url: '/scholarships/filters/offline' },
   ]
   return (
     <Layout>

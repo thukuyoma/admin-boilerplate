@@ -31,7 +31,7 @@ export default function UpdateScholarshipPage() {
     { title: 'Create Scholarship', url: '/scholarships/create' },
     { title: 'Scholaships', url: '/scholarships' },
     { title: 'All Online', url: '/scholarships/filters/online' },
-    { title: 'All offline', url: '/scholarships/filters/offline' },
+    { title: 'All Offline', url: '/scholarships/filters/offline' },
   ]
   return (
     <Layout>

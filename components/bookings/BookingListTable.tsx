@@ -9,6 +9,7 @@ import Button from '../buttons/Button'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 import wordShortener from '../../utils/wordShortener'
+import StatusButton from '../buttons/StatusButton'
 
 const Styles = styled.div`
   .table__cell {
@@ -57,6 +58,7 @@ export default function BookingListTable({ bookings }) {
                   <TableCell className="table__cell table-cell__border-top">Title</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Type</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Date Created</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Status</TableCell>
                   <TableCell
                     align="right"
                     className="table__cell table-cell__align-right table-cell__border-top"
@@ -86,12 +88,18 @@ export default function BookingListTable({ bookings }) {
                         <TableCell className="table__cell booking__timestamp">
                           {dateFormatter(booking.timestamp)}
                         </TableCell>
+                        <TableCell className="table__cell bookingRequest__timestamp">
+                          <StatusButton
+                            title={`${booking.status.isPublished ? 'Online' : 'Offline'}`}
+                            color={`${booking.status.isPublished ? 'success' : 'warning'}`}
+                          />
+                        </TableCell>
                         <TableCell className="table__cell table-cell__align-right">
                           <Button
-                            title="See More"
+                            title="See Booking"
                             color="info"
                             size="small"
-                            variant="outlined"
+                            variant="filled"
                             align="right"
                           />
                         </TableCell>

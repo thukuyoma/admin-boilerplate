@@ -27,7 +27,7 @@ export default function FilterApplicationByPending() {
     applications: [],
   })
   const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['applications', page],
+    ['Pending Applications', page],
     () => filterApplications({ page, limit, status: 'pending' }),
     {
       keepPreviousData: true,

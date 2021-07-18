@@ -19,10 +19,10 @@ export default function ToggleBookedStatusButton({ isBooked, refetch, bookingReq
   }
   return (
     <Button
-      title={`${isBooked ? 'Mark Booked' : 'Mark Pending'}`}
-      color={`${isBooked ? 'info' : 'danger'}`}
+      title={`${!isBooked ? 'Mark As Booked' : 'Mark As Pending'}`}
+      color={`${!isBooked ? 'danger' : 'info'}`}
       size="small"
-      variant="outlined"
+      variant="filled"
       align="right"
       loading={isLoading}
       onClick={() => handleSubmit()}

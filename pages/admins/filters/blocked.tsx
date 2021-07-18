@@ -27,7 +27,7 @@ export default function FilterBlockedAdmin() {
     admins: null,
   })
   const { isLoading, data, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['admins', page],
+    ['Blocked admins', page],
     () => filterAdmins({ page, limit, status: 'blocked' }),
     {
       keepPreviousData: true,

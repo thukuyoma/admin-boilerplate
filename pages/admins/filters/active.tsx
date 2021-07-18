@@ -27,7 +27,7 @@ export default function FilterActiveAdmin() {
     admins: null,
   })
   const { isLoading, data, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['admins', page],
+    ['Active Admins', page],
     () => filterAdmins({ page, limit, status: 'active' }),
     {
       keepPreviousData: true,

@@ -52,6 +52,8 @@ export default function BookingIndex() {
   const secondaryActions = [
     { title: 'Create Booking', url: '/bookings/create' },
     { title: 'Booking Requests', url: '/bookings/booking-requests' },
+    { title: 'All Online', url: '/bookings/filters/online' },
+    { title: 'All Offline', url: '/bookings/filters/offline' },
   ]
 
   return (
