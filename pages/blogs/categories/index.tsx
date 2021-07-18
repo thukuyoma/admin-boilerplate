@@ -55,6 +55,8 @@ export default function Categories() {
     { title: 'Blogs', url: '/blogs' },
     { title: 'Create Blog', url: '/blogs/create' },
     { title: 'Create Categories', url: '/blogs/categories/create' },
+    { title: 'Online Categories', url: '/blogs/categories/filter/online' },
+    { title: 'Offline Categories', url: '/blogs/categories/filter/offline' },
   ]
   return (
     <Layout>

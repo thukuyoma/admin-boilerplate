@@ -21,6 +21,8 @@ export default function CreateBlogPost() {
   ]
   const secondaryActions = [
     { title: 'Blogs', url: '/blogs' },
+    { title: 'All Online', url: '/blogs/filters/online' },
+    { title: 'All Offline', url: '/blogs/filters/offline' },
     { title: 'Categories', url: '/blogs/categories' },
     { title: 'Create Category', url: '/blogs/categories/create' },
   ]

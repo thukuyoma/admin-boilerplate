@@ -11,7 +11,7 @@ export default async function filterApplications({
 }) {
   try {
     const res = await api.get(
-      `/applications/filter/${status}?page=${Number(page)}&&limit=${Number(limit)}`
+      `/applications/filter/${status}?page=${Number(page)}&limit=${Number(limit)}`
     )
     return res.data
   } catch (err) {

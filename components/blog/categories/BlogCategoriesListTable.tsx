@@ -9,6 +9,7 @@ import Button from '../../buttons/Button'
 import capitalizeFirstLetter from '../../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../../shared/BorderPaddingWrapper'
 import wordShortener from '../../../utils/wordShortener'
+import StatusButton from '../../buttons/StatusButton'
 
 const Styles = styled.div`
   .category__description {
@@ -58,15 +59,13 @@ export default function BlogCategoriesListTable({ categories }) {
                     #
                   </TableCell>
                   <TableCell className="table__cell table-cell__border-top">Title</TableCell>
-                  <TableCell className="table__cell table-cell__border-top category__description">
-                    Description
-                  </TableCell>
-                  <TableCell className="table__cell table-cell__border-top">Date</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Date Created</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Status</TableCell>
                   <TableCell
                     align="right"
                     className="table__cell table-cell__align-right table-cell__border-top"
                   >
-                    Status
+                    Action
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -80,21 +79,25 @@ export default function BlogCategoriesListTable({ categories }) {
                         className="table__row"
                       >
                         <TableCell className="table__cell">
-                          <TableAvatar image={category?.image?.url} />
+                          <TableAvatar image={category?.image?.url} initial={category.title} />
                         </TableCell>
                         <TableCell className="table__cell category__subject">
                           {capitalizeFirstLetter(category.title)}
                         </TableCell>
-                        <TableCell className="table__cell category__description">
-                          {wordShortener(category?.description, 10)}
-                        </TableCell>
                         <TableCell className="table__cell category__timestamp">
                           {dateFormatter(category.timestamp)}
                         </TableCell>
+                        <TableCell className="table__cell category__timestamp">
+                          <StatusButton
+                            title={`${category.status.isPublished ? 'Online' : 'Offline'}`}
+                            color={`${category.status.isPublished ? 'success' : 'warning'}`}
+                          />
+                        </TableCell>
+
                         <TableCell className="table__cell table-cell__align-right">
                           <Button
-                            title={`${category.status.isPublished ? 'Online' : 'Offline'}`}
-                            color={`${category.status.isPublished ? 'info' : 'danger'}`}
+                            title="See More"
+                            color="info"
                             size="small"
                             variant="filled"
                             align="right"

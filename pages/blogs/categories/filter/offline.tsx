@@ -1,38 +1,39 @@
 import React, { useState } from 'react'
-import Layout from '../../components/layout/Layout'
-import ContainerMainAction from '../../components/layout/ContainerMainAction'
-import ContainerMainColumn from '../../components/layout/ContainerMainColumn'
-import ScrollableContainer from '../../components/layout/ScrollableContainer'
+import Layout from '../../../../components/layout/Layout'
+import ContainerMainAction from '../../../../components/layout/ContainerMainAction'
+import ContainerMainColumn from '../../../../components/layout/ContainerMainColumn'
+import ScrollableContainer from '../../../../components/layout/ScrollableContainer'
 import { useQuery } from 'react-query'
-import getAllPosts from '../../actions/post/get-all-posts'
-import QueryPagination from '../../components/shared/QueryPagination'
-import ServerError from '../../components/shared/ServerError'
-import NotFound from '../../components/shared/NotFound'
-import ServerLoadingLoader from '../../components/shared/ServerLoadingLoader'
-import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
+import QueryPagination from '../../../../components/shared/QueryPagination'
+import ServerError from '../../../../components/shared/ServerError'
+import NotFound from '../../../../components/shared/NotFound'
+import ServerLoadingLoader from '../../../../components/shared/ServerLoadingLoader'
+import ActionButtonWrapper from '../../../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
-import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
-import ContainerHeaders from '../../components/layout/ContainerHeaders'
-import BlogListTable from '../../components/blog/BlogListTable'
+import ContainerMainWrapper from '../../../../components/layout/ContainerWrapper'
+import ContainerHeaders from '../../../../components/layout/ContainerHeaders'
+import BlogCategoriesListTable from '../../../../components/blog/categories/BlogCategoriesListTable'
+import filterCategories from '../../../../actions/post/categories/filter-categories'
 
-export default function Blogs() {
+export default function FilterOnlineCategories() {
   const [page, setPage] = useState<number>(1)
   const limit = 5
   const [query, setQuery] = useState({
     hasMore: false,
     totalPages: 0,
-    totalBlogs: 0,
+    totalCategories: 0,
     currentPage: page,
-    blogs: [],
+    categories: [],
   })
   const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['articles', page],
-    () => getAllPosts({ page, limit }),
+    ['Offline Categories', page],
+    () => filterCategories({ page, limit, status: 'offline' }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
         setQuery(data)
+        return
       },
     }
   )
@@ -45,17 +46,18 @@ export default function Blogs() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `(${query.totalBlogs})`, url: '/blogs', isActive: true },
-    { title: 'Categories', url: '/blogs/categories', isActive: false },
+    { title: `Offline Categories (${query.totalCategories})`, url: '', isActive: true },
+    { title: 'Blogs', url: '/blogs', isActive: false },
     { title: 'Create Category', url: '/blogs/categories/create', isActive: false },
     { title: 'Create Blog', url: '/blogs/create', isActive: false },
   ]
   const secondaryActions = [
+    { title: 'Blogs', url: '/blogs' },
     { title: 'Create Blog', url: '/blogs/create' },
+    { title: 'Create Categories', url: '/blogs/categories/create' },
     { title: 'Categories', url: '/blogs/categories' },
-    { title: 'Create Category', url: '/blogs/categories/create' },
-    { title: 'All Online', url: '/blogs/filters/online' },
-    { title: 'All Offline', url: '/blogs/filters/offline' },
+    { title: 'Online Categories', url: '/blogs/categories/filter/online' },
+    { title: 'Offline Categories', url: '/blogs/categories/filter/offline' },
   ]
   return (
     <Layout>
@@ -63,14 +65,16 @@ export default function Blogs() {
         <ContainerMainColumn>
           <ContainerHeaders
             pageTitle="Blogs"
-            createButtonUrl="/blogs/create"
-            createButtonTitle="Create Blog"
+            createButtonUrl="/blogs/categories/create"
+            createButtonTitle="Create Category"
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess && query?.blogs && <BlogListTable blogs={query.blogs} />}
-            {isLoading && <ServerLoadingLoader message="Loading Posts" />}
-            {isSuccess && query.blogs.length === 0 && <NotFound message="No Post Found" />}
+            {isSuccess && query?.categories && (
+              <BlogCategoriesListTable categories={query.categories} />
+            )}
+            {isLoading && <ServerLoadingLoader message="Loading Categories" />}
+            {isSuccess && query.categories.length === 0 && <NotFound message="No Category Found" />}
             {isError && <ServerError error={error} />}
             <QueryPagination
               nextPage={handleNextPage}

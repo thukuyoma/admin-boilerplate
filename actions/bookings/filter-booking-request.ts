@@ -11,7 +11,7 @@ export default async function filterBookingRequests({
 }) {
   try {
     const res = await api.get(
-      `/booking-requests/filter/${status}?page=${Number(page)}&&limit=${Number(limit)}`
+      `/booking-requests/filter/${status}?page=${Number(page)}&limit=${Number(limit)}`
     )
     const { data } = res
     return data

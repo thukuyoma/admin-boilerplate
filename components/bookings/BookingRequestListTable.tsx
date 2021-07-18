@@ -75,7 +75,10 @@ export default function BookingRequestListTable({ bookingRequests, refetch }) {
                   ? bookingRequests.map((bookingRequest) => (
                       <TableRow key={nanoid()} className="table__row">
                         <TableCell className="table__cell">
-                          <TableAvatar image={bookingRequest?.image?.url} />
+                          <TableAvatar
+                            image={bookingRequest?.image?.url}
+                            initial={bookingRequest.firstName}
+                          />
                         </TableCell>
                         <TableCell className="table__cell bookingRequest__subject">
                           {capitalizeFirstLetter(bookingRequest.firstName)}{' '}

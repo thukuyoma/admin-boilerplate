@@ -79,7 +79,7 @@ export default function ScholarshipListTable({ scholarships }) {
                         className="table__row"
                       >
                         <TableCell className="table__cell">
-                          <TableAvatar image={scholarship?.image.url} />
+                          <TableAvatar image={scholarship?.image.url} initial={scholarship.title} />
                         </TableCell>
                         <TableCell className="table__cell scholarship__subject">
                           {capitalizeFirstLetter(scholarship.title)}

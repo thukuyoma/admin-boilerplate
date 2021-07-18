@@ -77,7 +77,7 @@ export default function BookingListTable({ bookings }) {
                         className="table__row"
                       >
                         <TableCell className="table__cell">
-                          <TableAvatar image={booking?.image?.url} />
+                          <TableAvatar image={booking?.image?.url} initial={booking.title} />
                         </TableCell>
                         <TableCell className="table__cell">
                           {wordShortener(capitalizeFirstLetter(booking.title), 12)}

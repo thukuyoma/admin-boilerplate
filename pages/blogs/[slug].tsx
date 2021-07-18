@@ -48,6 +48,8 @@ export default function BlogPostDetails() {
   const secondaryActions = [
     { title: 'Create Blog', url: '/blogs/create' },
     { title: 'Blogs', url: '/blogs' },
+    { title: 'All Online', url: '/blogs/filters/online' },
+    { title: 'All Offline', url: '/blogs/filters/offline' },
     { title: 'Categories', url: '/blogs/categories' },
     { title: 'Create Category', url: '/blogs/categories/create' },
   ]

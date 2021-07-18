@@ -1,17 +1,17 @@
-import api from '../../utils/api'
+import api from '../../../utils/api'
 
-export default async function filterAdmins({
+export default async function filterCategories({
   page,
   limit,
   status,
 }: {
   page: number
   limit: number
-  status: 'blocked' | 'active'
+  status: 'online' | 'offline'
 }) {
   try {
     const res = await api.get(
-      `/admins/filter/${status}?page=${Number(page)}&limit=${Number(limit)}`
+      `/blogs/categories/filter/${status}?page=${Number(page)}&limit=${Number(limit)}`
     )
     const { data } = res
     return data

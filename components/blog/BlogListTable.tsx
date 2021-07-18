@@ -79,7 +79,7 @@ export default function BlogListTable({ blogs }) {
                         className="table__row"
                       >
                         <TableCell className="table__cell">
-                          <TableAvatar image={blog?.image.url} />
+                          <TableAvatar image={blog?.image.url} initial={blog.title} />
                         </TableCell>
                         <TableCell className="table__cell blog__subject">
                           {capitalizeFirstLetter(blog.title)}

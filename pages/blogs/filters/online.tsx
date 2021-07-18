@@ -1,20 +1,21 @@
+export {}
 import React, { useState } from 'react'
-import Layout from '../../components/layout/Layout'
-import ContainerMainAction from '../../components/layout/ContainerMainAction'
-import ContainerMainColumn from '../../components/layout/ContainerMainColumn'
-import ScrollableContainer from '../../components/layout/ScrollableContainer'
+import Layout from '../../../components/layout/Layout'
+import ContainerMainAction from '../../../components/layout/ContainerMainAction'
+import ContainerMainColumn from '../../../components/layout/ContainerMainColumn'
+import ScrollableContainer from '../../../components/layout/ScrollableContainer'
 import { useQuery } from 'react-query'
-import getAllPosts from '../../actions/post/get-all-posts'
-import QueryPagination from '../../components/shared/QueryPagination'
-import ServerError from '../../components/shared/ServerError'
-import NotFound from '../../components/shared/NotFound'
-import ServerLoadingLoader from '../../components/shared/ServerLoadingLoader'
-import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
+import QueryPagination from '../../../components/shared/QueryPagination'
+import ServerError from '../../../components/shared/ServerError'
+import NotFound from '../../../components/shared/NotFound'
+import ServerLoadingLoader from '../../../components/shared/ServerLoadingLoader'
+import ActionButtonWrapper from '../../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
-import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
-import ContainerHeaders from '../../components/layout/ContainerHeaders'
-import BlogListTable from '../../components/blog/BlogListTable'
+import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
+import ContainerHeaders from '../../../components/layout/ContainerHeaders'
+import BlogListTable from '../../../components/blog/BlogListTable'
+import filterBlogs from '../../../actions/post/filters/filter-by-published'
 
 export default function Blogs() {
   const [page, setPage] = useState<number>(1)
@@ -27,8 +28,8 @@ export default function Blogs() {
     blogs: [],
   })
   const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['articles', page],
-    () => getAllPosts({ page, limit }),
+    ['Online Articles', page],
+    () => filterBlogs({ page, limit, status: 'online' }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
@@ -45,7 +46,7 @@ export default function Blogs() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `(${query.totalBlogs})`, url: '/blogs', isActive: true },
+    { title: `Online (${query.totalBlogs})`, url: '/blogs', isActive: true },
     { title: 'Categories', url: '/blogs/categories', isActive: false },
     { title: 'Create Category', url: '/blogs/categories/create', isActive: false },
     { title: 'Create Blog', url: '/blogs/create', isActive: false },
@@ -54,6 +55,7 @@ export default function Blogs() {
     { title: 'Create Blog', url: '/blogs/create' },
     { title: 'Categories', url: '/blogs/categories' },
     { title: 'Create Category', url: '/blogs/categories/create' },
+    { title: 'Blogs', url: '/blogs' },
     { title: 'All Online', url: '/blogs/filters/online' },
     { title: 'All Offline', url: '/blogs/filters/offline' },
   ]

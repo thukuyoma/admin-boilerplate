@@ -31,6 +31,8 @@ export default function UpdatePost() {
   const secondaryActions = [
     { title: 'Create Blog', url: '/blogs/create' },
     { title: 'All Blogs', url: '/blogs' },
+    { title: 'All Online', url: '/blogs/filters/online' },
+    { title: 'All Offline', url: '/blogs/filters/offline' },
     { title: 'All Categories', url: '/blogs/categories' },
     { title: 'Create Categories', url: '/blogs/categories/create' },
   ]
