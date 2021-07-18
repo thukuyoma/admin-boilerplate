@@ -10,27 +10,25 @@ import NotFound from '../../../components/shared/NotFound'
 import ServerLoadingLoader from '../../../components/shared/ServerLoadingLoader'
 import ActionButtonWrapper from '../../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
-import { useRouter } from 'next/router'
+import router from 'next/router'
 import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
-import AdminActivitiesCard from '../../../components/admins/AdminActivitiesCard'
-import getAdminActiviesLog from '../../../actions/account/get-admin-activities-log'
+import filterApplications from '../../../actions/application/filter-applications'
 import ContainerHeaders from '../../../components/layout/ContainerHeaders'
+import ApplicationListTable from '../../../components/applications/ApplicationListTable'
 
-export default function AdminActivitiesPage() {
+export default function FilterApplicationByApplied() {
   const [page, setPage] = useState<number>(1)
-  const limit = 10
-  const router = useRouter()
-  const { adminId } = router.query
+  const limit: number = 5
   const [query, setQuery] = useState({
     hasMore: false,
     totalPages: 0,
-    totalActivityHistory: 0,
+    totalApplications: 0,
     currentPage: page,
-    activityHistory: null,
+    applications: [],
   })
-  const { isLoading, data, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['activity history', page],
-    () => getAdminActiviesLog({ page, limit, adminId }),
+  const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
+    ['applications', page],
+    () => filterApplications({ page, limit, status: 'applied' }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
@@ -48,22 +46,16 @@ export default function AdminActivitiesPage() {
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
     {
-      title: `Activities (${query && query.totalActivityHistory})`,
-      url: '/',
+      title: `Applied (${query.totalApplications})`,
+      url: '/applications',
       isActive: true,
     },
-    { title: 'Create Admin', url: '/admins/create', isActive: false },
-    { title: 'Details', url: `admins/${adminId}`, isActive: false },
-    { title: 'Admins', url: '/admins', isActive: false },
-    { title: 'Create Admin', url: '/admins/create', isActive: false },
   ]
 
   const secondaryActions = [
-    { title: 'Create Admin', url: '/admins/create' },
-    { title: 'Admin Details', url: `/admins/${adminId}` },
-    { title: 'Admins', url: `/admins` },
-    { title: 'All Active', url: '/admins/filters/active' },
-    { title: 'All Blocked', url: '/admins/filters/blocked' },
+    { title: 'Applications', url: '/applications' },
+    { title: 'All Applied', url: '/applications/filters/applied' },
+    { title: 'All Pending', url: '/applications/filters/pending' },
   ]
 
   return (
@@ -71,21 +63,16 @@ export default function AdminActivitiesPage() {
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerHeaders
-            pageTitle="Admins"
-            createButtonUrl="/admins/create"
-            createButtonTitle="Create Admin"
+            pageTitle="Application"
+            createButtonUrl=""
+            createButtonTitle=""
             overlayItems={overlayItems}
           />
+
           <ScrollableContainer>
-            {isSuccess &&
-              data &&
-              query?.activityHistory.map((activity) => (
-                <AdminActivitiesCard key={nanoid()} activity={activity} />
-              ))}
-            {isLoading && <ServerLoadingLoader message="Loading Admin Activities" />}
-            {isSuccess && !query.activityHistory.length && (
-              <NotFound message="No Admin Activity Found" />
-            )}
+            {isSuccess && <ApplicationListTable applications={query.applications} />}
+            {isLoading && <ServerLoadingLoader message="Loading Applications" />}
+            {isSuccess && !query.applications.length && <NotFound message="No Application Found" />}
             {isError && <ServerError error={error} />}
             <QueryPagination
               nextPage={handleNextPage}

@@ -54,8 +54,8 @@ export default function ApplicationsIndexPage() {
 
   const secondaryActions = [
     { title: 'Applications', url: '/applications' },
-    { title: 'All Applied', url: '/applications/filters?sort=home' },
-    { title: 'All Pending', url: '/applications/filters?sort=pending' },
+    { title: 'All Applied', url: '/applications/filters/pending' },
+    { title: 'All Pending', url: '/applications/filters/applied' },
   ]
 
   return (

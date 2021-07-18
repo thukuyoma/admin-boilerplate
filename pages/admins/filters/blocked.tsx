@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
-import Layout from '../../components/layout/Layout'
-import ContainerMainAction from '../../components/layout/ContainerMainAction'
-import ContainerMainColumn from '../../components/layout/ContainerMainColumn'
-import ScrollableContainer from '../../components/layout/ScrollableContainer'
+import Layout from '../../../components/layout/Layout'
+import ContainerMainAction from '../../../components/layout/ContainerMainAction'
+import ContainerMainColumn from '../../../components/layout/ContainerMainColumn'
+import ScrollableContainer from '../../../components/layout/ScrollableContainer'
 import { useQuery } from 'react-query'
-import QueryPagination from '../../components/shared/QueryPagination'
-import ServerError from '../../components/shared/ServerError'
-import NotFound from '../../components/shared/NotFound'
-import ServerLoadingLoader from '../../components/shared/ServerLoadingLoader'
-import ActionButtonWrapper from '../../components/shared/ActionButtonWrapper'
+import QueryPagination from '../../../components/shared/QueryPagination'
+import ServerError from '../../../components/shared/ServerError'
+import NotFound from '../../../components/shared/NotFound'
+import ServerLoadingLoader from '../../../components/shared/ServerLoadingLoader'
+import ActionButtonWrapper from '../../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
-import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
-import getAllAdmins from '../../actions/account/get-all-admins'
-import ContainerHeaders from '../../components/layout/ContainerHeaders'
-import AdminListTable from '../../components/admins/AdminListTable'
+import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
+import ContainerHeaders from '../../../components/layout/ContainerHeaders'
+import AdminListTable from '../../../components/admins/AdminListTable'
+import filterAdmins from '../../../actions/admins/filter-admins'
 
-export default function AdminIndexPage() {
+export default function FilterBlockedAdmin() {
   const [page, setPage] = useState<number>(1)
   const limit = 5
   const [query, setQuery] = useState({
@@ -28,7 +28,7 @@ export default function AdminIndexPage() {
   })
   const { isLoading, data, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
     ['admins', page],
-    () => getAllAdmins({ page, limit }),
+    () => filterAdmins({ page, limit, status: 'blocked' }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
@@ -45,11 +45,12 @@ export default function AdminIndexPage() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `(${query.totalAdmins})`, url: '/admins', isActive: true },
+    { title: `Blocked (${query.totalAdmins})`, url: '/admins', isActive: true },
     { title: 'Create Admin', url: '/admins/create', isActive: false },
   ]
   const secondaryActions = [
     { title: 'Create Admin', url: '/admins/create' },
+    { title: 'Admins', url: '/admins' },
     { title: 'All Active', url: '/admins/filters/active' },
     { title: 'All Blocked', url: '/admins/filters/blocked' },
   ]

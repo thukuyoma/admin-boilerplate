@@ -19,7 +19,11 @@ export default function CreateAdminPage() {
     { title: 'Admins', url: '/admins', isActive: false },
     { title: 'Admin Requests', url: '/admins/admin-request', isActive: false },
   ]
-  const secondaryActions = [{ title: 'Admins', url: '/admins' }]
+  const secondaryActions = [
+    { title: 'Admins', url: '/admins' },
+    { title: 'All Active', url: '/admins/filters/active' },
+    { title: 'All Blocked', url: '/admins/filters/blocked' },
+  ]
   const [email, setEmail] = useState('')
   const [user, setUser] = useState(null)
   return (

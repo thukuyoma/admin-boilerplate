@@ -30,6 +30,8 @@ export default function UpdateAdminPage() {
   const secondaryActions = [
     { title: 'Create Admin', url: '/admins/create' },
     { title: 'Admins', url: '/admins' },
+    { title: 'All Active', url: '/admins/filters/active' },
+    { title: 'All Blocked', url: '/admins/filters/blocked' },
   ]
   return (
     <Layout>

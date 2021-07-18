@@ -53,7 +53,7 @@ export default function Blogs() {
   const secondaryActions = [
     { title: 'Create Blog', url: '/blogs/create' },
     { title: 'Categories', url: '/blogs/categories' },
-    { title: 'Create Categories', url: '/blogs/categories/create' },
+    { title: 'Create Category', url: '/blogs/categories/create' },
   ]
   return (
     <Layout>

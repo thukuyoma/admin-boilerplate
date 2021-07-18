@@ -12,23 +12,23 @@ import ActionButtonWrapper from '../../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
-import getAllApplications from '../../../actions/application/get-all-applications'
 import ContainerHeaders from '../../../components/layout/ContainerHeaders'
-import ApplicationListTable from '../../../components/applications/ApplicationListTable'
+import AdminListTable from '../../../components/admins/AdminListTable'
+import filterAdmins from '../../../actions/admins/filter-admins'
 
-export default function ApplicationsIndexPage() {
+export default function FilterActiveAdmin() {
   const [page, setPage] = useState<number>(1)
-  const limit: number = 5
+  const limit = 5
   const [query, setQuery] = useState({
     hasMore: false,
     totalPages: 0,
-    totalApplications: 0,
+    totalAdmins: 0,
     currentPage: page,
-    applications: [],
+    admins: null,
   })
-  const { isLoading, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['applications', page],
-    () => getAllApplications({ page, limit }),
+  const { isLoading, data, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
+    ['admins', page],
+    () => filterAdmins({ page, limit, status: 'active' }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
@@ -45,17 +45,14 @@ export default function ApplicationsIndexPage() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    {
-      title: `(${query.totalApplications})`,
-      url: '/applications',
-      isActive: true,
-    },
+    { title: `Active (${query.totalAdmins})`, url: '/admins', isActive: true },
+    { title: 'Create Admin', url: '/admins/create', isActive: false },
   ]
-
   const secondaryActions = [
-    { title: 'Applications', url: '/applications' },
-    { title: 'All Applied', url: '/applications/filters?sort=home' },
-    { title: 'All Pending', url: '/applications/filters?sort=pending' },
+    { title: 'Create Admin', url: '/admins/create' },
+    { title: 'Admins', url: '/admins' },
+    { title: 'All Active', url: '/admins/filters/active' },
+    { title: 'All Blocked', url: '/admins/filters/blocked' },
   ]
 
   return (
@@ -63,16 +60,15 @@ export default function ApplicationsIndexPage() {
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerHeaders
-            pageTitle="Application"
-            createButtonUrl=""
-            createButtonTitle=""
+            pageTitle="Admins"
+            createButtonUrl="/admins/create"
+            createButtonTitle="Create Admin"
             overlayItems={overlayItems}
           />
-
           <ScrollableContainer>
-            {isSuccess && <ApplicationListTable applications={query.applications} />}
-            {isLoading && <ServerLoadingLoader message="Loading Applications" />}
-            {isSuccess && !query.applications.length && <NotFound message="No Application Found" />}
+            {isSuccess && query.admins && <AdminListTable admins={query.admins} />}
+            {isSuccess && !query.admins.length && <NotFound message="No Admin Found" />}
+            {isLoading && <ServerLoadingLoader message="Loading Admins" />}
             {isError && <ServerError error={error} />}
             <QueryPagination
               nextPage={handleNextPage}

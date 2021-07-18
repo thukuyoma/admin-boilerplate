@@ -13,8 +13,8 @@ const Styles = styled.div`
   padding: 30px 0;
 
   .image-wrapper {
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 100px;
     position: relative;
   }
   p {

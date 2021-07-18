@@ -8,6 +8,7 @@ import TableAvatar from '../shared/TableAvatar'
 import Button from '../buttons/Button'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
+import StatusButton from '../buttons/StatusButton'
 
 const Styles = styled.div`
   .blog__subject {
@@ -59,11 +60,12 @@ export default function BlogListTable({ blogs }) {
                   <TableCell className="table__cell table-cell__border-top">Title</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Views</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Date</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Status</TableCell>
                   <TableCell
                     align="right"
                     className="table__cell table-cell__align-right table-cell__border-top"
                   >
-                    Status
+                    Action
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -88,10 +90,16 @@ export default function BlogListTable({ blogs }) {
                         <TableCell className="table__cell blog__timestamp">
                           {dateFormatter(blog.timestamp)}
                         </TableCell>
+                        <TableCell className="table__cell blog__timestamp">
+                          <StatusButton
+                            title={`${blog.status.isPublished ? 'Online' : 'Offline'}`}
+                            color={`${blog.status.isPublished ? 'success' : 'warning'}`}
+                          />
+                        </TableCell>
                         <TableCell className="table__cell table-cell__align-right">
                           <Button
-                            title={`${blog.status.isPublished ? 'Online' : 'Offline'}`}
-                            color={`${blog.status.isPublished ? 'info' : 'danger'}`}
+                            title="View"
+                            color="info"
                             size="small"
                             variant="filled"
                             align="right"

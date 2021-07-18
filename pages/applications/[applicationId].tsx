@@ -38,7 +38,11 @@ export default function ApplicationtDetails() {
     },
   ]
 
-  const secondaryActions = [{ title: 'Applications', url: '/applications' }]
+  const secondaryActions = [
+    { title: 'Applications', url: '/applications' },
+    { title: 'All Applied', url: '/applications/filters/applied' },
+    { title: 'All Pending', url: '/applications/filters/pending' },
+  ]
   return (
     <Layout>
       <ContainerMainWrapper>
