@@ -34,7 +34,7 @@ const Styles = styled.div`
 export default function ReplySupportTicket({ ticketId, refetch }) {
   const [message, setMessage] = useState('')
   const [inputError, setInputError] = useState('')
-  const { mutateAsync, isLoading, isSuccess } = useMutation(replyTicket)
+  const { mutateAsync, isLoading } = useMutation(replyTicket)
   const handleSubmitLog = async (e) => {
     e.preventDefault()
     if (!message) {

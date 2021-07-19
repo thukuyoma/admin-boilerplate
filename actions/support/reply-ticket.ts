@@ -8,7 +8,7 @@ export default async function replyTicket({
   ticketId: string
 }) {
   try {
-    const res = await api.post(`/supports/${ticketId}/logs`, { message })
+    const res = await api.post(`/supports/admin/${ticketId}`, { message })
     return res.data.msg
   } catch (err) {
     if (err) {

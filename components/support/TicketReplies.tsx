@@ -19,12 +19,13 @@ export default function TicketReplies({ ticketId }) {
   const [query, setQuery] = useState({
     hasMore: false,
     totalPages: 0,
-    totalApplicationLogs: 0,
+    totalSuppportReplies: 0,
     currentPage: page,
-    applicationLogs: [],
+    suppportReplies: [],
   })
+
   const { isLoading, refetch, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['application logs', ticketId, page],
+    ['support ticket replies', ticketId, page],
     () => getTicketReplies({ ticketId, page, limit }),
     {
       keepPreviousData: true,
@@ -47,9 +48,9 @@ export default function TicketReplies({ ticketId }) {
       <Styles>
         <p className="tag__title">Application Support Log</p>
         {isSuccess &&
-          query.applicationLogs.map((log) => <TicketReplyCard key={log._id} log={log} />)}
+          query.suppportReplies.map((log) => <TicketReplyCard key={log._id} log={log} />)}
         {isLoading && <ServerLoadingLoader message="Loading Tickets Replies" />}
-        {isSuccess && !query.applicationLogs.length && <NotFound message="No Replies Found" />}
+        {isSuccess && !query.suppportReplies.length && <NotFound message="No Replies Found" />}
         {isError && <ServerError error={error} />}
         <QueryPagination
           nextPage={handleNextPage}

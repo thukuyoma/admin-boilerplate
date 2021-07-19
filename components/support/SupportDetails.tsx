@@ -42,12 +42,12 @@ export default function AdminPublicDetails({ ticket }) {
   return (
     <Styles>
       <PersonDataDisplay
-        firstName={ticket.requester.firstName}
-        lastName={ticket.requester.lastName}
+        firstName={ticket.createdBy.firstName}
+        lastName={ticket.createdBy.lastName}
         timestamp={ticket.timestamp}
-        email={ticket.requester.email}
+        email={ticket.createdBy.email}
         isOpen={ticket.status.isClosed}
-        telephone={ticket.requester.telephone}
+        telephone={ticket.createdBy.telephone}
       />
       <TagKey>Subject</TagKey>
       <p>{ticket.subject}</p>

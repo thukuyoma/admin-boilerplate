@@ -8,6 +8,7 @@ import TableAvatar from '../shared/TableAvatar'
 import Button from '../buttons/Button'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
+import StatusButton from '../buttons/StatusButton'
 
 const Styles = styled.div`
   .support__subject {
@@ -41,62 +42,67 @@ export default function SupportListTable({ supports }) {
   const router = useRouter()
   return (
     <Styles>
-      <BorderPaddingWrapper>
-        <TableContainer>
-          <Table aria-label="support support">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center" className="table__cell table-cell__border-top">
-                  #
-                </TableCell>
-                <TableCell className="table__cell table-cell__border-top">Subject</TableCell>
-                <TableCell className="table__cell table-cell__border-top">Department</TableCell>
-                <TableCell className="table__cell table-cell__border-top">Date</TableCell>
-                <TableCell
-                  align="right"
-                  className="table__cell table-cell__align-right table-cell__border-top"
-                >
-                  Status
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {supports.length
-                ? supports.map((support) => (
-                    <TableRow
-                      key={nanoid()}
-                      onClick={() => router.push(`supports/${support._id}`)}
-                      onKeyPress={() => router.push(`supports/${support._id}`)}
-                      className="table__row"
-                    >
-                      <TableCell className="table__cell">
-                        <TableAvatar initial={support.requester.firstName} />
-                      </TableCell>
-                      <TableCell className="table__cell support__subject">
-                        {capitalizeFirstLetter(support.subject)}
-                      </TableCell>
-                      <TableCell className="table__cell">
-                        {capitalizeFirstLetter(support.department)}
-                      </TableCell>
-                      <TableCell className="table__cell support__timestamp">
-                        {dateFormatter(support.timestamp)}
-                      </TableCell>
-                      <TableCell className="table__cell table-cell__align-right">
-                        <Button
-                          title={`${support.status.isClosed ? 'Closed' : 'Open'}`}
-                          color={`${support.status.isClosed ? 'info' : 'danger'}`}
-                          size="small"
-                          variant="filled"
-                          align="right"
-                        />
-                      </TableCell>
-                    </TableRow>
-                  ))
-                : null}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </BorderPaddingWrapper>
+      {supports?.length ? (
+        <BorderPaddingWrapper>
+          <TableContainer>
+            <Table aria-label="support support">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center" className="table__cell table-cell__border-top">
+                    #
+                  </TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Subject</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Date</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Status</TableCell>
+                  <TableCell
+                    align="right"
+                    className="table__cell table-cell__align-right table-cell__border-top"
+                  >
+                    Action
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {supports.length
+                  ? supports.map((support) => (
+                      <TableRow
+                        key={nanoid()}
+                        onClick={() => router.push(`/supports/${support._id}`)}
+                        onKeyPress={() => router.push(`/supports/${support._id}`)}
+                        className="table__row"
+                      >
+                        <TableCell className="table__cell">
+                          <TableAvatar initial={support.createdBy.firstName} />
+                        </TableCell>
+                        <TableCell className="table__cell support__subject">
+                          {capitalizeFirstLetter(support.subject)}
+                        </TableCell>
+                        <TableCell className="table__cell support__timestamp">
+                          {dateFormatter(support.timestamp)}
+                        </TableCell>
+                        <TableCell className="table__cell">
+                          <StatusButton
+                            title={`${support.status.isClosed ? 'Closed' : 'Open'}`}
+                            color={`${support.status.isClosed ? 'success' : 'warning'}`}
+                          />
+                        </TableCell>
+                        <TableCell className="table__cell table-cell__align-right">
+                          <Button
+                            title={`${support.status.isClosed ? 'View' : 'Respond'}`}
+                            color={`${support.status.isClosed ? 'info' : 'danger'}`}
+                            size="small"
+                            variant="filled"
+                            align="right"
+                          />
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  : null}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </BorderPaddingWrapper>
+      ) : null}
     </Styles>
   )
 }

@@ -13,6 +13,7 @@ import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
 import SupportDetails from '../../components/support/SupportDetails'
 import getSupportTicket from '../../actions/support/getSupportTicket'
+import ToggleSupportCloseButton from '../../components/support/actions/ToggleSupportCloseButton'
 
 export default function SupporttDetails() {
   const router = useRouter()
@@ -25,6 +26,19 @@ export default function SupporttDetails() {
     { title: 'Details', url: '', isActive: true },
     { title: 'Supports', url: '/supports', isActive: false },
   ]
+
+  const primaryActions = [
+    {
+      component: support && (
+        <ToggleSupportCloseButton
+          isClosed={support.status && support.status.isClosed}
+          ticketId={ticketId}
+          refetch={refetch}
+        />
+      ),
+    },
+  ]
+
   const secondaryActions = [{ title: 'Supports', url: '/supports' }]
   return (
     <Layout>
@@ -43,6 +57,13 @@ export default function SupporttDetails() {
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>
+          {isSuccess && support && (
+            <>
+              {primaryActions.map((primaryAction) => (
+                <ActionButtonWrapper key={nanoid()}>{primaryAction.component} </ActionButtonWrapper>
+              ))}
+            </>
+          )}
           {secondaryActions.map((secondaryAction) => (
             <ActionButtonWrapper key={nanoid()}>
               <span

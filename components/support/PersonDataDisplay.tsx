@@ -174,7 +174,7 @@ export default function PersonDataDisplay({
                   </div>
                 </div>
                 <div className="tag__seperator">
-                  <ItemStatus statusTitle="Ticket open" status={isOpen} />
+                  <ItemStatus statusTitle="Ticket Closed" status={isOpen} />
                 </div>
               </div>
             </Grid>

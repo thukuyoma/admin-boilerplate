@@ -31,7 +31,8 @@ export default function TicketReplyCard({ log }) {
   return (
     <Styles>
       <p className="log__name-date">
-        <span className="log__name">{wordsCapitalizer(log.createdBy.adminFullName)}</span>-{' '}
+        <span className="log__name">{wordsCapitalizer(log?.repliedBy?.adminFullName)}</span>-{' '}
+        <span className="log__name">{wordsCapitalizer(log?.createdBy?.email)}</span>-{' '}
         <span className="log__date">{moment(log.timestamp).startOf('hour').fromNow()}</span>
       </p>
       <p className="log__message">{capitalizeFirstLetter(log.message)}</p>
