@@ -10,6 +10,7 @@ import getAdminActiviesLog from '../../actions/account/get-admin-activities-log'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import { HiArrowNarrowLeft, HiArrowNarrowRight } from 'react-icons/hi'
 import HeaderTabTitle from './header-tabs/HeaderTabTitle'
+import Avatar from '../shared/Avatar'
 
 const Styles = styled.div`
   .logger {
@@ -74,10 +75,23 @@ export default function ActivityLogs() {
   const [page, setPage] = useState<number>(1)
   const limit: number = 10
   const adminId: string = profile?._id
+  const [query, setQuery] = useState({
+    hasMore: false,
+    totalPages: 0,
+    totalActionLogs: 0,
+    currentPage: page,
+    actionLogs: [],
+  })
+
   const { refetch, isFetching, data, isLoading, isPreviousData } = useQuery(
     ['adminActionsLog', page, adminId],
     () => getAdminActiviesLog({ page, limit, adminId: profile?._id }),
-    { keepPreviousData: true }
+    {
+      keepPreviousData: true,
+      onSuccess: (data) => {
+        setQuery(data)
+      },
+    }
   )
   const handleNextPage = () => {
     if (!isPreviousData && data?.hasMore) {
@@ -109,10 +123,14 @@ export default function ActivityLogs() {
             />
           </div>
         )}
-        {data?.activityHistory.map((action) => (
+        {query?.actionLogs.map((action) => (
           <div key={action._id} className="logger">
             <span className="avatar">
-              <img className="avatar" src={profile?.avatar} />
+              <Avatar
+                image={profile?.avatar}
+                initial={action.createdBy.adminFullName}
+                size="small"
+              />
             </span>
             <span className="activity">
               {capitalizeFirstLetter(action.activity)}
@@ -120,7 +138,7 @@ export default function ActivityLogs() {
             </span>
           </div>
         ))}
-        {data?.hasMore ? (
+        {query?.hasMore ? (
           <div className="pagination">
             <HiArrowNarrowLeft
               onClick={() => handlePrevPage()}

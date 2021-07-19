@@ -5,6 +5,10 @@ const Styles = styled.div`
   .card__tag {
     height: 40px;
     width: 40px;
+    ${({ size }) =>
+      (size === 'small' && 'height: 25px; width: 25px;') ||
+      (size === 'medium' && 'height: 30px; width: 30px;') ||
+      (size === 'large' && 'height: 40px; width: 40px;')}
     border-radius: 50px;
     background: #e3f2fd;
     color: #0098db;
@@ -20,7 +24,15 @@ const Styles = styled.div`
     border-radius: 50px;
   }
 `
-export default function TableAvatar({ initial, image }: { initial?: string; image?: string }) {
+export default function Avatar({
+  initial,
+  image,
+  size,
+}: {
+  initial?: string
+  image?: string
+  size: 'small' | 'medium' | 'large'
+}) {
   if (image) {
     return (
       <Styles>
@@ -32,7 +44,7 @@ export default function TableAvatar({ initial, image }: { initial?: string; imag
   }
   if (initial) {
     return (
-      <Styles>
+      <Styles size={size}>
         {initial && <div className="card__tag">{initial.charAt(0).toUpperCase()}</div>}
         {!initial && !image && <div className="card__tag">#</div>}
       </Styles>

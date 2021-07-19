@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import dateFormatter from '../../utils/date-formatter'
-import TableAvatar from '../shared/TableAvatar'
+import Avatar from '../shared/Avatar'
 import Button from '../buttons/Button'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
@@ -72,7 +72,7 @@ export default function SupportListTable({ supports }) {
                         className="table__row"
                       >
                         <TableCell className="table__cell">
-                          <TableAvatar initial={support.createdBy.firstName} />
+                          <Avatar initial={support.createdBy.firstName} size="small" />
                         </TableCell>
                         <TableCell className="table__cell support__subject">
                           {capitalizeFirstLetter(support.subject)}
@@ -93,6 +93,7 @@ export default function SupportListTable({ supports }) {
                             size="small"
                             variant="filled"
                             align="right"
+                            style={{ minWidth: 90 }}
                           />
                         </TableCell>
                       </TableRow>

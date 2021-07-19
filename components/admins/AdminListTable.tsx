@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import dateFormatter from '../../utils/date-formatter'
-import TableAvatar from '../shared/TableAvatar'
+import Avatar from '../shared/Avatar'
 import Button from '../buttons/Button'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
@@ -79,7 +79,11 @@ export default function AdminListTable({ admins }) {
                         className="table__row"
                       >
                         <TableCell className="table__cell">
-                          <TableAvatar image={admin?.image?.url} initial={admin.firstName} />
+                          <Avatar
+                            size="large"
+                            image={admin?.image?.url}
+                            initial={admin.firstName}
+                          />
                         </TableCell>
                         <TableCell className="table__cell admin__subject">
                           {capitalizeFirstLetter(admin.firstName)}{' '}

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import dateFormatter from '../../../utils/date-formatter'
-import TableAvatar from '../../shared/TableAvatar'
+import Avatar from '../../shared/Avatar'
 import Button from '../../buttons/Button'
 import capitalizeFirstLetter from '../../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../../shared/BorderPaddingWrapper'
@@ -79,7 +79,11 @@ export default function BlogCategoriesListTable({ categories }) {
                         className="table__row"
                       >
                         <TableCell className="table__cell">
-                          <TableAvatar image={category?.image?.url} initial={category.title} />
+                          <Avatar
+                            image={category?.image?.url}
+                            initial={category.title}
+                            size="large"
+                          />
                         </TableCell>
                         <TableCell className="table__cell category__subject">
                           {capitalizeFirstLetter(category.title)}
