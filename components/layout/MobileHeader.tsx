@@ -1,16 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import config from '../../config/config'
 import Logo from './Logo'
-import Icon from './../icons/index'
 import MobileSideNav from './MobileSideNav'
 import { FiSettings } from 'react-icons/fi'
 import { BsBell, BsClockHistory } from 'react-icons/bs'
 import { IoIosAddCircle } from 'react-icons/io'
-import { AiOutlineDown, AiOutlineMenu } from 'react-icons/ai'
+import { AiOutlineMenu } from 'react-icons/ai'
 import useAuth from '../../context/auth'
-import ProfileContainer from '../account/ProfileContainer'
-import { RiLoginCircleLine } from 'react-icons/ri'
 import { useRouter } from 'next/router'
 import HeaderLogin from './HeaderLogin'
 import HeaderProfileAvatar from './header-tabs/HeaderProfileAvatar'
@@ -104,9 +100,7 @@ export default function MobileHeader({ handleAccount, handleShowNav, showNav, sh
             <FiSettings />
           </div>
           <div className="header-links__item">
-            {profile?.avatar && (
-              <HeaderProfileAvatar handleAccount={handleAccount} showAccount={showAccount} />
-            )}
+            {profile?.avatar && <HeaderProfileAvatar handleAccount={handleAccount} />}
             {!profile && !isLoading && <HeaderLogin />}
             {isLoading && <div className="profile"></div>}
           </div>

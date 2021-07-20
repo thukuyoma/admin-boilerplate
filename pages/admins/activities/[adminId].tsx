@@ -87,6 +87,8 @@ export default function AdminActivitiesPage() {
               <NotFound message="No Admin Activity Found" />
             )}
             {isError && <ServerError error={error} />}
+            How far
+            <p>How are you doing today</p>
             <QueryPagination
               nextPage={handleNextPage}
               prevPage={handlePrevPage}

@@ -138,7 +138,7 @@ export default function ActivityLogs() {
             </span>
           </div>
         ))}
-        {query?.hasMore ? (
+        {query?.totalPages > 1 ? (
           <div className="pagination">
             <HiArrowNarrowLeft
               onClick={() => handlePrevPage()}

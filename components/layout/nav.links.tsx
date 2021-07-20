@@ -1,4 +1,3 @@
-import config from '../../config/config'
 import { nanoid } from 'nanoid'
 import {
   IconReportAnalytics,
@@ -10,7 +9,10 @@ import {
   IconNotebook,
   IconHelp,
   IconSettings,
+  IconCreditCard,
+  IconUser,
 } from '@tabler/icons'
+import React from 'react'
 
 const links = [
   {
@@ -26,6 +28,12 @@ const links = [
     uri: '/admins',
   },
   {
+    title: 'Users',
+    icon: <IconUser width={20} color="#0C4284" strokeWidth={1.5} />,
+    id: nanoid(),
+    uri: '/users',
+  },
+  {
     title: 'Scholarships',
     icon: <IconSchool width={20} color="#0C4284" strokeWidth={1.5} />,
     id: nanoid(),
@@ -38,10 +46,10 @@ const links = [
     uri: '/applications',
   },
   {
-    title: 'Newsletter',
-    icon: <IconMailOpened width={20} color="#0C4284" strokeWidth={1.5} />,
+    title: 'Payments',
+    icon: <IconCreditCard width={20} color="#0C4284" strokeWidth={1.5} />,
     id: nanoid(),
-    uri: '/newsletter',
+    uri: '/payments',
   },
   {
     title: 'Bookings',

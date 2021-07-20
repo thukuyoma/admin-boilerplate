@@ -1,9 +1,6 @@
-import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
-import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import dateFormatter from '../../utils/date-formatter'
-import randomColorPicker from '../../utils/random-color-picker'
 import wordsCapitalizer from '../../utils/words-capitalizer'
 
 const Styles = styled.div`
@@ -31,7 +28,6 @@ const Styles = styled.div`
 `
 
 export default function AdminActivitiesCard({ activity }) {
-  const colors = randomColorPicker()
   return (
     <Styles>
       <div className="activity__creator">

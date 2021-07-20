@@ -54,6 +54,11 @@ const shortcuts = [
     icon: '/shortcuts/admin.png',
   },
   {
+    title: 'Users',
+    url: '/users',
+    icon: '/shortcuts/users.png',
+  },
+  {
     title: 'Bookings',
     url: '/bookings',
     icon: '/shortcuts/booking.svg',
@@ -74,9 +79,9 @@ const shortcuts = [
     icon: '/shortcuts/support.png',
   },
   {
-    title: 'Newsletter',
-    url: '/newsletter',
-    icon: '/shortcuts/newsletter.png',
+    title: 'Payments',
+    url: '/payments',
+    icon: '/shortcuts/payment.png',
   },
   {
     title: 'Dashboard',

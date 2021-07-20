@@ -29,7 +29,6 @@ const Styles = styled.div`
   }
   .shortcut__title {
     margin-top: 10px;
-    font-size: 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
