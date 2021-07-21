@@ -35,6 +35,7 @@ export default function Layout({ children }) {
   const [showCreateShortcuts, setShowCreateShortcuts] = useState<boolean>(false)
   const [showHistoryTab, setShowHistryTab] = useState<boolean>(false)
   const [showShortcuts, setShowShortcuts] = useState<boolean>(false)
+  const [showNotification, setShowNotification] = useState<boolean>(false)
   const handleAccount = () => {
     setShowNav(false)
     setShowCreateShortcuts(false)
@@ -52,19 +53,29 @@ export default function Layout({ children }) {
     setShowAccount(false)
     setShowHistryTab(false)
     setShowShortcuts(false)
+    setShowNotification(false)
     setShowCreateShortcuts(!showCreateShortcuts)
   }
   const handleShortcuts = () => {
     setShowAccount(false)
     setShowHistryTab(false)
     setShowCreateShortcuts(false)
+    setShowNotification(false)
     setShowShortcuts(!showShortcuts)
   }
   const handleHistoryTab = () => {
     setShowCreateShortcuts(false)
     setShowAccount(false)
     setShowShortcuts(false)
+    setShowNotification(false)
     setShowHistryTab(!showHistoryTab)
+  }
+  const handleNotification = () => {
+    setShowCreateShortcuts(false)
+    setShowAccount(false)
+    setShowShortcuts(false)
+    setShowHistryTab(false)
+    setShowNotification(!showNotification)
   }
 
   return (
@@ -79,6 +90,8 @@ export default function Layout({ children }) {
         showHistoryTab={showHistoryTab}
         handleShortcuts={handleShortcuts}
         showShortcuts={showShortcuts}
+        handleNotification={handleNotification}
+        showNotification={showNotification}
       />
       <MobileHeader
         showNav={showNav}

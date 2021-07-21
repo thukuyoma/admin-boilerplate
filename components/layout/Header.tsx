@@ -13,6 +13,8 @@ import CreateShortcuts from './header-tabs/CreateShortcuts'
 import HistoryTab from './header-tabs/HistoryTab'
 import AccountTab from '../account/AccountTab'
 import ShortcutsTab from './header-tabs/ShortcutsTab'
+import NotificationCount from '../notifications/NotificationCount'
+import NotificationTab from './header-tabs/NotificationTab'
 
 const Styles = styled.div`
   justify-content: space-between;
@@ -53,6 +55,7 @@ const Styles = styled.div`
     align-items: center;
     font-size: 20px;
     cursor: pointer;
+    position: relative;
     :hover {
       color: #0098db;
     }
@@ -102,6 +105,8 @@ export default function Header({
   showHistoryTab,
   handleShortcuts,
   showShortcuts,
+  handleNotification,
+  showNotification,
 }) {
   const { profile, isLoading } = useAuth()
   return (
@@ -131,8 +136,13 @@ export default function Header({
             </div>
             <HistoryTab showHistoryTab={showHistoryTab} />
             <div className="header-links__item">
-              <BsBell />
+              <BsBell
+                onClick={() => handleNotification()}
+                onKeyPress={() => handleNotification()}
+              />
+              <NotificationCount />
             </div>
+            {showNotification && <NotificationTab showNotification={showNotification} />}
             <div className="header-links__item">
               <TiThSmall onClick={() => handleShortcuts()} onKeyPress={() => handleShortcuts()} />
             </div>

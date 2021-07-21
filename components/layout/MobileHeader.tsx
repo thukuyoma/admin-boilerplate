@@ -22,7 +22,6 @@ const Styles = styled.div`
   width: 100%;
   opacity: 1;
   z-index: 99999999;
-
   .header__left {
     display: flex;
     align-items: center;
