@@ -82,14 +82,14 @@ export default function SupportListTable({ supports }) {
                         </TableCell>
                         <TableCell className="table__cell">
                           <StatusButton
-                            title={`${support.status.isClosed ? 'Closed' : 'Open'}`}
-                            color={`${support.status.isClosed ? 'success' : 'warning'}`}
+                            title={support.status.isClosed ? 'Closed' : 'Open'}
+                            color={support.status.isClosed ? 'success' : 'warning'}
                           />
                         </TableCell>
                         <TableCell className="table__cell table-cell__align-right">
                           <Button
-                            title={`${support.status.isClosed ? 'View' : 'Respond'}`}
-                            color={`${support.status.isClosed ? 'info' : 'danger'}`}
+                            title={support.status.isClosed ? 'View' : 'Respond'}
+                            color={support.status.isClosed ? 'info' : 'danger'}
                             size="small"
                             variant="filled"
                             align="right"

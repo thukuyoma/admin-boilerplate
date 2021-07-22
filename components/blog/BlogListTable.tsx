@@ -92,8 +92,8 @@ export default function BlogListTable({ blogs }) {
                         </TableCell>
                         <TableCell className="table__cell blog__timestamp">
                           <StatusButton
-                            title={`${blog.status.isPublished ? 'Online' : 'Offline'}`}
-                            color={`${blog.status.isPublished ? 'success' : 'warning'}`}
+                            title={blog.status.isPublished ? 'Online' : 'Offline'}
+                            color={blog.status.isPublished ? 'success' : 'warning'}
                           />
                         </TableCell>
                         <TableCell className="table__cell table-cell__align-right">

@@ -99,8 +99,8 @@ export default function BookingRequestListTable({ bookingRequests, refetch }) {
                         </TableCell>
                         <TableCell className="table__cell bookingRequest__timestamp">
                           <StatusButton
-                            title={`${bookingRequest.status.isBooked ? 'Booked' : 'Pending'}`}
-                            color={`${bookingRequest.status.isBooked ? 'success' : 'warning'}`}
+                            title={bookingRequest.status.isBooked ? 'Booked' : 'Pending'}
+                            color={bookingRequest.status.isBooked ? 'success' : 'warning'}
                           />
                         </TableCell>
                         <TableCell className="table__cell table-cell__align-right">

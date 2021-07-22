@@ -94,8 +94,8 @@ export default function BookingListTable({ bookings }) {
                         </TableCell>
                         <TableCell className="table__cell bookingRequest__timestamp">
                           <StatusButton
-                            title={`${booking.status.isPublished ? 'Online' : 'Offline'}`}
-                            color={`${booking.status.isPublished ? 'success' : 'warning'}`}
+                            title={booking.status.isPublished ? 'Online' : 'Offline'}
+                            color={booking.status.isPublished ? 'success' : 'warning'}
                           />
                         </TableCell>
                         <TableCell className="table__cell table-cell__align-right">

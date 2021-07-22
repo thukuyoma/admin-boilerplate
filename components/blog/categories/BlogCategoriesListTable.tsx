@@ -8,7 +8,6 @@ import Avatar from '../../shared/Avatar'
 import Button from '../../buttons/Button'
 import capitalizeFirstLetter from '../../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../../shared/BorderPaddingWrapper'
-import wordShortener from '../../../utils/wordShortener'
 import StatusButton from '../../buttons/StatusButton'
 
 const Styles = styled.div`
@@ -93,8 +92,8 @@ export default function BlogCategoriesListTable({ categories }) {
                         </TableCell>
                         <TableCell className="table__cell category__timestamp">
                           <StatusButton
-                            title={`${category.status.isPublished ? 'Online' : 'Offline'}`}
-                            color={`${category.status.isPublished ? 'success' : 'warning'}`}
+                            title={category.status.isPublished ? 'Online' : 'Offline'}
+                            color={category.status.isPublished ? 'success' : 'warning'}
                           />
                         </TableCell>
 

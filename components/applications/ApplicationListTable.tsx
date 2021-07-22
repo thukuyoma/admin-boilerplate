@@ -97,8 +97,8 @@ export default function ApplicationListTable({ applications }) {
                         </TableCell>
                         <TableCell className="table__cell application__timestamp">
                           <StatusButton
-                            title={`${application.status.isApplied ? 'Applied' : 'Pending'}`}
-                            color={`${application.status.isApplied ? 'success' : 'warning'}`}
+                            title={application.status.isApplied ? 'Applied' : 'Pending'}
+                            color={application.status.isApplied ? 'success' : 'warning'}
                           />
                         </TableCell>
                         <TableCell className="table__cell table-cell__align-right">

@@ -19,8 +19,8 @@ export default function ToggleBookedStatusButton({ isBooked, refetch, bookingReq
   }
   return (
     <Button
-      title={`${!isBooked ? 'Mark As Booked' : 'Mark As Pending'}`}
-      color={`${!isBooked ? 'danger' : 'info'}`}
+      title={!isBooked ? 'Mark As Booked' : 'Mark As Pending'}
+      color={!isBooked ? 'danger' : 'info'}
       size="small"
       variant="filled"
       align="right"

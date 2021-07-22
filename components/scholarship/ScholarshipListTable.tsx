@@ -96,8 +96,8 @@ export default function ScholarshipListTable({ scholarships }) {
                         </TableCell>
                         <TableCell className="table__cell scholarship__timestamp">
                           <StatusButton
-                            title={`${scholarship.status.isPublished ? 'Online' : 'Offline'}`}
-                            color={`${scholarship.status.isPublished ? 'success' : 'warning'}`}
+                            title={scholarship.status.isPublished ? 'Online' : 'Offline'}
+                            color={scholarship.status.isPublished ? 'success' : 'warning'}
                           />
                         </TableCell>
                         <TableCell className="table__cell table-cell__align-right">
