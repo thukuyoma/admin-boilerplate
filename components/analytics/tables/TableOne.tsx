@@ -17,6 +17,7 @@ const Styles = styled.div`
   overflow: hidden;
   box-shadow: 0 1px 20px 0 rgb(69 90 100 / 8%);
   border: 1px solid rgba(144, 202, 249, 0.46);
+  margin-bottom: 10px;
 
   .table__title {
     padding: 16px;

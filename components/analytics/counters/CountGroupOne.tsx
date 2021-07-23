@@ -6,7 +6,7 @@ import { IconVolume } from '@tabler/icons'
 const Styles = styled.div`
   border-radius: 5px;
   border: none;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   transition: all 0.3s ease-in-out;
   width: 100%;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;

@@ -9,7 +9,7 @@ const Styles = styled.div`
   flex-direction: column;
   padding: 20px;
   box-shadow: 0 1px 20px 0 rgb(69 90 100 / 8%);
-  // margin-bottom: 30px;
+  margin-bottom: 10px;
   color: #616161;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   box-shadow: 0 1px 20px 0 rgb(69 90 100 / 8%);

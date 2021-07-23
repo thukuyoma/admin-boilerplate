@@ -7,7 +7,7 @@ const Styles = styled.div`
   box-sizing: border-box;
   align-items: center;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   border-radius: 12px;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   box-shadow: 0 1px 20px 0 rgb(69 90 100 / 8%);
@@ -50,14 +50,16 @@ export default function CountTwo({
   itemName,
   icon,
   iconBg,
+  style,
 }: {
   itemCount: string
   itemName: string
   icon: ReactElement
   iconBg: string
+  style?: { marginBottom: number }
 }) {
   return (
-    <Styles>
+    <Styles style={style}>
       <div className="count__icon" style={{ backgroundColor: iconBg }}>
         {icon}
       </div>
