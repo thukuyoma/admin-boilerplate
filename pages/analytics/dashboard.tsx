@@ -7,9 +7,16 @@ import { IconEye } from '@tabler/icons'
 import CountThree from '../../components/analytics/counters/CountThree'
 import CounterFour from '../../components/analytics/counters/CountFour'
 import TableOne from '../../components/analytics/tables/TableOne'
+import styled from 'styled-components'
+
+const MobileSpacer = styled.div`
+  @media (max-width: 500px) {
+    padding-top: 75px;
+  }
+`
 export default function dashboard() {
   return (
-    <div>
+    <MobileSpacer>
       <Layout>
         <Grid>
           <Grid container spacing={3}>
@@ -95,6 +102,6 @@ export default function dashboard() {
           </Grid>
         </Grid>
       </Layout>
-    </div>
+    </MobileSpacer>
   )
 }
