@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import blockAdmin from '../../../actions/account/block-admin'
 import ActionButton from '../../buttons/ActionButton'
 
-export default function DeleteBookingButton({
+export default function BlockAdminButton({
   adminId,
   refetch,
   isBlocked,

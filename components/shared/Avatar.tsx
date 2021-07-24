@@ -8,7 +8,8 @@ const Styles = styled.div`
     ${({ size }) =>
       (size === 'small' && 'height: 25px; width: 25px;') ||
       (size === 'medium' && 'height: 30px; width: 30px;') ||
-      (size === 'large' && 'height: 40px; width: 40px;')}
+      (size === 'large' && 'height: 40px; width: 40px;') ||
+      (size === 'extraLarge' && 'height: 100px; width: 100px;')}
     border-radius: 50px;
     background: #e3f2fd;
     color: #0098db;
@@ -31,7 +32,7 @@ export default function Avatar({
 }: {
   initial?: string
   image?: string
-  size: 'small' | 'medium' | 'large'
+  size: 'small' | 'medium' | 'large' | 'extraLarge'
 }) {
   if (image) {
     return (

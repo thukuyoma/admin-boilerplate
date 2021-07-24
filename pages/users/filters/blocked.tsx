@@ -10,27 +10,25 @@ import NotFound from '../../../components/shared/NotFound'
 import ServerLoadingLoader from '../../../components/shared/ServerLoadingLoader'
 import ActionButtonWrapper from '../../../components/shared/ActionButtonWrapper'
 import { nanoid } from 'nanoid'
-import { useRouter } from 'next/router'
+import router from 'next/router'
 import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
-import getAdminActiviesLog from '../../../actions/account/get-admin-activities-log'
 import ContainerHeaders from '../../../components/layout/ContainerHeaders'
-import ActionLogListTable from '../../../components/admins/ActionLogListTable'
+import AdminListTable from '../../../components/admins/AdminListTable'
+import filterAdmins from '../../../actions/admins/filter-admins'
 
-export default function AdminActivitiesPage() {
+export default function FilterBlockedAdmin() {
   const [page, setPage] = useState<number>(1)
-  const limit = 10
-  const router = useRouter()
-  const { adminId } = router.query
+  const limit = 5
   const [query, setQuery] = useState({
     hasMore: false,
     totalPages: 0,
-    totalActionLogs: 0,
+    totalAdmins: 0,
     currentPage: page,
-    actionLogs: [],
+    admins: null,
   })
   const { isLoading, data, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['activity history', page],
-    () => getAdminActiviesLog({ page, limit, adminId }),
+    ['Blocked admins', page],
+    () => filterAdmins({ page, limit, status: 'blocked' }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
@@ -47,21 +45,12 @@ export default function AdminActivitiesPage() {
     setPage((prev) => Math.max(prev - 1, 1))
   }
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    {
-      title: `Activities (${query && query.totalActionLogs})`,
-      url: '/',
-      isActive: true,
-    },
-    { title: 'Create Admin', url: '/admins/create', isActive: false },
-    { title: 'Details', url: `admins/${adminId}`, isActive: false },
-    { title: 'Admins', url: '/admins', isActive: false },
+    { title: `Blocked (${query.totalAdmins})`, url: '/admins', isActive: true },
     { title: 'Create Admin', url: '/admins/create', isActive: false },
   ]
-
   const secondaryActions = [
     { title: 'Create Admin', url: '/admins/create' },
-    { title: 'Admin Details', url: `/admins/${adminId}` },
-    { title: 'Admins', url: `/admins` },
+    { title: 'Admins', url: '/admins' },
     { title: 'All Active', url: '/admins/filters/active' },
     { title: 'All Blocked', url: '/admins/filters/blocked' },
   ]
@@ -77,18 +66,10 @@ export default function AdminActivitiesPage() {
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess &&
-              data &&
-              query?.actionLogs.map((activity) => (
-                <ActionLogListTable key={nanoid()} actionLogs={activity} />
-              ))}
-            {isLoading && <ServerLoadingLoader message="Loading Admin Activities" />}
-            {isSuccess && !query.actionLogs.length && (
-              <NotFound message="No Admin Activity Found" />
-            )}
+            {isSuccess && query.admins && <AdminListTable admins={query.admins} />}
+            {isSuccess && !query.admins.length && <NotFound message="No Admin Found" />}
+            {isLoading && <ServerLoadingLoader message="Loading Admins" />}
             {isError && <ServerError error={error} />}
-            How far
-            <p>How are you doing today</p>
             <QueryPagination
               nextPage={handleNextPage}
               prevPage={handlePrevPage}
