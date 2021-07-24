@@ -18,9 +18,9 @@ interface IconButtonI {
   label?: string
   color?: Colors
   children: React.ReactNode
-  className: 'icon'
   loading?: boolean
   onClick: () => void
+  block?: boolean
   style?: {
     marginRight?: number
     marginLeft?: number
@@ -37,13 +37,12 @@ const Styles = styled.button`
     (size === 'small' && 'height: 30px; width: 30px;') ||
     (size === 'medium' && 'height: 36px; width: 36px;') ||
     (size === 'large' && 'height: 42px; width: 42px;')}
-
   :hover {
     background-color: #e2e2e2;
   }
   border-radius: 50px;
   flex-shrink: 0;
-  display: flex;
+  display: ${(block) => (block ? 'flex' : 'inline-flex')};
   align-items: center;
   justify-content: center;
   font-size: 50px;
@@ -69,9 +68,9 @@ export default function IconButton({
   color,
   children,
   style,
-  className,
   loading,
   onClick,
+  block,
 }: IconButtonI) {
   return (
     <Styles
@@ -79,7 +78,7 @@ export default function IconButton({
       color={color}
       size={size}
       style={style}
-      className={className}
+      className="icon"
       onClick={onClick}
     >
       {!loading ? children : <Loader width={13} isLoading={loading} />}

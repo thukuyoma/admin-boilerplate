@@ -1,12 +1,10 @@
 import { Grid } from '@material-ui/core'
 import React from 'react'
-import { AiFillClockCircle } from 'react-icons/ai'
 import { CgWorkAlt } from 'react-icons/cg'
 import { MdEmail } from 'react-icons/md'
 import { RiAdminLine } from 'react-icons/ri'
 import styled from 'styled-components'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
-import dateFormatter from '../../utils/date-formatter'
 import wordsCapitalizer from '../../utils/words-capitalizer'
 import Avatar from '../shared/Avatar'
 
@@ -34,7 +32,7 @@ const Styles = styled.div`
     margin-top: 5px;
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 14px;s
   }
   .user__timestamp-tag {
     margin-bottom: 0;

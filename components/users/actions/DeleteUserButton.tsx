@@ -1,11 +1,18 @@
+import { IconTrash } from '@tabler/icons'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
 import deleteUser from '../../../actions/users/delete-user'
-import ActionButton from '../../buttons/ActionButton'
+import IconButton from '../../buttons/IconButton'
 
-export default function DeleteUserButton({ userId }: { userId: string }) {
+export default function DeleteUserButton({
+  userId,
+  refetch,
+}: {
+  userId: string
+  refetch: () => void
+}) {
   const router = useRouter()
   const { mutateAsync, isLoading } = useMutation([userId], deleteUser)
   const handleSubmit = async () => {
@@ -18,18 +25,22 @@ export default function DeleteUserButton({ userId }: { userId: string }) {
       },
       onSuccess: (data) => {
         toast.success(data)
+        refetch()
         router.push('/users')
       },
     })
     return null
   }
   return (
-    <ActionButton
+    <IconButton
+      style={{ marginRight: 30 }}
       block
-      title="Delete User"
       onClick={handleSubmit}
       loading={isLoading}
-      align="left"
-    />
+      size="medium"
+      color="danger"
+    >
+      <IconTrash />
+    </IconButton>
   )
 }

@@ -1,14 +1,14 @@
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core'
 import { nanoid } from 'nanoid'
-import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import dateFormatter from '../../utils/date-formatter'
 import Avatar from '../shared/Avatar'
-import Button from '../buttons/Button'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 import StatusButton from '../buttons/StatusButton'
+import BlockUserButton from './actions/BlockUserButton'
+import DeleteUserButton from './actions/DeleteUserButton'
 
 const Styles = styled.div`
   .user__subject {
@@ -25,7 +25,7 @@ const Styles = styled.div`
     text-align: right;
   }
   .table-cell__align-left {
-    text-align: right;
+    text-align: left;
   }
   .table-cell__align-center {
     text-align: center;
@@ -39,10 +39,13 @@ const Styles = styled.div`
   .table__row {
     cursor: pointer;
   }
+  .button__wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
 `
 
-export default function UserListTable({ users }) {
-  const router = useRouter()
+export default function UserListTable({ users, refetch }) {
   return (
     <Styles>
       {users?.length ? (
@@ -58,6 +61,7 @@ export default function UserListTable({ users }) {
                     #
                   </TableCell>
                   <TableCell className="table__cell table-cell__border-top">Name</TableCell>
+                  <TableCell className="table__cell table-cell__border-top">Email</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Date Created</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Active</TableCell>
                   <TableCell
@@ -71,12 +75,7 @@ export default function UserListTable({ users }) {
               <TableBody>
                 {users.length
                   ? users.map((user) => (
-                      <TableRow
-                        key={nanoid()}
-                        onClick={() => router.push(`/users/${user._id}`)}
-                        onKeyPress={() => router.push(`/users/${user._id}`)}
-                        className="table__row"
-                      >
+                      <TableRow key={nanoid()} className="table__row">
                         <TableCell className="table__cell">
                           <Avatar size="large" image={user?.image?.url} initial={user.firstName} />
                         </TableCell>
@@ -84,6 +83,7 @@ export default function UserListTable({ users }) {
                           {capitalizeFirstLetter(user.firstName)}{' '}
                           {capitalizeFirstLetter(user.lastName)}
                         </TableCell>
+                        <TableCell className="table__cell user__subject">{user.email}</TableCell>
                         <TableCell className="table__cell user__timestamp">
                           {dateFormatter(user.timestamp)}
                         </TableCell>
@@ -95,14 +95,15 @@ export default function UserListTable({ users }) {
                             />
                           }
                         </TableCell>
-                        <TableCell className="table__cell table-cell__align-right">
-                          <Button
-                            title="View"
-                            color="info"
-                            size="small"
-                            variant="filled"
-                            align="right"
-                          />
+                        <TableCell className="table__cell table-cell__align-left">
+                          <div className="button__wrapper">
+                            <DeleteUserButton refetch={refetch} userId={user._id} />
+                            <BlockUserButton
+                              refetch={refetch}
+                              isBlocked={user.status.isBlocked}
+                              userId={user ? user._id : ''}
+                            />
+                          </div>
                         </TableCell>
                       </TableRow>
                     ))

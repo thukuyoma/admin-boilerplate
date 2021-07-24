@@ -26,7 +26,7 @@ export default function AdminIndexPage() {
     currentPage: page,
     users: [],
   })
-  const { isLoading, data, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
+  const { isLoading, refetch, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
     ['users', page],
     () => listUsers({ page, limit }),
     {
@@ -48,8 +48,8 @@ export default function AdminIndexPage() {
     { title: `(${query.totalUsers})`, url: '/users', isActive: true },
   ]
   const secondaryActions = [
+    { title: 'Users', url: '/users/users' },
     { title: 'All Active', url: '/users/filters/active' },
-    { title: 'All Blocked', url: '/users/filters/blocked' },
     { title: 'All Blocked', url: '/users/filters/blocked' },
   ]
 
@@ -64,7 +64,7 @@ export default function AdminIndexPage() {
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess && query.users && <UserListTable users={query.users} />}
+            {isSuccess && query.users && <UserListTable users={query.users} refetch={refetch} />}
             {isSuccess && !query.users.length && <NotFound message="No User Found" />}
             {isLoading && <ServerLoadingLoader message="Loading Users" />}
             {isError && <ServerError error={error} />}

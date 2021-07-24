@@ -1,8 +1,9 @@
+import { IconUserCheck, IconUserOff } from '@tabler/icons'
 import React from 'react'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
-import blockAdmin from '../../../actions/account/block-admin'
-import ActionButton from '../../buttons/ActionButton'
+import blockUser from '../../../actions/users/block-user'
+import IconButton from '../../buttons/IconButton'
 
 export default function DeleteUsergButton({
   userId,
@@ -13,7 +14,7 @@ export default function DeleteUsergButton({
   refetch: () => void
   isBlocked: boolean
 }) {
-  const { mutateAsync, isLoading } = useMutation([userId], blockAdmin)
+  const { mutateAsync, isLoading } = useMutation([userId], blockUser)
   const handleSubmit = async () => {
     if (!userId) {
       return null
@@ -30,12 +31,13 @@ export default function DeleteUsergButton({
     return null
   }
   return (
-    <ActionButton
-      block
-      title={isBlocked ? 'Unblock Admin' : 'Block Admin'}
+    <IconButton
       onClick={handleSubmit}
       loading={isLoading}
-      align="left"
-    />
+      size="medium"
+      color={isBlocked ? 'primary' : 'warning'}
+    >
+      {isBlocked ? <IconUserCheck /> : <IconUserOff />}
+    </IconButton>
   )
 }
