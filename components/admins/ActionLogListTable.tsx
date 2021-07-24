@@ -55,7 +55,9 @@ export default function ActionLogListTable({ actionLogs }) {
                   </TableCell>
                   <TableCell className="table__cell table-cell__border-top">Activity</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Timestamp</TableCell>
-                  <TableCell className="table__cell table-cell__border-top">Status</TableCell>
+                  <TableCell className="table__cell table-cell__border-top table-cell__align-right">
+                    Status
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -71,7 +73,7 @@ export default function ActionLogListTable({ actionLogs }) {
                         <TableCell className="table__cell actionLog__timestamp">
                           {dateFormatter(actionLog.timestamp)}
                         </TableCell>
-                        <TableCell className="table__cell actionLog__timestamp">
+                        <TableCell className="table__cell actionLog__timestamp table-cell__align-right">
                           {
                             <StatusButton
                               color={!actionLog.status.isBlocked ? 'success' : 'danger'}
