@@ -26,7 +26,6 @@ export default function DeleteUserButton({
       onSuccess: (data) => {
         toast.success(data)
         refetch()
-        router.push('/users')
       },
     })
     return null

@@ -24,8 +24,8 @@ export default function DeleteUsergButton({
         toast.error(err)
       },
       onSuccess: async (data) => {
-        refetch()
         toast.success(data)
+        refetch()
       },
     })
     return null

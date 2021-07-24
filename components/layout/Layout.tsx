@@ -98,6 +98,14 @@ export default function Layout({ children }) {
         showAccount={showAccount}
         handleAccount={handleAccount}
         handleShowNav={handleShowNav}
+        handleCreateShortcuts={handleCreateShortcuts}
+        showCreateShortcuts={showCreateShortcuts}
+        handleHistoryTab={handleHistoryTab}
+        showHistoryTab={showHistoryTab}
+        handleShortcuts={handleShortcuts}
+        showShortcuts={showShortcuts}
+        handleNotification={handleNotification}
+        showNotification={showNotification}
       />
       <div className="container">
         <SideNav toggleSideNav={toggleSideNav} setToggleSideNav={setToggleSideNav} />

@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import Logo from './Logo'
 import MobileSideNav from './MobileSideNav'
-import { FiSettings } from 'react-icons/fi'
 import { BsBell, BsClockHistory } from 'react-icons/bs'
 import { IoIosAddCircle } from 'react-icons/io'
 import { AiOutlineMenu } from 'react-icons/ai'
@@ -10,6 +9,13 @@ import useAuth from '../../context/auth'
 import { useRouter } from 'next/router'
 import HeaderLogin from './HeaderLogin'
 import HeaderProfileAvatar from './header-tabs/HeaderProfileAvatar'
+import AccountTab from '../account/AccountTab'
+import ShortcutsTab from './header-tabs/ShortcutsTab'
+import { TiThSmall } from 'react-icons/ti'
+import NotificationTab from './header-tabs/NotificationTab'
+import NotificationCount from '../notifications/NotificationCount'
+import CreateShortcuts from './header-tabs/CreateShortcuts'
+import HistoryTab from './header-tabs/HistoryTab'
 
 const Styles = styled.div`
   background: #e8e8e8;
@@ -34,7 +40,7 @@ const Styles = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 40px;
-    background: #ffffff;
+    background: #c9c9c9;
   }
   .alert {
     width: 40px;
@@ -58,6 +64,7 @@ const Styles = styled.div`
     display: flex;
     align-items: center;
     font-size: 22px;
+    position: relative;
     :hover {
       color: #0098db;
     }
@@ -68,11 +75,24 @@ const Styles = styled.div`
   .mobile__hamburger {
     display: flex;
     align-items: center;
-    font-size: 20px;
+    font-size: 25px;
   }
 `
 
-export default function MobileHeader({ handleAccount, handleShowNav, showNav, showAccount }) {
+export default function MobileHeader({
+  handleShowNav,
+  showNav,
+  handleCreateShortcuts,
+  showCreateShortcuts,
+  handleHistoryTab,
+  showHistoryTab,
+  handleNotification,
+  showNotification,
+  handleShortcuts,
+  showShortcuts,
+  handleAccount,
+  showAccount,
+}) {
   const { profile, isLoading } = useAuth()
   const router = useRouter()
   return (
@@ -87,22 +107,34 @@ export default function MobileHeader({ handleAccount, handleShowNav, showNav, sh
       <div className="header__right">
         <div className="header__account-details">
           <div className="header-links__item" style={{ fontSize: '30px' }}>
-            <IoIosAddCircle />
+            <IoIosAddCircle
+              onClick={() => handleCreateShortcuts()}
+              onKeyPress={() => handleCreateShortcuts()}
+            />
           </div>
+          <CreateShortcuts showCreateShortcuts={showCreateShortcuts} />
           <div className="header-links__item">
-            <BsClockHistory />
+            <BsClockHistory
+              onClick={() => handleHistoryTab()}
+              onKeyPress={() => handleHistoryTab()}
+            />
           </div>
+          <HistoryTab showHistoryTab={showHistoryTab} />
           <div className="header-links__item">
-            <BsBell />
+            <BsBell onClick={() => handleNotification()} onKeyPress={() => handleNotification()} />
+            <NotificationCount />
           </div>
+          {showNotification && <NotificationTab showNotification={showNotification} />}
           <div className="header-links__item">
-            <FiSettings />
+            <TiThSmall onClick={() => handleShortcuts()} onKeyPress={() => handleShortcuts()} />
           </div>
+          <ShortcutsTab showShortcuts={showShortcuts} />
           <div className="header-links__item">
-            {profile?.avatar && <HeaderProfileAvatar handleAccount={handleAccount} />}
+            {profile && !isLoading && <HeaderProfileAvatar handleAccount={handleAccount} />}
             {!profile && !isLoading && <HeaderLogin />}
             {isLoading && <div className="profile"></div>}
           </div>
+          <AccountTab showAccount={showAccount} />
         </div>
       </div>
     </Styles>

@@ -44,7 +44,7 @@ const Styles = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 40px;
-    background: #ffffff;
+    background: #c9c9c9;
   }
   .alert {
     margin-left: 20px;

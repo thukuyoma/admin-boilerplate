@@ -1,6 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import config from '../../config/config'
+import { useRouter } from 'next/router'
+import links from './nav.links'
+import Logo from './Logo'
+import Avatar from '../shared/Avatar'
+import useAuth from '../../context/auth'
+import { GrClose } from 'react-icons/gr'
+
 const Styles = styled.div`
   display: flex;
   position: absolute;
@@ -13,6 +20,7 @@ const Styles = styled.div`
   height: 100vh;
   position: fixed;
   border-right: 1px solid #f0f0f0;
+  z-index: 999;
   .sidenav__logo {
     margin: 0 0 50px 10px;
     height: 40px;
@@ -24,7 +32,7 @@ const Styles = styled.div`
   .side-nav__link {
     display: flex;
     align-items: center;
-    padding: 7px 10px;
+    padding: 10px;
     :hover {
       background: #ffa50042;
       width: 180px;
@@ -49,6 +57,8 @@ const Styles = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 20px 30px;
+    position: relative;
   }
 
   .wrapper__top {
@@ -62,24 +72,21 @@ const Styles = styled.div`
     }
   }
   .close {
-    width: 30px;
-    height: 30px;
-    color: #fff;
+    width: 25px;
+    height: 25px;
+    color: #444;
     border-radius: 50%;
     position: absolute;
-    right: 80px;
-    top: 8px;
-    background: #0098db;
+    right: 15px;
+    top: 28px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
     font-weight: bold;
   }
   .wrapper__bottom {
     display: flex;
-    padding: 10px;
-    margin-bottom: 10px;
   }
   .account__details {
     display: flex;
@@ -98,18 +105,16 @@ const Styles = styled.div`
   }
 `
 
-import { useRouter } from 'next/router'
-import links from './nav.links'
-import Logo from './Logo'
-
 export default function MobileSideNav({ handleShowNav }) {
+  const { profile, isLoading, logout } = useAuth()
   const router = useRouter()
   const handleRedirect = (url: string) => router.push(url)
   return (
     <Styles>
       <div className="mobile__wrapper">
         <div className="close" onClick={() => handleShowNav(false)}>
-          X
+          {/* X */}
+          <GrClose />
         </div>
         <div className="wrapper__top">
           <div className="sidenav__logo">
@@ -130,17 +135,20 @@ export default function MobileSideNav({ handleShowNav }) {
             ))}
           </div>
         </div>
-        <div className="wrapper__bottom">
-          <img src="/assets/face.svg" className="account__avatar" />
-          <div className="account__details">
-            <span className="username">Ukuyoma Theophilus</span>
-            <span className="logout">Logout</span>
+        {profile && !isLoading && (
+          <div className="wrapper__bottom">
+            <Avatar image={profile?.avatar} initial={profile.firstName} size="large" />
+            <div className="account__details">
+              <span className="username">
+                {profile.firstName} {profile.lastName}
+              </span>
+              <span className="logout" onClick={() => logout()} onKeyPress={() => logout()}>
+                Logout
+              </span>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </Styles>
   )
-}
-function handleShowNav(arg0: boolean): void {
-  throw new Error('Function not implemented.')
 }

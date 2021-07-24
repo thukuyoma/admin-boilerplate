@@ -35,6 +35,12 @@ export function AuthProvider({ children }) {
     fetchProfile()
   }, [])
 
+  useEffect(() => {
+    if (!profile && !isLoading) {
+      router.push('/login')
+    }
+  }, [profile, isLoading])
+
   const login = async (credentials) => {
     const user = await loginAdmin(credentials)
     if (user) {

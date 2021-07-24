@@ -9,6 +9,11 @@ const Styles = styled.div`
   top: 60px;
   right: 0;
   padding: 30px 20px 20px 20px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+    top: 75px;
+  }
 `
 
 export default function TabsOverlay({ children }) {
