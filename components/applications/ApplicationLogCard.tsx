@@ -81,17 +81,11 @@ export default function ApplicationLogCard({ log, refetchApplicationLogs }) {
           size="medium"
           color="danger"
           style={{ marginLeft: 10 }}
-          className="icon"
           loading={isLoading}
         >
           <IconTrash width={12} />
         </IconButton>
-        <IconButton
-          size="medium"
-          color="secondary"
-          className="icon"
-          onClick={() => handleEdit(log._id)}
-        >
+        <IconButton size="medium" color="secondary" onClick={() => handleEdit(log._id)}>
           <IconPencil width={12} />
         </IconButton>
       </div>
