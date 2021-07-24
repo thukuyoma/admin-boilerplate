@@ -5,10 +5,9 @@ import React from 'react'
 import styled from 'styled-components'
 import dateFormatter from '../../utils/date-formatter'
 import Avatar from '../shared/Avatar'
-import Button from '../buttons/Button'
-import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 import StatusButton from '../buttons/StatusButton'
+import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 
 const Styles = styled.div`
   .actionLog__subject {
@@ -36,9 +35,6 @@ const Styles = styled.div`
   .actionLog__timestamp {
     min-width: 150px;
   }
-  .table__row {
-    cursor: pointer;
-  }
 `
 
 export default function ActionLogListTable({ actionLogs }) {
@@ -57,40 +53,20 @@ export default function ActionLogListTable({ actionLogs }) {
                   >
                     #
                   </TableCell>
-                  <TableCell className="table__cell table-cell__border-top">Name</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Activity</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Timestamp</TableCell>
                   <TableCell className="table__cell table-cell__border-top">Status</TableCell>
-                  <TableCell
-                    align="right"
-                    className="table__cell table-cell__align-right table-cell__border-top"
-                  >
-                    Action
-                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {actionLogs.length
                   ? actionLogs.map((actionLog) => (
-                      <TableRow
-                        key={nanoid()}
-                        onClick={() => router.push(`/actionLogs/${actionLog._id}`)}
-                        onKeyPress={() => router.push(`/actionLogs/${actionLog._id}`)}
-                        className="table__row"
-                      >
+                      <TableRow key={nanoid()} className="table__row">
                         <TableCell className="table__cell">
-                          <Avatar
-                            size="large"
-                            image={actionLog?.image?.url}
-                            initial={actionLog.firstName}
-                          />
+                          <Avatar size="medium" initial={actionLog.createdBy.adminFullName} />
                         </TableCell>
                         <TableCell className="table__cell actionLog__subject">
-                          {capitalizeFirstLetter(actionLog.firstName)}{' '}
-                          {capitalizeFirstLetter(actionLog.lastName)}
-                        </TableCell>
-                        <TableCell className="table__cell">
-                          {capitalizeFirstLetter(actionLog.role)}
+                          {capitalizeFirstLetter(actionLog.activity)}
                         </TableCell>
                         <TableCell className="table__cell actionLog__timestamp">
                           {dateFormatter(actionLog.timestamp)}
@@ -102,15 +78,6 @@ export default function ActionLogListTable({ actionLogs }) {
                               title={!actionLog.status.isBlocked ? 'Active' : 'Blocked'}
                             />
                           }
-                        </TableCell>
-                        <TableCell className="table__cell table-cell__align-right">
-                          <Button
-                            title="View"
-                            color="info"
-                            size="small"
-                            variant="filled"
-                            align="right"
-                          />
                         </TableCell>
                       </TableRow>
                     ))

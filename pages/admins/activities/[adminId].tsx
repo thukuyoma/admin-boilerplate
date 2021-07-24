@@ -77,18 +77,12 @@ export default function AdminActivitiesPage() {
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess &&
-              data &&
-              query?.actionLogs.map((activity) => (
-                <ActionLogListTable key={nanoid()} actionLogs={activity} />
-              ))}
+            {isSuccess && <ActionLogListTable key={nanoid()} actionLogs={query.actionLogs} />}
             {isLoading && <ServerLoadingLoader message="Loading Admin Activities" />}
             {isSuccess && !query.actionLogs.length && (
               <NotFound message="No Admin Activity Found" />
             )}
             {isError && <ServerError error={error} />}
-            How far
-            <p>How are you doing today</p>
             <QueryPagination
               nextPage={handleNextPage}
               prevPage={handlePrevPage}

@@ -5,10 +5,10 @@ const Styles = styled.div`
   height: 40px;
   width: 40px;
   ${({ size }) =>
-    (size === 'small' && 'height: 25px; width: 25px; font-size: 16px;') ||
-    (size === 'medium' && 'height: 30px; width: 30px; font-size: 20px;') ||
-    (size === 'large' && 'height: 40px; width: 40px; font-size: 25px;') ||
-    (size === 'extraLarge' && 'height: 100px; width: 100px; font-size: 35px;')}
+    (size === 'small' && 'height: 25px; width: 25px; font-size: 13px;') ||
+    (size === 'medium' && 'height: 30px; width: 30px; font-size: 18px;') ||
+    (size === 'large' && 'height: 40px; width: 40px; font-size: 23px;') ||
+    (size === 'extraLarge' && 'height: 100px; width: 100px; font-size: 30px;')}
   border-radius: 50px;
   background: #e3f2fd;
   color: #0098db;
