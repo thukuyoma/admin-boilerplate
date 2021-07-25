@@ -9,7 +9,6 @@ import dateFormatter from '../../utils/date-formatter'
 import wordsCapitalizer from '../../utils/words-capitalizer'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 import ApplicationsLogs from './ApplicationsLogs'
-import WriteSupportLog from './WriteSupportLog'
 
 const Styles = styled.div`
   .application__group {

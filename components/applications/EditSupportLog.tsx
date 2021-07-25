@@ -72,7 +72,7 @@ export default function EditSupportLog({
           setInputError('')
           setMessage(e.target.value)
         }}
-        placeholder="Edit support log here"
+        placeholder="Edit log here"
       />
       <DisplayInputError error={inputError} />
       <Button

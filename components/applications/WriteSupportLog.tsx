@@ -59,19 +59,19 @@ export default function WriteSupportLog({ applicationId, refetchApplicationLogs 
   }
   return (
     <Styles>
-      <p className="tag__title">Create Support Log</p>
+      <p className="tag__title">Create Application Log</p>
       <textarea
         value={message}
         onChange={(e) => {
           setInputError('')
           setMessage(e.target.value)
         }}
-        placeholder="Write a short support log here"
+        placeholder="Write a concise application support log here"
       />
       <DisplayInputError error={inputError} />
       <Button
         block
-        title="Submit Log"
+        title="Create Log"
         onClick={(e) => handleSubmitLog(e)}
         loading={isLoading}
         align="center"
