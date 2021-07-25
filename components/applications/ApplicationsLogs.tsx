@@ -6,16 +6,13 @@ import ServerError from '../shared/ServerError'
 import ApplicationLogCard from './ApplicationLogCard'
 import styled from 'styled-components'
 import WriteSupportLog from './WriteSupportLog'
+import TextDisplay from '../shared/TextDisplay'
 
 const Styles = styled.div`
   margin-top: 30px;
   padding-bottom: 30px;
-  .log__not-found {
-    font-size: 12px;
-    color: gray;
-    font-style: italic;
-  }
 `
+
 export default function ApplicationsLogs({ applicationId }) {
   const [page, setPage] = useState<number>(1)
   const limit: number = 5
@@ -68,9 +65,9 @@ export default function ApplicationsLogs({ applicationId }) {
               log={log}
             />
           ))}
-        {isLoading && <p className="log__not-found">Loading previous logs...</p>}
+        {isLoading && <TextDisplay text="Loading previous logs..." />}
         {isSuccess && !query.applicationLogs.length && (
-          <p className="log__not-found">Logs on this application will appear here</p>
+          <TextDisplay text="Logs on this application will appear here" />
         )}
         {isError && <ServerError error={error} />}
         <QueryPagination

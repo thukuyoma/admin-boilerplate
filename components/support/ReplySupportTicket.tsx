@@ -58,7 +58,7 @@ export default function ReplySupportTicket({ ticketId, refetch }) {
   }
   return (
     <Styles>
-      <p className="tag__title">Create Support Log</p>
+      <p className="tag__title">Reply Support Log</p>
       <textarea
         value={message}
         onChange={(e) => {

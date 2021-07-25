@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PersonDataDisplay from './PersonDataDisplay'
-import { TagKey, TagKeyValuePair, TagValue } from '../shared/shared-styles'
-import ReplySupportTicket from './ReplySupportTicket'
+import { TagKey } from '../shared/shared-styles'
 import TicketReplies from './TicketReplies'
 
 const Styles = styled.div`
