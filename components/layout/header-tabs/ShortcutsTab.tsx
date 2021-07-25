@@ -85,7 +85,7 @@ const shortcuts = [
   },
   {
     title: 'Dashboard',
-    url: '/dashboard',
+    url: '/dashboard/analytics',
     icon: '/shortcuts/dashboard.png',
   },
   {

@@ -22,7 +22,7 @@ export default function ChangePassword({ setSwitchCaseAccount }) {
     newPassword: '',
     confirmNewPassword: '',
   })
-  const { mutateAsync, isSuccess, isLoading, data, isError, error } = useMutation(changePassword)
+  const { mutateAsync, isSuccess, isLoading, isError, error } = useMutation(changePassword)
   const [inputsError, setInputErrors] = useState({
     oldPassword: '',
     newPassword: '',
@@ -47,7 +47,11 @@ export default function ChangePassword({ setSwitchCaseAccount }) {
       oldPassword,
       newPassword,
     }
-    await mutateAsync(passwordToUpdate)
+    await mutateAsync(passwordToUpdate, {
+      onSuccess: () => {
+        setPasswords({ oldPassword: '', newPassword: '', confirmNewPassword: '' })
+      },
+    })
     return null
   }
 
@@ -92,7 +96,7 @@ export default function ChangePassword({ setSwitchCaseAccount }) {
           {inputsError.confirmNewPassword && <ErrorAlert error={inputsError.confirmNewPassword} />}
         </div>
         {isError && <ErrorAlert error={error} />}
-        {isSuccess && data && <SuccessAlert message="Password successfully updated" />}
+        {isSuccess && <SuccessAlert message="Password successfully updated" />}
         <Button
           title="Update Password"
           loading={isLoading}

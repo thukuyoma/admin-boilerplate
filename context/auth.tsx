@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     if (!profile && !isLoading) {
-      router.push('/login')
+      router.push('/')
     }
   }, [profile, isLoading])
 
