@@ -49,7 +49,7 @@ export default function FilterActiveAdmin() {
     { title: `Active (${query.totalUsers})`, url: '/users', isActive: true },
   ]
   const secondaryActions = [
-    { title: 'Users', url: '/users/users' },
+    { title: 'Users', url: '/users' },
     { title: 'All Active', url: '/users/filters/active' },
     { title: 'All Blocked', url: '/users/filters/blocked' },
   ]
