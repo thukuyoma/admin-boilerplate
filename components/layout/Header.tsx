@@ -7,7 +7,6 @@ import { AiOutlineDown } from 'react-icons/ai'
 import { IoIosAddCircle } from 'react-icons/io'
 import Search from './Search'
 import useAuth from '../../context/auth'
-import HeaderLogin from './HeaderLogin'
 import HeaderProfileAvatar from './header-tabs/HeaderProfileAvatar'
 import CreateShortcuts from './header-tabs/CreateShortcuts'
 import HistoryTab from './header-tabs/HistoryTab'
@@ -39,12 +38,6 @@ const Styles = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .profile {
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    background: #c9c9c9;
   }
   .alert {
     margin-left: 20px;
@@ -108,7 +101,6 @@ export default function Header({
   handleNotification,
   showNotification,
 }) {
-  const { profile, isLoading } = useAuth()
   return (
     <Styles toggleSideNav={toggleSideNav}>
       <div className="wrapper__now">
@@ -148,9 +140,7 @@ export default function Header({
             </div>
             <ShortcutsTab showShortcuts={showShortcuts} />
             <div className="header-links__item">
-              {profile && !isLoading && <HeaderProfileAvatar handleAccount={handleAccount} />}
-              {!profile && !isLoading && <HeaderLogin />}
-              {isLoading && <div className="profile"></div>}
+              <HeaderProfileAvatar handleAccount={handleAccount} />
             </div>
             <AccountTab showAccount={showAccount} />
           </div>

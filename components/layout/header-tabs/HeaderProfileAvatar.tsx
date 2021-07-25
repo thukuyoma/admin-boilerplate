@@ -8,6 +8,10 @@ const Styles = styled.div`
   justify-content: center;
   cursor: pointer;
   z-index: 12;
+  width: 30px;
+  height: 30px;
+  border-radius: 40px;
+  background: #c9c9c9;
   .avatar {
     height: 30px;
     width: 30px;
@@ -16,16 +20,18 @@ const Styles = styled.div`
 `
 
 export default function HeaderProfileAvatar({ handleAccount }) {
-  const { profile } = useAuth()
+  const { profile, isLoading } = useAuth()
   return (
     <Styles>
-      <img
-        src={profile?.avatar ? profile?.avatar : '/assets/default-avatar.png'}
-        alt="default"
-        className="avatar"
-        onClick={() => handleAccount()}
-        onKeyPress={() => handleAccount()}
-      />
+      {!isLoading ? (
+        <img
+          src={profile?.avatar ? profile?.avatar : '/assets/default-avatar.png'}
+          alt="default"
+          className="avatar"
+          onClick={() => handleAccount()}
+          onKeyPress={() => handleAccount()}
+        />
+      ) : null}
     </Styles>
   )
 }

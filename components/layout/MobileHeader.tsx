@@ -5,9 +5,6 @@ import MobileSideNav from './MobileSideNav'
 import { BsBell, BsClockHistory } from 'react-icons/bs'
 import { IoIosAddCircle } from 'react-icons/io'
 import { AiOutlineMenu } from 'react-icons/ai'
-import useAuth from '../../context/auth'
-import { useRouter } from 'next/router'
-import HeaderLogin from './HeaderLogin'
 import HeaderProfileAvatar from './header-tabs/HeaderProfileAvatar'
 import AccountTab from '../account/AccountTab'
 import ShortcutsTab from './header-tabs/ShortcutsTab'
@@ -36,12 +33,6 @@ const Styles = styled.div`
   .header__right {
     display: flex;
     align-items: center;
-  }
-  .profile {
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    background: #c9c9c9;
   }
   .alert {
     width: 40px;
@@ -94,8 +85,6 @@ export default function MobileHeader({
   handleAccount,
   showAccount,
 }) {
-  const { profile, isLoading } = useAuth()
-  const router = useRouter()
   return (
     <Styles>
       <div className="header__left">
@@ -131,9 +120,7 @@ export default function MobileHeader({
           </div>
           <ShortcutsTab showShortcuts={showShortcuts} />
           <div className="header-links__item">
-            {profile && !isLoading && <HeaderProfileAvatar handleAccount={handleAccount} />}
-            {!profile && !isLoading && <HeaderLogin />}
-            {isLoading && <div className="profile"></div>}
+            <HeaderProfileAvatar handleAccount={handleAccount} />
           </div>
           <AccountTab showAccount={showAccount} />
         </div>
