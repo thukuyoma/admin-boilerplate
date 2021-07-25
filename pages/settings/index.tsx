@@ -32,8 +32,8 @@ export default function SettingsIndexPage() {
         <ContainerMainColumn>
           <ContainerHeaders
             pageTitle="Settings"
-            createButtonUrl="/scholarships/create"
-            createButtonTitle="Create d"
+            createButtonUrl=""
+            createButtonTitle=""
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
