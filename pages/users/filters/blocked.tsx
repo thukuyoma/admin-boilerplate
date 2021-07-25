@@ -13,22 +13,22 @@ import { nanoid } from 'nanoid'
 import router from 'next/router'
 import ContainerMainWrapper from '../../../components/layout/ContainerWrapper'
 import ContainerHeaders from '../../../components/layout/ContainerHeaders'
-import AdminListTable from '../../../components/admins/AdminListTable'
-import filterAdmins from '../../../actions/admins/filter-admins'
+import UserListTable from '../../../components/users/UserListTable'
+import filterUsers from '../../../actions/users/filter-user'
 
-export default function FilterBlockedAdmin() {
+export default function FilterActiveAdmin() {
   const [page, setPage] = useState<number>(1)
   const limit = 5
   const [query, setQuery] = useState({
     hasMore: false,
     totalPages: 0,
-    totalAdmins: 0,
+    totalUsers: 0,
     currentPage: page,
-    admins: null,
+    users: [],
   })
-  const { isLoading, data, isError, isSuccess, error, isPreviousData, isFetching } = useQuery(
-    ['Blocked admins', page],
-    () => filterAdmins({ page, limit, status: 'blocked' }),
+  const { isLoading, isError, refetch, isSuccess, error, isPreviousData, isFetching } = useQuery(
+    ['Blocked Users', page],
+    () => filterUsers({ page, limit, status: 'blocked' }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
@@ -44,15 +44,14 @@ export default function FilterBlockedAdmin() {
   const handlePrevPage = () => {
     setPage((prev) => Math.max(prev - 1, 1))
   }
+
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
-    { title: `Blocked (${query.totalAdmins})`, url: '/admins', isActive: true },
-    { title: 'Create Admin', url: '/admins/create', isActive: false },
+    { title: `Active (${query.totalUsers})`, url: '/users', isActive: true },
   ]
   const secondaryActions = [
-    { title: 'Create Admin', url: '/admins/create' },
-    { title: 'Admins', url: '/admins' },
-    { title: 'All Active', url: '/admins/filters/active' },
-    { title: 'All Blocked', url: '/admins/filters/blocked' },
+    { title: 'Users', url: '/users/users' },
+    { title: 'All Active', url: '/users/filters/active' },
+    { title: 'All Blocked', url: '/users/filters/blocked' },
   ]
 
   return (
@@ -60,15 +59,15 @@ export default function FilterBlockedAdmin() {
       <ContainerMainWrapper>
         <ContainerMainColumn>
           <ContainerHeaders
-            pageTitle="Admins"
-            createButtonUrl="/admins/create"
-            createButtonTitle="Create Admin"
+            pageTitle="Users"
+            createButtonUrl=""
+            createButtonTitle=""
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            {isSuccess && query.admins && <AdminListTable admins={query.admins} />}
-            {isSuccess && !query.admins.length && <NotFound message="No Admin Found" />}
-            {isLoading && <ServerLoadingLoader message="Loading Admins" />}
+            {isSuccess && query.users && <UserListTable users={query.users} refetch={refetch} />}
+            {isSuccess && !query.users.length && <NotFound message="No User Found" />}
+            {isLoading && <ServerLoadingLoader message="Loading Users" />}
             {isError && <ServerError error={error} />}
             <QueryPagination
               nextPage={handleNextPage}
