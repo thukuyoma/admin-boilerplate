@@ -9,6 +9,7 @@ import ContainerMainWrapper from '../../components/layout/ContainerWrapper'
 import ContainerHeaders from '../../components/layout/ContainerHeaders'
 import SettingsCard from '../../components/setting/SettingsCard'
 import { useRouter } from 'next/router'
+import MobileSpacer from '../../components/shared/MobileSpacer'
 
 export default function SettingsIndexPage() {
   const overlayItems: Array<{ title: string; url: string; isActive: boolean }> = [
@@ -37,11 +38,13 @@ export default function SettingsIndexPage() {
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            <div style={{ display: 'flex' }}>
-              {settings.map((item) => (
-                <SettingsCard item={item} />
-              ))}
-            </div>
+            <MobileSpacer>
+              <div style={{ display: 'flex' }}>
+                {settings.map((item) => (
+                  <SettingsCard item={item} />
+                ))}
+              </div>
+            </MobileSpacer>
           </ScrollableContainer>
         </ContainerMainColumn>
         <ContainerMainAction>

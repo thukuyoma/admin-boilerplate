@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Styles = styled.div`
   @media (max-width: 500px) {
-    padding-top: 50px;
+    padding-top: 60px;
   }
 `
 

@@ -34,10 +34,11 @@ const Styles = styled.div`
     align-items: center;
     padding: 10px;
     :hover {
-      background: #ffa50042;
-      width: 180px;
+      background: #f7f7f7;
+      width: 300px;
       cursor: pointer;
-      border-radius: 5px;
+      margin: 0px -30px;
+      padding: 10px 40px;
     }
   }
   .side-nav-link___icon {
