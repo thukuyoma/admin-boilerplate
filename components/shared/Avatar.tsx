@@ -6,9 +6,9 @@ const Styles = styled.div`
   width: 40px;
   ${({ size }) =>
     (size === 'small' && 'height: 25px; width: 25px; font-size: 13px;') ||
-    (size === 'medium' && 'height: 30px; width: 30px; font-size: 18px;') ||
-    (size === 'large' && 'height: 40px; width: 40px; font-size: 23px;') ||
-    (size === 'extraLarge' && 'height: 100px; width: 100px; font-size: 30px;')}
+    (size === 'medium' && 'height: 30px; width: 30px; font-size: 16px;') ||
+    (size === 'large' && 'height: 40px; width: 40px; font-size: 20px;') ||
+    (size === 'extraLarge' && 'height: 100px; width: 100px; font-size: 25px;')}
   border-radius: 50px;
   background: #e3f2fd;
   color: #0098db;

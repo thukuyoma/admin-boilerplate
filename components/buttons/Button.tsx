@@ -6,11 +6,10 @@ import Loader from 'react-loader-spinner'
 const Styles = styled.div`
   display: ${(block) => (block ? 'flex' : 'inline-flex')};
   justify-content: ${({ align }) =>
-    (align === 'left' && 'flex-start;') ||
-    (align === 'center' && 'center;') ||
-    (align === 'right' && 'flex-end;')}
-  width: 100%;
-  button {
+      (align === 'left' && 'flex-start;') ||
+      (align === 'center' && 'center;') ||
+      (align === 'right' && 'flex-end;')}
+    button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,7 +19,7 @@ const Styles = styled.div`
     white-space: nowrap;
     outline: 0;
     color: #fff;
-    border:  0;
+    border: 0;
     ${({ size }) =>
       (size === 'small' && 'height: 30px; font-size: 13px;') ||
       (size === 'medium' && 'height: 36px; font-size: 14px;') ||
@@ -78,7 +77,7 @@ const Styles = styled.div`
     margin-right: 5px;
     display: flex;
     align-items: center;
-    justify-content:  center;
+    justify-content: center;
   }
   .button-icon__end {
     margin-left: 5px;

@@ -41,7 +41,7 @@ export default function NotificationTab({ showNotification }) {
   const [page, setPage] = useState<number>(1)
   const [query, setQuery] = useState({
     hasMore: true,
-    totalPages: 2,
+    totalPages: 0,
     totalAdminAnnouncements: 9,
     currentPage: 1,
     adminAnnouncements: [],

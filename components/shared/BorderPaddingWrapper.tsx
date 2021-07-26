@@ -9,7 +9,7 @@ const BorderPaddingWrapper = styled.div`
   @media(max-width: 900px) {
     margin-top: 30px;
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px 10px;
   }
 `
 export default BorderPaddingWrapper

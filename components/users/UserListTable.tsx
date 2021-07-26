@@ -77,7 +77,7 @@ export default function UserListTable({ users, refetch }) {
                   ? users.map((user) => (
                       <TableRow key={nanoid()} className="table__row">
                         <TableCell className="table__cell">
-                          <Avatar size="large" image={user?.image?.url} initial={user.firstName} />
+                          <Avatar size="large" image={user?.avatar?.url} initial={user.firstName} />
                         </TableCell>
                         <TableCell className="table__cell user__subject">
                           {capitalizeFirstLetter(user.firstName)}{' '}
