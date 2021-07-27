@@ -8,6 +8,7 @@ import fileUploader from '../../actions/cloud-assets/file-uploader'
 import deleteCloudFile from '../../actions/cloud-assets/delete-cloud-file'
 import Loader from '../shared/Loader'
 import DisplayInputError from './DisplayInputError'
+import config from '../../config/config'
 
 const Styles = styled.div`
   .preview__container {
@@ -101,11 +102,18 @@ export default function ImagePicker({
   setImageCallback,
   buttonTitle,
   styles,
+  destination,
 }: {
   image?: { url: string; publicId: string }
   setImageCallback: (value: object | string) => void
   buttonTitle?: string
   styles?: { marginBottom?: number; marginTop?: number; marginRight?: number; marginLeft?: number }
+  destination:
+    | 'postImages'
+    | 'accountAvatars'
+    | 'bookingImage'
+    | 'scholarshipImages'
+    | 'blogCategoryImage'
 }) {
   const { mutateAsync: uploadMutateAsync, isLoading: uploadIsLoading } = useMutation(fileUploader)
   const { mutateAsync: deleteMutateAsync, isLoading: deleteingIsLoading } = useMutation(
@@ -130,7 +138,8 @@ export default function ImagePicker({
   const uploader = async () => {
     const formData = new FormData()
     formData.append('file', file)
-    formData.append('upload_preset', 'postimages')
+    console.log({ destination: config.cloudinary.preset[destination] })
+    formData.append('upload_preset', config.cloudinary.preset[destination])
     await uploadMutateAsync(
       { formData, setUploadPercentage },
       {

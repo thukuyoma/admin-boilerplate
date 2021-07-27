@@ -25,7 +25,7 @@ export default function HeaderProfileAvatar({ handleAccount }) {
     <Styles>
       {!isLoading ? (
         <img
-          src={profile?.avatar ? profile?.avatar : '/assets/default-avatar.png'}
+          src={profile?.avatar?.url ? profile?.avatar?.url : '/assets/default-avatar.png'}
           alt="default"
           className="avatar"
           onClick={() => handleAccount()}

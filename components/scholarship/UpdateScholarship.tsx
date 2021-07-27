@@ -154,7 +154,11 @@ export default function UpdateScholarship({ scholarship }) {
           </Grid>
           <Grid item xs={12} sm={4} md={4} lg={4}>
             <InputTitle> Image</InputTitle>
-            <ImagePicker image={image} setImageCallback={setImage} />
+            <ImagePicker
+              destination="scholarshipImages"
+              image={image}
+              setImageCallback={setImage}
+            />
             {inputErrors.image && <DisplayInputError error={inputErrors.image} />}
           </Grid>
         </Grid>

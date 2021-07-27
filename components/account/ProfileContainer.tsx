@@ -98,7 +98,6 @@ export default function ProfileContainer({ setSwitchCaseAccount }) {
                 </>
               )}
             </div>
-            {profile?.avatar?.url}
             <span className="username">
               {capitalizeFirstLetter(profile.firstName)} {capitalizeFirstLetter(profile.lastName)}
             </span>

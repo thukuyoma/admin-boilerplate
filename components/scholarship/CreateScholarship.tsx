@@ -145,7 +145,11 @@ export default function CreateScholarship() {
           </Grid>
           <Grid item xs={12} sm={4} md={4} lg={4}>
             <InputTitle> Image</InputTitle>
-            <ImagePicker image={image} setImageCallback={setImage} />
+            <ImagePicker
+              image={image}
+              setImageCallback={setImage}
+              destination="scholarshipImages"
+            />
             {inputErrors.image && <DisplayInputError error={inputErrors.image} />}
           </Grid>
         </Grid>

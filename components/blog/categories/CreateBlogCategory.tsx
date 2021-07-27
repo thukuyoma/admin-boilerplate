@@ -73,7 +73,11 @@ export default function CreateBlogCategory() {
                 <InputTitle>
                   Image <Must>*</Must>
                 </InputTitle>
-                <ImagePicker image={image} setImageCallback={setImage} />
+                <ImagePicker
+                  destination="blogCategoryImage"
+                  image={image}
+                  setImageCallback={setImage}
+                />
               </Control>
             </Grid>
           </Grid>

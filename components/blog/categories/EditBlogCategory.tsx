@@ -68,7 +68,11 @@ export default function EditBlogCategory({ category }) {
       <Spacer>
         <form encType="multipart/form-data">
           <Control>
-            <ImagePicker image={image} setImageCallback={setImage} />
+            <ImagePicker
+              image={image}
+              setImageCallback={setImage}
+              destination="blogCategoryImage"
+            />
           </Control>
           <Description
             description={description}

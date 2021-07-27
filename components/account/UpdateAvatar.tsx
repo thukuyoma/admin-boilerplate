@@ -8,6 +8,7 @@ import ErrorAlert from '../shared/ErrorAlert'
 import Button from '../buttons/Button'
 import AccountTabTitle from './AccountTabTitle'
 import ImagePicker from '../forms/ImagePicker'
+import image from 'next/image'
 
 const Styles = styled.div`
   .avatar__wrapper {
@@ -19,9 +20,13 @@ const Styles = styled.div`
 `
 
 export default function UpdateAvatar({ setSwitchCaseAccount }) {
-  const [avatar, setAvatar] = useState({ url: '', publicId: '' })
   const { refreshProfile, profile } = useAuth()
+  const [avatar, setAvatar] = useState({
+    url: profile?.avatar?.url || '',
+    publicId: profile?.avatar?.publicId || '',
+  })
   const { mutateAsync, data, isSuccess, isLoading, isError, error } = useMutation(updateAvatar)
+
   const handleUpload = async () => {
     await mutateAsync(avatar, {
       onSuccess: () => {
@@ -30,15 +35,6 @@ export default function UpdateAvatar({ setSwitchCaseAccount }) {
     })
   }
 
-  useEffect(() => {
-    setAvatar({
-      url: profile?.avatar?.url || '',
-      publicId: profile?.avatar?.publicId || '',
-    })
-    return () => {
-      setAvatar({ url: '', publicId: '' })
-    }
-  })
   return (
     <Styles>
       <AccountTabTitle
@@ -46,21 +42,23 @@ export default function UpdateAvatar({ setSwitchCaseAccount }) {
         setSwitchCaseAccount={setSwitchCaseAccount}
       />
       <div className="avatar__wrapper">
-        <ImagePicker image={avatar} setImageCallback={setAvatar} />
+        <ImagePicker image={avatar} setImageCallback={setAvatar} destination="accountAvatars" />
         {isError && <ErrorAlert error={error} />}
         {isSuccess && data && <SuccessAlert message="Profile Image Uploaded successfully" />}
-        <Button
-          title="Update Avatar"
-          loading={isLoading}
-          onClick={handleUpload}
-          disabled={isLoading}
-          align="center"
-          block
-          style={{ marginTop: 30 }}
-          color="primary"
-          size="medium"
-          variant="filled"
-        />
+        {avatar.url && (
+          <Button
+            title="Update Avatar"
+            loading={isLoading}
+            onClick={handleUpload}
+            disabled={isLoading}
+            align="center"
+            block
+            style={{ marginTop: 30 }}
+            color="primary"
+            size="medium"
+            variant="filled"
+          />
+        )}
       </div>
     </Styles>
   )

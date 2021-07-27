@@ -121,7 +121,11 @@ export default function CreateBooking() {
               <InputTitle>
                 Booking Image <Must>*</Must>
               </InputTitle>
-              <ImagePicker image={bookingImage} setImageCallback={setBookingImage} />
+              <ImagePicker
+                image={bookingImage}
+                setImageCallback={setBookingImage}
+                destination="bookingImage"
+              />
             </Control>
           </Grid>
         </Grid>

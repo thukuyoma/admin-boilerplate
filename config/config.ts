@@ -13,10 +13,11 @@ export default {
   cloudinary: {
     cloudName: 'odemru-technologies',
     preset: {
-      postImages: 'postimages',
+      postImages: 'post-images',
       accountAvatars: 'account-avatars',
       bookingImage: 'booking-images',
       scholarshipImages: 'scholarship-images',
+      blogCategoryImage: 'blog-category-image',
     },
   },
   apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,

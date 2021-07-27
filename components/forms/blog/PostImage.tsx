@@ -25,7 +25,7 @@ export default function PostImage({
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12} lg={4}>
           <InputTitle>Post Image</InputTitle>
-          <ImagePicker image={image} setImageCallback={setImage} />
+          <ImagePicker image={image} setImageCallback={setImage} destination="postImages" />
         </Grid>
         {image.url && (
           <Grid item xs={12} sm={12} md={12} lg={8}>
