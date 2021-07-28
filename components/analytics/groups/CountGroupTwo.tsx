@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import TotalUsers from '../../users/analytics/TotalUsers'
-import TotalAdmins from '../../admins/analytics/TotalAdmins'
-import TotalApplications from '../../applications/analytics/TotalApplications'
-import TotalSupports from '../../support/analytics/TotalSupports'
 import TotalBlogs from '../../blog/analytics/TotalBlogs'
+import TotalBookings from '../../bookings/analytics/TotalBookings'
+import TotalScholarships from '../../scholarship/analytics/TotalScholarships'
+import TotalPayments from '../../payments/analytics/TotalPayments'
 
 const Styles = styled.div`
   border-radius: 5px;
@@ -29,11 +28,11 @@ export default function CountGroupTwo() {
     <Styles>
       <div className="count-group__top">
         <TotalBlogs />
-        <TotalAdmins />
+        <TotalBookings />
       </div>
       <div className="count-group__bottom">
-        <TotalApplications />
-        <TotalSupports />
+        <TotalScholarships />
+        <TotalPayments />
       </div>
     </Styles>
   )
