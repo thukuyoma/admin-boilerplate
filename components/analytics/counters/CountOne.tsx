@@ -24,7 +24,7 @@ const Styles = styled.div`
   .count__details {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     h5 {
       margin: 0;
       font-weight: 600;

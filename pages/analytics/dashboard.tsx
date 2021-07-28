@@ -1,13 +1,14 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
 import Layout from '../../components/layout/Layout'
-import TotalItemCountGroup from '../../components/analytics/counters/CountGroupOne'
-import TotalItemCountTwoGroup from '../../components/analytics/counters/CountGroupTwo'
+import CountGroupOne from '../../components/analytics/groups/CountGroupOne'
 import { IconEye } from '@tabler/icons'
 import CountThree from '../../components/analytics/counters/CountThree'
 import CounterFour from '../../components/analytics/counters/CountFour'
 import TableOne from '../../components/analytics/tables/TableOne'
 import MobileSpacer from '../../components/shared/MobileSpacer'
+import CountGroupThree from '../../components/analytics/groups/CountGroupThree'
+import CountGroupTwo from '../../components/analytics/groups/CountGroupTwo'
 
 export default function dashboard() {
   return (
@@ -16,13 +17,13 @@ export default function dashboard() {
         <Grid>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={4}>
-              <TotalItemCountGroup />
+              <CountGroupOne />
             </Grid>
             <Grid item xs={12} sm={12} md={4}>
-              <TotalItemCountGroup />
+              <CountGroupTwo />
             </Grid>
             <Grid item xs={12} sm={12} md={4}>
-              <TotalItemCountTwoGroup />
+              <CountGroupThree />
             </Grid>
           </Grid>
           <Grid container spacing={3}>
