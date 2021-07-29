@@ -11,7 +11,7 @@ const Styles = styled.div`
   width: 100%;
   color: #616161;
   .count__icon {
-    color: #673ab7;
+    // color: #673ab7;
     width: 50px;
     height: 50px;
     padding: 10px;

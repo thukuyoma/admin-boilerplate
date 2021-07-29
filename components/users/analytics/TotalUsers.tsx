@@ -10,7 +10,7 @@ export default function TotalUsers() {
     <CountOne
       itemCount={data}
       itemName="Users"
-      icon={<IconUsers width={20} color="#0098db" strokeWidth={1.5} />}
+      icon={<IconUsers width={20} color="#673ab7" strokeWidth={1.5} />}
       style={{ borderRight: '1px solid #eeeeee' }}
     />
   )

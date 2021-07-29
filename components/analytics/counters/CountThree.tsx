@@ -1,4 +1,4 @@
-import { IconArrowNarrowDown } from '@tabler/icons'
+import { IconArrowNarrowDown, IconArrowNarrowUp } from '@tabler/icons'
 import React, { ReactElement } from 'react'
 import styled from 'styled-components'
 
@@ -48,20 +48,22 @@ const Styles = styled.div`
 export default function CountThree({
   itemCount,
   itemName,
+  percentageChange,
   icon,
 }: {
   itemCount?: string
   itemName?: string
   icon?: ReactElement
+  percentageChange?: number
 }) {
   return (
     <Styles>
-      <h6 className="count__header">Total Subscription</h6>
+      <h6 className="count__header">{itemName}</h6>
       <div className="count__icon">
-        <IconArrowNarrowDown onClick={() => console.log('Do something')} />
-        <span>7652</span>
+        {/* {percentageChange > 0 ? <IconArrowNarrowUp /> : <IconArrowNarrowDown />} */}
+        <span>{itemCount}</span>
       </div>
-      <p className="count__text">36% From Last 6 Months</p>
+      <p className="count__text">{percentageChange}</p>
     </Styles>
   )
 }

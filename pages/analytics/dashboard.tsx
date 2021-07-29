@@ -9,6 +9,11 @@ import TableOne from '../../components/analytics/tables/TableOne'
 import MobileSpacer from '../../components/shared/MobileSpacer'
 import CountGroupThree from '../../components/analytics/groups/CountGroupThree'
 import CountGroupTwo from '../../components/analytics/groups/CountGroupTwo'
+import DailyPageViews from '../../components/analytics/DailyPageViews'
+import TotalPageViews from '../../components/analytics/TotalPageViews'
+import AveragePageViews from '../../components/analytics/AveragePageView'
+import DailyUniqueVisitors from '../../components/analytics/DailyUniqueVisitors'
+import TotalBookingRequest from '../../components/bookings/analytics/TotalBookingRequests'
 
 export default function dashboard() {
   return (
@@ -28,7 +33,10 @@ export default function dashboard() {
           </Grid>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={3}>
-              <CountThree />
+              <TotalBookingRequest />
+            </Grid>
+            <Grid item xs={12} sm={12} md={3}>
+              <DailyPageViews />
             </Grid>
             <Grid item xs={12} sm={12} md={3}>
               <CountThree />
@@ -36,8 +44,20 @@ export default function dashboard() {
             <Grid item xs={12} sm={12} md={3}>
               <CountThree />
             </Grid>
+          </Grid>
+
+          <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={3}>
-              <CountThree />
+              <TotalPageViews />
+            </Grid>
+            <Grid item xs={12} sm={12} md={3}>
+              <AveragePageViews />
+            </Grid>
+            <Grid item xs={12} sm={12} md={3}>
+              <DailyPageViews />
+            </Grid>
+            <Grid item xs={12} sm={12} md={3}>
+              <DailyUniqueVisitors />
             </Grid>
           </Grid>
 
