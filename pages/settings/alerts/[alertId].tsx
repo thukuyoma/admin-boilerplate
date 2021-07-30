@@ -19,7 +19,6 @@ import DeleteAlertButton from '../../../components/setting/alert/actions/DeleteA
 export default function AlertDetailsPage() {
   const router = useRouter()
   const { alertId } = router.query
-  console.log({ alertId })
   const { data: alert, isSuccess, isError, error, isLoading } = useQuery(
     ['Alert details', alertId],
     () => getAlert(alertId)

@@ -56,7 +56,6 @@ export default function CreateBooking() {
       setInputErrors(validationResult.errors)
       return null
     }
-    console.log({ values })
     await mutateAsync(values, {
       onError: (resError: object) => {
         setInputErrors({ ...inputErrors, ...resError })

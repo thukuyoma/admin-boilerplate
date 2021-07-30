@@ -25,8 +25,8 @@ export default function ToggleReadNotification({ isRead, refetch, notificationId
         toast.error(err)
       },
       onSuccess: (data) => {
-        refetch()
         toast.success(data)
+        refetch()
       },
     })
   }

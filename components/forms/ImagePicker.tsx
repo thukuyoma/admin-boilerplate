@@ -138,7 +138,6 @@ export default function ImagePicker({
   const uploader = async () => {
     const formData = new FormData()
     formData.append('file', file)
-    console.log({ destination: config.cloudinary.preset[destination] })
     formData.append('upload_preset', config.cloudinary.preset[destination])
     await uploadMutateAsync(
       { formData, setUploadPercentage },

@@ -7,6 +7,7 @@ import NotificationCard from '../../notifications/NotificationCard'
 import HeaderTabTitle from './HeaderTabTitle'
 import TabsOverlay from './TabsOverlay'
 import Loader from 'react-loader-spinner'
+import useGlobalState from '../../../context/global'
 
 const Styles = styled.div`
   .pagination {
@@ -35,22 +36,24 @@ const Styles = styled.div`
 `
 
 export default function NotificationTab({ showNotification }) {
+  const { setNotificationCount } = useGlobalState()
   const limit: number = 3
   const [page, setPage] = useState<number>(1)
   const [query, setQuery] = useState({
     hasMore: true,
     totalPages: 0,
-    totalAdminAnnouncements: 9,
+    totalAdminAnnouncements: 0,
     currentPage: 1,
     adminAnnouncements: [],
   })
-  const { refetch, isFetching, isSuccess, data, isLoading, isPreviousData } = useQuery(
+  const { refetch, isFetching, isSuccess, data, isPreviousData } = useQuery(
     ['admin notifications', page, limit],
     () => getAdminNotifications({ page, limit }),
     {
       keepPreviousData: true,
       onSuccess: (data) => {
         setQuery(data)
+        setNotificationCount(data.totalAdminAnnouncements)
       },
     }
   )

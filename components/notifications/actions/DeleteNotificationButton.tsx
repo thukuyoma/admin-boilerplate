@@ -36,7 +36,7 @@ export default function DeleteNotificationButton({
       },
       onSuccess: (data) => {
         toast.success(data)
-        refetch
+        refetch()
       },
     })
     return null

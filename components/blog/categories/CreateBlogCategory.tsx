@@ -40,7 +40,6 @@ export default function CreateBlogCategory() {
       setInputErrors(validation.errors)
       return null
     }
-    console.log({ values })
     await mutateAsync(values, {
       onError: (resError: object) => {
         setInputErrors({ ...inputErrors, ...resError })

@@ -42,7 +42,7 @@ const Styles = styled.div`
     align-items: center;
   }
 `
-export default function NotificationCard({ item, refetch }) {
+export default function NotificationCard({ item, refetch }: { item: any; refetch: () => void }) {
   const router = useRouter()
   return (
     <Styles>

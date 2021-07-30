@@ -10,7 +10,6 @@ export default function TooglePublishBookingButton({ bookingId, refetch, isPubli
     if (!bookingId) {
       return null
     }
-    console.log({ bookingId })
     await mutateAsync(bookingId, {
       onError: (err) => {
         toast.error(err)

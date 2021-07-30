@@ -1,7 +1,8 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import styled from 'styled-components'
-import notificationCount from '../../actions/notifications/notification-count'
+import getNotificationCount from '../../actions/notifications/get-notification-count'
+import useGlobalState from '../../context/global'
 
 const Styles = styled.div`
   position: absolute;
@@ -19,6 +20,18 @@ const Styles = styled.div`
   justify-content: center;
 `
 export default function NotificationCount() {
-  const { data } = useQuery('notification count', notificationCount)
-  return <>{data ? <Styles>{data > 99 ? `99+` : data}</Styles> : null}</>
+  const { notificationCount, setNotificationCount } = useGlobalState()
+
+  useQuery('notification count', getNotificationCount, {
+    onSuccess: (data) => {
+      setNotificationCount(data)
+    },
+  })
+  return (
+    <>
+      {notificationCount ? (
+        <Styles>{notificationCount > 99 ? `99+` : notificationCount}</Styles>
+      ) : null}
+    </>
+  )
 }
