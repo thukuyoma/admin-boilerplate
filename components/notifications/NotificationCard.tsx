@@ -3,6 +3,8 @@ import React from 'react'
 import styled from 'styled-components'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import dateFormatter from '../../utils/date-formatter'
+import DeleteNotificationButton from './actions/DeleteNotificationButton'
+import ToggleReadNotification from './actions/ToggleReadNotification'
 
 const Styles = styled.div`
   margin: 0 -20px;
@@ -35,6 +37,10 @@ const Styles = styled.div`
       text-decoration: underline;
     }
   }
+  .card__buttons {
+    display: flex;
+    align-items: center;
+  }
 `
 export default function NotificationCard({ item, refetch }) {
   const router = useRouter()
@@ -45,7 +51,7 @@ export default function NotificationCard({ item, refetch }) {
         <small className="timestamp">{dateFormatter(item.timestamp)}</small>
       </div>
       <p>{capitalizeFirstLetter(item.message)}</p>
-      <div>
+      <div className="card__buttons">
         {item.linkButtonText && (
           <div
             className="button"
@@ -55,12 +61,12 @@ export default function NotificationCard({ item, refetch }) {
             {item.linkButtonText}
           </div>
         )}
-        <div className="button" onClick={() => router.push(item.link)} style={{ marginRight: 10 }}>
-          Mark as read
-        </div>
-        <div className="button" onClick={() => router.push(item.link)}>
-          Delete
-        </div>
+        <ToggleReadNotification
+          isRead={item.status.isRead}
+          refetch={refetch}
+          notificationId={item._id}
+        />
+        <DeleteNotificationButton refetch={refetch} notificationId={item._id} />
       </div>
     </Styles>
   )
