@@ -38,7 +38,7 @@ export default function SettingsIndexPage() {
             overlayItems={overlayItems}
           />
           <ScrollableContainer>
-            <MobileSpacer>
+            <MobileSpacer style={{ paddingTop: 40 }}>
               <div style={{ display: 'flex' }}>
                 {settings.map((item) => (
                   <SettingsCard item={item} />

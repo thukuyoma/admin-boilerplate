@@ -120,14 +120,14 @@ export default function MobileContainerHeader({
           </button>
         ) : null}
 
-        <button
+        {/* <button
           className="create__button"
           onKeyPress={() => setOptionDropDown(!optionDropDown)}
           onClick={() => setOptionDropDown(!optionDropDown)}
         >
           <FiMoreHorizontal />
-        </button>
-        {optionDropDown && (
+        </button> */}
+        {/* {optionDropDown && (
           <div className="mobile-container-header-dropdown-menu">
             <span className="mobile-container-header-dropdown-menu__item">Filter By Category</span>
             <span className="mobile-container-header-dropdown-menu__item">Filter By Category</span>
@@ -135,7 +135,7 @@ export default function MobileContainerHeader({
             <span className="mobile-container-header-dropdown-menu__item">Filter By Category</span>
             <span className="mobile-container-header-dropdown-menu__item">Filter By Category</span>
           </div>
-        )}
+        )} */}
       </div>
     </Styles>
   )

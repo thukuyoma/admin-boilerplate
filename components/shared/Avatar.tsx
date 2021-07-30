@@ -19,6 +19,7 @@ const Styles = styled.div`
     border-radius: 50px;
     height: 100%;
     width: 100%;
+    flex-shrink: 0;
   }
 `
 export default function Avatar({

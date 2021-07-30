@@ -7,6 +7,12 @@ const Styles = styled.div`
   }
 `
 
-export default function MobileSpacer({ children }) {
-  return <Styles>{children}</Styles>
+export default function MobileSpacer({
+  children,
+  style,
+}: {
+  children: React.ReactNode
+  style?: { paddingTop?: number }
+}) {
+  return <Styles style={style}>{children}</Styles>
 }

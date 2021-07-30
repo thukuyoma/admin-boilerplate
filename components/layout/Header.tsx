@@ -1,13 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import Logo from './Logo'
 import { TiThSmall } from 'react-icons/ti'
 import { BsBell, BsClockHistory } from 'react-icons/bs'
 import { AiOutlineDown } from 'react-icons/ai'
 import { IoIosAddCircle } from 'react-icons/io'
 import Search from './Search'
 import useAuth from '../../context/auth'
-import HeaderProfileAvatar from './header-tabs/HeaderProfileAvatar'
 import CreateShortcuts from './header-tabs/CreateShortcuts'
 import HistoryTab from './header-tabs/HistoryTab'
 import AccountTab from '../account/AccountTab'
@@ -15,6 +13,7 @@ import ShortcutsTab from './header-tabs/ShortcutsTab'
 import NotificationCount from '../notifications/NotificationCount'
 import NotificationTab from './header-tabs/NotificationTab'
 import StudyovsLogo from './StudyovsLogo'
+import Avatar from '../shared/Avatar'
 
 const Styles = styled.div`
   justify-content: space-between;
@@ -105,6 +104,7 @@ export default function Header({
   handleNotification,
   showNotification,
 }) {
+  const { profile, isLoading } = useAuth()
   return (
     <Styles toggleSideNav={toggleSideNav}>
       <div className="wrapper__now">
@@ -114,7 +114,7 @@ export default function Header({
         <Search service="Products" />
         <div className="header__spead">
           <div className="header__account-details">
-            <div className="header-links__item colorizer" style={{ fontSize: '14px' }}>
+            <div className="header-links__item" style={{ fontSize: '14px' }}>
               Studyovs <AiOutlineDown />
             </div>
             <div className="header-links__item" style={{ fontSize: '26px' }}>
@@ -143,8 +143,15 @@ export default function Header({
               <TiThSmall onClick={() => handleShortcuts()} onKeyPress={() => handleShortcuts()} />
             </div>
             <ShortcutsTab showShortcuts={showShortcuts} />
-            <div className="header-links__item">
-              <HeaderProfileAvatar handleAccount={handleAccount} />
+            <div
+              className="header-links__item"
+              onClick={() => handleAccount()}
+              onKeyPress={() => handleAccount()}
+            >
+              <Avatar
+                image={profile?.avatar?.url ? profile?.avatar?.url : '/assets/default-avatar.png'}
+                size="medium"
+              />
             </div>
             <AccountTab showAccount={showAccount} />
           </div>

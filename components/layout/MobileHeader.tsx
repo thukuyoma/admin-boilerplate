@@ -1,11 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import Logo from './Logo'
 import MobileSideNav from './MobileSideNav'
 import { BsBell, BsClockHistory } from 'react-icons/bs'
 import { IoIosAddCircle } from 'react-icons/io'
 import { AiOutlineMenu } from 'react-icons/ai'
-import HeaderProfileAvatar from './header-tabs/HeaderProfileAvatar'
 import AccountTab from '../account/AccountTab'
 import ShortcutsTab from './header-tabs/ShortcutsTab'
 import { TiThSmall } from 'react-icons/ti'
@@ -14,6 +12,8 @@ import NotificationCount from '../notifications/NotificationCount'
 import CreateShortcuts from './header-tabs/CreateShortcuts'
 import HistoryTab from './header-tabs/HistoryTab'
 import StudyovsLogo from './StudyovsLogo'
+import Avatar from '../shared/Avatar'
+import useAuth from '../../context/auth'
 
 const Styles = styled.div`
   background: #e8e8e8;
@@ -89,6 +89,7 @@ export default function MobileHeader({
   handleAccount,
   showAccount,
 }) {
+  const { profile, isLoading } = useAuth()
   return (
     <Styles>
       <div className="header__left">
@@ -123,8 +124,15 @@ export default function MobileHeader({
             <TiThSmall onClick={() => handleShortcuts()} onKeyPress={() => handleShortcuts()} />
           </div>
           <ShortcutsTab showShortcuts={showShortcuts} />
-          <div className="header-links__item">
-            <HeaderProfileAvatar handleAccount={handleAccount} />
+          <div
+            className="header-links__item"
+            onClick={() => handleAccount()}
+            onKeyPress={() => handleAccount()}
+          >
+            <Avatar
+              image={profile?.avatar?.url ? profile?.avatar?.url : '/assets/default-avatar.png'}
+              size="large"
+            />
           </div>
           <AccountTab showAccount={showAccount} />
         </div>
