@@ -104,14 +104,14 @@ export default function Header({
   handleNotification,
   showNotification,
 }) {
-  const { profile, isLoading } = useAuth()
+  const { profile } = useAuth()
   return (
     <Styles toggleSideNav={toggleSideNav}>
       <div className="wrapper__now">
         <div className="header__logo">
           <StudyovsLogo complete />
         </div>
-        <Search service="Products" />
+        <Search />
         <div className="header__spead">
           <div className="header__account-details">
             <div className="header-links__item" style={{ fontSize: '14px' }}>

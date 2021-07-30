@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { HiArrowNarrowLeft, HiArrowNarrowRight } from 'react-icons/hi'
 import { useQuery } from 'react-query'
@@ -14,6 +13,7 @@ const Styles = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 10px;
   }
   .pagination__control {
     color: orange;
@@ -35,7 +35,7 @@ const Styles = styled.div`
 `
 
 export default function NotificationTab({ showNotification }) {
-  const limit: number = 4
+  const limit: number = 3
   const [page, setPage] = useState<number>(1)
   const [query, setQuery] = useState({
     hasMore: true,

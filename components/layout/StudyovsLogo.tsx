@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -43,8 +44,12 @@ export default function StudyovsLogo({
   marginTop?: string
   marginBottom?: string
 }) {
+  const router = useRouter()
   return (
-    <Styles>
+    <Styles
+      onClick={() => router.push('/analytics/dashboard')}
+      onKeyPress={() => router.push('/analytics/dashboard')}
+    >
       <div
         style={{
           marginRight: marginRight,

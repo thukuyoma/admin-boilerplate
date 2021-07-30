@@ -20,5 +20,5 @@ const Styles = styled.div`
 `
 export default function NotificationCount() {
   const { data } = useQuery('notification count', notificationCount)
-  return <>{data ? <Styles>{data > 9 ? `9+` : data}</Styles> : null}</>
+  return <>{data ? <Styles>{data > 99 ? `99+` : data}</Styles> : null}</>
 }

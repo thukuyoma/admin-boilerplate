@@ -38,22 +38,50 @@ const Styles = styled.div`
   .search-dropdown_item {
     font-size: 14px;
     font-weight: 400;
+    :hover {
+      cursor: pointer;
+    }
   }
 `
-export default function Search({ service }) {
-  const [showDropDown, setShowDropDOwn] = useState<boolean>(false)
+export default function Search() {
+  const [showDropDown, setShowDropDown] = useState<boolean>(false)
+  const [service, setService] = useState('')
+
+  const items = [
+    { title: 'Scholarships' },
+    { title: 'Applications' },
+    { title: 'Bookings' },
+    { title: 'Blogs' },
+  ]
   return (
     <Styles>
       <div className="search__wrapper">
-        <FiSearch /> <AiFillCaretDown onClick={() => setShowDropDOwn(!showDropDown)} />
-        <input type="text" className="search__input" placeholder={`Search ${service}`} />
+        <FiSearch />
+        <AiFillCaretDown
+          onClick={() => {
+            setShowDropDown(!showDropDown)
+          }}
+        />
+        <input
+          type="text"
+          className="search__input"
+          placeholder={`Search ${service ? service.toLowerCase() : 'studyovs'} ...`}
+        />
       </div>
       {showDropDown && (
         <div className="search__dropdown">
-          <span className="search-dropdown_item">Home</span>
-          <span className="search-dropdown_item">Products</span>
-          <span className="search-dropdown_item">Blogs</span>
-          <span className="search-dropdown_item">Application</span>
+          {items.map((item) => (
+            <span
+              key={item.title}
+              className="search-dropdown_item"
+              onClick={() => {
+                setService(item.title)
+                setShowDropDown(false)
+              }}
+            >
+              {item.title}
+            </span>
+          ))}
         </div>
       )}
     </Styles>
