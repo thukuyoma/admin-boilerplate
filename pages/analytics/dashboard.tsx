@@ -3,7 +3,6 @@ import { Grid } from '@material-ui/core'
 import Layout from '../../components/layout/Layout'
 import CountGroupOne from '../../components/analytics/groups/CountGroupOne'
 import { IconEye } from '@tabler/icons'
-import CountThree from '../../components/analytics/counters/CountThree'
 import CounterFour from '../../components/analytics/counters/CountFour'
 import TableOne from '../../components/analytics/tables/TableOne'
 import MobileSpacer from '../../components/shared/MobileSpacer'
@@ -14,6 +13,9 @@ import TotalPageViews from '../../components/analytics/TotalPageViews'
 import AveragePageViews from '../../components/analytics/AveragePageView'
 import DailyUniqueVisitors from '../../components/analytics/DailyUniqueVisitors'
 import TotalBookingRequest from '../../components/bookings/analytics/TotalBookingRequests'
+import TotalApplicationLogs from '../../components/applications/analytics/TotalApplicationLogs'
+import TotalBlogCategories from '../../components/blog/analytics/TotalBlogCategories'
+import TotalNewsletterSubscribers from '../../components/newsletter/analytics/TotalNewsletterSubscribers'
 
 export default function dashboard() {
   return (
@@ -31,18 +33,19 @@ export default function dashboard() {
               <CountGroupThree />
             </Grid>
           </Grid>
+
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={3}>
               <TotalBookingRequest />
             </Grid>
             <Grid item xs={12} sm={12} md={3}>
-              <DailyPageViews />
+              <TotalApplicationLogs />
             </Grid>
             <Grid item xs={12} sm={12} md={3}>
-              <CountThree />
+              <TotalBlogCategories />
             </Grid>
             <Grid item xs={12} sm={12} md={3}>
-              <CountThree />
+              <TotalNewsletterSubscribers />
             </Grid>
           </Grid>
 
