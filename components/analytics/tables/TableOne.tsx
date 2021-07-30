@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import ReactCountryFlag from 'react-country-flag'
 import styled from 'styled-components'
+import { nanoid } from 'nanoid'
 
 const Styles = styled.div`
   background-color: rgb(255, 255, 255);
@@ -123,7 +124,7 @@ export default function TableOne() {
           </TableHead>
           <TableBody>
             {users.map((row) => (
-              <TableRow key={row.name} className="table__row">
+              <TableRow key={nanoid()} className="table__row">
                 <TableCell align="left" className="table__cell">
                   <ReactCountryFlag
                     countryCode={row.countryCode.toUpperCase()}

@@ -1,6 +1,7 @@
 import React from 'react'
 import config from '../../config/config'
 import styled from 'styled-components'
+import { useRouter } from 'next/router'
 
 const Styles = styled.div`
   height: 40px;
@@ -49,8 +50,12 @@ export default function Logo({
   marginTop?: string
   marginBottom?: string
 }) {
+  const router = useRouter()
   return (
-    <Styles>
+    <Styles
+      onClick={() => router.push('/analytics/dashboard')}
+      onKeyPress={() => router.push('/analytics/dashboard')}
+    >
       <div
         style={{
           marginRight: marginRight,

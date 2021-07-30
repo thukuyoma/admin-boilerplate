@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import { useRouter } from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
@@ -104,7 +105,7 @@ export default function ShortcutsTab({ showShortcuts }) {
             <HeaderTabTitle>Shortcuts</HeaderTabTitle>
             <div className="shortcut-wrapper">
               {shortcuts.map((shortcut) => (
-                <div className="shortcut">
+                <div key={nanoid()} className="shortcut">
                   <img className="shortcut__image" src={shortcut.icon} />
                   <p className="shortcut__title" onClick={() => router.push(shortcut.url)}>
                     {shortcut.title}

@@ -15,9 +15,9 @@ const Styles = styled.div`
   flex-direction: column;
   flex-direction: column;
   background: #00000099;
-  width: 100vw;
+  width: 100%;
   left: 0;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   border-right: 1px solid #f0f0f0;
   z-index: 999;
@@ -53,7 +53,7 @@ const Styles = styled.div`
 
   .mobile__wrapper {
     background: #f0f0f0;
-    height: 100vh;
+    height: 100%;
     width: 300px;
     display: flex;
     flex-direction: column;
@@ -93,6 +93,8 @@ const Styles = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 10px;
+    height: 100%;
+    justify-content: center;
   }
   .account__avatar {
     width: 45px;
@@ -114,7 +116,6 @@ export default function MobileSideNav({ handleShowNav }) {
     <Styles>
       <div className="mobile__wrapper">
         <div className="close" onClick={() => handleShowNav(false)}>
-          {/* X */}
           <GrClose />
         </div>
         <div className="wrapper__top">
@@ -138,7 +139,12 @@ export default function MobileSideNav({ handleShowNav }) {
         </div>
         {profile && !isLoading && (
           <div className="wrapper__bottom">
-            <Avatar image={profile?.avatar} initial={profile.firstName} size="large" />
+            <Avatar
+              image={profile?.avatar?.url}
+              initial={profile.firstName}
+              size="large"
+              style={{ height: 60, width: 60 }}
+            />
             <div className="account__details">
               <span className="username">
                 {profile.firstName} {profile.lastName}

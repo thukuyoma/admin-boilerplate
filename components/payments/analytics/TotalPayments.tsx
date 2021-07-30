@@ -11,7 +11,7 @@ export default function TotalPayments() {
       itemCount={data}
       itemName="Payments"
       icon={<IconCreditCard width={20} color="#FFC300" strokeWidth={1.5} />}
-      style={{ borderRight: '1px solid #eeeeee' }}
+      // style={{ borderRight: '1px solid #eeeeee' }}
     />
   )
 }

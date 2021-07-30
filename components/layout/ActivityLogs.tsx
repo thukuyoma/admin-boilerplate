@@ -13,15 +13,6 @@ import HeaderTabTitle from './header-tabs/HeaderTabTitle'
 import Avatar from '../shared/Avatar'
 
 const Styles = styled.div`
-  .logger {
-    font-size: 12px;
-  }
-  .avatar {
-    width: 25px;
-    height: 25px;
-    border-radius: 28px;
-    margin-right: 10px;
-  }
   .activity {
     margin-right: 10px;
   }
@@ -35,6 +26,7 @@ const Styles = styled.div`
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    font-size: 12px;
   }
   .refetch {
     margin: 0 10px;
@@ -125,17 +117,16 @@ export default function ActivityLogs() {
         )}
         {query?.actionLogs.map((action) => (
           <div key={action._id} className="logger">
-            <span className="avatar">
-              <Avatar
-                image={profile?.avatar}
-                initial={action.createdBy.adminFullName}
-                size="small"
-              />
-            </span>
-            <span className="activity">
+            <Avatar
+              image={profile?.avatar?.url}
+              initial={action.createdBy.adminFullName}
+              size="small"
+              style={{ marginRight: 10 }}
+            />
+            <div className="activity">
               {capitalizeFirstLetter(action.activity)}
               <span className="time">{moment(action.timestamp).startOf('hour').fromNow()}</span>
-            </span>
+            </div>
           </div>
         ))}
         {query?.totalPages > 1 ? (

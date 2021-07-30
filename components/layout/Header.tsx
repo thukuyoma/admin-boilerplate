@@ -14,6 +14,7 @@ import AccountTab from '../account/AccountTab'
 import ShortcutsTab from './header-tabs/ShortcutsTab'
 import NotificationCount from '../notifications/NotificationCount'
 import NotificationTab from './header-tabs/NotificationTab'
+import StudyovsLogo from './StudyovsLogo'
 
 const Styles = styled.div`
   justify-content: space-between;
@@ -87,6 +88,9 @@ const Styles = styled.div`
     padding-left: 20px;
     margin-right: 30px;
   }
+  .colorizer {
+    color: #f4863a;
+  }
 `
 export default function Header({
   toggleSideNav,
@@ -105,13 +109,13 @@ export default function Header({
     <Styles toggleSideNav={toggleSideNav}>
       <div className="wrapper__now">
         <div className="header__logo">
-          <Logo complete />
+          <StudyovsLogo complete />
         </div>
         <Search service="Products" />
         <div className="header__spead">
           <div className="header__account-details">
-            <div className="header-links__item" style={{ fontSize: '14px' }}>
-              Kimogan <AiOutlineDown />
+            <div className="header-links__item colorizer" style={{ fontSize: '14px' }}>
+              Studyovs <AiOutlineDown />
             </div>
             <div className="header-links__item" style={{ fontSize: '26px' }}>
               <IoIosAddCircle
@@ -135,7 +139,7 @@ export default function Header({
               <NotificationCount />
             </div>
             {showNotification && <NotificationTab showNotification={showNotification} />}
-            <div className="header-links__item">
+            <div className="header-links__item colorizer">
               <TiThSmall onClick={() => handleShortcuts()} onKeyPress={() => handleShortcuts()} />
             </div>
             <ShortcutsTab showShortcuts={showShortcuts} />

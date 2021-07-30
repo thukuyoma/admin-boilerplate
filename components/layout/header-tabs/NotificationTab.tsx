@@ -8,10 +8,8 @@ import NotificationCard from '../../notifications/NotificationCard'
 import HeaderTabTitle from './HeaderTabTitle'
 import TabsOverlay from './TabsOverlay'
 import Loader from 'react-loader-spinner'
-import PerfectScrollbar from 'react-perfect-scrollbar'
 
 const Styles = styled.div`
-  overflow-y: scroll;
   .pagination {
     display: flex;
     align-items: center;
@@ -37,7 +35,7 @@ const Styles = styled.div`
 `
 
 export default function NotificationTab({ showNotification }) {
-  const limit: number = 5
+  const limit: number = 4
   const [page, setPage] = useState<number>(1)
   const [query, setQuery] = useState({
     hasMore: true,
@@ -56,7 +54,6 @@ export default function NotificationTab({ showNotification }) {
       },
     }
   )
-  const router = useRouter()
   const handleNextPage = () => {
     if (!isPreviousData && data?.hasMore) {
       setPage((prev) => prev + 1)
@@ -84,39 +81,39 @@ export default function NotificationTab({ showNotification }) {
                 </div>
               )}
             </HeaderTabTitle>
-            <PerfectScrollbar>
-              {isSuccess &&
-                query.adminAnnouncements.map((item) => <NotificationCard item={item} />)}
-              {isSuccess && query?.totalPages > 1 ? (
-                <div className="pagination">
-                  <HiArrowNarrowLeft
-                    onClick={() => handlePrevPage()}
-                    onKeyPress={() => handlePrevPage()}
-                    className="pagination__control"
-                    style={{ color: data?.currentPage === 1 && 'gray' }}
-                  />
-                  <div className="pagination__number">{data?.currentPage}</div>
-                  {isFetching && (
-                    <div className="loader__window">
-                      <Loader
-                        style={{ marginLeft: '5px' }}
-                        type="Oval"
-                        color="black"
-                        height={15}
-                        width={15}
-                      />
-                    </div>
-                  )}
-                  <div className="pagination__number">{data?.totalPages}</div>
-                  <HiArrowNarrowRight
-                    onClick={() => handleNextPage()}
-                    onKeyPress={() => handleNextPage()}
-                    className="pagination__control"
-                    style={{ color: !data?.hasMore && 'gray' }}
-                  />
-                </div>
-              ) : null}
-            </PerfectScrollbar>
+            {isSuccess &&
+              query.adminAnnouncements.map((item) => (
+                <NotificationCard key={item._id} item={item} refetch={refetch} />
+              ))}
+            {isSuccess && query?.totalPages > 1 ? (
+              <div className="pagination">
+                <HiArrowNarrowLeft
+                  onClick={() => handlePrevPage()}
+                  onKeyPress={() => handlePrevPage()}
+                  className="pagination__control"
+                  style={{ color: data?.currentPage === 1 && 'gray' }}
+                />
+                <div className="pagination__number">{data?.currentPage}</div>
+                {isFetching && (
+                  <div className="loader__window">
+                    <Loader
+                      style={{ marginLeft: '5px' }}
+                      type="Oval"
+                      color="black"
+                      height={15}
+                      width={15}
+                    />
+                  </div>
+                )}
+                <div className="pagination__number">{data?.totalPages}</div>
+                <HiArrowNarrowRight
+                  onClick={() => handleNextPage()}
+                  onKeyPress={() => handleNextPage()}
+                  className="pagination__control"
+                  style={{ color: !data?.hasMore && 'gray' }}
+                />
+              </div>
+            ) : null}
           </TabsOverlay>
         </Styles>
       )}

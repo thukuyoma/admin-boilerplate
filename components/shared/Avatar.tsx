@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Styles = styled.div`
-  height: 40px;
-  width: 40px;
   ${({ size }) =>
     (size === 'small' && 'height: 25px; width: 25px; font-size: 13px;') ||
     (size === 'medium' && 'height: 30px; width: 30px; font-size: 16px;') ||
@@ -18,8 +16,9 @@ const Styles = styled.div`
   flex-shrink: 0;
 
   img {
-    width: 100%;
+    border-radius: 50px;
     height: 100%;
+    width: 100%;
   }
 `
 export default function Avatar({
@@ -37,11 +36,15 @@ export default function Avatar({
     height?: number
     width?: number
     borderRadius?: number
+    marginRight?: number
+    marginLeft?: number
+    marginBottom?: number
+    marginTop?: number
   }
 }) {
   if (image) {
     return (
-      <Styles style={style}>
+      <Styles size={size} style={style}>
         <img src={image} alt="" />
       </Styles>
     )
@@ -54,5 +57,9 @@ export default function Avatar({
       </Styles>
     )
   }
-  return <Styles style={style}>#</Styles>
+  return (
+    <Styles style={style} size={size}>
+      #
+    </Styles>
+  )
 }

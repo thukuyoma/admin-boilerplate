@@ -7,8 +7,8 @@ const Styles = styled.div`
   position: absolute;
   top: -10px;
   right: -10px;
-  color: red;
-  background: #fff;
+  color: #f4863a;
+  font-weight: 500;
   font-size: 12px;
   font-weight: 500;
   width: 18px;

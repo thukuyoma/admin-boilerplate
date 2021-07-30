@@ -13,6 +13,7 @@ import NotificationTab from './header-tabs/NotificationTab'
 import NotificationCount from '../notifications/NotificationCount'
 import CreateShortcuts from './header-tabs/CreateShortcuts'
 import HistoryTab from './header-tabs/HistoryTab'
+import StudyovsLogo from './StudyovsLogo'
 
 const Styles = styled.div`
   background: #e8e8e8;
@@ -69,6 +70,9 @@ const Styles = styled.div`
     align-items: center;
     font-size: 25px;
   }
+  .colorizer {
+    color: #f4863a;
+  }
 `
 
 export default function MobileHeader({
@@ -91,7 +95,7 @@ export default function MobileHeader({
         <span onClick={() => handleShowNav(true)} className="mobile__hamburger">
           <AiOutlineMenu />
         </span>
-        <Logo icon marginLeft="10px" />
+        <StudyovsLogo icon marginLeft="10px" />
         {showNav && <MobileSideNav handleShowNav={handleShowNav} />}
       </div>
       <div className="header__right">
@@ -115,7 +119,7 @@ export default function MobileHeader({
             <NotificationCount />
           </div>
           {showNotification && <NotificationTab showNotification={showNotification} />}
-          <div className="header-links__item">
+          <div className="header-links__item colorizer">
             <TiThSmall onClick={() => handleShortcuts()} onKeyPress={() => handleShortcuts()} />
           </div>
           <ShortcutsTab showShortcuts={showShortcuts} />
