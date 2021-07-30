@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import dateFormatter from '../../utils/date-formatter'
 import DeleteNotificationButton from './actions/DeleteNotificationButton'
-import ToggleReadNotification from './actions/ToggleReadNotification'
+// import ToggleReadNotification from './actions/ToggleReadNotification'
 
 const Styles = styled.div`
   margin: 0 -20px;
@@ -38,7 +38,7 @@ const Styles = styled.div`
     }
   }
   .card__buttons {
-    display: flex;
+    display: inline-flex;
     align-items: center;
   }
 `
@@ -61,12 +61,12 @@ export default function NotificationCard({ item, refetch }: { item: any; refetch
             {item.linkButtonText}
           </div>
         )}
-        <ToggleReadNotification
+        <DeleteNotificationButton refetch={refetch} notificationId={item._id} />
+        {/* <ToggleReadNotification
           isRead={item.status.isRead}
           refetch={refetch}
           notificationId={item._id}
-        />
-        <DeleteNotificationButton refetch={refetch} notificationId={item._id} />
+        /> */}
       </div>
     </Styles>
   )

@@ -12,7 +12,7 @@ export default function TotalAmount() {
       itemCount={kFormatter(data, 2)}
       itemName="Total Amount"
       iconBg="#11c15b"
-      icon={<IconCurrencyNaira color="#fff" strokeWidth={1.5} />}
+      icon={<IconCurrencyNaira color="#fff" strokeWidth={2} />}
       style={{ marginBottom: 30 }}
     />
   )

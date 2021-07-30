@@ -10,7 +10,7 @@ export default function TotalScholarships() {
     <CountOne
       itemCount={data}
       itemName="Scholarships"
-      icon={<IconSchool width={20} color="#FFC300" strokeWidth={1.5} />}
+      icon={<IconSchool width={20} color="#0baee6" strokeWidth={2} />}
       style={{ borderRight: '1px solid #eeeeee' }}
     />
   )

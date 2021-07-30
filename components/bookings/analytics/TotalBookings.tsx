@@ -10,8 +10,7 @@ export default function TotalBookings() {
     <CountOne
       itemCount={data}
       itemName="Bookings"
-      icon={<IconNotebook width={20} color="#FFC300" strokeWidth={1.5} />}
-      // style={{ borderRight: '1px solid #eeeeee' }}
+      icon={<IconNotebook width={20} color="#0baee6" strokeWidth={2} />}
     />
   )
 }

@@ -12,7 +12,7 @@ export default function TotalUniqueVisitors() {
       itemCount={kFormatter(data, 2)}
       itemName="Total Unique Visitors"
       iconBg="#11c15b"
-      icon={<IconFriends color="#fff" strokeWidth={1.5} />}
+      icon={<IconFriends color="#fff" strokeWidth={2} />}
     />
   )
 }

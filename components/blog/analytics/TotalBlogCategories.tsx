@@ -12,7 +12,7 @@ export default function TotalBlogCategories() {
       <CountFive
         itemCount={kFormatter(data, 2)}
         itemName="Total Blog Categories"
-        icon={<IconNews width={20} color="#3bf235" strokeWidth={1.5} />}
+        icon={<IconNews width={20} color="#3bf235" strokeWidth={2} />}
       />
     </>
   )

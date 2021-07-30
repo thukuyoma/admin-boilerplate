@@ -71,9 +71,7 @@ export default function dashboard() {
                 itemCount="20,000"
                 itemDate="1,356May 23 - June 01 (2018)"
                 iconBg="rgb(33, 150, 243)"
-                icon={
-                  <IconEye width="20" color="#0098db" strokeWidth={1.5} style={{ zIndex: 5 }} />
-                }
+                icon={<IconEye width="20" color="#0098db" strokeWidth={2} style={{ zIndex: 5 }} />}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={3}>
@@ -82,9 +80,7 @@ export default function dashboard() {
                 itemCount="20,000"
                 itemDate="1,356May 23 - June 01 (2018)"
                 iconBg="rgb(33, 150, 243)"
-                icon={
-                  <IconEye width="20" color="#0098db" strokeWidth={1.5} style={{ zIndex: 5 }} />
-                }
+                icon={<IconEye width="20" color="#0098db" strokeWidth={2} style={{ zIndex: 5 }} />}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={3}>
@@ -93,9 +89,7 @@ export default function dashboard() {
                 itemCount="20,000"
                 itemDate="1,356May 23 - June 01 (2018)"
                 iconBg="rgb(33, 150, 243)"
-                icon={
-                  <IconEye width="20" color="#0098db" strokeWidth={1.5} style={{ zIndex: 5 }} />
-                }
+                icon={<IconEye width="20" color="#0098db" strokeWidth={2} style={{ zIndex: 5 }} />}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={3}>
@@ -104,9 +98,7 @@ export default function dashboard() {
                 itemCount="20,000"
                 itemDate="1,356May 23 - June 01 (2018)"
                 iconBg="rgb(33, 150, 243)"
-                icon={
-                  <IconEye width="20" color="#0098db" strokeWidth={1.5} style={{ zIndex: 5 }} />
-                }
+                icon={<IconEye width="20" color="#0098db" strokeWidth={2} style={{ zIndex: 5 }} />}
               />
             </Grid>
           </Grid>

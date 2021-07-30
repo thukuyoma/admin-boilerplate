@@ -10,7 +10,7 @@ export default function TotalSupports() {
     <CountOne
       itemCount={data}
       itemName="Supports"
-      icon={<IconHelp width={20} color="#673ab7" strokeWidth={1.5} />}
+      icon={<IconHelp width={20} color="#0baee6" strokeWidth={2} />}
     />
   )
 }

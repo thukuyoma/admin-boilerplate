@@ -10,8 +10,7 @@ export default function TotalPayments() {
     <CountOne
       itemCount={data}
       itemName="Payments"
-      icon={<IconCreditCard width={20} color="#FFC300" strokeWidth={1.5} />}
-      // style={{ borderRight: '1px solid #eeeeee' }}
+      icon={<IconCreditCard width={20} color="#0baee6" strokeWidth={2} />}
     />
   )
 }

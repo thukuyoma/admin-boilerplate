@@ -13,8 +13,8 @@ export default function DailyPageViews() {
       <CountFive
         // itemCount={kFormatter(2000, 2)}
         itemCount={kFormatter(data?.todayPageView, 2)}
-        itemName="Daily Page Views"
-        icon={<IconNotebook width={20} color="rgb(255, 193, 7)" strokeWidth={1.5} />}
+        itemName="Today Page Views"
+        icon={<IconNotebook width={20} color="rgb(255, 193, 7)" strokeWidth={2} />}
       />
     </>
   )

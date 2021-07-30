@@ -5,7 +5,6 @@ import {
   IconSchool,
   IconForms,
   IconNews,
-  IconMailOpened,
   IconNotebook,
   IconHelp,
   IconSettings,

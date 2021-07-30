@@ -10,7 +10,7 @@ export default function TotalBlogs() {
     <CountOne
       itemCount={data}
       itemName="Blogs"
-      icon={<IconNews width={20} color="#FFC300" strokeWidth={1.5} />}
+      icon={<IconNews width={20} color="#0baee6" strokeWidth={2} />}
       style={{ borderRight: '1px solid #eeeeee' }}
     />
   )

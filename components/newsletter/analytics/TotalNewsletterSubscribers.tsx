@@ -12,7 +12,7 @@ export default function TotalNewsletterSubscribers() {
       <CountFive
         itemCount={kFormatter(data, 2)}
         itemName="Newsletter Subscriber"
-        icon={<IconMail width={20} color="#5a9b8a" strokeWidth={1.5} />}
+        icon={<IconMail width={20} color="#5a9b8a" strokeWidth={2} />}
       />
     </>
   )

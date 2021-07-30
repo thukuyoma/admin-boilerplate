@@ -37,7 +37,7 @@ const Styles = styled.div`
 
 export default function NotificationTab({ showNotification }) {
   const { setNotificationCount } = useGlobalState()
-  const limit: number = 3
+  const limit: number = 4
   const [page, setPage] = useState<number>(1)
   const [query, setQuery] = useState({
     hasMore: true,

@@ -10,7 +10,7 @@ export default function TotalApplications() {
     <CountOne
       itemCount={data}
       itemName="Applications"
-      icon={<IconForms width={20} color="#673ab7" strokeWidth={1.5} />}
+      icon={<IconForms width={20} color="#0baee6" strokeWidth={2} />}
       style={{ borderRight: '1px solid #eeeeee' }}
     />
   )

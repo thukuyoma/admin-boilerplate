@@ -32,6 +32,7 @@ const Styles = styled.div`
     width: 100%;
     height: 100%;
     justify-content: center;
+    // align-items: flex-end;
     color: #616161;
     h5 {
       margin: 0;

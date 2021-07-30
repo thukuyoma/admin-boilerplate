@@ -12,7 +12,7 @@ export default function TotalBookingRequest() {
       <CountFive
         itemCount={kFormatter(data, 2)}
         itemName="Total Booking Request"
-        icon={<IconBook width={20} color="#e3713c" strokeWidth={1.5} />}
+        icon={<IconBook width={20} color="#e3713c" strokeWidth={2} />}
       />
     </>
   )

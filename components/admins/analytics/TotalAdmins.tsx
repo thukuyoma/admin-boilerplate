@@ -10,7 +10,7 @@ export default function TotalAdmins() {
     <CountOne
       itemCount={data}
       itemName="Admins"
-      icon={<IconUserCheck width={20} color="#673ab7" strokeWidth={1.5} />}
+      icon={<IconUserCheck width={20} color="#0baee6" strokeWidth={2} />}
     />
   )
 }

@@ -12,7 +12,7 @@ export default function TotalApplicationLogs() {
       <CountFive
         itemCount={kFormatter(data, 2)}
         itemName="Total Application Logs"
-        icon={<IconWritingSign width={20} color="#ff59b9" strokeWidth={1.5} />}
+        icon={<IconWritingSign width={20} color="#ff59b9" strokeWidth={2} />}
       />
     </>
   )

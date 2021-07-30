@@ -12,7 +12,7 @@ export default function TotalPageViews() {
       <CountFive
         itemCount={kFormatter(data, 2)}
         itemName="Total Page Views"
-        icon={<IconNotebook width={20} color="#F44A36" strokeWidth={1.5} />}
+        icon={<IconNotebook width={20} color="#F44A36" strokeWidth={2} />}
       />
     </>
   )
