@@ -103,11 +103,13 @@ export default function ImagePicker({
   buttonTitle,
   styles,
   destination,
+  error,
 }: {
   image?: { url: string; publicId: string }
   setImageCallback: (value: object | string) => void
   buttonTitle?: string
   styles?: { marginBottom?: number; marginTop?: number; marginRight?: number; marginLeft?: number }
+  error: string
   destination:
     | 'postImages'
     | 'accountAvatars'
@@ -256,7 +258,7 @@ export default function ImagePicker({
           </div>
         </div>
       )}
-      {imageError && <DisplayInputError error={imageError} />}
+      {imageError || (error && <DisplayInputError error={imageError || error} />)}
     </Styles>
   )
 }

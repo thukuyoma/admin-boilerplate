@@ -4,10 +4,42 @@ import DisplayInputError from './DisplayInputError'
 import styled from 'styled-components'
 
 const Styles = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   select {
+    border: 1px solid #e9e9e9;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-family: inherit;
     width: 100%;
+    height: 45px;
+    padding: 10px;
+    background: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    ::placeholder {
+      font-size: 16px;
+      line-height: 19px;
+      color: #c7c7c7;
+    }
+    :focus {
+      border-color: #0098db;
+      outline: none;
+    }
+  }
+  label {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #2a2828;
+    margin-bottom: 15px;
+  }
+  option {
+    font-size: 16px;
   }
 `
 export default function InputSelect({
@@ -18,6 +50,7 @@ export default function InputSelect({
   title,
   onChange,
   value,
+  placeholder,
 }: {
   name: string
   error?: string
@@ -25,15 +58,26 @@ export default function InputSelect({
   label: string
   title: string
   value: string | number
-  onChange: (e) => void | null
+  onChange: Function
+  placeholder: string
 }) {
+  const handleChange = (e) => {
+    console.log({ name: e.target.value })
+    onChange(e)
+  }
   return (
     <Styles>
       <label htmlFor={label}>{capitalizeFirstLetter(title)}</label>
-      <select name={name} value={value} onChange={(e) => this.onchange(e)}>
+      <select
+        name={name}
+        value={value}
+        onChange={(e) => handleChange(e)}
+        style={{ borderColor: error && 'red' }}
+      >
+        <option value="">{placeholder}</option>
         {options.map((option) => (
           <option key={option} value={option}>
-            {option}
+            {capitalizeFirstLetter(option)}
           </option>
         ))}
       </select>

@@ -34,7 +34,7 @@ export default function CreateBooking() {
       setInputErrors({ ...inputErrors, bookingImage: '' })
     }
     return () => null
-  }, [bookingImage])
+  }, [bookingImage.url, bookingImage.publicId])
 
   const { bookingTitle, bookingDescription, bookingType, bookingAffiliateLink } = bookingValues
   const { mutateAsync, isSuccess, isLoading } = useMutation(createBooking)
@@ -46,9 +46,6 @@ export default function CreateBooking() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const formItems = { ...bookingValues, image: bookingImage }
-    console.log({ formItems })
-
     const validationResult = bookingValidation({
       bookingTitle,
       bookingDescription,
@@ -58,6 +55,13 @@ export default function CreateBooking() {
     if (validationResult.isError) {
       setInputErrors(validationResult.errors)
       return null
+    }
+    const formItems = {
+      title: bookingTitle,
+      description: bookingDescription,
+      affiliateLink: bookingAffiliateLink,
+      type: bookingType,
+      image: bookingImage,
     }
     await mutateAsync(formItems, {
       onError: (resError: object) => {
@@ -116,21 +120,15 @@ export default function CreateBooking() {
         </Grid>
         <Grid container spacing={6}>
           <Grid item xs={12} sm={6} md={6} lg={6}>
-            {/* <BookingType
-              bookingType={bookingType}
-              setBookingType={setBookingType}
-              inputErrors={inputErrors}
-              setInputErrors={setInputErrors}
-            /> */}
-            {/* <InputField /> */}
             <InputSelect
-              title="Booking Affiliate Link"
-              label="bookingAffiliateLink"
-              name="bookingAffiliateLink"
-              value={bookingAffiliateLink}
-              options={['name', 'home']}
-              // placeholder="Booking Title"
+              title="Booking Type"
+              label="bookingType"
+              name="bookingType"
+              value={bookingType}
+              options={['hotel', 'flight', 'train']}
+              error={inputErrors.bookingType}
               onChange={(e) => handleChange(e)}
+              placeholder="Select Booking"
             />
           </Grid>
           <Grid item xs={12} sm={6} md={6} lg={6}>
@@ -142,6 +140,7 @@ export default function CreateBooking() {
                 image={bookingImage}
                 setImageCallback={setBookingImage}
                 destination="bookingImage"
+                error={inputErrors.bookingImage}
               />
             </Control>
           </Grid>

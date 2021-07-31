@@ -1,10 +1,10 @@
 import React from 'react'
-import { AiFillInfoCircle } from 'react-icons/ai'
 import styled from 'styled-components'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
+import DisplayInputError from './DisplayInputError'
 
 const Styles = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   width: 100%;
   .form__control {
     display: flex;
@@ -13,8 +13,8 @@ const Styles = styled.div`
       font-weight: 500;
       font-size: 16px;
       line-height: 19px;
-      color: #000000;
-      margin-bottom: 10px;
+      color: #2a2828;
+      margin-bottom: 15px;
     }
     textarea {
       box-sizing: border-box;
@@ -22,7 +22,6 @@ const Styles = styled.div`
       box-sizing: border-box;
       border-radius: 5px;
       font-family: inherit;
-      height: 50px;
       padding: 10px;
       background: inherit;
       ::placeholder {
@@ -36,18 +35,6 @@ const Styles = styled.div`
         outline: none;
       }
     }
-    .textarea-error {
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      color: red;
-    }
-    .textarea-error__error {
-      margin-right: 5px;
-    }
-    .error {
-      border: 1px solid red;
-    }
   }
 `
 interface InputFieldProps {
@@ -59,6 +46,7 @@ interface InputFieldProps {
   type?: 'number' | 'text'
   value?: string | number
   title: string
+  height: number
   style?: {
     marginTop?: string
     marginLeft?: string
@@ -74,6 +62,7 @@ export default function InputTextArea({
   value,
   style,
   title,
+  height,
   onChange,
 }: InputFieldProps) {
   return (
@@ -87,13 +76,9 @@ export default function InputTextArea({
           placeholder={capitalizeFirstLetter(placeholder)}
           onChange={(e) => onChange(e)}
           className={`${error && 'error'}`}
+          style={{ height, borderColor: error && 'red' }}
         />
-        {error && (
-          <div className="textarea-error">
-            <AiFillInfoCircle className="textarea-error__error" />
-            {error}
-          </div>
-        )}
+        {error && <DisplayInputError error={error} />}
       </div>
     </Styles>
   )

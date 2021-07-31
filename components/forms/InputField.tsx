@@ -1,10 +1,10 @@
 import React from 'react'
-import { AiFillInfoCircle } from 'react-icons/ai'
 import styled from 'styled-components'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
+import DisplayInputError from './DisplayInputError'
 
 const Styles = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   width: 100%;
   .form__control {
     display: flex;
@@ -13,8 +13,8 @@ const Styles = styled.div`
       font-weight: 500;
       font-size: 16px;
       line-height: 19px;
-      color: #000000;
-      margin-bottom: 10px;
+      color: #2a2828;
+      margin-bottom: 15px;
     }
     input {
       box-sizing: border-box;
@@ -22,31 +22,18 @@ const Styles = styled.div`
       box-sizing: border-box;
       border-radius: 5px;
       font-family: inherit;
-      height: 50px;
+      height: 45px;
       padding: 10px;
       background: inherit;
       ::placeholder {
-        font-weight: 500;
         font-size: 16px;
         line-height: 19px;
         color: #c7c7c7;
       }
       :focus {
-        border-color: #f4863a;
+        border-color: #0098db;
         outline: none;
       }
-    }
-    .input-error {
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      color: red;
-    }
-    .input-error__error {
-      margin-right: 5px;
-    }
-    .error {
-      border: 1px solid red;
     }
   }
 `
@@ -89,13 +76,9 @@ export default function InputField({
           type={type || 'text'}
           onChange={(e) => onChange(e)}
           className={`${error && 'error'}`}
+          style={{ borderColor: error && 'red' }}
         />
-        {error && (
-          <div className="input-error">
-            <AiFillInfoCircle className="input-error__error" />
-            {error}
-          </div>
-        )}
+        {error && <DisplayInputError error={error} />}
       </div>
     </Styles>
   )
