@@ -39,7 +39,7 @@ export default function UpdateBookingPage() {
         <ContainerMainColumn>
           <ContainerHeaders
             pageTitle="Bookings"
-            createButtonUrl="/booking/create"
+            createButtonUrl="/bookings/create"
             createButtonTitle="Create Booking"
             overlayItems={overlayItems}
           />

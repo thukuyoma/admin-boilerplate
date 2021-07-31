@@ -3,53 +3,48 @@ import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { useMutation } from 'react-query'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import getFormData from '../../utils/get-form-data'
 import Button from '../buttons/Button'
 import InputErrorsSummary from '../forms/InputErrorsSummary'
 import { toast } from 'react-toastify'
-import {
-  BookingTitle,
-  BookingDescription,
-  BookingType,
-  BookingAffiliateLink,
-} from '../forms/booking'
-import bookingValidation from '../forms/booking/booking-validation'
 import editBooking from '../../actions/bookings/edit-booking'
-import { Control, InputTitle, Must } from '../forms/form-styles'
 import ImagePicker from '../forms/ImagePicker'
+import InputSelect from '../forms/InputSelect'
+import CustomInputContainer from '../forms/CustomInputContainer'
+import InputField from '../forms/InputField'
+import bookingValidation from '../../validations/booking-validation'
 
 export default function EditBooking({ booking }) {
   const router = useRouter()
-  const [bookingTitle, setBookingTitle] = useLocalStorage('bookingTitle', '')
   const [bookingImage, setBookingImage] = useLocalStorage('bookingImage', { url: '', publicId: '' })
-  const [bookingType, setBookingType] = useLocalStorage('bookingType', '')
-  const [bookingDescription, setBookingDescription] = useLocalStorage('bookingDescription', '')
-  const [bookingAffiliateLink, setBookingAffiliateLink] = useLocalStorage(
-    'bookingAffiliateLink',
-    ''
-  )
+  const [bookingValues, setBookingValues] = useLocalStorage('bookingValues', {
+    bookingTitle: '',
+    bookingType: '',
+    bookingDescription: '',
+    bookingAffiliateLink: '',
+  })
   const [inputErrors, setInputErrors] = useLocalStorage('inputErrors', {
     bookingTitle: '',
     bookingDescription: '',
     bookingImage: '',
     bookingType: '',
   })
-  const values = {
-    title: bookingTitle,
-    description: bookingDescription,
-    image: bookingImage,
-    type: bookingType,
-    affiliateLink: bookingAffiliateLink,
-  }
+  const { bookingTitle, bookingDescription, bookingType, bookingAffiliateLink } = bookingValues
   const { mutateAsync, isSuccess, isLoading } = useMutation(editBooking)
 
   useEffect(() => {
-    setBookingTitle(booking.title)
-    setBookingType(booking.type)
-    setBookingDescription(booking.description)
-    setBookingAffiliateLink(booking?.affiliateLink ? booking.affiliateLink : '')
     setBookingImage(booking?.image ? booking.image : { url: '', publicId: '' })
+    setBookingValues({
+      bookingTitle: booking.title,
+      bookingType: booking.type,
+      bookingDescription: booking.description,
+      bookingAffiliateLink: booking?.affiliateLink ? booking.affiliateLink : '',
+    })
   }, [])
+
+  const handleChange = (e) => {
+    setInputErrors({ ...inputErrors, [e.target.name]: '' })
+    setBookingValues({ ...bookingValues, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -63,22 +58,26 @@ export default function EditBooking({ booking }) {
       setInputErrors(validationResult.errors)
       return null
     }
+    const formItems = {
+      title: bookingTitle,
+      description: bookingDescription,
+      affiliateLink: bookingAffiliateLink,
+      type: bookingType,
+      image: bookingImage,
+    }
     await mutateAsync(
-      { bookingId: booking._id, formData: values },
+      { bookingId: booking._id, formData: formItems },
       {
         onError: (resError: object) => {
           setInputErrors({ ...inputErrors, ...resError })
         },
         onSuccess: (bookingId) => {
           const localStorageItems: Array<string> = [
-            'bookingTitle',
-            'bookingDescription',
+            'bookingValues',
             'bookingImage',
-            'bookingType',
-            'bookingAffiliateLink',
+            'bookingInputErrors',
           ]
           localStorageItems.forEach((formItem) => localStorage.removeItem(formItem))
-          localStorage.removeItem('inputErrors')
           toast.success('Booking successfully updated')
           router.push(`/bookings/${bookingId}`)
         },
@@ -91,50 +90,60 @@ export default function EditBooking({ booking }) {
     <form encType="multipart/form-data">
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <BookingTitle
-            bookingTitle={bookingTitle}
-            setBookingTitle={setBookingTitle}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
+          <InputField
+            title="Booking Title"
+            label="bookingTitle"
+            name="bookingTitle"
+            placeholder="Booking Title"
+            onChange={(e) => handleChange(e)}
+            error={inputErrors.bookingTitle}
+            value={bookingTitle}
           />
         </Grid>
       </Grid>
-      <BookingDescription
-        bookingDescription={bookingDescription}
-        setBookingDescription={setBookingDescription}
-        inputErrors={inputErrors}
-        setInputErrors={setInputErrors}
+      <InputField
+        title="Booking Description"
+        label="bookingDescription"
+        name="bookingDescription"
+        value={bookingDescription}
+        placeholder="Booking Title"
+        onChange={(e) => handleChange(e)}
+        error={inputErrors.bookingDescription}
       />
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <BookingAffiliateLink
-            bookingAffiliateLink={bookingAffiliateLink}
-            setBookingAffiliateLink={setBookingAffiliateLink}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
+          <InputField
+            title="Booking Affiliate Link"
+            label="bookingAffiliateLink"
+            name="bookingAffiliateLink"
+            value={bookingAffiliateLink}
+            placeholder="Booking Title"
+            onChange={(e) => handleChange(e)}
           />
         </Grid>
       </Grid>
       <Grid container spacing={6}>
         <Grid item xs={12} sm={6} md={6} lg={6}>
-          <BookingType
-            bookingType={bookingType}
-            setBookingType={setBookingType}
-            inputErrors={inputErrors}
-            setInputErrors={setInputErrors}
+          <InputSelect
+            title="Booking Type"
+            label="bookingType"
+            name="bookingType"
+            value={bookingType}
+            options={['hotel', 'flight', 'train']}
+            error={inputErrors.bookingType}
+            onChange={(e) => handleChange(e)}
+            placeholder="Select Booking"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6}>
-          <Control>
-            <InputTitle>
-              Booking Image <Must>*</Must>
-            </InputTitle>
+          <CustomInputContainer title="Booking Image">
             <ImagePicker
               image={bookingImage}
               setImageCallback={setBookingImage}
               destination="bookingImage"
+              error={inputErrors.bookingImage}
             />
-          </Control>
+          </CustomInputContainer>
         </Grid>
       </Grid>
       <>

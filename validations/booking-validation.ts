@@ -1,9 +1,6 @@
 /**
  * @description booking validation
- * @param title
- * @param description
- * @param type
- * @param path
+ * @param title @param description @param type  @param path
  */
 export default function bookingValidation({
   bookingTitle,
