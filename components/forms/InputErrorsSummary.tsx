@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import { nanoid } from 'nanoid'
+import React from 'react'
 import styled from 'styled-components'
 import DisplayInputError from './DisplayInputError'
 
@@ -17,7 +18,7 @@ export default function InputErrorsSummary({ errors }) {
       <p>{errors.length} input error(s) found</p>
       <div>
         {errors.map((error: string) => (
-          <DisplayInputError error={error} />
+          <DisplayInputError key={nanoid()} error={error} />
         ))}
       </div>
     </Styles>

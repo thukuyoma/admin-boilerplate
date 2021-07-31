@@ -63,7 +63,7 @@ export default function dashboard() {
               <DailyUniqueVisitors />
             </Grid>
           </Grid>
-
+          {/* 
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={3}>
               <CounterFour
@@ -101,16 +101,16 @@ export default function dashboard() {
                 icon={<IconEye width="20" color="#0098db" strokeWidth={2} style={{ zIndex: 5 }} />}
               />
             </Grid>
-          </Grid>
+          </Grid> */}
 
-          <Grid container spacing={3}>
+          {/* <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={6}>
               <TableOne />
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
               <TableOne />
             </Grid>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Layout>
     </MobileSpacer>
