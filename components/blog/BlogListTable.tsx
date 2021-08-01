@@ -84,9 +84,7 @@ export default function BlogListTable({ blogs }) {
                         <TableCell className="table__cell blog__subject">
                           {capitalizeFirstLetter(blog.title)}
                         </TableCell>
-                        <TableCell className="table__cell">
-                          {blog?.viewCount ? blog.viewCount : 0}
-                        </TableCell>
+                        <TableCell className="table__cell">{blog?.viewsCount || 0}</TableCell>
                         <TableCell className="table__cell blog__timestamp">
                           {dateFormatter(blog.timestamp)}
                         </TableCell>

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useMutation } from 'react-query'
-import { Control, InputField, InputTitle } from '../../components/forms/form-styles'
 import DisplayInputError from '../../components/forms/DisplayInputError'
 import Button from '../../components/buttons/Button'
 import styled from 'styled-components'
@@ -10,6 +8,8 @@ import ErrorAlert from '../../components/shared/ErrorAlert'
 import registerValidation from '../../validations/register-validation'
 import register from '../../actions/account/register'
 import { Grid } from '@material-ui/core'
+import InputField from '../../components/forms/InputField'
+import QuickLinks from '../../components/account/QuickLinks'
 
 interface RegisterI {
   firstName: string
@@ -47,7 +47,7 @@ export default function RegisterPage() {
     email: '',
     password: '',
   })
-  const { mutateAsync, isSuccess, isLoading, isError, error } = useMutation(register)
+  const { mutateAsync, isLoading, isError, error } = useMutation(register)
   const [inputErrors, setInputErrors] = useState({
     firstName: '',
     lastName: '',
@@ -84,7 +84,7 @@ export default function RegisterPage() {
     })
     await mutateAsync(values, {
       onSuccess: () => {
-        router.push('/blogs/edit')
+        router.push('/')
         return null
       },
     })
@@ -96,74 +96,63 @@ export default function RegisterPage() {
         <p className="account__tag">Register</p>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={6}>
-            <Control>
-              <InputTitle>First name</InputTitle>
-              <InputField
-                type="text"
-                placeholder="First name"
-                name="firstName"
-                value={values.firstName}
-                onChange={handleChange}
-                error={inputErrors.firstName}
-              />
-              {inputErrors.firstName && <DisplayInputError error={inputErrors.firstName} />}
-            </Control>
+            <InputField
+              title="First name"
+              type="text"
+              placeholder="First name"
+              name="firstName"
+              label="firstName"
+              value={values.firstName}
+              onChange={handleChange}
+              error={inputErrors.firstName}
+              isRequired
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Control>
-              <InputTitle>Last name</InputTitle>
-              <InputField
-                type="text"
-                placeholder="Last name"
-                name="lastName"
-                value={values.lastName}
-                onChange={handleChange}
-                error={inputErrors.lastName}
-              />
-              {inputErrors.lastName && <DisplayInputError error={inputErrors.lastName} />}
-            </Control>
+            <InputField
+              title="Last name"
+              type="text"
+              placeholder="Last name"
+              name="lastName"
+              label="lastName"
+              isRequired
+              value={values.lastName}
+              onChange={handleChange}
+              error={inputErrors.lastName}
+            />
           </Grid>
         </Grid>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={6}>
-            <Control>
-              <InputTitle>Email</InputTitle>
-              <InputField
-                type="text"
-                placeholder="Email"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-                error={inputErrors.email}
-              />
-              {inputErrors.email && <DisplayInputError error={inputErrors.email} />}
-            </Control>
+            <InputField
+              title="Email"
+              label="email"
+              type="text"
+              placeholder="Email"
+              name="email"
+              isRequired
+              value={values.email}
+              onChange={handleChange}
+              error={inputErrors.email}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Control>
-              <InputTitle>Password</InputTitle>
-              <InputField
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-                autoComplete="on"
-                error={inputErrors.password}
-              />
-              {inputErrors.password && <DisplayInputError error={inputErrors.password} />}
-            </Control>
+            <InputField
+              title="Password"
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              label="password"
+              isRequired
+              error={inputErrors.password}
+            />
+            {inputErrors.password && <DisplayInputError error={inputErrors.password} />}
           </Grid>
         </Grid>
         {isError && <ErrorAlert error={error} />}
-        <span className="tagline">
-          Cant login contact
-          <Link href="/register">
-            <a>
-              <strong> Support</strong>
-            </a>
-          </Link>
-        </span>
+        <QuickLinks />
         <Button
           block
           style={{ marginTop: '30px' }}

@@ -3,12 +3,12 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useMutation } from 'react-query'
 import useAuth from '../context/auth'
-import { Control, InputField, InputTitle } from '../components/forms/form-styles'
-import DisplayInputError from '../components/forms/DisplayInputError'
 import Button from '../components/buttons/Button'
 import styled from 'styled-components'
 import loginValidation from '../validations/login-validation'
 import ErrorAlert from '../components/shared/ErrorAlert'
+import InputField from '../components/forms/InputField'
+import QuickLinks from '../components/account/QuickLinks'
 interface LoginStateProps {
   email: string
   password: string
@@ -81,40 +81,30 @@ const Login: React.FC = () => {
     <Styles>
       <form>
         <p className="account__tag">Login</p>
-        <Control>
-          <InputTitle>Email</InputTitle>
-          <InputField
-            type="text"
-            placeholder="Email"
-            name="email"
-            value={values.email}
-            onChange={handleChange}
-            error={inputErrors.email}
-          />
-          {inputErrors.email && <DisplayInputError error={inputErrors.email} />}
-        </Control>
-        <Control>
-          <InputTitle>Password</InputTitle>
-          <InputField
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-            autoComplete="on"
-            error={inputErrors.password}
-          />
-          {inputErrors.password && <DisplayInputError error={inputErrors.password} />}
-        </Control>
+        <InputField
+          type="text"
+          placeholder="Email"
+          name="email"
+          label="email"
+          title="Email"
+          isRequired
+          value={values.email}
+          onChange={handleChange}
+          error={inputErrors.email}
+        />
+        <InputField
+          title="Password"
+          type="password"
+          label="password"
+          placeholder="Password"
+          name="password"
+          isRequired
+          value={values.password}
+          onChange={(e) => handleChange(e)}
+          error={inputErrors.password}
+        />
         {isError && <ErrorAlert error={error} />}
-        <span className="tagline">
-          Cant login contact
-          <Link href="/register">
-            <a>
-              <strong> Support</strong>
-            </a>
-          </Link>
-        </span>
+        <QuickLinks />
         <Button
           block
           style={{ marginTop: '30px' }}

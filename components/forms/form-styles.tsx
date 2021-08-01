@@ -18,7 +18,6 @@ const InputField = styled.input`
   height: 35px;
   padding: 10px 10px;
   width: 100%;
-  box-shadow: ${({ error }) => error && '0 0 0 0.1rem #f28da0'};
   background: inherit;
   font-family: inherit;
   :focus {
@@ -26,7 +25,6 @@ const InputField = styled.input`
     background-color: #fff;
     border-color: #80bdff;
     outline: 0;
-    box-shadow: 0 0 0 0.1rem rgb(0 123 255 / 25%);
   }
   :hover {
     background: #f0f0f0;
@@ -39,7 +37,6 @@ const TextArea = styled.textarea`
   height: 100px;
   padding: 10px 10px;
   width: 100%;
-  box-shadow: ${({ error }) => error && '0 0 0 0.1rem #f28da0'};
   background: inherit;
   font-family: inherit;
   :focus {
@@ -47,7 +44,6 @@ const TextArea = styled.textarea`
     background-color: #fff;
     border-color: #80bdff;
     outline: 0;
-    box-shadow: 0 0 0 0.1rem rgb(0 123 255 / 25%);
   }
   :hover {
     background: #f0f0f0;

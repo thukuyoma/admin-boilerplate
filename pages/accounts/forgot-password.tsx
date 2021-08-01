@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useMutation } from 'react-query'
-import { Control, InputField, InputTitle } from '../../components/forms/form-styles'
-import DisplayInputError from '../../components/forms/DisplayInputError'
 import Button from '../../components/buttons/Button'
 import styled from 'styled-components'
 import ErrorAlert from '../../components/shared/ErrorAlert'
@@ -11,6 +8,8 @@ import forgotPassword from '../../actions/account/forgot-password'
 import emailValidator from '../../utils/email-validator'
 import { useAnalytics } from '../../context/analytics'
 import SuccessAlert from '../../components/shared/SuccessAlert'
+import QuickLinks from '../../components/account/QuickLinks'
+import InputField from '../../components/forms/InputField'
 
 const Styles = styled.div`
   display: flex;
@@ -69,28 +68,19 @@ export default function ForgotPasswordPage() {
     <Styles>
       <form>
         <p className="account__tag">Forgot password</p>
-        <Control>
-          <InputTitle>Email</InputTitle>
-          <InputField
-            type="text"
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            error={inputErrors}
-          />
-          {inputErrors && <DisplayInputError error={inputErrors} />}
-        </Control>
+        <InputField
+          title="Email"
+          placeholder="Email"
+          label="email"
+          name="email"
+          isRequired
+          value={email}
+          onChange={handleChange}
+          error={inputErrors}
+        />
         {isError && <ErrorAlert error={error} />}
         {isSuccess && <SuccessAlert message={data} />}
-        <span className="tagline">
-          Cant login contact
-          <Link href="/register">
-            <a>
-              <strong>Support</strong>
-            </a>
-          </Link>
-        </span>
+        <QuickLinks />
         <Button
           block
           style={{ marginTop: '30px' }}

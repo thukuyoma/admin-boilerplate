@@ -4,13 +4,13 @@ import { useRouter } from 'next/router'
 import { useMutation } from 'react-query'
 import styled from 'styled-components'
 import resetPassword from '../../../actions/account/reset-password'
-import DisplayInputError from '../../../components/forms/DisplayInputError'
-import { Control, InputTitle, InputField } from '../../../components/forms/form-styles'
 import ErrorAlert from '../../../components/shared/ErrorAlert'
 import { useAnalytics } from '../../../context/analytics'
 import resetPasswordValidation from '../../../validations/reset-password-validation'
 import Button from '../../../components/buttons/Button'
 import { toast } from 'react-toastify'
+import QuickLinks from '../../../components/account/QuickLinks'
+import InputField from '../../../components/forms/InputField'
 interface ResetPasswordI {
   newPassword: string
   confirmNewPassword: string
@@ -98,42 +98,29 @@ export default function ResetPasswordPage() {
     <Styles>
       <form>
         <p className="account__tag">Reset Password</p>
-        <Control>
-          <InputTitle>New Password</InputTitle>
-          <InputField
-            type="password"
-            placeholder="First name"
-            name="newPassword"
-            value={values.newPassword}
-            onChange={handleChange}
-            error={inputErrors.newPassword}
-          />
-          {inputErrors.newPassword && <DisplayInputError error={inputErrors.newPassword} />}
-        </Control>
-        <Control>
-          <InputTitle>Confirm Password</InputTitle>
-          <InputField
-            type="password"
-            placeholder="Last name"
-            name="confirmNewPassword"
-            value={values.confirmNewPassword}
-            onChange={handleChange}
-            error={inputErrors.confirmNewPassword}
-          />
-          {inputErrors.confirmNewPassword && (
-            <DisplayInputError error={inputErrors.confirmNewPassword} />
-          )}
-        </Control>
-
+        <InputField
+          title="New Password"
+          type="password"
+          placeholder="New Password"
+          label="newPassword"
+          name="newPassword"
+          isRequired
+          value={values.newPassword}
+          onChange={handleChange}
+          error={inputErrors.newPassword}
+        />
+        <InputField
+          title="Confirm New Password"
+          type="password"
+          placeholder="Last name"
+          name="confirmNewPassword"
+          value={values.confirmNewPassword}
+          onChange={handleChange}
+          label="confirmNewPassword"
+          error={inputErrors.confirmNewPassword}
+        />
         {isError && <ErrorAlert error={error} />}
-        <span className="tagline">
-          Cant login contact
-          <Link href="/register">
-            <a>
-              <strong> Support</strong>
-            </a>
-          </Link>
-        </span>
+        <QuickLinks />
         <Button
           block
           style={{ marginTop: '30px' }}

@@ -43,7 +43,7 @@ interface InputFieldProps {
   onChange: (e) => void | null
   placeholder?: string
   error?: string
-  type?: 'number' | 'text'
+  type?: 'number' | 'text' | 'password'
   value: string
   title: string
   maxLength?: number
