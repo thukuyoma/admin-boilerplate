@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import {
-  InputTitle,
-  InputField,
   AddTagButton,
   RemoveTagButton,
   TagInputWrapper,
@@ -10,8 +8,9 @@ import {
 } from '../form-styles'
 import { nanoid } from 'nanoid'
 import { MdCancel } from 'react-icons/md'
-import { RiAddLine, RiErrorWarningLine } from 'react-icons/ri'
+import { RiAddLine } from 'react-icons/ri'
 import DisplayInputError from '../DisplayInputError'
+import InputField from '../InputField'
 
 export default function Tags({ tags, setTags }) {
   const [tagItemToAdd, setTagItemToAdd] = useState('')
@@ -38,14 +37,15 @@ export default function Tags({ tags, setTags }) {
   }
   return (
     <div>
-      <InputTitle>Tags</InputTitle>
       <TagInputWrapper>
         <InputField
+          title="Tags"
+          label="tags"
+          name="tags"
           error={tagError}
           placeholder="Tags"
           value={tagItemToAdd}
           onChange={handleAddTag}
-          onFocus={() => setTagError('')}
         />
         <AddTagButton onClick={addTag}>
           <RiAddLine />

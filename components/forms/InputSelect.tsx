@@ -62,7 +62,6 @@ export default function InputSelect({
   placeholder: string
 }) {
   const handleChange = (e) => {
-    console.log({ name: e.target.value })
     onChange(e)
   }
   return (
@@ -70,16 +69,18 @@ export default function InputSelect({
       <label htmlFor={label}>{capitalizeFirstLetter(title)}</label>
       <select
         name={name}
-        value={value}
+        value={capitalizeFirstLetter(value as string)}
         onChange={(e) => handleChange(e)}
         style={{ borderColor: error && 'red' }}
       >
-        <option value="">{placeholder}</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {capitalizeFirstLetter(option)}
-          </option>
-        ))}
+        <option value="">{capitalizeFirstLetter(placeholder)}</option>
+        {Array.isArray(options) &&
+          options.length &&
+          options.map((option) => (
+            <option key={option} value={option}>
+              {capitalizeFirstLetter(option)}
+            </option>
+          ))}
       </select>
       {error && <DisplayInputError error={error} />}
     </Styles>

@@ -109,7 +109,7 @@ export default function ImagePicker({
   setImageCallback: (value: object | string) => void
   buttonTitle?: string
   styles?: { marginBottom?: number; marginTop?: number; marginRight?: number; marginLeft?: number }
-  error: string
+  error?: string
   destination:
     | 'postImages'
     | 'accountAvatars'

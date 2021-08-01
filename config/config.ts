@@ -11,7 +11,7 @@ export default {
     tertiaryColor: '',
   },
   cloudinary: {
-    cloudName: 'odemru-technologies',
+    cloudName: 'www-studyovs-com',
     preset: {
       postImages: 'post-images',
       accountAvatars: 'account-avatars',

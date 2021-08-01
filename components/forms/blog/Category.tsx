@@ -1,34 +1,22 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import Select from 'react-select'
 import getWriteCategories from '../../../actions/post/get-write-categories'
-import capitalizeFirstLetter from '../../../utils/capitalize-first-letter'
-import DisplayInputError from '../DisplayInputError'
-import { Control, customReactSelectStyles, InputTitle } from '../form-styles'
+import InputSelect from '../InputSelect'
 
-export default function Category({ category, inputErrors, setInputErrors, setCategory }) {
+export default function Category({ category, error, handleChange }) {
   const { data: catItems, isSuccess } = useQuery('catItems', getWriteCategories)
-
-  const options =
-    isSuccess && catItems.map((x) => ({ value: x.title, label: capitalizeFirstLetter(x.title) }))
-
-  const handleChange = (selectedOption) => {
-    setInputErrors((prev) => ({ ...prev, category: '' }))
-    setCategory(selectedOption.value)
-  }
+  const options = isSuccess && catItems.map((x) => x.title)
 
   return (
-    <Control>
-      <InputTitle>Category</InputTitle>
-      <div>
-        <Select
-          styles={customReactSelectStyles('inputErrors.category')}
-          options={options.length && options}
-          onChange={handleChange}
-          placeholder={category ? category : 'Select Category'}
-        />
-      </div>
-      {inputErrors.category && <DisplayInputError error={inputErrors.category} />}
-    </Control>
+    <InputSelect
+      title="Blog Category"
+      label="blogCategory"
+      name="blogCategory"
+      value={category}
+      onChange={(e) => handleChange(e)}
+      error={error}
+      options={options}
+      placeholder={category ? category : 'Select Category'}
+    />
   )
 }

@@ -1,9 +1,9 @@
 import { Grid } from '@material-ui/core'
 import React from 'react'
 import styled from 'styled-components'
-import { InputField, InputTitle, Must } from '../form-styles'
-import DisplayInputError from '../DisplayInputError'
+import CustomInputContainer from '../CustomInputContainer'
 import ImagePicker from '../ImagePicker'
+import InputField from '../InputField'
 
 const ImageDetailsControl = styled.div`
   margin-bottom: 20px;
@@ -13,43 +13,40 @@ const ImageDetailsControl = styled.div`
 export default function PostImage({
   image,
   setImage,
-  imageCaption,
-  setImageCaption,
-  imageSource,
-  setImageSource,
-  setInputErrors,
-  inputErrors,
+  blogImageCaption,
+  handleChange,
+  blogImageSource,
+  blogImageCaptionError,
 }) {
   return (
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12} lg={4}>
-          <InputTitle>Post Image</InputTitle>
-          <ImagePicker image={image} setImageCallback={setImage} destination="postImages" />
+          <CustomInputContainer title="Blog Image">
+            <ImagePicker image={image} setImageCallback={setImage} destination="postImages" />
+          </CustomInputContainer>
         </Grid>
         {image.url && (
           <Grid item xs={12} sm={12} md={12} lg={8}>
             <ImageDetailsControl>
-              <InputTitle>
-                Caption <Must>*</Must>
-              </InputTitle>
               <InputField
-                value={imageCaption}
-                onChange={(e) => {
-                  setInputErrors({ ...inputErrors, imageCaption: '' })
-                  setImageCaption(e.target.value)
-                }}
-                placeholder="Post Image Caption"
-                error={inputErrors.imageCaption}
+                title="Blog Image Title"
+                name="blogImageCaption"
+                label="blogImageCaption"
+                value={blogImageCaption}
+                onChange={(e) => handleChange(e)}
+                placeholder="Blog Image Source"
+                error={blogImageCaptionError}
               />
-              {inputErrors.imageCaption && <DisplayInputError error={inputErrors.imageCaption} />}
             </ImageDetailsControl>
             <ImageDetailsControl>
-              <InputTitle>Source</InputTitle>
               <InputField
-                value={imageSource}
-                onChange={(e) => setImageSource(e.target.value)}
-                placeholder="Post Image Title"
+                title="Blog Image Source"
+                name="blogImageSource"
+                label="blogImageSource"
+                value={blogImageSource}
+                onChange={(e) => handleChange(e)}
+                placeholder="Blog Image Source"
               />
             </ImageDetailsControl>
           </Grid>

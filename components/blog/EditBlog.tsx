@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { useMutation } from 'react-query'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import postValidator from '../../utils/post-validator'
+import postValidator from '../../validations/post-validation'
 import Category from '../forms/blog/Category'
 import Description from '../forms/blog/Description'
 import PostBody from '../forms/blog/PostBody'
@@ -75,11 +75,11 @@ export default function EditBlog({ blog }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const validationResult = postValidator(values)
-    if (validationResult.isError) {
-      setInputErrors(validationResult.errors)
-      return null
-    }
+    // const validationResult = postValidator(values)
+    // if (validationResult.isError) {
+    //   setInputErrors(validationResult.errors)
+    //   return null
+    // }
     await mutateAsync(
       { formData: values, postId: blog._id },
       {
@@ -120,12 +120,12 @@ export default function EditBlog({ blog }) {
         />
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} md={12} lg={12}>
-            <Category
+            {/* <Category
               category={category}
               setCategory={setCategory}
               inputErrors={inputErrors}
               setInputErrors={setInputErrors}
-            />
+            /> */}
           </Grid>
         </Grid>
         <Grid container spacing={3}>

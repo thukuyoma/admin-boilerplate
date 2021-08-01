@@ -12,6 +12,7 @@ import { Control, InputTitle, Must } from '../forms/form-styles'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 import InputField from '../forms/InputField'
 import InputSelect from '../forms/InputSelect'
+import bookingValidation from '../../validations/booking-validation'
 
 export default function CreateBooking() {
   const router = useRouter()
