@@ -51,25 +51,30 @@ export default function InputSelect({
   onChange,
   value,
   placeholder,
+  isRequired,
 }: {
   name: string
   error?: string
   options: Array<string>
   label: string
   title: string
-  value: string | number
+  value: string
   onChange: Function
   placeholder: string
+  isRequired?: boolean
 }) {
   const handleChange = (e) => {
     onChange(e)
   }
   return (
     <Styles>
-      <label htmlFor={label}>{capitalizeFirstLetter(title)}</label>
+      <label htmlFor={label}>
+        {capitalizeFirstLetter(title)}{' '}
+        {isRequired && <span style={{ color: value.length ? '#4cd964' : 'red' }}>*</span>}
+      </label>
       <select
         name={name}
-        value={capitalizeFirstLetter(value as string)}
+        value={capitalizeFirstLetter(value)}
         onChange={(e) => handleChange(e)}
         style={{ borderColor: error && 'red' }}
       >

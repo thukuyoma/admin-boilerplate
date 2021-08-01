@@ -13,14 +13,16 @@ const Styles = styled.div`
     padding-top: 10px;
   }
 `
-export default function PostBody({ handleSetBody, inputErrors, postBody }) {
+export default function PostBody({ handleSetBody, inputErrors, postBody, isRequired }) {
   return (
     <Styles>
       <div
         className="editor__wrapper"
         style={{ boxShadow: inputErrors.body && '0 0 0 0.2rem #f28da0' }}
       >
-        <h3 className="editor__title">Body</h3>
+        <h3 className="editor__title">
+          Body {isRequired && <span style={{ color: postBody.length ? '#4cd964' : 'red' }}>*</span>}
+        </h3>
         {postBody ? (
           <EditorEditer body={postBody} handleSetBody={handleSetBody} inputErrors={inputErrors} />
         ) : (

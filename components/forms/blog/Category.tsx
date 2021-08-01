@@ -17,6 +17,7 @@ export default function Category({ category, error, handleChange }) {
       error={error}
       options={options}
       placeholder={category ? category : 'Select Category'}
+      isRequired
     />
   )
 }

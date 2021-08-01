@@ -44,8 +44,10 @@ interface InputFieldProps {
   placeholder?: string
   error?: string
   type?: 'number' | 'text'
-  value: string | number
+  value: string
   title: string
+  maxLength?: number
+  isRequired?: boolean
   style?: {
     marginTop?: string
     marginLeft?: string
@@ -62,12 +64,23 @@ export default function InputField({
   value,
   style,
   title,
+  maxLength,
   onChange,
+  isRequired,
 }: InputFieldProps) {
   return (
     <Styles>
       <div className="form__control" style={style}>
-        <label htmlFor={label}>{capitalizeFirstLetter(title)}</label>
+        <label htmlFor={label}>
+          {capitalizeFirstLetter(title)}{' '}
+          {isRequired && <span style={{ color: value.length ? '#4cd964' : 'red' }}>*</span>}{' '}
+          {maxLength && (
+            <span style={{ fontSize: 12, color: '#c7c7c7' }}>
+              (<span>{value.length}</span>/{' '}
+              <span style={{ color: value.length > maxLength && 'red' }}>{maxLength}</span>)
+            </span>
+          )}
+        </label>
         <input
           id={label}
           name={name}
@@ -76,9 +89,19 @@ export default function InputField({
           type={type || 'text'}
           onChange={(e) => onChange(e)}
           className={`${error && 'error'}`}
-          style={{ borderColor: error && 'red' }}
+          style={{ borderColor: error || (value.length > maxLength && 'red') }}
         />
-        {error && <DisplayInputError error={error} />}
+        {error || maxLength ? (
+          <DisplayInputError
+            error={
+              error ||
+              (value.length > maxLength &&
+                `${capitalizeFirstLetter(
+                  title
+                )} is too long, max of ${maxLength} characters is allowed`)
+            }
+          />
+        ) : null}
       </div>
     </Styles>
   )

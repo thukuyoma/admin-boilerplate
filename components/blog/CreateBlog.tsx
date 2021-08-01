@@ -113,8 +113,10 @@ export default function CreateBlog() {
                 name="blogTitle"
                 value={blogTitle}
                 placeholder="Blog Title"
+                maxLength={100}
                 onChange={(e) => handleChange(e)}
                 error={blogInputErrors.blogTitle}
+                isRequired
               />
             </Grid>
           </Grid>
@@ -126,6 +128,8 @@ export default function CreateBlog() {
             placeholder="Blog Description"
             error={blogInputErrors.blogDescription}
             onChange={(e) => handleChange(e)}
+            isRequired
+            maxLength={250}
           />
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -156,6 +160,7 @@ export default function CreateBlog() {
               postBody={blogPostBody}
               inputErrors={blogInputErrors}
               handleSetBody={handleSetBody}
+              isRequired
             />
           </Grid>
           <>

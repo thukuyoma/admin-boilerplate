@@ -20,6 +20,18 @@ export default function postValidation(values) {
   if (blogImage.url && blogImage.publicId && !blogImageCaption) {
     errors.blogImageCaption = 'Image must have a caption'
   }
+  if (blogTitle && blogTitle.length > 101) {
+    errors.blogTitle = 'Title is too long, max of 100 characters is recommended'
+  }
+  if (blogDescription && blogDescription.length > 251) {
+    errors.blogDescription = 'Title is too long, max of 250 characters is recommended'
+  }
+  if (blogImage.url && blogImageCaption.length > 101) {
+    errors.blogImageCaption = 'Caption is too long, max of 100 characters is recommended'
+  }
+  if (blogCategory && blogCategory.length > 101) {
+    errors.blogCategory = 'Category is too long, max of 100 characters is recommended'
+  }
   if (!blogImage.url && !blogImage.publicId && blogImageCaption) {
     errors.blogImageCaption = 'Image is required'
   }

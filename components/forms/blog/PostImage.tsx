@@ -22,7 +22,7 @@ export default function PostImage({
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12} lg={4}>
-          <CustomInputContainer title="Blog Image">
+          <CustomInputContainer title="Blog Image" isRequired value={image.url}>
             <ImagePicker image={image} setImageCallback={setImage} destination="postImages" />
           </CustomInputContainer>
         </Grid>

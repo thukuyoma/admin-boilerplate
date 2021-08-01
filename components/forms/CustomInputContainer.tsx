@@ -11,14 +11,21 @@ export default function CustomInputContainer({
   title,
   children,
   error,
+  isRequired,
+  value,
 }: {
   children: React.ReactNode
   title: string
   error?: string
+  isRequired?: boolean
+  value?: string
 }) {
   return (
     <Styles>
-      <label>{capitalizeFirstLetter(title)}</label>
+      <label>
+        {capitalizeFirstLetter(title)}{' '}
+        {isRequired && <span style={{ color: value.length ? '#4cd964' : 'red' }}>*</span>}{' '}
+      </label>
       {children}
       {error && <DisplayInputError error={error} />}
     </Styles>
