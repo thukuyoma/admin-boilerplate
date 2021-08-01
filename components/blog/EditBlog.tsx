@@ -3,94 +3,103 @@ import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { useMutation } from 'react-query'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import postValidator from '../../validations/post-validation'
-import Category from '../forms/blog/Category'
-import Description from '../forms/blog/Description'
-import PostBody from '../forms/blog/PostBody'
-import PostImage from '../forms/blog/PostImage'
-import Tags from '../forms/blog/Tags'
-import TItle from '../forms/blog/TItle'
+import Category from './form/Category'
 import Button from '../buttons/Button'
 import styled from 'styled-components'
 import editPost from '../../actions/post/edit-post'
 import { toast } from 'react-toastify'
-
+import postValidation from '../../validations/post-validation'
+import InputField from '../forms/InputField'
+import PostBody from './form/PostBody'
+import PostImage from './form/PostImage'
+import Tags from './form/Tags'
 const Spacer = styled.div`
   margin-bottom: 100px;
 `
 
 export default function EditBlog({ blog }) {
   const router = useRouter()
-  const [title, setTitle] = useLocalStorage('title', '')
-  const [tags, setTags] = useLocalStorage('tags', [])
-  const [imageCaption, setImageCaption] = useLocalStorage('imageCaption', '')
-  const [imageSource, setImageSource] = useLocalStorage('imageSource', '')
-  const [image, setImage] = useLocalStorage('image', { url: '', publicId: '' })
-  const [category, setCategory] = useLocalStorage('category', '')
-  const [postBody, setPostBody] = useLocalStorage('postBody', '')
-  const [description, setDescription] = useLocalStorage('description', '')
-  const [inputErrors, setInputErrors] = useLocalStorage('inputErrors', {
-    title: '',
-    description: '',
-    imageCaption: '',
-    image: '',
-    category: '',
-    postBody: '',
+  const [blogValues, setBlogValues] = useLocalStorage('blogValues', {
+    blogTitle: '',
+    blogCategory: '',
+    blogDescription: '',
+    blogImageCaption: '',
+    blogImageSource: '',
   })
-
+  const [blogTags, setBlogTags] = useLocalStorage('blogTags', [])
+  const [blogImage, setBlogImage] = useLocalStorage('blogImage', { url: '', publicId: '' })
+  const [blogPostBody, setBlogPostBody] = useLocalStorage('blogPostBody', '')
+  const [blogInputErrors, setBlogInputErrors] = useLocalStorage('blogInputErrors', {
+    blogTitle: '',
+    blogDescription: '',
+    blogImageCaption: '',
+    blogImage: '',
+    blogCategory: '',
+    blogPostBody: '',
+  })
+  const { blogTitle, blogCategory, blogDescription, blogImageSource, blogImageCaption } = blogValues
   const values = {
-    title,
-    description,
-    tags,
-    image: {
-      ...image,
-      caption: imageCaption,
-      source: imageSource,
-    },
-    postBody,
-    category,
+    title: blogTitle,
+    description: blogDescription,
+    tags: blogTags,
+    image: { ...blogImage, source: blogImageSource, caption: blogImageCaption },
+    category: blogCategory,
+    postBody: blogPostBody,
   }
 
   const { mutateAsync, isSuccess, isLoading } = useMutation(editPost)
 
   useEffect(() => {
-    setTitle(blog?.title)
-    setTags(blog.tags ? [...blog.tags] : [])
-    setImageCaption(blog.image ? blog.image.caption : '')
-    setImageSource(blog.image ? blog.image.source : '')
-    setImage(
-      blog.image
-        ? { url: blog.image.url, publicId: blog.image.publicId }
-        : { url: '', publicId: '' }
-    )
-    setCategory(blog?.category ? blog.category : '')
-    setPostBody(blog?.postBody ? blog.postBody : '')
-    setDescription(blog?.description ? blog.description : '')
+    setBlogValues({
+      blogTitle: blog?.title || '',
+      blogImageCaption: blog?.image?.caption || '',
+      blogImageSource: blog?.image?.source || '',
+      blogCategory: blog?.category || '',
+      blogDescription: blog?.description || '',
+    })
+    setBlogTags(blog.tags ? [...blog.tags] : [])
+    setBlogImage({ url: blog?.image?.url || '', publicId: blog?.image?.publicId || '' })
+    setBlogPostBody(blog?.postBody ? blog.postBody : '')
   }, [])
 
   const handleSetBody = (bodyContent: string) => {
-    setInputErrors({ ...inputErrors, postBody: '' })
-    setPostBody(bodyContent)
+    setBlogInputErrors({ ...blogInputErrors, blogPostBody: '' })
+    setBlogPostBody(bodyContent)
   }
 
+  const handleChange = (e) => {
+    setBlogValues({ ...blogValues, [e.target.name]: e.target.value })
+    setBlogInputErrors({ ...blogInputErrors, [e.target.name]: '' })
+  }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // const validationResult = postValidator(values)
-    // if (validationResult.isError) {
-    //   setInputErrors(validationResult.errors)
-    //   return null
-    // }
+    const validationResult = postValidation({
+      blogTitle,
+      blogDescription,
+      blogImageCaption,
+      blogImage,
+      blogCategory,
+      blogPostBody,
+    })
+    if (validationResult.isError) {
+      setBlogInputErrors(validationResult.errors)
+      return null
+    }
     await mutateAsync(
       { formData: values, postId: blog._id },
       {
         onError: (resError: object) => {
-          setInputErrors({ ...inputErrors, ...resError })
+          setBlogInputErrors({ ...blogInputErrors, ...resError })
         },
         onSuccess: (postSlug) => {
-          Object.keys({ ...values, imageCaption, imageSource }).forEach((formItem) =>
-            localStorage.removeItem(formItem)
-          )
-          localStorage.removeItem('inputErrors')
+          const itemsToRemoveFromLocalStorage = [
+            'blogTags',
+            'blogImage',
+            'blogPostBody',
+            'blogValues',
+            'blogInputErrors',
+          ]
+          itemsToRemoveFromLocalStorage.forEach((item) => localStorage.removeItem(item))
           toast.success('Post successfully updated')
           router.push(`/blogs/${postSlug}`)
         },
@@ -104,49 +113,61 @@ export default function EditBlog({ blog }) {
       <form encType="multipart/form-data">
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} md={12} lg={12}>
-            <TItle
-              title={title}
-              setTitle={setTitle}
-              inputErrors={inputErrors}
-              setInputErrors={setInputErrors}
+            <InputField
+              title="Blog Title"
+              label="blogTitle"
+              name="blogTitle"
+              value={blogTitle}
+              placeholder="Blog Title"
+              maxLength={100}
+              onChange={(e) => handleChange(e)}
+              error={blogInputErrors.blogTitle}
+              isRequired
             />
           </Grid>
         </Grid>
-        <Description
-          description={description}
-          setDescription={setDescription}
-          inputErrors={inputErrors}
-          setInputErrors={setInputErrors}
+        <InputField
+          title="Blog Description"
+          label="blogDescription"
+          name="blogDescription"
+          value={blogDescription}
+          placeholder="Blog Description"
+          error={blogInputErrors.blogDescription}
+          onChange={(e) => handleChange(e)}
+          isRequired
+          maxLength={250}
         />
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} md={12} lg={12}>
-            {/* <Category
-              category={category}
-              setCategory={setCategory}
-              inputErrors={inputErrors}
-              setInputErrors={setInputErrors}
-            /> */}
+            <Category
+              category={blogCategory}
+              handleChange={handleChange}
+              error={blogInputErrors.blogCategory}
+            />
           </Grid>
         </Grid>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={5} md={5} lg={5}>
-            <Tags tags={tags.slice().reverse()} setTags={setTags} />
+            <Tags tags={blogTags.slice().reverse()} setTags={setBlogTags} />
           </Grid>
           <Grid item xs={12} sm={7} md={7} lg={7}>
             <PostImage
-              image={image}
-              imageCaption={imageCaption}
-              setImageCaption={setImageCaption}
-              imageSource={imageSource}
-              setImageSource={setImageSource}
-              inputErrors={inputErrors}
-              setInputErrors={setInputErrors}
-              setImage={setImage}
+              image={blogImage}
+              blogImageCaption={blogImageCaption}
+              handleChange={handleChange}
+              blogImageSource={blogImageSource}
+              blogImageCaptionError={blogInputErrors.blogImageCaption}
+              setImage={setBlogImage}
             />
           </Grid>
         </Grid>
         <Grid>
-          <PostBody postBody={postBody} inputErrors={inputErrors} handleSetBody={handleSetBody} />
+          <PostBody
+            isRequired
+            postBody={blogPostBody}
+            inputErrors={blogInputErrors.blogPostBody}
+            handleSetBody={handleSetBody}
+          />
         </Grid>
         <Button
           block

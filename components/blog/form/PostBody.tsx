@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import React from 'react'
 import styled from 'styled-components'
-import DisplayInputError from '../DisplayInputError'
+import DisplayInputError from './../../forms/DisplayInputError'
 
 const EditorWriter = dynamic(() => import('./../../shared/EditorWriter'), { ssr: false })
 const EditorEditer = dynamic(() => import('./../../shared/EditorEditer'), { ssr: false })

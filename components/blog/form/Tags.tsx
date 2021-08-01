@@ -5,12 +5,12 @@ import {
   TagInputWrapper,
   TagItem,
   TagItemWrapper,
-} from '../form-styles'
+} from './../../forms/form-styles'
 import { nanoid } from 'nanoid'
 import { MdCancel } from 'react-icons/md'
 import { RiAddLine } from 'react-icons/ri'
-import DisplayInputError from '../DisplayInputError'
-import InputField from '../InputField'
+import DisplayInputError from './../../forms/DisplayInputError'
+import InputField from './../../forms/InputField'
 
 export default function Tags({ tags, setTags }) {
   const [tagItemToAdd, setTagItemToAdd] = useState('')

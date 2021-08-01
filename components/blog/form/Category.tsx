@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import getWriteCategories from '../../../actions/post/get-write-categories'
-import InputSelect from '../InputSelect'
+import InputSelect from '../../forms/InputSelect'
 
 export default function Category({ category, error, handleChange }) {
   const { data: catItems, isSuccess } = useQuery('catItems', getWriteCategories)

@@ -4,10 +4,7 @@ import React, { useEffect } from 'react'
 import { useMutation } from 'react-query'
 import writePost from '../../actions/post/write-post'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import Category from '../forms/blog/Category'
-import PostBody from '../forms/blog/PostBody'
-import PostImage from '../forms/blog/PostImage'
-import Tags from '../forms/blog/Tags'
+import Category from './form/Category'
 import Button from '../buttons/Button'
 import styled from 'styled-components'
 import InputErrorsSummary from '../forms/InputErrorsSummary'
@@ -15,6 +12,9 @@ import { toast } from 'react-toastify'
 import BorderPaddingWrapper from '../shared/BorderPaddingWrapper'
 import InputField from '../forms/InputField'
 import postValidation from '../../validations/post-validation'
+import PostBody from './form/PostBody'
+import PostImage from './form/PostImage'
+import Tags from './form/Tags'
 
 const Spacer = styled.div`
   margin-bottom: 100px;
@@ -32,7 +32,6 @@ export default function CreateBlog() {
   const [blogTags, setBlogTags] = useLocalStorage('blogTags', [])
   const [blogImage, setBlogImage] = useLocalStorage('blogImage', { url: '', publicId: '' })
   const [blogPostBody, setBlogPostBody] = useLocalStorage('blogPostBody', '')
-
   const [blogInputErrors, setBlogInputErrors] = useLocalStorage('blogInputErrors', {
     blogTitle: '',
     blogDescription: '',

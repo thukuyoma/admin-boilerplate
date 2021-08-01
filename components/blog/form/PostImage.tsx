@@ -1,9 +1,9 @@
 import { Grid } from '@material-ui/core'
 import React from 'react'
 import styled from 'styled-components'
-import CustomInputContainer from '../CustomInputContainer'
-import ImagePicker from '../ImagePicker'
-import InputField from '../InputField'
+import CustomInputContainer from './../../forms/CustomInputContainer'
+import ImagePicker from './../../forms/ImagePicker'
+import InputField from './../../forms/InputField'
 
 const ImageDetailsControl = styled.div`
   margin-bottom: 20px;
@@ -52,7 +52,6 @@ export default function PostImage({
           </Grid>
         )}
       </Grid>
-      {}
     </>
   )
 }
