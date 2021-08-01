@@ -5,21 +5,20 @@ import AccountsPermission from './permissions/AccountsPermissions'
 import PostsPermission from './permissions/PostsPermissions'
 import SettingsPermissions from './permissions/SettingsPermissions'
 import UtilitiesPermissions from './permissions/UtilitiesPermissions'
-import { Control, InputTitle } from '../forms/form-styles'
 import Button from '../buttons/Button'
 import ErrorAlert from '../shared/ErrorAlert'
 import SuccessAlert from '../shared/SuccessAlert'
 import createAdmin from '../../actions/account/create-admin'
-import SelectAdminRole from '../forms/admins/SelectAdminRole'
 import { toast } from 'react-toastify'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
+import InputSelect from '../forms/InputSelect'
 
 export default function CreateAdmin({ email, user }) {
   const router = useRouter()
   const { mutateAsync, isLoading, isSuccess, isError, error } = useMutation(createAdmin, {
     retry: false,
   })
-  const [role, setRole] = useState('support')
+  const [role, setRole] = useState('')
   const [accounts, setAccounts] = useState({
     canMakeAdmin: false,
     canDeleteAdmin: false,
@@ -94,7 +93,15 @@ export default function CreateAdmin({ email, user }) {
 
   return (
     <>
-      <SelectAdminRole role={role} setRole={setRole} />
+      <InputSelect
+        title="Admin Role"
+        label="role"
+        name="role"
+        value={role}
+        isRequired
+        options={['super', 'master', 'editor', 'support', 'marketer', 'developer']}
+        onChange={(e) => setRole(e.target.value)}
+      />
       <AccountsPermission handleSetAccounts={handleSetAccounts} accounts={accounts} />
       <PostsPermission handleSetPosts={handleSetPosts} posts={posts} />
       <SettingsPermissions handleSetSettings={handleSetSettings} settings={settings} />

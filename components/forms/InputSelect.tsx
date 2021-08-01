@@ -17,9 +17,6 @@ const Styles = styled.div`
     height: 45px;
     padding: 10px;
     background: inherit;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
 
     ::placeholder {
       font-size: 16px;
@@ -60,7 +57,7 @@ export default function InputSelect({
   title: string
   value: string
   onChange: Function
-  placeholder: string
+  placeholder?: string
   isRequired?: boolean
 }) {
   const handleChange = (e) => {
@@ -78,7 +75,7 @@ export default function InputSelect({
         onChange={(e) => handleChange(e)}
         style={{ borderColor: error && 'red' }}
       >
-        <option value="">{capitalizeFirstLetter(placeholder)}</option>
+        {placeholder && <option value="">{capitalizeFirstLetter(placeholder)}</option>}
         {Array.isArray(options) &&
           options.length &&
           options.map((option) => (
@@ -87,7 +84,7 @@ export default function InputSelect({
             </option>
           ))}
       </select>
-      {error && <DisplayInputError error={error} />}
+      {}
     </Styles>
   )
 }

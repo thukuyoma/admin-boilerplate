@@ -74,7 +74,7 @@ export default function AccountSettingsMenu({ setSwitchCaseAccount }) {
       />
       <div className="settings-tab-wrapper">
         {tabs.map((tab) => (
-          <div className="settings-tab">
+          <div key={tab.title} className="settings-tab">
             <img className="settings-tab__image" src={tab.icon} />
             <p className="settings-tab__title" onClick={() => setSwitchCaseAccount(tab.switchCase)}>
               <RiExchangeLine className="settings-tab__icon" />

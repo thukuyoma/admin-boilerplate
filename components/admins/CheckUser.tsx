@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import { AiOutlineCheck } from 'react-icons/ai'
-import { ImCancelCircle } from 'react-icons/im'
 import styled from 'styled-components'
 import emailValidator from '../../utils/email-validator'
 import userChecker from '../../actions/account/user-checker'
@@ -10,7 +9,6 @@ import { Control, InputTitle } from '../forms/form-styles'
 import ErrorAlert from '../shared/ErrorAlert'
 import { TagKey, TagKeyValuePair, TagValue } from '../shared/shared-styles'
 import Loader from '../shared/Loader'
-import { GrClose } from 'react-icons/gr'
 import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 
 const Styles = styled.div`
@@ -31,7 +29,7 @@ const Styles = styled.div`
 }
   }
   .input__group {
-    height: 35px;
+    height: 45px;
     margin-top: 10px;
     outline: none;
     background: inherit;

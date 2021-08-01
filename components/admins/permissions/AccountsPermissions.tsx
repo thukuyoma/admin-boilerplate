@@ -11,6 +11,7 @@ export default function AccountsPermission({ handleSetAccounts, accounts }) {
         {Object.keys(accounts).map((permit) => (
           <PermitListItem
             permit={permit}
+            key={permit}
             permissionObject={accounts}
             callback={handleSetAccounts}
           />

@@ -11,6 +11,7 @@ export default function SettingsPermissions({ handleSetSettings, settings }) {
         {Object.keys(settings).map((permit) => (
           <PermitListItem
             permit={permit}
+            key={permit}
             permissionObject={settings}
             callback={handleSetSettings}
           />

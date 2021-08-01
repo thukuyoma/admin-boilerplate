@@ -74,7 +74,7 @@ export default function CreateShortcuts({ showCreateShortcuts }) {
             <HeaderTabTitle>Create Shortcuts</HeaderTabTitle>
             <div className="shortcut-wrapper">
               {shortcuts.map((shortcut) => (
-                <div className="shortcut">
+                <div key={shortcut.title} className="shortcut">
                   <img className="shortcut__image" src={shortcut.icon} />
                   <p className="shortcut__title" onClick={() => router.push(shortcut.url)}>
                     <BiMessageSquareAdd className="shortcut__icon" /> {shortcut.title}

@@ -9,11 +9,10 @@ import Button from '../buttons/Button'
 import ErrorAlert from '../shared/ErrorAlert'
 import SuccessAlert from '../shared/SuccessAlert'
 import updateAdmin from '../../actions/account/update-admin'
-import SelectAdminRole from '../forms/admins/SelectAdminRole'
 import { toast } from 'react-toastify'
-import capitalizeFirstLetter from '../../utils/capitalize-first-letter'
 import { TagKey, TagKeyValuePair, TagValue } from '../shared/shared-styles'
 import wordsCapitalizer from '../../utils/words-capitalizer'
+import InputSelect from '../forms/InputSelect'
 
 export default function UpdateAdmin({ admin, adminToUpdateName }) {
   const router = useRouter()
@@ -72,7 +71,15 @@ export default function UpdateAdmin({ admin, adminToUpdateName }) {
         <TagKey>Name:</TagKey>
         <TagValue>{adminToUpdateName}</TagValue>
       </TagKeyValuePair>
-      <SelectAdminRole role={role} setRole={setRole} />
+      <InputSelect
+        title="Admin Role"
+        label="role"
+        name="role"
+        value={role}
+        isRequired
+        options={['super', 'master', 'editor', 'support', 'marketer', 'developer']}
+        onChange={(e) => setRole(e.target.value)}
+      />
       <AccountsPermission handleSetAccounts={handleSetAccounts} accounts={accounts} />
       <PostsPermission handleSetPosts={handleSetPosts} posts={posts} />
       <SettingsPermissions handleSetSettings={handleSetSettings} settings={settings} />

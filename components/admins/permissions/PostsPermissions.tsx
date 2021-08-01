@@ -9,7 +9,12 @@ export default function PostsPermission({ handleSetPosts, posts }) {
       <PermitHeader>Posts Permissions</PermitHeader>
       <Grid container spacing={3}>
         {Object.keys(posts).map((permit) => (
-          <PermitListItem permit={permit} permissionObject={posts} callback={handleSetPosts} />
+          <PermitListItem
+            key={permit}
+            permit={permit}
+            permissionObject={posts}
+            callback={handleSetPosts}
+          />
         ))}
       </Grid>
     </PermissionStyles>

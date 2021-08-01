@@ -10,6 +10,7 @@ export default function UtilitiesPermissions({ handleSetUtilities, utilities }) 
       <Grid container spacing={3}>
         {Object.keys(utilities).map((permit) => (
           <PermitListItem
+            key={permit}
             permit={permit}
             permissionObject={utilities}
             callback={handleSetUtilities}
